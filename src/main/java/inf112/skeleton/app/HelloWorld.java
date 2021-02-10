@@ -28,8 +28,8 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    public final int MAP_SIZE_X     = 5;
-    public final int MAP_SIZE_Y     = 5;
+    public  final int   MAP_SIZE_X   = 5;
+    public  final int   MAP_SIZE_Y   = 5;
     private final float cameraHeight = (float) 5;
 
     private TiledMapTileLayer.Cell playerCell, playerWonCell, playerDiedCell;
@@ -82,7 +82,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
     }
 
     public boolean isOnTheMap() {
-        if ((posX >= 0) && (posX < MAP_SIZE_X)) {
+        if     ((posX >= 0) && (posX < MAP_SIZE_X)) {
             if ((posY >= 0) && (posY < MAP_SIZE_Y)) return true;
         }
         return false;
