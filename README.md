@@ -6,4 +6,5 @@ Simple skeleton with libgdx.
 
 (test-commit av Anders)
 (test-commit av Julian)2
+A
 (test-commit av Heming)
