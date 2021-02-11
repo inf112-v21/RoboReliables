@@ -44,7 +44,9 @@ Vi syntes blant annet at Kanban er enkel å bruke og gir god struktur og oversik
 # Deloppgave 3
 
 Referer til `UserStories.md`.
+
 # Deloppgave 4
 
 
 
+# Oppsummering
