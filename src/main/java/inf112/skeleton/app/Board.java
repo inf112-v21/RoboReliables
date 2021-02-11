@@ -30,9 +30,9 @@ public class Board extends InputAdapter implements ApplicationListener {
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    public  final int   MAP_SIZE_X   = 5;
-    public  final int   MAP_SIZE_Y   = 5;
-    private final float cameraHeight = (float) 5;
+    public  final int   MAP_SIZE_X   = 12;
+    public  final int   MAP_SIZE_Y   = 12;
+    private final float cameraHeight = (float) 12;
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell, flagCell;
 
@@ -90,9 +90,9 @@ public class Board extends InputAdapter implements ApplicationListener {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
-        if ((posX == 4) && (posY == 4)) {
+        if ((posX == 11) && (posY == 11)) {
             robotLayer.setCell(posX, posY, robotWonCell);
-        } else if ((posX == 2) && (posY == 2)) {
+        } else if ((posX == 0) && (posY == 11)) {
             robotLayer.setCell(posX, posY, robotDiedCell);
         } else {
             robotLayer.setCell(posX, posY, robotCell);
@@ -109,7 +109,7 @@ public class Board extends InputAdapter implements ApplicationListener {
      * @return true if won
      */
     public boolean checkIfWon() {
-        return (posX == 4) && (posY == 4);
+        return (posX == 11) && (posY == 11);
     }
 
     @Override
