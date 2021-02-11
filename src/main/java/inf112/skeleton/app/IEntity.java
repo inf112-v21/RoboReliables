@@ -25,10 +25,4 @@ public interface IEntity {
      * @param newYValue the new Y coordinate
      */
     void setPosY(int newYValue);
-
-    /**
-     * Check whether or not the entity is on the map.
-     * @return true if the entity is on the map, false if not
-     */
-    boolean isOnTheMap();
 }
