@@ -33,7 +33,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
     private final float cameraHeight = (float) 5;
 
     private TiledMapTileLayer.Cell playerCell, playerWonCell, playerDiedCell;
-    private Texture playerTexture;
+    //private Texture playerTexture;
     private int posX = 0, posY = 0;
     private Vector2 playerPos;
 
@@ -71,7 +71,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         renderer = new OrthogonalTiledMapRenderer(map, (float) 1/300);
         renderer.setView(camera);
 
-        TextureRegion playerTextures [][] = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
+        TextureRegion[][] playerTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
         playerCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][0]));
         playerWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][2]));
         playerDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][1]));

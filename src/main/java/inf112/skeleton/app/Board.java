@@ -2,9 +2,12 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,7 +18,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 
-public class Board implements ApplicationListener {
+public class Board extends InputAdapter implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
 
@@ -31,6 +34,7 @@ public class Board implements ApplicationListener {
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
 
+    private int posX, posY;
     private Vector2 playerPos;
 
     public void setRobotTexture(TextureRegion [][] textures) {
@@ -51,6 +55,14 @@ public class Board implements ApplicationListener {
         return robotLayer;
     }
 
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -68,6 +80,13 @@ public class Board implements ApplicationListener {
 
         renderer = new OrthogonalTiledMapRenderer(map, (float) 1/300);
         renderer.setView(camera);
+
+        TextureRegion[][] robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
+        robotCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
+        robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
+        robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
+
+        Gdx.input.setInputProcessor(this);
     }
 
     public void setRobotPosition(int posX, int posY) {
@@ -81,7 +100,6 @@ public class Board implements ApplicationListener {
 
     public void setCell(int posX, int posY) {
         robotLayer.setCell(posX, posY, robotCell);
-
     }
 
     @Override
@@ -89,6 +107,7 @@ public class Board implements ApplicationListener {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
+        robotLayer.setCell(posX, posY, robotCell);
     }
 
     @Override
@@ -105,5 +124,34 @@ public class Board implements ApplicationListener {
     public void dispose() {
         batch.dispose();
         font.dispose();
+    }
+
+    @Override
+    public boolean keyUp(int intCode) {
+        if (intCode == Input.Keys.UP) {
+            if (!(posY == MAP_SIZE_Y - 1)) {
+                robotLayer.setCell(posX, posY, null);
+                posY += 1;
+            }
+        }
+        if (intCode == Input.Keys.DOWN) {
+            if (!(posY == 0)) {
+                robotLayer.setCell(posX, posY, null);
+                posY -= 1;
+            }
+        }
+        if (intCode == Input.Keys.LEFT) {
+            if (!(posX == 0)) {
+                robotLayer.setCell(posX, posY, null);
+                posX -= 1;
+            }
+        }
+        if (intCode == Input.Keys.RIGHT) {
+            if (!(posX == MAP_SIZE_X - 1)) {
+                robotLayer.setCell(posX, posY, null);
+                posX += 1;
+            }
+        }
+        return false;
     }
 }
