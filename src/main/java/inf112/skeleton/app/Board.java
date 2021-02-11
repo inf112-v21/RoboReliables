@@ -50,10 +50,10 @@ public class Board extends InputAdapter implements ApplicationListener {
         font.setColor(Color.RED);
 
         // Sets the map and various layers
-        map = new TmxMapLoader().load("gameboard.tmx");
+        map        = new TmxMapLoader().load("gameboard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
-        holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
+        holeLayer  = (TiledMapTileLayer) map.getLayers().get("hole");
 
         // Initializes camera
         camera = new OrthographicCamera();
