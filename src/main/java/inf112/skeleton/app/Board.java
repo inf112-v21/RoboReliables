@@ -77,6 +77,11 @@ public class Board extends InputAdapter implements ApplicationListener {
         Gdx.input.setInputProcessor(this);
     }
 
+    /**
+     *
+     * @param posX
+     * @param posY
+     */
     public void setRobotPosition(int posX, int posY) {
         playerPos = new Vector2(posX, posY);
     }

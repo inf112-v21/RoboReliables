@@ -20,9 +20,4 @@ public class Flag extends Entity {
     public void setPosY(int newYValue) {
 
     }
-
-    @Override
-    public boolean isOnTheMap() {
-        return false;
-    }
 }
