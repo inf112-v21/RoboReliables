@@ -16,7 +16,6 @@ public class RoboRally {
         int posX = testPlayer.getRobot().getPosX();
         int posY = testPlayer.getRobot().getPosY();
 
-        board.setRobotPosition(posX, posY);
         new Lwjgl3Application(board, cfg);
     }
 }

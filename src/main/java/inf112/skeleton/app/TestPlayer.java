@@ -8,7 +8,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 public class TestPlayer extends AbstractPlayer  {
     private int posX, posY;
     private TiledMapTileLayer robotLayer;
-    private Board board;
+    private final Board board;
 
 
     public TestPlayer(int posX, int posY, Board board) {

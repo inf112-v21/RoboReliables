@@ -35,7 +35,6 @@ public class Board extends InputAdapter implements ApplicationListener {
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell, flagCell;
 
     private int posX, posY;
-    private Vector2 playerPos;
 
 
     public int getMAP_SIZE_X() {
@@ -77,10 +76,6 @@ public class Board extends InputAdapter implements ApplicationListener {
         Gdx.input.setInputProcessor(this);
     }
 
-    public void setRobotPosition(int posX, int posY) {
-        playerPos = new Vector2(posX, posY);
-    }
-
     @Override
     public void resize(int width, int height) {
 
@@ -111,9 +106,7 @@ public class Board extends InputAdapter implements ApplicationListener {
      * @return true if won
      */
     public boolean checkIfWon() {
-        if ((posX == 4) && (posY == 4)) {
-            return true;
-        } else return false;
+        return (posX == 4) && (posY == 4);
     }
 
     @Override
