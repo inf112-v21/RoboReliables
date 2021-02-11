@@ -91,20 +91,28 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
     @Override
     public boolean keyUp(int intCode) {
         if (intCode == Input.Keys.UP) {
-            playerLayer.setCell(posX, posY, null);
-            posY += 1;
+            if (!(posY == MAP_SIZE_Y - 1)) {
+                playerLayer.setCell(posX, posY, null);
+                posY += 1;
+            }
         }
         if (intCode == Input.Keys.DOWN) {
-            playerLayer.setCell(posX, posY, null);
-            posY -= 1;
+            if (!(posY == 0)) {
+                playerLayer.setCell(posX, posY, null);
+                posY -= 1;
+            }
         }
         if (intCode == Input.Keys.LEFT) {
-            playerLayer.setCell(posX, posY, null);
-            posX -= 1;
+            if (!(posX == 0)) {
+                playerLayer.setCell(posX, posY, null);
+                posX -= 1;
+            }
         }
         if (intCode == Input.Keys.RIGHT) {
-            playerLayer.setCell(posX, posY, null);
-            posX += 1;
+            if (!(posX == MAP_SIZE_X - 1)) {
+                playerLayer.setCell(posX, posY, null);
+                posX += 1;
+            }
         }
         return false;
     }
