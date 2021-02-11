@@ -8,4 +8,7 @@ import com.badlogic.gdx.InputAdapter;
 public class TestPlayer extends AbstractPlayer  {
 
 
+    public TestPlayer(int posX, int posY) {
+        super(posX, posY);
+    }
 }

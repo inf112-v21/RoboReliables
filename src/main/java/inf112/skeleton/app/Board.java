@@ -7,17 +7,20 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.math.Vector2;
 
 public class Board implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
 
     private TiledMap map;
-    private TiledMapTileLayer boardLayer, holeLayer, flagLayer, playerLayer;
+    private TiledMapTileLayer boardLayer, holeLayer, flagLayer, robotLayer;
 
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
@@ -26,8 +29,15 @@ public class Board implements ApplicationListener {
     public  final int   MAP_SIZE_Y   = 5;
     private final float cameraHeight = (float) 5;
 
-    private TiledMapTileLayer.Cell playerCell, playerWonCell, playerDiedCell;
+    private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
 
+    private Vector2 playerPos;
+
+    public void setRobotTexture(TextureRegion [][] textures) {
+        robotCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(textures[0][0]));
+        robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(textures[0][2]));
+        robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(textures[0][1]));
+    }
 
     @Override
     public void create() {
@@ -36,8 +46,8 @@ public class Board implements ApplicationListener {
         font.setColor(Color.RED);
 
         map = new TmxMapLoader().load("assets/gameboard.tmx");
-        boardLayer  = (TiledMapTileLayer) map.getLayers().get("assets/gameboard.tmx");
-        playerLayer = (TiledMapTileLayer) map.getLayers().get("player");
+        boardLayer = (TiledMapTileLayer) map.getLayers().get("assets/gameboard.tmx");
+        robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, MAP_SIZE_X, MAP_SIZE_Y);
@@ -48,8 +58,17 @@ public class Board implements ApplicationListener {
         renderer.setView(camera);
     }
 
+    public void setRobotPosition(int posX, int posY) {
+        playerPos = new Vector2(posX, posY);
+    }
+
     @Override
     public void resize(int width, int height) {
+
+    }
+
+    public void setCell(int posX, int posY) {
+        robotLayer.setCell(posX, posY, robotCell);
 
     }
 
@@ -58,7 +77,6 @@ public class Board implements ApplicationListener {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
-        //playerLayer.setCell(posX, posY, playerCell);
     }
 
     @Override
