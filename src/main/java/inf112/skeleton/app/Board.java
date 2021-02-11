@@ -16,8 +16,10 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.math.Vector2;
 
+/**
+ *
+ */
 public class Board extends InputAdapter implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
@@ -56,18 +58,23 @@ public class Board extends InputAdapter implements ApplicationListener {
         font  = new BitmapFont();
         font.setColor(Color.RED);
 
-        map = new TmxMapLoader().load("assets/gameboard.tmx");
-        boardLayer = (TiledMapTileLayer) map.getLayers().get("assets/gameboard.tmx");
+        // Sets the map and various layers
+        map = new TmxMapLoader().load("gameboard.tmx");
+        boardLayer = (TiledMapTileLayer) map.getLayers().get("gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
+        holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
 
+        // Initializes camera
         camera = new OrthographicCamera();
         camera.setToOrtho(false, MAP_SIZE_X, MAP_SIZE_Y);
         camera.viewportHeight = cameraHeight;
         camera.update();
 
+        // Initializes renderer
         renderer = new OrthogonalTiledMapRenderer(map, (float) 1/300);
         renderer.setView(camera);
 
+        // Splits the textures of the player into different states and sets them to the given Cell
         TextureRegion[][] robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
         robotCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
         robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
