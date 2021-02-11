@@ -24,9 +24,4 @@ public class Robot extends Entity {
     public void setPosY(int newYValue) {
         this.posY = newYValue;
     }
-
-    @Override
-    public boolean isOnTheMap() {
-        return false;
-    }
 }

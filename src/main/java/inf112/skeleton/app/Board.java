@@ -50,6 +50,12 @@ public class Board extends InputAdapter implements ApplicationListener {
         return robotLayer;
     }
 
+    public boolean checkIfPlayerOnBoard() {
+        if (posX >= 0 && posX < MAP_SIZE_X) {
+            return posY >= 0 && posY < MAP_SIZE_Y;
+        } return false;
+    }
+
 
     @Override
     public void create() {
@@ -61,14 +67,17 @@ public class Board extends InputAdapter implements ApplicationListener {
         boardLayer = (TiledMapTileLayer) map.getLayers().get("assets/gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
 
+        // Initializes the camera
         camera = new OrthographicCamera();
         camera.setToOrtho(false, MAP_SIZE_X, MAP_SIZE_Y);
         camera.viewportHeight = cameraHeight;
         camera.update();
 
+        // Initializes the renderer
         renderer = new OrthogonalTiledMapRenderer(map, (float) 1/300);
         renderer.setView(camera);
 
+        // Splits and gives each robot instance
         TextureRegion[][] robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
         robotCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
         robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
@@ -92,6 +101,7 @@ public class Board extends InputAdapter implements ApplicationListener {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
+        // Checks which player texture to render based on player status
         if ((posX == 4) && (posY == 4)) {
             robotLayer.setCell(posX, posY, robotWonCell);
         } else if ((posX == 2) && (posY == 2)) {
@@ -111,9 +121,7 @@ public class Board extends InputAdapter implements ApplicationListener {
      * @return true if won
      */
     public boolean checkIfWon() {
-        if ((posX == 4) && (posY == 4)) {
-            return true;
-        } else return false;
+        return (posX == 4) && (posY == 4);
     }
 
     @Override

@@ -21,8 +21,4 @@ public class Flag extends Entity {
 
     }
 
-    @Override
-    public boolean isOnTheMap() {
-        return false;
-    }
 }
