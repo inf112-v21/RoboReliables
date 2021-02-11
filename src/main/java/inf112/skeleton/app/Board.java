@@ -105,8 +105,15 @@ public class Board extends InputAdapter implements ApplicationListener {
         }
     }
 
+    /**
+     * Checks if a player has won by checking that the player has gone through
+     * the flags in the appropriate order.
+     * @return true if won
+     */
     public boolean checkIfWon() {
-        return (posX == 4) && (posY == 4);
+        if ((posX == 4) && (posY == 4)) {
+            return true;
+        } else return false;
     }
 
     @Override
