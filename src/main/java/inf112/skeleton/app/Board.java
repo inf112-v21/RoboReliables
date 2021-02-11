@@ -39,6 +39,18 @@ public class Board implements ApplicationListener {
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(textures[0][1]));
     }
 
+    public int getMAP_SIZE_X() {
+        return MAP_SIZE_X;
+    }
+
+    public int getMAP_SIZE_Y() {
+        return MAP_SIZE_Y;
+    }
+
+    public TiledMapTileLayer getRobotLayer() {
+        return robotLayer;
+    }
+
     @Override
     public void create() {
         batch = new SpriteBatch();

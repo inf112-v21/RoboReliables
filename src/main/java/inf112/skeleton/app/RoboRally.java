@@ -10,12 +10,12 @@ public class RoboRally {
         cfg.setTitle("RoboRally");
         cfg.setWindowedMode(500, 500);
 
-        AbstractPlayer testPlayer = new TestPlayer(0, 0);
+        Board board = new Board();
+        AbstractPlayer testPlayer = new TestPlayer(0, 0, board);
 
         int posX = testPlayer.getRobot().getPosX();
         int posY = testPlayer.getRobot().getPosY();
 
-        Board board = new Board();
         board.setRobotTexture(testPlayer.getRobot().getTextureRegion());
         board.setCell(posX, posY);
         board.setRobotPosition(posX, posY);
