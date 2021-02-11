@@ -37,11 +37,6 @@ public class Board extends InputAdapter implements ApplicationListener {
     private int posX, posY;
     private Vector2 playerPos;
 
-    public void setRobotTexture(TextureRegion [][] textures) {
-        robotCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(textures[0][0]));
-        robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(textures[0][2]));
-        robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(textures[0][1]));
-    }
 
     public int getMAP_SIZE_X() {
         return MAP_SIZE_X;
@@ -55,13 +50,6 @@ public class Board extends InputAdapter implements ApplicationListener {
         return robotLayer;
     }
 
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
-
-    public void setPosY(int posY) {
-        this.posY = posY;
-    }
 
     @Override
     public void create() {
@@ -98,10 +86,6 @@ public class Board extends InputAdapter implements ApplicationListener {
 
     }
 
-    public void setCell(int posX, int posY) {
-        robotLayer.setCell(posX, posY, robotCell);
-    }
-
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -115,6 +99,14 @@ public class Board extends InputAdapter implements ApplicationListener {
         } else {
             robotLayer.setCell(posX, posY, robotCell);
         }
+        if (checkIfWon()) {
+            System.out.println("Player won!");
+            System.out.close();
+        }
+    }
+
+    public boolean checkIfWon() {
+        return (posX == 4) && (posY == 4);
     }
 
     @Override
