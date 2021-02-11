@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package Network;
 
 /**
  * This class will work as Server-side

@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package Network;
 
 import java.util.ArrayList;
 import java.util.HashMap;

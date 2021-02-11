@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package Network;
 
 /**
  * This ENUM-class shows the state of the server state

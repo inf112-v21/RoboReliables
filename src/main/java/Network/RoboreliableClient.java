@@ -1,4 +1,6 @@
-package inf112.skeleton.app;
+package Network;
+
+import Network.RoboreliableClientListener;
 
 /**
  * This class will work as the Roboraliable client-side
