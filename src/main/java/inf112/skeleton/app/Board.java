@@ -77,11 +77,6 @@ public class Board extends InputAdapter implements ApplicationListener {
         Gdx.input.setInputProcessor(this);
     }
 
-    /**
-     *
-     * @param posX
-     * @param posY
-     */
     public void setRobotPosition(int posX, int posY) {
         playerPos = new Vector2(posX, posY);
     }
@@ -137,6 +132,15 @@ public class Board extends InputAdapter implements ApplicationListener {
         font.dispose();
     }
 
+    /**
+     * Moves the robot in the specified direction when the key is released
+     * (NOT when it is pushed down), hence the name.
+     * Also, before making the move, checks whether or not the robot is attempting to move past a wall,
+     * and does not perform the move action if it is.
+     * @param intCode the integer code of the key being pressed
+     *               UP = 19, DOWN = 20, LEFT = 21, RIGHT = 22.
+     * @return false, in accordance with ApplicationListener.
+     */
     @Override
     public boolean keyUp(int intCode) {
         if (intCode == Input.Keys.UP) {
