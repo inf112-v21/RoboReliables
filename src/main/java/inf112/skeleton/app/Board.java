@@ -110,6 +110,8 @@ public class Board extends InputAdapter implements ApplicationListener {
 
         if ((posX == 4) && (posY == 4)) {
             robotLayer.setCell(posX, posY, robotWonCell);
+        } else if ((posX == 2) && (posY == 2)) {
+            robotLayer.setCell(posX, posY, robotDiedCell);
         } else {
             robotLayer.setCell(posX, posY, robotCell);
         }
