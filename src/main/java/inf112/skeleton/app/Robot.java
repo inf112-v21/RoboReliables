@@ -8,9 +8,7 @@ public class Robot extends Entity {
     private int posX, posY;
 
     public Robot() {
-        TextureRegion robotTextures [][] = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
-
-        //robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
+        robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
     }
 
     public TextureRegion [][] getTextureRegion() {
