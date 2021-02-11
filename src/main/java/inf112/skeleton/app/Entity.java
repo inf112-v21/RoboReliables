@@ -21,5 +21,4 @@ public abstract class Entity implements IEntity {
     public void setPosY(int newYValue) {
 
     }
-
 }
