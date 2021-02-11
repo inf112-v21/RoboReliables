@@ -7,7 +7,7 @@ import inf112.skeleton.app.HelloWorld;
 public class Main {
     public static void main(String[] args) {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
-        cfg.setTitle("Robo Rally 3D HD Ultra");
+        cfg.setTitle("RoboRally");
         cfg.setWindowedMode(500, 500);
 
         new Lwjgl3Application(new HelloWorld(), cfg);
