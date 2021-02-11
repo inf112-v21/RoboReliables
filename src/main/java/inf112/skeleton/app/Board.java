@@ -47,10 +47,6 @@ public class Board extends InputAdapter implements ApplicationListener {
         return MAP_SIZE_Y;
     }
 
-    public TiledMapTileLayer getRobotLayer() {
-        return robotLayer;
-    }
-
 
     @Override
     public void create() {
