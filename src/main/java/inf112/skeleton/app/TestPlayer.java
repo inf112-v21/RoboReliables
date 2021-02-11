@@ -2,9 +2,7 @@ package inf112.skeleton.app;
 
 // This class is for testing player actions with input from keyboard.
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 public class TestPlayer extends AbstractPlayer  {
