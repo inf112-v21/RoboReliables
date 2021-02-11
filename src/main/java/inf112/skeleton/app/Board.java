@@ -32,7 +32,7 @@ public class Board extends InputAdapter implements ApplicationListener {
     public  final int   MAP_SIZE_Y   = 5;
     private final float cameraHeight = (float) 5;
 
-    private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
+    private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell, flagCell;
 
     private int posX, posY;
     private Vector2 playerPos;
@@ -107,7 +107,12 @@ public class Board extends InputAdapter implements ApplicationListener {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
-        robotLayer.setCell(posX, posY, robotCell);
+
+        if ((posX == 4) && (posY == 4)) {
+            robotLayer.setCell(posX, posY, robotWonCell);
+        } else {
+            robotLayer.setCell(posX, posY, robotCell);
+        }
     }
 
     @Override
