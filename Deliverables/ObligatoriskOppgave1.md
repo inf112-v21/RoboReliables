@@ -37,6 +37,14 @@ Ideathons, konkurranser og jobbing på StartupLab Bergen
 
 # Deloppgave 2
   
+Vi ble enige om å bruke Kanban-metoden for å strukturere arbeidet i prosjektet.
+Vi syntes blant annet at Kanban er enkel å bruke og gir god struktur og oversikt.
+
+
+# Deloppgave 3
+
+Referer til `UserStories.md`.
+# Deloppgave 4
 
 
 
