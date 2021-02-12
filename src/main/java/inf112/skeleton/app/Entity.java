@@ -1,5 +1,9 @@
 package inf112.skeleton.app;
 
+/**
+ * This class takes care of all the things common for entities.
+ * Entities are classes that are shown on the board.
+ */
 public abstract class Entity implements IEntity {
 
     @Override
