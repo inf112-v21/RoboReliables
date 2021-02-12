@@ -88,7 +88,24 @@ Foreløpig funksjonalitet til spillet:
 
 # Oppsummering
 
+Alt i alt har sammarbeidet innad i gruppen fungert svært bra. Vi har alle fått bidratt til prosjektet
+og vi har koordinert arbeidet effektivt. Discord er enkelt å bruke til å samle teamet på enten voice eller
+tekst. I noen tilfeller har kvaliteten på skjermdelingen på Discord vært for dårlig til
+å effektivt vise kode. I disse tilfeller har vi lært at Zoom gir bedre kvalitet på skjermdeling, men ettersom
+Zoom tar litt lenger tid å gjøre klart brukes det bare når vi ikke trenger å dele kode på skjermdeling.
 
+Til å begynne med var det litt vansker med å bruke Project Board. For mange tasks ble lagt inn og det ble
+uoversiktelig. Vi fikset dette med å gå over til å benytte oss av "Issues" i github. Dette
+har fungert veldig bra, og gir oss nå mulighet til å ha bedre oversikt over oppgavene.
+
+Møtene har vært effektive, og har hjulpet til å gi oss en samlet forståelse for programmet. Vi endret et par
+roller før vi begynte å programmere for fult til "Arkitekt". Dette var fordi vi følte at det var mer viktig å
+ha medlemmer på teamet som hadde fult fokus på å legge opp strukturen til programmet. Dette fungerte svært bra
+og hjalp masse med å gi oss en bedre oversikt. Til dette ble det også laget et klasediagram som vi jevnlig bruker
+som referanse til programmet.
+
+Helt i begynnelsen hadde vi noen mindre problemer med bruk av git. Dette løste vi med hjelp av parprogrammering
+og digital brukerstøtte.
 
 # Referat fra møter
 
