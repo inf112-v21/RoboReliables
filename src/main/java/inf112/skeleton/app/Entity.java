@@ -1,8 +1,8 @@
 package inf112.skeleton.app;
 
 /**
- * This class takes care of all the things common for entities.
- * Entities are classes that are shown on the board.
+ * A class for handling all the things common for entities.
+ * An entity is something that can be shown on the board
  */
 public abstract class Entity implements IEntity {
 
