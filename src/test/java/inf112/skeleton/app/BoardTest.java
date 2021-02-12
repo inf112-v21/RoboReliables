@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 /**
- *
+ * Tests for the Board class.
  */
 public class BoardTest {
     public Board board;
@@ -17,20 +17,18 @@ public class BoardTest {
 
 
     /**
-     *
+     * Tests that getMAP_SIZE_X returns the actual mapsize in the X direction.
      */
     @Test
     public void getMAP_SIZE_XTest() {
-        createBoard();
         assertEquals(board.MAP_SIZE_X, board.getMAP_SIZE_X());
     }
 
     /**
-     *
+     * Tests that getMAP_SIZE_Y returns the actual mapsize in the Y direction.
      */
     @Test
     public void getMAP_SIZE_YTest() {
-        createBoard();
         assertEquals(board.MAP_SIZE_Y, board.getMAP_SIZE_Y());
     }
 }
