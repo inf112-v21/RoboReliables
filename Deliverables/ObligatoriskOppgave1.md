@@ -1,6 +1,6 @@
 # Deloppgave 1
 
-![logo.png](logo.png)
+![logo.png](../assets/logo.png)
 
 Vi valgte gruppenavnet **RoboReliables**. Grunnen til dette er fordi målet vårt 
 er å levere pålitelig kode som funker.
@@ -80,7 +80,8 @@ Referer til `documents/UserStories.md`.
 
 # Deloppgave 4 - Kode
 
-
+Måten vi kodet på har hovedsakelig vært gjennom parprogrammering og
+delt-skjerm møter. 
 
 
 

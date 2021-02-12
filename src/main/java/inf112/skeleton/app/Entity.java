@@ -5,24 +5,29 @@ package inf112.skeleton.app;
  * An entity is something that can be shown on the board
  */
 public abstract class Entity implements IEntity {
+    private int posX, posY;
+
+    public Entity() {
+
+    }
 
     @Override
     public int getPosX() {
-        return 0;
+        return posX;
     }
 
     @Override
     public int getPosY() {
-        return 0;
+        return posY;
     }
 
     @Override
     public void setPosX(int newXValue) {
-
+        posX = newXValue;
     }
 
     @Override
     public void setPosY(int newYValue) {
-
+        posY = newYValue;
     }
 }

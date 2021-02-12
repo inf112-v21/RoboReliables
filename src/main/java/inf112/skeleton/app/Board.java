@@ -39,34 +39,18 @@ public class Board extends InputAdapter implements ApplicationListener {
     private int posX, posY;
 
 
-    /**
-     * Returns the private variable MAP_SIZE_X.
-     * @return MAP_SIZE_X
-     */
     public int getMAP_SIZE_X() {
         return MAP_SIZE_X;
     }
 
-    /**
-     * Returns the privat variable MAP_SIZE_Y.
-     * @return MAP_SIZE_Y
-     */
     public int getMAP_SIZE_Y() {
         return MAP_SIZE_Y;
     }
 
-    /**
-     * Sets the x-position to a new integer value.
-     * @param newPosX The new x-value
-     */
     public void setPosX(int newPosX) {
         posX = newPosX;
     }
 
-    /**
-     * Sets the y-position to a new integer value.
-     * @param newPosY The new y-value
-     */
     public void setPosY(int newPosY) {
         posY = newPosY;
     }

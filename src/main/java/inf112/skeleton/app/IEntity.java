@@ -1,5 +1,9 @@
 package inf112.skeleton.app;
 
+/**
+ * Interface for entities on the board. Can for example be flags, holes or other
+ * objects.
+ */
 public interface IEntity {
 
     int getPosX();
