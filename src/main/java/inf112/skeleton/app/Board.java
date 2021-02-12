@@ -46,6 +46,38 @@ public class Board extends InputAdapter implements ApplicationListener {
         return MAP_SIZE_Y;
     }
 
+    /**
+     *
+     * @param newPosX
+     */
+    public void setPosX(int newPosX) {
+        posX = newPosX;
+    }
+
+    /**
+     *
+     * @param newPosY
+     */
+    public void setPosY(int newPosY) {
+        posY = newPosY;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getPosX() {
+        return posX;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getPosY() {
+        return posY;
+    }
+
     @Override
     public void create() {
         batch = new SpriteBatch();

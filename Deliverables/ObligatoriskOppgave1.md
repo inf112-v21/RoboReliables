@@ -50,3 +50,11 @@ Referer til `UserStories.md`.
 
 
 # Oppsummering
+
+
+
+# Arbeidsfordeling
+
+### Gruppetime onsdag 3/2
+
+Dette møte var vårt første 
