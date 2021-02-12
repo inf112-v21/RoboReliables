@@ -17,6 +17,9 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 
+/**
+ *
+ */
 public class Board extends InputAdapter implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;

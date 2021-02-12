@@ -16,15 +16,18 @@ public class BoardTest {
     }
 
 
-    /** @Test
-    public void PlayerStaysOnBoardTest() {
-
-    }**/
+    /**
+     *
+     */
     @Test
     public void getMAP_SIZE_XTest() {
         createBoard();
         assertEquals(board.MAP_SIZE_X, board.getMAP_SIZE_X());
     }
+
+    /**
+     *
+     */
     @Test
     public void getMAP_SIZE_YTest() {
         createBoard();

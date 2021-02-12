@@ -1,5 +1,8 @@
 package inf112.skeleton.app;
 
+/**
+ *
+ */
 public class TestPlayer extends AbstractPlayer  {
     private int posX, posY;
     private final Board board;
