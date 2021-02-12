@@ -85,7 +85,8 @@ Foreløpig funksjonalitet til spillet:
 - Endrer sprite og state til spiller når spiller flyttes til spesielle tiles (hull eller flagg)
 - Spiller vinner når alle flagg er besøkt
 
-Referer til assets/klassediagram
+![klassediagram.png](../assets/klassediagram.png)
+
 Dette er klassestrukturen som denne første innleveringen endte opp med. Den generelle strukturen
 er laget med fremtidig utvidelse og objektorienterte prinsipper i baktanke.
 
