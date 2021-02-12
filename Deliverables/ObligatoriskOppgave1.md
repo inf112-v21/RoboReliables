@@ -88,7 +88,9 @@ Foreløpig funksjonalitet til spillet:
 ![klassediagram.png](../assets/klassediagram.png)
 
 Dette er klassestrukturen som denne første innleveringen endte opp med. Den generelle strukturen
-er laget med fremtidig utvidelse og objektorienterte prinsipper i baktanke.
+er laget med fremtidig utvidelse og objektorienterte prinsipper i baktanke. De røde klassene er
+hva som er tenkt til senere, men som ikke ennå er implementert ordentlig, som forklarer hvorfor
+det er valgt å bruke de abstrakte klassene og interfaces.
 
 # Oppsummering
 
