@@ -20,58 +20,61 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 /**
  * The Board.java class is responsible for creating the board and displaying a graphical
  * representation to the users screen. It also serves the purpose of registering input from the keyboard
- * for testing purposes. The create() function sets up the camera and renderer and
+ * for testing purposes.
  */
 public class Board extends InputAdapter implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
 
     private TiledMap map;
-    private TiledMapTileLayer boardLayer, holeLayer, flagLayer, robotLayer;
+    private TiledMapTileLayer boardLayer, holeLayer, robotLayer;
 
     private OrthogonalTiledMapRenderer renderer;
-    private OrthographicCamera camera;
 
     public  final int   MAP_SIZE_X   = 12;
     public  final int   MAP_SIZE_Y   = 12;
-    private final float cameraHeight = (float) 12;
 
-    private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell, flagCell;
+    private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
 
     private int posX, posY;
 
+
     /**
-     *
-     * @return
+     * Returns the private variable MAP_SIZE_X.
+     * @return MAP_SIZE_X
      */
     public int getMAP_SIZE_X() {
         return MAP_SIZE_X;
     }
 
     /**
-     *
-     * @return
+     * Returns the privat variable MAP_SIZE_Y.
+     * @return MAP_SIZE_Y
      */
     public int getMAP_SIZE_Y() {
         return MAP_SIZE_Y;
     }
 
     /**
-     *
-     * @param newPosX
+     * Sets the x-position to a new integer value.
+     * @param newPosX The new x-value
      */
     public void setPosX(int newPosX) {
         posX = newPosX;
     }
 
     /**
-     *
-     * @param newPosY
+     * Sets the y-position to a new integer value.
+     * @param newPosY The new y-value
      */
     public void setPosY(int newPosY) {
         posY = newPosY;
     }
 
+    /**
+     * Initializes the camera and renderer as well as sets the textures for the map and various
+     * layers. Also assigns the textures of the player sprite.
+     */
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -85,9 +88,9 @@ public class Board extends InputAdapter implements ApplicationListener {
         holeLayer  = (TiledMapTileLayer) map.getLayers().get("hole");
 
         // Initializes camera
-        camera = new OrthographicCamera();
+        OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, MAP_SIZE_X, MAP_SIZE_Y);
-        camera.viewportHeight = cameraHeight;
+        camera.viewportHeight = (float) 12;
         camera.update();
 
         // Initializes renderer

@@ -2,9 +2,6 @@
 
 ![img.png](img.png)
 
-
-
-
 Vi valgte gruppenavnet **RoboReliables**. Grunnen til dette er fordi målet vårt 
 er å levere pålitelig kode som funker.
 
