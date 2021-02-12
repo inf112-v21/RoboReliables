@@ -8,8 +8,10 @@ er å levere pålitelig kode som funker.
 ### Oppsumering av kompetansenivå til teamet
 
 **Sebastian** (Nettverksansvarlig):
+- Går hybridutdanning med Informatikk og Dataingeniør
 - Faglig styrke: Java, Python, SQL, Cryptologi, Anti-hacking, Sikkerhet
 - Softskills: Ledelse fra LAN, samarbeid i prosjekt og lærer på front-end kurs
+
 
 **Heming** (Arkitekt):
 - Går fjerde semester på bachelorgrad i Informatikk: Datateknologi
@@ -18,16 +20,19 @@ er å levere pålitelig kode som funker.
 - Relativt ny til å kode/utvikle i teams
 - Ca 50 score på Kattis
 
+
 **Julian** (Arkitekt):
 - Har hovedsakelig programmer i Java og Python
 - Programmerer med forskjellige programmeringsspråk på fritiden
 - Går tredjeåret på datateknologi
+
 
 **Anders** (Ansvarlig for kodekvalitet):
 - Er på 6. semester på bachelor i Informatikk: datatryggleik
 - Har tatt INF100, DAT103, INF140 og INF142. Tar INF101 dette semesteret
 - Drevet med hobbyprogrammering, mest på egen hånd siden 2016/2017. Mest 
 erfaring i Python men også en del erfaring i Java/C
+
   
 **Sigurd** (Team Leader):
 - Går på 6. semester på bachelor i Kognitiv Vitenskap med spesialiseringen i Informatikk
@@ -35,7 +40,21 @@ erfaring i Python men også en del erfaring i Java/C
 - Programmerer med Raspberry Pi på fritiden og har laget et par små prosjekter i dette
 - Har jobbet en del i teams i ulike settings, og har blant annet erfaring fra
 Ideathons, konkurranser og jobbing på StartupLab Bergen
+
+- - - - - - - - - - 
   
+### ROLLER:
+- **Teamleder** (Sigurd): Han er god på å strukturere team og har god erfaring med ledelse
+
+- **Ansvarlig for kodekvalitet** (Anders): Ble kodeansvarlig da han brenner for ryddig kode og liker å strukturere kode bra
+
+- **Arkitekt** (Julian): Ble arkitekt da han syns det er spennende å sette opp diagram for kode
+
+- **Arkitekt** (Hemning): Ble arkitekt da han god til å sette opp og se for seg struktur på kode
+
+- **Nettverksansvarlig** (Sebastian): Ble Nettverksansvarlig da han tidligere har erfaring med lignende prosjekter og ønsker flere erfaringer
+
+
 
 # Deloppgave 2
   
@@ -43,11 +62,14 @@ Vi ble enige om å bruke Kanban-metoden for å strukturere arbeidet i prosjektet
 Vi syntes blant annet at Kanban er enkel å bruke og gir god struktur og oversikt.
 
 
+
 # Deloppgave 3
 
 Referer til `UserStories.md`.
 
-# Deloppgave 4
+# Deloppgave 4 - Kode
+
+
 
 
 
@@ -57,6 +79,6 @@ Referer til `UserStories.md`.
 
 # Arbeidsfordeling
 
-### Gruppetime onsdag 3/2
+### Gruppetime onsdag 3/2   
 
 Dette møte var vårt første 

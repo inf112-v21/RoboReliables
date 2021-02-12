@@ -1,8 +1,9 @@
 package inf112.skeleton.app;
 
 /**
- *
+ * Maps the robots position on the board
  */
+
 public class Robot extends Entity {
     private int posX, posY;
 
