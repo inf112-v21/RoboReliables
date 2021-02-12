@@ -50,7 +50,7 @@ Ideathons, konkurranser og jobbing på StartupLab Bergen
 
 - **Arkitekt** (Julian): Ble arkitekt da han syns det er spennende å sette opp diagram for kode
 
-- **Arkitekt** (Hemning): Ble arkitekt da han god til å sette opp og se for seg struktur på kode
+- **Arkitekt** (Heming): Ble arkitekt da han god til å sette opp og se for seg struktur på kode
 
 - **Nettverksansvarlig** (Sebastian): Ble Nettverksansvarlig da han tidligere har erfaring med lignende prosjekter og ønsker flere erfaringer
 
@@ -79,6 +79,11 @@ Referer til `documents/UserStories.md`.
 Måten vi kodet på har hovedsakelig vært gjennom parprogrammering og
 delt-skjerm møter. 
 
+Foreløpig funksjonalitet til spillet:
+- Viser et grafisk interface med et spillbrett
+- Viser en spiller som kan beveges med piltaster rundt på brettet
+- Endrer sprite og state til spiller når spiller flyttes til spesielle tiles (hull eller flagg)
+- Spiller vinner når alle flagg er besøkt
 
 
 # Oppsummering
