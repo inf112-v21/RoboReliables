@@ -1,5 +1,5 @@
 
-### Som spiller ønsker jeg å se spillebrettet for å kunne spille spillet.
+### Som spiller ønsker jeg å se spillebrettet for å kunne få oversikt.
 
 **Akseptansekriterier**:
 
