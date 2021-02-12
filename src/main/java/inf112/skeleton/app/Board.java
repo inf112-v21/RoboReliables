@@ -18,7 +18,9 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 
 /**
- *
+ * The Board.java class is responsible for creating the board and displaying a graphical
+ * representation to the users screen. It also serves the purpose of registering input from the keyboard
+ * for testing purposes. The create() function sets up the camera and renderer and
  */
 public class Board extends InputAdapter implements ApplicationListener {
     private SpriteBatch batch;
@@ -38,10 +40,18 @@ public class Board extends InputAdapter implements ApplicationListener {
 
     private int posX, posY;
 
+    /**
+     *
+     * @return
+     */
     public int getMAP_SIZE_X() {
         return MAP_SIZE_X;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMAP_SIZE_Y() {
         return MAP_SIZE_Y;
     }
@@ -60,22 +70,6 @@ public class Board extends InputAdapter implements ApplicationListener {
      */
     public void setPosY(int newPosY) {
         posY = newPosY;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getPosX() {
-        return posX;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getPosY() {
-        return posY;
     }
 
     @Override
