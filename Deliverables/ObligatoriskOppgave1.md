@@ -109,7 +109,30 @@ og digital brukerstøtte.
 
 # Referat fra møter
 
-### Gruppetime onsdag 3/2   
+**Gruppetime 03.02.21 - Sted: Discord** 
 - Ble kjent med hverandre
 - Gikk gjennom erfaringer
-- 
+- Kartla gruppen faglige styrker
+- Kartla timeplanen til teamet mtp møter framover
+- Satt opp nytt møte 08.02.21, kl 14:00
+
+**Møte 08.02.21  - Sted: Discord**
+- Reviderte grupperollene mtp utfordringer som har dukket opp ila planleggingen
+- Planla litt hvordan vi skal møte framover og hvordan vi skal arbeide progressivt mot bolig 1 og gjennom prosjektet
+- Kjørte en status på arbeidsoppgaver og fokus fram til neste møte
+- Satt opp nytt møte 11.02.21, kl 16:30
+
+**Møte 11.01.21 - Sted: Discord**
+- Møter for å få sydd sammen litt elementer i prosjektet
+- Alle går igjennom hva som gjenstår på deres del før innlevering
+- De som har problemer lufter dem og får innspill fra teamet
+- Omstrukturte klassne våres for å få mer klar struktur og gruppering
+- Satt opp nytt møte 12.02.21, kl 15:30
+
+**Gruppetime 12.01.21 - Sted: Discord**
+- Møtes for å ta en siste status på oppgaven og evt utbedringer
+- Finepusse siste elementer til innleveringen
+- Satt opp nytt møte til 15.02.20, 15:30
+
+**Andre møter: - Sted: Discord**
+- Vi har internt også hatt små møter hvor de som smarbeider om en arbeidsoppgave eller arbeidsprossess har samarbeidet.
