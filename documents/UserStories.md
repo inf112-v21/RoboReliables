@@ -7,7 +7,7 @@
 
 **Arbeidsoppgaver**:
 
-Lage GUI.
+- Lage GUI.
 
 ### Som spiller ønsker jeg å se hvor roboten min er på brettet for å kunne vite hvor brikken er.
 
