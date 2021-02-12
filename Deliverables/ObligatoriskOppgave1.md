@@ -64,15 +64,11 @@ Vi syntes blant annet at Kanban er enkel å bruke og gir god struktur og oversik
 For kommunikasjon bruker vi hovedsaklig discord hvor vi har en egen kanal for teamet/prosjektet. 
 Viktig informasjon i forhold til teamarbeidet som f. eks. møtetidspunkter o.l. postes her.
 
-Vi avtaler møter hvor vi diskuterer/planlegger hva som skal gjøres og fordeler ansvar og oppgaver.
+Vi avtaler møter hvor vi diskuterer hva som skal gjøres og fordeler ansvar og oppgaver.
 På grunn av varierende timeplaner har vi ikke faste møter, men planlegger møter fortløpende og etter behov.
 
-
-
-
-
-
-
+Vi begynte først å bruke Project Board med å legge til nye kort direkte i boardet.
+Senere gikk vi over til å åpne "Issues" og heller legge disse til i projektet.
 
 # Deloppgave 3
 
@@ -89,8 +85,9 @@ delt-skjerm møter.
 
 
 
-# Arbeidsfordeling
+# Referat fra møter
 
 ### Gruppetime onsdag 3/2   
-
-Dette møte var vårt første 
+- Ble kjent med hverandre
+- Gikk gjennom erfaringer
+- 
