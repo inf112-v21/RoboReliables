@@ -14,6 +14,7 @@ public class RoboRally {
         cfg.setWindowedMode(500, 500);
 
         Board board = new Board();
+        board.initializeFlags();
         new Lwjgl3Application(board, cfg);
     }
 }

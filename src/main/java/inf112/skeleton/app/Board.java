@@ -11,11 +11,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolylineMapObject;
+import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.math.Polyline;
+
+import java.util.ArrayList;
 
 /**
  * The Board.java class is responsible for creating the board and displaying a graphical
@@ -27,7 +30,7 @@ public class Board extends InputAdapter implements ApplicationListener {
     private BitmapFont font;
 
     private TiledMap map;
-    private TiledMapTileLayer boardLayer, holeLayer, robotLayer;
+    private TiledMapTileLayer boardLayer, holeLayer, flagLayer, robotLayer;
 
     private OrthogonalTiledMapRenderer renderer;
 
@@ -35,6 +38,9 @@ public class Board extends InputAdapter implements ApplicationListener {
     public  final int   MAP_SIZE_Y   = 12;
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
+
+    private final int nrOfFlags = 1;
+    private final ArrayList<Flag> flags = new ArrayList<Flag>(nrOfFlags);
 
     private int posX, posY;
 
@@ -90,6 +96,14 @@ public class Board extends InputAdapter implements ApplicationListener {
         Gdx.input.setInputProcessor(this);
     }
 
+    /**
+     *
+     */
+    public void initializeFlags() {
+        for (int i = 0; i < nrOfFlags; i++)
+            flags.add(new Flag(flagLayer));
+    }
+
     @Override
     public void resize(int width, int height) {
 
@@ -112,6 +126,14 @@ public class Board extends InputAdapter implements ApplicationListener {
             System.out.println("Player won!");
             System.out.close();
         }
+    }
+
+    public void boardInterpreter() {
+        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+        TiledMapTileSet tileSet = new TiledMapTileSet();
+        //holeLayer.setCell(12, 12);
+        //cell.setTile();
+        //Polyline polyline = .getPolyline();
     }
 
     /**
