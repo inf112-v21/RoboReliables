@@ -12,9 +12,9 @@ public class RoboRally {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         cfg.setTitle("RoboRally");
         cfg.setWindowedMode(500, 500);
+        cfg.disableAudio(true);
 
         Board board = new Board();
-        board.initializeFlags();
         new Lwjgl3Application(board, cfg);
     }
 }

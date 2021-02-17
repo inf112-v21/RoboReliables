@@ -30,7 +30,7 @@ public class Board extends InputAdapter implements ApplicationListener {
     private BitmapFont font;
 
     private TiledMap map;
-    private TiledMapTileLayer boardLayer, holeLayer, flagLayer, robotLayer;
+    public TiledMapTileLayer boardLayer, holeLayer, flagLayer, robotLayer;
 
     private OrthogonalTiledMapRenderer renderer;
 
@@ -61,6 +61,7 @@ public class Board extends InputAdapter implements ApplicationListener {
         posY = newPosY;
     }
 
+
     /**
      * Initializes the camera and renderer as well as sets the textures for the map and various
      * layers. Also assigns the textures of the player sprite.
@@ -75,6 +76,7 @@ public class Board extends InputAdapter implements ApplicationListener {
         map        = new TmxMapLoader().load("gameboard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
+        flagLayer  = (TiledMapTileLayer) map.getLayers().get("flag");
         holeLayer  = (TiledMapTileLayer) map.getLayers().get("hole");
 
         // Initializes camera
@@ -92,6 +94,8 @@ public class Board extends InputAdapter implements ApplicationListener {
         robotCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
         robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
+
+        initializeFlags();
 
         Gdx.input.setInputProcessor(this);
     }
