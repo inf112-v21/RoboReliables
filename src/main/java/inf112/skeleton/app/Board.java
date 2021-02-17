@@ -154,29 +154,21 @@ public class Board extends InputAdapter implements ApplicationListener {
      */
     @Override
     public boolean keyUp(int intCode) {
-        if (intCode == Input.Keys.UP) {
-            if (!(posY == MAP_SIZE_Y - 1)) {
-                robotLayer.setCell(posX, posY, null);
-                posY += 1;
-            }
+        if (intCode == Input.Keys.UP && !(posY == MAP_SIZE_Y - 1)) {
+            robotLayer.setCell(posX, posY, null);
+            posY += 1;
         }
-        if (intCode == Input.Keys.DOWN) {
-            if (!(posY == 0)) {
-                robotLayer.setCell(posX, posY, null);
-                posY -= 1;
-            }
+        if (intCode == Input.Keys.DOWN && !(posY == 0)) {
+            robotLayer.setCell(posX, posY, null);
+            posY -= 1;
         }
-        if (intCode == Input.Keys.LEFT) {
-            if (!(posX == 0)) {
-                robotLayer.setCell(posX, posY, null);
-                posX -= 1;
-            }
+        if (intCode == Input.Keys.LEFT && !(posX == 0)) {
+            robotLayer.setCell(posX, posY, null);
+            posX -= 1;
         }
-        if (intCode == Input.Keys.RIGHT) {
-            if (!(posX == MAP_SIZE_X - 1)) {
-                robotLayer.setCell(posX, posY, null);
-                posX += 1;
-            }
+        if (intCode == Input.Keys.RIGHT && !(posX == MAP_SIZE_X - 1)) {
+            robotLayer.setCell(posX, posY, null);
+            posX += 1;
         }
         return false;
     }
