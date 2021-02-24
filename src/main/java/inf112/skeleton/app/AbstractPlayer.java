@@ -7,12 +7,15 @@ import com.badlogic.gdx.InputAdapter;
  */
 public abstract class AbstractPlayer extends InputAdapter implements IAbstractPlayer {
     private final Robot robot;
+    //private Card[] hand;
 
     public AbstractPlayer(int posX, int posY) {
         robot = new Robot();
         robot.setPosX(posX);
         robot.setPosY(posY);
     }
+
+//    public
 
     public Robot getRobot() {
         return robot;
