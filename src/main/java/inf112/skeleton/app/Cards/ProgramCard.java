@@ -16,6 +16,7 @@ public class ProgramCard extends Card {
     public final List<String> programCardValuesList = Arrays.asList(programCardValues);
 
     ProgramCard(String cardValue) {
+        super(cardValue);
         this.cardValue = programCardValues[programCardValuesList.indexOf(cardValue)];
     }
 }

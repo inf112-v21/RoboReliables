@@ -4,7 +4,7 @@ public interface ICardDeck {
     /**
      * Shuffle the deck in random order.
      */
-    void shuffle();
+    void shuffle(ArrayList<Card> deck);
 
     /**
      * Populate the deck with the relevant cards (different from program card deck and option card deck).
@@ -18,7 +18,7 @@ public interface ICardDeck {
      *     18x rotate left cards
      *     6x u-turn cards
      */
-    void populate();
+    void populate(CardDeck cardDeck, String cardValue);
 
     /**
      * Deal a card to player.
