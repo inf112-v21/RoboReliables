@@ -1,4 +1,5 @@
 package inf112.skeleton.app.Cards;
+import java.util.ArrayList;
 
 public interface ICardDeck {
     /**
