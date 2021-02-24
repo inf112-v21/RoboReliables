@@ -11,13 +11,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.PolylineMapObject;
-import com.badlogic.gdx.maps.tiled.*;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.math.Polyline;
-
 import java.util.ArrayList;
 
 /**
@@ -30,7 +28,7 @@ public class Board extends InputAdapter implements ApplicationListener {
     private BitmapFont font;
 
     private TiledMap map;
-    public TiledMapTileLayer boardLayer, holeLayer, flagLayer, robotLayer;
+    private TiledMapTileLayer flagLayer, boardLayer, holeLayer, robotLayer;
 
     private OrthogonalTiledMapRenderer renderer;
 
@@ -60,7 +58,6 @@ public class Board extends InputAdapter implements ApplicationListener {
     public void setPosY(int newPosY) {
         posY = newPosY;
     }
-
 
     /**
      * Initializes the camera and renderer as well as sets the textures for the map and various
@@ -132,14 +129,6 @@ public class Board extends InputAdapter implements ApplicationListener {
         }
     }
 
-    public void boardInterpreter() {
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        TiledMapTileSet tileSet = new TiledMapTileSet();
-        //holeLayer.setCell(12, 12);
-        //cell.setTile();
-        //Polyline polyline = .getPolyline();
-    }
-
     /**
      * Checks if a player has won by checking that the player has gone through
      * the flags in the appropriate order.
@@ -197,5 +186,28 @@ public class Board extends InputAdapter implements ApplicationListener {
             posX += 1;
         }
         return false;
+    }
+
+    public void layerReader(TiledMapTileLayer layer) {
+                        for (int x = 0; x < layer.getWidth(); x++) {
+                            for (int y = 0; y < layer.getHeight(); y++) {
+                                TiledMapTileLayer.Cell cell = layer.getCell(x,y);
+                                if (cell != null) {
+                                    assignPosition(x, y, cell);
+                                    System.out.println(cell.getTile().getId());
+                                    System.out.println(x);
+                                    System.out.println(y);
+                }
+            }
+        }
+    }
+
+    public void assignPosition(int x, int y, TiledMapTileLayer.Cell cell) {
+        switch (cell.getTile().getId()) {
+            case 6:
+                new Hole(x, y);
+            case 55:
+                new Flag(x, y);
+        }
     }
 }
