@@ -32,8 +32,8 @@ public class Board extends InputAdapter implements ApplicationListener {
 
     private OrthogonalTiledMapRenderer renderer;
 
-    public  final int   MAP_SIZE_X   = 12;
-    public  final int   MAP_SIZE_Y   = 12;
+    public final int MAP_SIZE_X = 12;
+    public final int MAP_SIZE_Y = 12;
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
 
@@ -41,7 +41,6 @@ public class Board extends InputAdapter implements ApplicationListener {
     private final ArrayList<Flag> flags = new ArrayList<Flag>(nrOfFlags);
 
     private int posX, posY;
-
 
     public int getMAP_SIZE_X() {
         return MAP_SIZE_X;
