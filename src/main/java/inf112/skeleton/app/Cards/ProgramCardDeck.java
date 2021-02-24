@@ -4,6 +4,6 @@ public class ProgramCardDeck extends CardDeck {
 
     public CardDeck programCardDeck = new CardDeck();
 
-    programCardDeck.populate(programCardDeck.cards, "F1");
+    programCardDeck.populate("F1");
 
 }

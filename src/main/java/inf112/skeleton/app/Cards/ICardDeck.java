@@ -18,7 +18,7 @@ public interface ICardDeck {
      *     18x rotate left cards
      *     6x u-turn cards
      */
-    void populate(CardDeck cardDeck, String cardValue);
+    void populate(String cardValue);
 
     /**
      * Deal a card to player.

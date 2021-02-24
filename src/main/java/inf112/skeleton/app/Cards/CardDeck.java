@@ -22,8 +22,8 @@ public class CardDeck implements ICardDeck {
      * Add one card to a deck.
      */
     @Override
-    public void populate(CardDeck cardDeck, String cardValue) {
-        cardDeck.cards.add(new Card(cardValue));
+    public void populate(String cardValue) {
+        cards.add(new Card(cardValue));
     }
 
     @Override
