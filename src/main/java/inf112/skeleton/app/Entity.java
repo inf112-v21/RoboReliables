@@ -7,11 +7,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
  * An entity is something that can be shown on the board
  */
 public abstract class Entity implements IEntity {
-    private final TiledMapTileLayer.Cell cell;
     private int posX = 0, posY = 0;
 
-    public Entity() {
-        cell = new TiledMapTileLayer.Cell();
+    public Entity(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
     }
 
     @Override
@@ -20,14 +20,9 @@ public abstract class Entity implements IEntity {
     }
 
     @Override
-    public int getPosY() {
-        return posY;
+    public int getPosY() { return posY;
     }
 
-    @Override
-    public TiledMapTileLayer.Cell getCell() {
-        return cell;
-    }
 
     @Override
     public void setPosX(int newXValue) {
@@ -39,21 +34,10 @@ public abstract class Entity implements IEntity {
         posY = newYValue;
     }
 
-    @Override
-    public void setCell(TiledMapTileLayer layer) {
-        layer.setCell(this.getPosX(), this.getPosY(), cell);
-    }
-
-    @Override
-    public void clearCell(TiledMapTileLayer.Cell cell) {
-
-    }
 
     @Override
     public void updatePosition(int x, int y, TiledMapTileLayer layer) {
         setPosX(x);
         setPosY(y);
-        clearCell(getCell());
-        setCell(layer);
     }
 }
