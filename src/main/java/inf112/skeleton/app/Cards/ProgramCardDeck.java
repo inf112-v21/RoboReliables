@@ -4,6 +4,9 @@ public class ProgramCardDeck extends CardDeck {
 
     public CardDeck programCardDeck = new CardDeck();
 
-    programCardDeck.populate("F1");
+    ProgramCardDeck() {
+        programCardDeck.populate("F1");
+    }
+
 
 }
