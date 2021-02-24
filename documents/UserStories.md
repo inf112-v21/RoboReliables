@@ -67,8 +67,8 @@
 - Hver spiller har en inventory hvor kortene til spilleren oppbevares.
 - Spillet gir ut x antall kort til hver spiller.
 - Ha en sentral kortstokk som inneholder spillets kort.
-
-  **Arbeidsoppgaver**:
+  
+**Arbeidsoppgaver**:
 
 - Implementere inventory til en spiller.
 - Lage funksjon som deler ut kort.
