@@ -12,23 +12,9 @@ public interface IEntity {
 
     int getPosY();
 
-    TiledMapTileLayer.Cell getCell();
-
     void setPosX(int newXValue);
 
     void setPosY(int newYValue);
-
-    /**
-     *
-     * @param layer
-     */
-    void setCell(TiledMapTileLayer layer);
-
-    /**
-     *
-     * @param cell
-     */
-    void clearCell(TiledMapTileLayer.Cell cell);
 
     /**
      *
