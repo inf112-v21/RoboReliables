@@ -8,16 +8,8 @@ public interface ICardDeck {
     void shuffle();
 
     /**
-     * Populate the deck with the relevant cards (different from program card deck and option card deck).
-     * Program card deck:
-     *     18x move 1 cards
-     *     12x move 2 cards
-     *     6x move 3 cards
-     *     6x back up cards (move backwards 1 tile)
-     *
-     *     18x rotate right cards
-     *     18x rotate left cards
-     *     6x u-turn cards
+     * Add a card with a given value to the deck.
+     * @param cardValue the card's value
      */
     void populate(String cardValue);
 
@@ -25,4 +17,17 @@ public interface ICardDeck {
      * Deal a card to player.
      */
     void dealCard();
+
+    /**
+     * Get the number of cards in the deck.
+     * @return the number of cards
+     */
+    int getSize();
+
+    /**
+     * Get the value of the card residing in the given position in the deck.
+     * @param index the nth card in the deck
+     * @return its value
+     */
+    String getCardValueAt(int index);
 }

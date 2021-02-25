@@ -18,9 +18,6 @@ public class CardDeck implements ICardDeck {
         Collections.shuffle(cards);
     }
 
-    /**
-     * Add one card to a deck.
-     */
     @Override
     public void populate(String cardValue) {
         cards.add(new Card(cardValue));
@@ -28,6 +25,16 @@ public class CardDeck implements ICardDeck {
 
     @Override
     public void dealCard() {
+        // TODO
+    }
 
+    @Override
+    public int getSize() {
+        return cards.size();
+    }
+
+    @Override
+    public String getCardValueAt(int index) {
+        return cards.get(index).cardValue;
     }
 }
