@@ -1,5 +1,7 @@
 package inf112.skeleton.app.Cards;
 
+import inf112.skeleton.app.player.AbstractPlayer;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Collections;
@@ -24,8 +26,9 @@ public class CardDeck implements ICardDeck {
     }
 
     @Override
-    public void dealCard() {
-        // TODO
+    public void dealCard(AbstractPlayer player) {
+        player.hand.add(getCard(0));
+        cards.remove(0);
     }
 
     @Override
@@ -36,5 +39,10 @@ public class CardDeck implements ICardDeck {
     @Override
     public String getCardValueAt(int index) {
         return cards.get(index).cardValue;
+    }
+
+    @Override
+    public Card getCard(int index) {
+        return cards.get(index);
     }
 }

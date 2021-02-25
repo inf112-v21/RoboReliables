@@ -1,4 +1,6 @@
 package inf112.skeleton.app.Cards;
+import inf112.skeleton.app.player.AbstractPlayer;
+
 import java.util.ArrayList;
 
 public interface ICardDeck {
@@ -16,7 +18,7 @@ public interface ICardDeck {
     /**
      * Deal a card to player.
      */
-    void dealCard();
+    void dealCard(AbstractPlayer player);
 
     /**
      * Get the number of cards in the deck.
@@ -30,4 +32,6 @@ public interface ICardDeck {
      * @return its value
      */
     String getCardValueAt(int index);
+
+    Card getCard(int index);
 }
