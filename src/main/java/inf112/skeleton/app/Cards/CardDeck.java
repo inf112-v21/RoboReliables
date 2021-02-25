@@ -3,12 +3,10 @@ package inf112.skeleton.app.Cards;
 import inf112.skeleton.app.player.AbstractPlayer;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Collections;
 
 public class CardDeck implements ICardDeck {
 
-    Random random = new Random();
     ArrayList<Card> cards;
 
     public CardDeck() {
