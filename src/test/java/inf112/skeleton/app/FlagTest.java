@@ -16,7 +16,7 @@ public class FlagTest {
         //cfg.setTitle("RoboRally");
         //cfg.setWindowedMode(500, 500);
         Board board = new Board();
-        Flag flag = new Flag(board.flagLayer);
+        Flag flag = new Flag(0, 0);
 
         new Lwjgl3Application(board, cfg);
     }

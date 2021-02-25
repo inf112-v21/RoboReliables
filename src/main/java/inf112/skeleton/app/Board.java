@@ -28,7 +28,7 @@ public class Board extends InputAdapter implements ApplicationListener {
     private BitmapFont font;
 
     private TiledMap map;
-    private TiledMapTileLayer flagLayer, boardLayer, holeLayer, robotLayer;
+    public TiledMapTileLayer flagLayer, boardLayer, holeLayer, robotLayer;
 
     private OrthogonalTiledMapRenderer renderer;
 

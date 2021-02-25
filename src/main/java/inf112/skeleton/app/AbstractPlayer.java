@@ -10,7 +10,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
     //private Card[] hand;
 
     public AbstractPlayer(int posX, int posY) {
-        robot = new Robot();
+        robot = new Robot(posX, posY);
         robot.setPosX(posX);
         robot.setPosY(posY);
     }

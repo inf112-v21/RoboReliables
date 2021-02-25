@@ -6,6 +6,10 @@ package inf112.skeleton.app;
 public class Robot extends Entity {
     private int posX, posY;
 
+    Robot(int x, int y) {
+        super(x, y);
+    }
+
     @Override
     public int getPosX() {
         return this.posX;
