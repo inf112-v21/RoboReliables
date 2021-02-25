@@ -1,6 +1,7 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.player;
 
 import com.badlogic.gdx.InputAdapter;
+import inf112.skeleton.app.entity.Robot;
 
 /**
  * An abstract class for the player.
@@ -15,7 +16,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
         robot.setPosY(posY);
     }
 
-//    public
+
 
     public Robot getRobot() {
         return robot;

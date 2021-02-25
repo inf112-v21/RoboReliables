@@ -16,6 +16,9 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import inf112.skeleton.app.entity.Flag;
+import inf112.skeleton.app.entity.Hole;
+
 import java.util.ArrayList;
 
 /**
@@ -40,6 +43,7 @@ public class Board extends InputAdapter implements ApplicationListener {
     private final int nrOfFlags = 1;
     private final ArrayList<Flag> flags = new ArrayList<Flag>(nrOfFlags);
 
+    private int[] position;
     private int posX, posY;
 
     public int getMAP_SIZE_X() {

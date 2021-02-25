@@ -1,6 +1,10 @@
 package inf112.skeleton.app;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import inf112.skeleton.app.entity.Robot;
+import inf112.skeleton.app.player.AbstractPlayer;
+import inf112.skeleton.app.player.TestPlayer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 

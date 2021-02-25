@@ -1,13 +1,22 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.entity;
+
+import inf112.skeleton.app.Direction;
 
 /**
  * Maps the robots position on the board
  */
 public class Robot extends Entity {
     private int posX, posY;
+    private Direction direction;
 
-    Robot(int x, int y) {
+
+    public Robot(int x, int y) {
         super(x, y);
+        direction = Direction.UP;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 
     @Override

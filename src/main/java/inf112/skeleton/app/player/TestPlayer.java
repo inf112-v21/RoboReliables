@@ -1,4 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.player;
+
+import inf112.skeleton.app.Board;
 
 /**
  * This class is used to test the player
