@@ -5,7 +5,7 @@ public interface ICardDeck {
     /**
      * Shuffle the deck in random order.
      */
-    void shuffle(ArrayList<Card> deck);
+    void shuffle();
 
     /**
      * Populate the deck with the relevant cards (different from program card deck and option card deck).
