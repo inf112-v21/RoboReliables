@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ProgramCard extends Card {
 
-    // TODO start using CardValuesEnum instead of this array
+    // TODO start using the CardValues enum instead of this array
     public final String[] programCardValues = {
         "F1", // forwards 1
         "F2", // forwards 2

@@ -1,6 +1,6 @@
 package inf112.skeleton.app.Cards;
 
-public enum CardValuesEnum {
+public enum CardValues {
         F1, // forwards  1
         F2, // forwards  2
         F3, // forwards  3
