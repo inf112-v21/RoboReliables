@@ -33,5 +33,10 @@ public interface ICardDeck {
      */
     String getCardValueAt(int index);
 
+    /**
+     * Get a card from a deck.
+     * @param index the nth card in the deck
+     * @return the card itself
+     */
     Card getCard(int index);
 }
