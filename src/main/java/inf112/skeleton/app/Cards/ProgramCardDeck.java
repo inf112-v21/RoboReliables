@@ -14,6 +14,4 @@ public class ProgramCardDeck extends CardDeck {
         for (int i = 0; i < 6;  i++) programCardDeck.populate("UT");
         shuffle();
     }
-
-
 }
