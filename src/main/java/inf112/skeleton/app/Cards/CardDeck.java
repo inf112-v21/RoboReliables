@@ -14,8 +14,8 @@ public class CardDeck implements ICardDeck {
     }
 
     @Override
-    public void shuffle(ArrayList<Card> deck) {
-        Collections.shuffle(deck);
+    public void shuffle() {
+        Collections.shuffle(cards);
     }
 
     /**
