@@ -101,7 +101,7 @@ public class Board extends InputAdapter implements ApplicationListener {
      */
     public void initializeFlags() {
         for (int i = 0; i < nrOfFlags; i++)
-            flags.add(new Flag(flagLayer));
+            flags.add(new Flag(0, 0));
     }
 
     @Override
