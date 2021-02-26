@@ -24,6 +24,11 @@ public class CardDeck implements ICardDeck {
     }
 
     @Override
+    public void addToDeck(Card card) {
+        cards.add(0, card);
+    }
+
+    @Override
     public void dealCard(AbstractPlayer player) {
         player.hand.add(getCard(0));
         cards.remove(0);

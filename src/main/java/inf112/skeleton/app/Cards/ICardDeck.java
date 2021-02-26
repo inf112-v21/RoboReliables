@@ -10,13 +10,19 @@ public interface ICardDeck {
     void shuffle();
 
     /**
-     * Add a card with a given value to the deck.
+     * Create a new card, with a given value, and add it to the deck.
      * @param cardValue the card's value
      */
     void populate(String cardValue);
 
     /**
-     * Deal a card to player.
+     * Add an already existing card to the deck.
+     * @param card the card to add
+     */
+    void addToDeck(Card card);
+
+    /**
+     * Deal a card from the deck to a player.
      */
     void dealCard(AbstractPlayer player);
 
