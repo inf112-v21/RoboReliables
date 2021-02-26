@@ -24,13 +24,13 @@ public class CardDeck implements ICardDeck {
     }
 
     @Override
-    public void addToDeck(Card card) {
+    public void addToTopOfDeck(Card card) {
         cards.add(0, card);
     }
 
     @Override
     public void dealCard(AbstractPlayer player) {
-        player.hand.add(getCard(0));
+        player.addToHand(getCard(0));
         cards.remove(0);
     }
 
@@ -41,7 +41,7 @@ public class CardDeck implements ICardDeck {
 
     @Override
     public String getCardValueAt(int index) {
-        return cards.get(index).cardValue;
+        return cards.get(index).getCardValue();
     }
 
     @Override

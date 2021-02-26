@@ -16,10 +16,10 @@ public interface ICardDeck {
     void populate(String cardValue);
 
     /**
-     * Add an already existing card to the deck.
+     * Add a card to the top of the deck.
      * @param card the card to add
      */
-    void addToDeck(Card card);
+    void addToTopOfDeck(Card card);
 
     /**
      * Deal a card from the deck to a player.
