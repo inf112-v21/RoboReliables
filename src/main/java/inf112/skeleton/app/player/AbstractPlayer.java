@@ -25,8 +25,12 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
      * @param cardDeck The deck into which the card will be put
      */
     public void putInDeck(int index, CardDeck cardDeck) {
-        cardDeck.addToDeck(getCard(index));
+        cardDeck.addToTopOfDeck(getCard(index));
         hand.remove(index);
+    }
+
+    public void addToHand(Card card) {
+        hand.add(card);
     }
 
     public Card getCard(int index) {
