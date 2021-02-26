@@ -6,4 +6,8 @@ public class Card implements ICard {
     public Card(String cardValue) {
         this.cardValue = cardValue;
     }
+
+    public String getCardValue() {
+        return cardValue;
+    }
 }
