@@ -99,4 +99,37 @@ public class CardTest {
         assertEquals(testCard, player.hand.get(0));
     }
 
+    /**
+     * Test putting card from one's hand back into the deck.
+     * I'm not sure if this functionality will ever be useful in the game, but it is nice to have.
+     */
+    @Test
+    public void putCardInDeckTest() {
+        createCardDeck();
+        for (int i = 0; i < 18; i++) cardDeck.populate("F1");
+        for (int i = 0; i < 12; i++) cardDeck.populate("F2");
+        for (int i = 0; i < 6;  i++) cardDeck.populate("F3");
+        for (int i = 0; i < 6;  i++) cardDeck.populate("B1");
+        for (int i = 0; i < 18; i++) cardDeck.populate("RR");
+        for (int i = 0; i < 18; i++) cardDeck.populate("RL");
+        for (int i = 0; i < 6;  i++) cardDeck.populate("UT");
+        cardDeck.shuffle();
+
+        assertEquals(84, cardDeck.getSize());
+        assertEquals(0, player.hand.size());
+
+        Card cardDealt = cardDeck.getCard(0);
+
+        cardDeck.dealCard(player);
+        assertEquals(83, cardDeck.getSize());
+        assertEquals(1, player.hand.size());
+        assertEquals(cardDealt.cardValue, player.getCard(0).cardValue);
+
+        player.putInDeck(0, cardDeck);
+        assertEquals(84, cardDeck.getSize());
+        assertEquals(0, player.hand.size());
+        assertEquals(cardDealt.cardValue, cardDeck.getCardValueAt(0));
+
+    }
+
 }
