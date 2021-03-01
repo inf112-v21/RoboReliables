@@ -14,6 +14,8 @@ import java.util.List;
  */
 public abstract class AbstractPlayer extends InputAdapter implements IAbstractPlayer {
     private final Robot robot;
+    public final static Location abstractLocation = new Location(0,0);
+
 
     /**
      * ArrayList that contains the cards currently in the player's hand

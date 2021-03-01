@@ -106,6 +106,13 @@ public class Board extends InputAdapter implements ApplicationListener {
     /**
      *
      */
+    public void pickCards() {
+
+    }
+
+    /**
+     *
+     */
     public void initializeFlags() {
         for (int i = 0; i < nrOfFlags; i++)
             flags.add(new Flag(new Location(0, 0)));
