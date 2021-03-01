@@ -11,15 +11,19 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import inf112.skeleton.app.entity.Entity;
 import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.entity.Hole;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The Board.java class is responsible for creating the board and displaying a graphical
@@ -44,7 +48,10 @@ public class Board extends InputAdapter implements ApplicationListener {
     private final ArrayList<Flag> flags = new ArrayList<Flag>(nrOfFlags);
 
     private int[] position;
-    private int posX, posY;
+    private Location location = new Location(0,0);
+
+//  HashMap of all entities and their locations. Parsed from layers on startup.
+//  private HashMap<Location, ArrayList<Entity>> entities = new HashMap<>();
 
     public int getMAP_SIZE_X() {
         return MAP_SIZE_X;
@@ -54,12 +61,8 @@ public class Board extends InputAdapter implements ApplicationListener {
         return MAP_SIZE_Y;
     }
 
-    public void setPosX(int newPosX) {
-        posX = newPosX;
-    }
-
-    public void setPosY(int newPosY) {
-        posY = newPosY;
+    public void setLocation(Location newLocation) {
+        location = newLocation;
     }
 
     /**
@@ -69,15 +72,15 @@ public class Board extends InputAdapter implements ApplicationListener {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        font  = new BitmapFont();
+        font = new BitmapFont();
         font.setColor(Color.RED);
 
         // Sets the map and various layers
-        map        = new TmxMapLoader().load("gameboard.tmx");
+        map = new TmxMapLoader().load("gameboard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
-        flagLayer  = (TiledMapTileLayer) map.getLayers().get("flag");
-        holeLayer  = (TiledMapTileLayer) map.getLayers().get("hole");
+        flagLayer = (TiledMapTileLayer) map.getLayers().get("flag");
+        holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
 
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
@@ -86,13 +89,13 @@ public class Board extends InputAdapter implements ApplicationListener {
         camera.update();
 
         // Initializes renderer
-        renderer = new OrthogonalTiledMapRenderer(map, (float) 1/300);
+        renderer = new OrthogonalTiledMapRenderer(map, (float) 1 / 300);
         renderer.setView(camera);
 
         // Splits the textures of the player into different states and sets them to the given Cell
         TextureRegion[][] robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
-        robotCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
-        robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
+        robotCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
+        robotWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
 
         initializeFlags();
@@ -105,7 +108,7 @@ public class Board extends InputAdapter implements ApplicationListener {
      */
     public void initializeFlags() {
         for (int i = 0; i < nrOfFlags; i++)
-            flags.add(new Flag(0, 0));
+            flags.add(new Flag(new Location(0, 0)));
     }
 
     @Override
@@ -119,12 +122,14 @@ public class Board extends InputAdapter implements ApplicationListener {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
-        if ((posX == 11) && (posY == 11)) {
-            robotLayer.setCell(posX, posY, robotWonCell);
-        } else if ((posX == 0) && (posY == 11)) {
-            robotLayer.setCell(posX, posY, robotDiedCell);
+        int x = location.getX();
+        int y = location.getY();
+        if ((x == 11) && (y == 11)) {
+            robotLayer.setCell(x, y, robotWonCell);
+        } else if ((x == 0) && (y == 11)) {
+            robotLayer.setCell(x, y, robotDiedCell);
         } else {
-            robotLayer.setCell(posX, posY, robotCell);
+            robotLayer.setCell(x, y, robotCell);
         }
         if (checkIfWon()) {
             System.out.println("Player won!");
@@ -135,10 +140,11 @@ public class Board extends InputAdapter implements ApplicationListener {
     /**
      * Checks if a player has won by checking that the player has gone through
      * the flags in the appropriate order.
+     *
      * @return true if won
      */
     public boolean checkIfWon() {
-        return (posX == 11) && (posY == 11);
+        return (location.getX() == 11) && (location.getY() == 11);
     }
 
     @Override
@@ -161,56 +167,83 @@ public class Board extends InputAdapter implements ApplicationListener {
      * Moves the robot in the specified direction
      * when the key is released (NOT when it is pushed down),
      * hence the name.
-     *
+     * <p>
      * Also, before making the move, checks whether or not
      * the attempted move will place the robot outside the board bounds,
      * and does not perform the move action if it will.
      *
      * @param intCode the integer code of the key being pressed
-     *               UP = 19, DOWN = 20, LEFT = 21, RIGHT = 22.
+     *                UP = 19, DOWN = 20, LEFT = 21, RIGHT = 22.
      * @return false, in accordance with ApplicationListener.
      */
     @Override
     public boolean keyUp(int intCode) {
-        if (intCode == Input.Keys.UP && !(posY == MAP_SIZE_Y - 1)) {
-            robotLayer.setCell(posX, posY, null);
-            posY += 1;
+        int x = location.getX();
+        int y = location.getY();
+
+        if (intCode == Input.Keys.UP && !(y == MAP_SIZE_Y - 1)) {
+            robotLayer.setCell(x, y, null);
+            location.setY(y + 1);
         }
-        if (intCode == Input.Keys.DOWN && !(posY == 0)) {
-            robotLayer.setCell(posX, posY, null);
-            posY -= 1;
+        if (intCode == Input.Keys.DOWN && !(y == 0)) {
+            robotLayer.setCell(x, y, null);
+            location.setY(y - 1);
         }
-        if (intCode == Input.Keys.LEFT && !(posX == 0)) {
-            robotLayer.setCell(posX, posY, null);
-            posX -= 1;
+        if (intCode == Input.Keys.LEFT && !(x == 0)) {
+            robotLayer.setCell(x, y, null);
+            location.setX(x - 1);
         }
-        if (intCode == Input.Keys.RIGHT && !(posX == MAP_SIZE_X - 1)) {
-            robotLayer.setCell(posX, posY, null);
-            posX += 1;
+        if (intCode == Input.Keys.RIGHT && !(x == MAP_SIZE_X - 1)) {
+            robotLayer.setCell(x, y, null);
+            location.setX(x + 1);
         }
         return false;
     }
+}
 
+/*
     public void layerReader(TiledMapTileLayer layer) {
-                        for (int x = 0; x < layer.getWidth(); x++) {
-                            for (int y = 0; y < layer.getHeight(); y++) {
-                                TiledMapTileLayer.Cell cell = layer.getCell(x,y);
-                                if (cell != null) {
-                                    assignPosition(x, y, cell);
-                                    System.out.println(cell.getTile().getId());
-                                    System.out.println(x);
-                                    System.out.println(y);
+        for (int x = 0; x < layer.getWidth(); x++) {
+            for (int y = 0; y < layer.getHeight(); y++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
+                if (cell != null) {
+                    Location location = new Location(x, y);
+                    assignEntities(location, cell);
                 }
             }
         }
     }
 
-    public void assignPosition(int x, int y, TiledMapTileLayer.Cell cell) {
+*/
+
+/*    public void checkCell(int x, int y) {
+        for (int i = 0; i < map.getLayers().size(); i++) {
+            TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(i);
+            layer.getCell(x, y);
+        }
+    }*/
+/*
+
+    public void assignEntities(Location location, TiledMapTileLayer.Cell cell) {
+        Entity entity;
         switch (cell.getTile().getId()) {
             case 6:
-                new Hole(x, y);
+                entity = new Hole(location);
+                break;
             case 55:
-                new Flag(x, y);
+                entity = new Flag(location);
+                break;
+            default:
+                entity = null;
+        }
+        if (entity != null) {
+            addEntityToBoard(location, entity);
         }
     }
+
+    public void addEntityToBoard(Location location, Entity entity) {
+        ArrayList<Entity> entityList = entities.getOrDefault(location, new ArrayList<>());
+        entityList.add(entity);
+    }
 }
+*/
