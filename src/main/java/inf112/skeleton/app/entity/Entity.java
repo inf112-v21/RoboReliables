@@ -1,6 +1,7 @@
 package inf112.skeleton.app.entity;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import inf112.skeleton.app.Location;
 
 /**
  * A class for handling all the things common for entities.
@@ -15,7 +16,7 @@ public abstract class Entity implements IEntity {
     }
 
     @Override
-    public int getLocation() {
+    public Location getLocation() {
         return location;
     }
 

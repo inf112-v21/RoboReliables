@@ -1,6 +1,7 @@
 package inf112.skeleton.app.entity;
 
 import inf112.skeleton.app.Direction;
+import inf112.skeleton.app.Location;
 
 /**
  * Maps the robots position on the board
@@ -20,7 +21,7 @@ public class Robot extends Entity {
     }
 
     @Override
-    public int getLocation() {
+    public Location getLocation() {
         return this.location;
     }
 
