@@ -6,8 +6,8 @@ package inf112.skeleton.app.entity;
  */
 public class Flag extends Entity {
 
-    public Flag(int x, int y) {
-        super(x, y);
+    public Flag(Location location) {
+        super(location);
     }
 
 }

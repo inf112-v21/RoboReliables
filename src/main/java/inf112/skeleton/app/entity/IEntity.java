@@ -8,16 +8,12 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
  */
 public interface IEntity {
 
-    int getPosX();
+    void location getLocation;
 
-    int getPosY();
-
-    void setPosX(int newXValue);
-
-    void setPosY(int newYValue);
+    void setLocation(Location newLocation);
 
     /**
      *
      */
-    void updatePosition(int x, int y, TiledMapTileLayer layer);
+    void updatePosition(Location location, TiledMapTileLayer layer);
 }

@@ -6,12 +6,12 @@ import inf112.skeleton.app.Direction;
  * Maps the robots position on the board
  */
 public class Robot extends Entity {
-    private int posX, posY;
+    private Location location;
     private Direction direction;
 
 
-    public Robot(int x, int y) {
-        super(x, y);
+    public Robot(Location location) {
+        super(location);
         direction = Direction.UP;
     }
 
@@ -20,22 +20,14 @@ public class Robot extends Entity {
     }
 
     @Override
-    public int getPosX() {
-        return this.posX;
+    public int getLocation() {
+        return this.location;
     }
 
     @Override
-    public int getPosY() {
-        return this.posY;
+    public void setLocation(Location newLoc) {
+        this.location = newLoc;
     }
 
-    @Override
-    public void setPosX(int newXValue) {
-        this.posX = newXValue;
-    }
 
-    @Override
-    public void setPosY(int newYValue) {
-        this.posY = newYValue;
-    }
 }
