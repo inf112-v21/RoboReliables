@@ -14,15 +14,14 @@ import org.junit.jupiter.api.BeforeEach;
 public class BoardTest {
     private Board board;
     private AbstractPlayer testPlayer;
-    private int testPlayerPosX, testPlayerPosY;
+    private Location testPlayerLocation;
     private Robot robot;
 
     @BeforeEach
     private void createBoard() {
         board = new Board();
-        testPlayer = new TestPlayer(0, 0, board);
-        testPlayerPosX = testPlayer.getRobot().getPosX();
-        testPlayerPosY = testPlayer.getRobot().getPosY();
+        testPlayer = new TestPlayer(new Location(0,0), board);
+        testPlayerLocation = testPlayer.getRobot().getLocation();
         robot = testPlayer.getRobot();
     }
 
@@ -33,13 +32,11 @@ public class BoardTest {
     @Test
     public void checkIfWonTest() {
         createBoard();
-
-        board.setPosX(testPlayerPosX);
-        board.setPosY(testPlayerPosY);
+        Location winningPos = new Location(11,11);
+        board.setLocation(testPlayerLocation);
         assertFalse(board.checkIfWon());
 
-        board.setPosX(11);
-        board.setPosY(11);
+        board.setLocation(winningPos);
         assertTrue(board.checkIfWon());
     }
 

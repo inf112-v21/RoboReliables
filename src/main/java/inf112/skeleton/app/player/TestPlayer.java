@@ -8,7 +8,7 @@ import inf112.skeleton.app.Location;
  */
 
 public class TestPlayer extends AbstractPlayer  {
-    private int posX, posY;
+    private Location location;
     private final Board board;
 
     public TestPlayer(Location location, Board board) {
