@@ -57,7 +57,7 @@ public class DirectionTest {
      */
     @Test
     public void initialRobotDirectionTest() {
-        Robot robot = new Robot(0,0);
+        Robot robot = new Robot(new Location (0,0));
         Direction robotDirection = robot.getDirection();
 
         assertEquals(Direction.UP, robotDirection, "Initial direction not correct.");

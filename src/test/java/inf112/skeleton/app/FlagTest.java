@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FlagTest {
     private Flag flag;
 
-    @BeforeEach
+/*    @BeforeEach
     public void createFlag() {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         //cfg.setTitle("RoboRally");
@@ -20,14 +20,12 @@ public class FlagTest {
         Flag flag = new Flag(0, 0);
 
         new Lwjgl3Application(board, cfg);
-    }
+    }*/
 
     @Test
     public void setPositionOfFlagTest() {
-        int flagPosX = flag.getPosX();
-        int flagPosY = flag.getPosY();
+        Location flagLocation = flag.getLocation();
 
-        assertEquals(0, flagPosX);
-        assertEquals(0, flagPosY);
+        assertEquals(new Location(0,0), flag.getLocation());
     }
 }
