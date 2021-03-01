@@ -2,6 +2,7 @@ package inf112.skeleton.app.player;
 
 import com.badlogic.gdx.InputAdapter;
 import inf112.skeleton.app.Cards.CardDeck;
+import inf112.skeleton.app.Location;
 import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.Cards.Card;
 
@@ -37,10 +38,9 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
         return hand.get(index);
     }
 
-    public AbstractPlayer(int posX, int posY) {
-        robot = new Robot(posX, posY);
-        robot.setPosX(posX);
-        robot.setPosY(posY);
+    public AbstractPlayer(Location location) {
+        robot = new Robot(location);
+        robot.setLocation(location);
     }
 
     public Robot getRobot() {
