@@ -43,3 +43,4 @@ public class Location {
         return Objects.hash(x, y);
     }
 }
+
