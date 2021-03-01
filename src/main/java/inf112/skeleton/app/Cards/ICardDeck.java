@@ -16,6 +16,12 @@ public interface ICardDeck {
     void populate(String cardValue);
 
     /**
+     * Create a new card, with a given value, and add it to the deck.
+     * @param cardValue the card's value
+     */
+    void populate(String cardValue, int numberOfCards);
+
+    /**
      * Add a card to the top of the deck.
      * @param card the card to add
      */

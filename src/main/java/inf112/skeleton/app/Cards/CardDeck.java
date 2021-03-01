@@ -24,6 +24,12 @@ public class CardDeck implements ICardDeck {
     }
 
     @Override
+    public void populate(String cardValue, int numberOfCards) {
+        for (int i = 0; i < numberOfCards; i++)
+            cards.add(new Card(cardValue));
+    }
+
+    @Override
     public void addToTopOfDeck(Card card) {
         cards.add(0, card);
     }
