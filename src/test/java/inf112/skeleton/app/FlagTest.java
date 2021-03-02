@@ -29,4 +29,3 @@ public class FlagTest {
         assertEquals(new Location(0,0), flagLocation);
     }
 }
-
