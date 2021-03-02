@@ -18,6 +18,7 @@ public interface ICardDeck {
     /**
      * Create a new card, with a given value, and add it to the deck.
      * @param cardValue the card's value
+     * @param numberOfCards the number of cards that will be added to the deck
      */
     void populate(String cardValue, int numberOfCards);
 
@@ -29,8 +30,16 @@ public interface ICardDeck {
 
     /**
      * Deal a card from the deck to a player.
+     * @param player the player to whom the card will be dealt
      */
     void dealCard(AbstractPlayer player);
+
+    /**
+     * Deal a number of cards from the deck to a player.
+     * @param player the player to whom the card will be dealt
+     * @param numberOfCards the number of cards that will be dealt
+     */
+    void dealCard(AbstractPlayer player, int numberOfCards);
 
     /**
      * Get the number of cards in the deck.

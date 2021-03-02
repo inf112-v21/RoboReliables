@@ -36,10 +36,8 @@ public class RoboRally {
         players.add(player3);
         players.add(player4);
 
-        /**
-         * Deal cards to player1 and print their hand
-         */
-        for (int i = 0; i < 9; i++) programCardDeck.programCardDeck.dealCard(player1);
+        // Deal cards to player1 and print their hand
+        programCardDeck.dealCard(player1, 9);
         player1.printHand();
 
         activePlayer = players.peek();
@@ -50,10 +48,6 @@ public class RoboRally {
         new Lwjgl3Application(board, cfg);
     }
 
-    /**
-     *
-     * @param currentActivePlayer
-     */
     public void takeTurn(Player currentActivePlayer) {
         activePlayer = players.poll();
         players.add(currentActivePlayer);

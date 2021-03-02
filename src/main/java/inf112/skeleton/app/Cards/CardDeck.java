@@ -41,6 +41,14 @@ public class CardDeck implements ICardDeck {
     }
 
     @Override
+    public void dealCard(AbstractPlayer player, int numberOfCards) {
+        for (int i = 0; i < numberOfCards; i++) {
+            player.addToHand(getCard(0));
+            cards.remove(0);
+        }
+    }
+
+    @Override
     public int getSize() {
         return cards.size();
     }
