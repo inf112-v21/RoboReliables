@@ -34,8 +34,12 @@ public class RoboreliableServer {
                 ServerSideConnection ssc = new ServerSideConnection(s, numPlayers);
                 if (numPlayers == 1) {
                     player1 = ssc;
-                } else {
+                } else if (numPlayers == 2) {
                     player2 = ssc;
+                } else if (numPlayers == 3) {
+                    player3 = ssc;
+                } else {
+                    player4 = ssc;
                 }
                 Thread t = new Thread(ssc);
                 t.start();
