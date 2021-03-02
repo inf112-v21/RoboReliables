@@ -9,6 +9,7 @@ import java.awt.event.*;
 public class RoboreliableClient {
     private ClientSideConnection csc;
     private int playerID;
+    private int player;
 
 
     public void connectToServer() {
