@@ -86,8 +86,6 @@ public class RoboreliableServer {
         }
 
         public static void main(String[] args) {
-            Server gs = new Server();
-            gs.acceptConnections();
         }
     }
 }

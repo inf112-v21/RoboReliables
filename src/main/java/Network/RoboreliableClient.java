@@ -45,7 +45,5 @@ public class RoboreliableClient {
 
 
     public static void main(String[] args) {
-        Player p = new Player(500, 100);
-        p.connectToServer();
     }
 }
