@@ -11,21 +11,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FlagTest {
     private Flag flag;
 
-/*    @BeforeEach
+    @BeforeEach
     public void createFlag() {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         //cfg.setTitle("RoboRally");
         //cfg.setWindowedMode(500, 500);
         Board board = new Board();
-        Flag flag = new Flag(0, 0);
+        Flag flag = new Flag(new Location(0, 0));
 
         new Lwjgl3Application(board, cfg);
-    }*/
+    }
 
     @Test
     public void setPositionOfFlagTest() {
         Location flagLocation = flag.getLocation();
 
-        assertEquals(new Location(0,0), flag.getLocation());
+        assertEquals(new Location(0,0), flagLocation);
     }
 }
