@@ -8,6 +8,8 @@ import java.awt.event.*;
 
 public class RoboreliableClient {
     private ClientSideConnection csc;
+    private int playerID;
+
 
     public void connectToServer() {
         csc = new ClientSideConnection();
@@ -28,7 +30,7 @@ public class RoboreliableClient {
                 playerID = dataIn.readInt();
                 System.out.println("Connected to server as Player Nr." + playerID + ".");
             } catch (IOException ex) {
-                System.out.println("IOE from CSC");
+                System.out.println("IOE from ClientSideConnection() on Clien-class");
             }
         }
 
@@ -37,7 +39,7 @@ public class RoboreliableClient {
                 socket.close();
                 System.out.println("Connection closed");
             } catch (IOException ex) {
-                System.out.println("IOException disconnect");
+                System.out.println("IOException closeConnection() on Client-class");
             }
         }
     }

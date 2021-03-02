@@ -20,7 +20,7 @@ public class RoboreliableServer {
         try {
             ss = new ServerSocket(51734);
         } catch (IOException ex) {
-            System.out.println("IOException from Server Constructor");
+            System.out.println("IOException from Server() on Server-class");
         }
     }
 
@@ -46,7 +46,7 @@ public class RoboreliableServer {
             }
             System.out.println("We now have 4 players. The server is full.");
         } catch (IOException ex) {
-            System.out.println("IOException from acceptConnections()");
+            System.out.println("IOException from acceptConnections() on Server-class");
         }
     }
 
@@ -57,15 +57,33 @@ public class RoboreliableServer {
         private DataOutputStream dataOut;
         private int playerID;
 
+
         public ServerSideConnection(Socket s, int id) {
             playerID = id;
             try {
                 dataIn = new DataInputStream(socket.getInputStream());
                 dataOut = new DataOutputStream(socket.getOutputStream());
             } catch (IOException ex) {
-                System.out.println("IOException from SSC constructor");
+                System.out.println("IOException from ServerSideConnection() on Server-class");
             }
 
+        }
+
+        public void run() {
+            try {
+                dataOut.writeInt(playerID);
+            } catch (IOException ex) {
+                System.out.println("IOException from run() on Server-class");
+            }
+        }
+
+        public void closeConnection() {
+            try {
+                socket.close();
+                System.out.println("Connection lost");
+            } catch (IOException ex) {
+                System.out.println("IOE from closeconnecting() on Server-class");
+            }
         }
 
         public static void main(String[] args) {
