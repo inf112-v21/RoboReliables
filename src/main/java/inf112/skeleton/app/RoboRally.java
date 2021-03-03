@@ -2,6 +2,7 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import inf112.skeleton.app.Cards.CardDeck;
 import inf112.skeleton.app.Cards.ProgramCardDeck;
 import inf112.skeleton.app.player.Player;
 
@@ -13,7 +14,7 @@ import static java.lang.String.valueOf;
 /**
  * Sets up gdx to create a new game of RoboRally.
  */
-public class RoboRally {
+public class   RoboRally {
     private final int nrOfPlayers = 4; // Pre-determined number of players
     protected Queue<Player> players = new LinkedList<>();
     private ProgramCardDeck programCardDeck;
@@ -41,7 +42,8 @@ public class RoboRally {
         // Deal cards to player1 and print their hand
         programCardDeck.dealCard(player1, 9);
         //player1.printHand();
-
+        CardDeck pickedCards = player1.pickCards(5);
+        //System.out.println(pickedCards)
         new Lwjgl3Application(board, cfg);
     }
 

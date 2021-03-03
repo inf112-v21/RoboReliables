@@ -121,9 +121,6 @@ public class Board extends InputAdapter implements IBoard {
     /**
      *
      */
-    public void pickCards() {
-
-    }
 
     @Override
     public void startNewRound() {
