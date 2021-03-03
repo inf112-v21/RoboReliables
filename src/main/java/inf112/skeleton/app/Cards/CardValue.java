@@ -9,7 +9,7 @@ public enum CardValue {
     RL, // rotate left
     UT; // U-turn (invert rotation)
 
-    public String extendedCardValue(Card card) {
+    public static String extendedCardValue(Card card) {
         try {
             switch (card.getCardValue()) {
                 case F1:
