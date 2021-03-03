@@ -26,11 +26,11 @@ public class ClientHandler implements Runnable {
             while (true) {
                 String request = in.readLine();
                 if (request.contains("name")) {
-                    out.println(Server.getRandomName());
+                    out.println(RoboreliableServer.getRandomName());
                 } else if (request.startsWith("say")) {
                     int firstSpace = request.indexOf(" ");
                     if (firstSpace != -1) {
-                        outToAll(request.substring(firstSpace+1));
+                        outToAll(request.substring(firstSpace + 1));
                     }
                 } else {
                     out.println("Type 'tell me a name' to get a random name");
@@ -47,10 +47,11 @@ public class ClientHandler implements Runnable {
                 e.printStackTrace();
             }
         }
+    }
         private void outToAll(String msg) {
             for (ClientHandler aClient : clients) {
                 aClient.out.println(msg);
             }
         }
     }
-}
+
