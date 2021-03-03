@@ -4,6 +4,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import inf112.skeleton.app.Cards.ProgramCardDeck;
 import inf112.skeleton.app.player.Player;
+
 import java.util.LinkedList;
 import java.util.Queue;
 

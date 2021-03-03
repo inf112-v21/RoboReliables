@@ -1,6 +1,5 @@
 package inf112.skeleton.app.entity;
 
-
 import inf112.skeleton.app.Location;
 
 /**

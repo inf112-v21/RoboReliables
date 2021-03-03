@@ -11,19 +11,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import inf112.skeleton.app.entity.Entity;
 import inf112.skeleton.app.entity.Flag;
-import inf112.skeleton.app.entity.Hole;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * The Board.java class is responsible for creating the board and displaying a graphical
@@ -45,7 +40,7 @@ public class Board extends InputAdapter implements ApplicationListener {
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
 
     private final int nrOfFlags = 1;
-    private final ArrayList<Flag> flags = new ArrayList<Flag>(nrOfFlags);
+    private final ArrayList<Flag> flags = new ArrayList<>(nrOfFlags);
 
     private int[] position;
     private Location location = new Location(0,0);
