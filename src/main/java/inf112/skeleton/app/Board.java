@@ -17,8 +17,11 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import inf112.skeleton.app.entity.Flag;
+import inf112.skeleton.app.player.Player;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * The Board.java class is responsible for creating the board and displaying a graphical
@@ -39,14 +42,30 @@ public class Board extends InputAdapter implements ApplicationListener {
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
 
+    // Variables for the flags
     private final int nrOfFlags = 1;
     private final ArrayList<Flag> flags = new ArrayList<>(nrOfFlags);
 
-    private int[] position;
-    private Location location = new Location(0,0);
+    // Variables for the current active player
+    private Player activePlayer = new Player();
+    private Location activePlayerRobotLocation = activePlayer.getRobot().getLocation();
+    private Location activePlayerInitialRobotLocation;
+
+    protected Queue<Player> players = new LinkedList<>();
+
+
+    // Variables related to turns
+    private boolean turnIsOver = false;
 
 //  HashMap of all entities and their locations. Parsed from layers on startup.
 //  private HashMap<Location, ArrayList<Entity>> entities = new HashMap<>();
+
+
+    public Board(Queue<Player> players) {
+        this.players = players;
+    }
+
+    public Board() {}
 
     public int getMAP_SIZE_X() {
         return MAP_SIZE_X;
@@ -56,8 +75,12 @@ public class Board extends InputAdapter implements ApplicationListener {
         return MAP_SIZE_Y;
     }
 
-    public void setLocation(Location newLocation) {
-        location = newLocation;
+    /**
+     *
+     * @param newLocation
+     */
+    public void setActivePlayerRobotLocation(Location newLocation) {
+        activePlayerRobotLocation = newLocation;
     }
 
     /**
@@ -94,6 +117,7 @@ public class Board extends InputAdapter implements ApplicationListener {
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
 
         initializeFlags();
+        activePlayerInitialRobotLocation = activePlayerRobotLocation;
 
         Gdx.input.setInputProcessor(this);
     }
@@ -108,6 +132,26 @@ public class Board extends InputAdapter implements ApplicationListener {
     /**
      *
      */
+    public void startNewRound() {
+        turnIsOver = false;
+        switchActivePlayer();
+        activePlayerInitialRobotLocation = activePlayerRobotLocation;
+    }
+
+    /**
+     * Cycles the activePlayer to the next in the players queue.
+     */
+    public void switchActivePlayer() {
+        System.out.println("Switching active player. Next player up: ");
+        Player previousActivePlayer = players.poll();
+        players.add(previousActivePlayer);
+        activePlayer = players.peek();
+        System.out.println(activePlayer);
+    }
+
+    /**
+     *
+     */
     public void initializeFlags() {
         for (int i = 0; i < nrOfFlags; i++)
             flags.add(new Flag(new Location(0, 0)));
@@ -115,7 +159,6 @@ public class Board extends InputAdapter implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
@@ -124,8 +167,9 @@ public class Board extends InputAdapter implements ApplicationListener {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
-        int x = location.getX();
-        int y = location.getY();
+        int x = activePlayerRobotLocation.getX();
+        int y = activePlayerRobotLocation.getY();
+
         if ((x == 11) && (y == 11)) {
             robotLayer.setCell(x, y, robotWonCell);
         } else if ((x == 0) && (y == 11)) {
@@ -133,10 +177,26 @@ public class Board extends InputAdapter implements ApplicationListener {
         } else {
             robotLayer.setCell(x, y, robotCell);
         }
+
         if (checkIfWon()) {
             System.out.println("Player won!");
             System.out.close();
         }
+
+        turnIsOver = activePlayerHasMoved();
+        if (turnIsOver) {
+            System.out.println("Turn is over");
+            startNewRound();
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean activePlayerHasMoved() {
+        return activePlayerRobotLocation.getX() != activePlayerInitialRobotLocation.getX() ||
+                activePlayerRobotLocation.getY() != activePlayerInitialRobotLocation.getY();
     }
 
     /**
@@ -146,7 +206,7 @@ public class Board extends InputAdapter implements ApplicationListener {
      * @return true if won
      */
     public boolean checkIfWon() {
-        return (location.getX() == 11) && (location.getY() == 11);
+        return (activePlayerRobotLocation.getX() == 11) && (activePlayerRobotLocation.getY() == 11);
     }
 
     @Override
@@ -180,24 +240,24 @@ public class Board extends InputAdapter implements ApplicationListener {
      */
     @Override
     public boolean keyUp(int intCode) {
-        int x = location.getX();
-        int y = location.getY();
+        int x = activePlayerRobotLocation.getX();
+        int y = activePlayerRobotLocation.getY();
 
         if (intCode == Input.Keys.UP && !(y == MAP_SIZE_Y - 1)) {
             robotLayer.setCell(x, y, null);
-            location.setY(y + 1);
+            setActivePlayerRobotLocation(new Location(x, y+1));
         }
         if (intCode == Input.Keys.DOWN && !(y == 0)) {
             robotLayer.setCell(x, y, null);
-            location.setY(y - 1);
+            setActivePlayerRobotLocation(new Location(x, y-1));
         }
         if (intCode == Input.Keys.LEFT && !(x == 0)) {
             robotLayer.setCell(x, y, null);
-            location.setX(x - 1);
+            setActivePlayerRobotLocation(new Location(x-1, y));
         }
         if (intCode == Input.Keys.RIGHT && !(x == MAP_SIZE_X - 1)) {
             robotLayer.setCell(x, y, null);
-            location.setX(x + 1);
+            setActivePlayerRobotLocation(new Location(x+1, y));
         }
         return false;
     }

@@ -33,10 +33,10 @@ public class BoardTest {
     public void checkIfWonTest() {
         createBoard();
         Location winningPos = new Location(11,11);
-        board.setLocation(testPlayerLocation);
+        board.setActivePlayerRobotLocation(testPlayerLocation);
         assertFalse(board.checkIfWon());
 
-        board.setLocation(winningPos);
+        board.setActivePlayerRobotLocation(winningPos);
         assertTrue(board.checkIfWon());
     }
 

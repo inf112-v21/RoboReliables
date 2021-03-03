@@ -41,9 +41,4 @@ public interface IAbstractPlayer {
      */
     Robot getRobot();
 
-    /**
-     * Get a player's ID.
-     * @return id the ID itself
-     */
-    String getID();
 }
