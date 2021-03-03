@@ -62,4 +62,11 @@ public class CardDeck implements ICardDeck {
     public Card getCard(int index) {
         return cards.get(index);
     }
+
+    @Override
+    public void printDeck() {
+        for (int i = 0; i < cards.size(); i++) {
+            System.out.println((i + 1) + ": " + CardValue.extendedCardValue(cards.get(i)));
+        }
+    }
 }

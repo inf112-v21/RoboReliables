@@ -43,7 +43,8 @@ public class   RoboRally {
         programCardDeck.dealCard(player1, 9);
         //player1.printHand();
         CardDeck pickedCards = player1.pickCards(5);
-        //System.out.println(pickedCards)
+        System.out.println("Picked cards:");
+        pickedCards.printDeck();
         new Lwjgl3Application(board, cfg);
     }
 

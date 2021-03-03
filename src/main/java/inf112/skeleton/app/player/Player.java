@@ -30,6 +30,7 @@ public class Player extends AbstractPlayer {
             System.out.println((i + 1) + ": " + CardValue.extendedCardValue(getHand().get(i)));
         }
     }
+
     public CardDeck pickCards(int cardPicks) {
         CardDeck register = new CardDeck();
         Scanner input = new Scanner(System.in);

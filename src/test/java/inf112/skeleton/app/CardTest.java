@@ -141,4 +141,12 @@ public class CardTest {
 		assertEquals("Move forward 1 tile", CardValue.extendedCardValue(cardDeck.getCard(5)));
     }
 
+    @Test
+    public void PrintDeckTest() {
+        createCardDeck();
+        cardDeck.populate(CardValue.F1, 5);
+        cardDeck.populate(CardValue.B1, 5);
+        cardDeck.printDeck();
+    }
+
 }

@@ -61,4 +61,9 @@ public interface ICardDeck {
      * @return the card itself
      */
     Card getCard(int index);
+
+    /**
+     * Print the extended values of the cards in a deck.
+     */
+    void printDeck();
 }
