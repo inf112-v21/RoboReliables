@@ -1,4 +1,5 @@
 package inf112.skeleton.app.Cards;
+
 import inf112.skeleton.app.player.AbstractPlayer;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public interface ICardDeck {
     void populate(String cardValue);
 
     /**
-     * Create a new card, with a given value, and add it to the deck.
+     * Create a number of new cards, with a given value, and add them to the deck.
      * @param cardValue the card's value
      * @param numberOfCards the number of cards that will be added to the deck
      */

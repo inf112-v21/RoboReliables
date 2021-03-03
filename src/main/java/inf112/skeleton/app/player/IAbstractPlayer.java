@@ -17,33 +17,33 @@ public interface IAbstractPlayer {
     void putInDeck(int index, CardDeck cardDeck);
 
     /**
-     *
-     * @return
+     * Get the hand of a player.
+     * @return the player's hand
      */
     List<Card> getHand();
 
     /**
-     *
-     * @param card
+     * Add an existing card to a player's hand.
+     * @param card the card
      */
     void addToHand(Card card);
 
     /**
-     *
-     * @param index
-     * @return
+     * Get the card residing at a given position in a player's hand.
+     * @param index The nth card in the hand
+     * @return the card itself
      */
     Card getCard(int index);
 
     /**
-     *
-     * @return robot
+     * Get a player's robot.
+     * @return robot the robot itself
      */
     Robot getRobot();
 
     /**
-     *
-     * @return id
+     * Get a player's ID.
+     * @return id the ID itself
      */
     String getID();
 }
