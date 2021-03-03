@@ -30,24 +30,24 @@ public class TestPlayer extends AbstractPlayer  {
         Scanner input = new Scanner(System.in);
         System.out.println("Select " + cardPicks + " cards.");
         while (cardPicks > 0) {
-            printHand();
             int cardNr = 1;
-            boolean invalidInput = true;
-            while (invalidInput) {
-                try {
-                    System.out.println("Select card ,put: " + 1 + " to " + hand.size());
+            boolean valid;
+            do {
+                valid = true;
+                printHand();
+                System.out.println("Select card ,put: " + 1 + " to " + hand.size());
+                if (input.hasNextInt()) {
                     cardNr = input.nextInt();
-                    if (cardNr >= 1 && cardNr <= hand.size()) {
-                        invalidInput = false;
-                    }
-                    else {
-                        System.out.println("Select a valid card. Try again.");
+                    if (cardNr < 1 || cardNr > hand.size()) {
+                        System.out.println("Put a valid card number. Try again.");
+                        valid = false;
                     }
                 }
-                catch (InputMismatchException ex) {
-                    System.out.println("Invalid input. Try again.");
+                else {
+                    System.out.println("Invalid. Try again. " + input.nextLine());
+                    valid = false;
                 }
-            }
+            } while (!valid);
             register.addToTopOfDeck(hand.get(cardNr-1));
             hand.remove(cardNr-1);
             cardPicks--;
