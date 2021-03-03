@@ -8,10 +8,17 @@ public class Player extends AbstractPlayer {
 
     public Player(Location location) {
         super(location);
+        super.id = "null";
+    }
+
+    public Player(Location location, String id) {
+        super(location);
+        super.id = id;
     }
 
     public Player() {
         super(AbstractPlayer.abstractLocation);
+        super.id = "null";
     }
 
     public void printHand() {
