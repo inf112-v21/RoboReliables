@@ -62,3 +62,4 @@ public interface ICardDeck {
      */
     Card getCard(int index);
 }
+

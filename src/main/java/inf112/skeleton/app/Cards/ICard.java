@@ -7,3 +7,4 @@ public interface ICard {
      */
     String getCardValue();
 }
+

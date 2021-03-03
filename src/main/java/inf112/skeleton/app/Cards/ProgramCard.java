@@ -22,3 +22,4 @@ public class ProgramCard extends Card {
         this.cardValue = programCardValues[programCardValuesList.indexOf(cardValue)];
     }
 }
+

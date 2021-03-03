@@ -18,3 +18,4 @@ public interface IEntity {
      */
     void updatePosition(Location location, TiledMapTileLayer layer);
 }
+
