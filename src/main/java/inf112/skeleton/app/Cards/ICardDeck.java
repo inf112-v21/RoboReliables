@@ -14,14 +14,14 @@ public interface ICardDeck {
      * Create a new card, with a given value, and add it to the deck.
      * @param cardValue the card's value
      */
-    void populate(String cardValue);
+    void populate(CardValue cardValue);
 
     /**
      * Create a number of new cards, with a given value, and add them to the deck.
      * @param cardValue the card's value
      * @param numberOfCards the number of cards that will be added to the deck
      */
-    void populate(String cardValue, int numberOfCards);
+    void populate(CardValue cardValue, int numberOfCards);
 
     /**
      * Add a card to the top of the deck.
@@ -53,7 +53,7 @@ public interface ICardDeck {
      * @param index the nth card in the deck
      * @return its value
      */
-    String getCardValueAt(int index);
+    CardValue getCardValueAt(int index);
 
     /**
      * Get a card from a deck.

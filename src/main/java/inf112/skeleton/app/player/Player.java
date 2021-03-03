@@ -23,7 +23,7 @@ public class Player extends AbstractPlayer {
 
     public void printHand() {
         for (int i = 0; i < getHand().size(); i++) {
-            System.out.println((i + 1) + ": " + getHand().get(i).getCardValue());
+            System.out.println((i + 1) + ": " + getHand().get(i).getCardValue().extendedCardValue(getHand().get(i)));
         }
     }
 
