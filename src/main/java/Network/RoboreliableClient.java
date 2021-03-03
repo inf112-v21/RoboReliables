@@ -1,53 +1,35 @@
 package Network;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 
 public class RoboreliableClient {
-    private ClientSideConnection csc;
-    private int playerID;
-    private int player;
+    private static final String SERVER_IP = "127.0.0.1"; // Localhost
+    private static final int SERVER_PORT = 9090;
 
-    // Connection to server
-    public void connectToServer() {
-        csc = new ClientSideConnection();
-    }
+    public static void main(String[] args) throws IOException {
+        Socket socket = new Socket(SERVER_IP, SERVER_PORT);
 
-    // Client connection Inner Class
-    private class ClientSideConnection {
+        ServerConnection serverConn = new ServerConnection(socket);
+        BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-        private Socket socket;
-        private DataInputStream dataIn;
-        private DataOutputStream dataOut;
+        new Thread(serverConn).start();
 
-        // Sets up socket and prints out connection-message
-        public ClientSideConnection() {
-            try {
-                socket = new Socket("localhost", 51734);
-                dataIn = new DataInputStream(socket.getInputStream());
-                dataOut = new DataOutputStream(socket.getOutputStream());
-                playerID = dataIn.readInt();
-                System.out.println("Connected to server as Player Nr." + playerID + ".");
-            } catch (IOException ex) {
-                System.out.println("IOE from ClientSideConnection() on Clien-class");
-            }
+        while (true) {
+            System.out.println("> ");
+            String command = keyboard.readLine();
+
+            if (command.equals("quit")) break;
+            out.println(command);
         }
 
-        // Closes connection from Client
-        public void closeConnection() {
-            try {
-                socket.close();
-                System.out.println("Connection closed");
-            } catch (IOException ex) {
-                System.out.println("IOException closeConnection() on Client-class");
-            }
-        }
-    }
-
-    // Main-method
-    public static void main(String[] args) {
-
+        socket.close();
+        System.exit(0);
     }
 }
 
