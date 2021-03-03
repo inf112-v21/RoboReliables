@@ -1,6 +1,5 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -28,7 +27,7 @@ import java.util.Queue;
  * representation to the users screen. It also serves the purpose of registering input from the keyboard
  * for testing purposes.
  */
-public class Board extends InputAdapter implements ApplicationListener {
+public class Board extends InputAdapter implements IBoard {
     private SpriteBatch batch;
     private BitmapFont font;
 
@@ -53,8 +52,6 @@ public class Board extends InputAdapter implements ApplicationListener {
 
     protected Queue<Player> players = new LinkedList<>();
 
-
-    // Variables related to turns
     private boolean turnIsOver = false;
 
 //  HashMap of all entities and their locations. Parsed from layers on startup.
@@ -67,18 +64,17 @@ public class Board extends InputAdapter implements ApplicationListener {
 
     public Board() {}
 
+    @Override
     public int getMAP_SIZE_X() {
         return MAP_SIZE_X;
     }
 
+    @Override
     public int getMAP_SIZE_Y() {
         return MAP_SIZE_Y;
     }
 
-    /**
-     *
-     * @param newLocation
-     */
+    @Override
     public void setActivePlayerRobotLocation(Location newLocation) {
         activePlayerRobotLocation = newLocation;
     }
@@ -129,18 +125,14 @@ public class Board extends InputAdapter implements ApplicationListener {
 
     }
 
-    /**
-     *
-     */
+    @Override
     public void startNewRound() {
         turnIsOver = false;
         switchActivePlayer();
         activePlayerInitialRobotLocation = activePlayerRobotLocation;
     }
 
-    /**
-     * Cycles the activePlayer to the next in the players queue.
-     */
+    @Override
     public void switchActivePlayer() {
         System.out.println("Switching active player. Next player up: ");
         Player previousActivePlayer = players.poll();
@@ -149,9 +141,7 @@ public class Board extends InputAdapter implements ApplicationListener {
         System.out.println(activePlayer);
     }
 
-    /**
-     *
-     */
+    @Override
     public void initializeFlags() {
         for (int i = 0; i < nrOfFlags; i++)
             flags.add(new Flag(new Location(0, 0)));
@@ -190,21 +180,13 @@ public class Board extends InputAdapter implements ApplicationListener {
         }
     }
 
-    /**
-     *
-     * @return
-     */
+    @Override
     public boolean activePlayerHasMoved() {
         return activePlayerRobotLocation.getX() != activePlayerInitialRobotLocation.getX() ||
                 activePlayerRobotLocation.getY() != activePlayerInitialRobotLocation.getY();
     }
 
-    /**
-     * Checks if a player has won by checking that the player has gone through
-     * the flags in the appropriate order.
-     *
-     * @return true if won
-     */
+    @Override
     public boolean checkIfWon() {
         return (activePlayerRobotLocation.getX() == 11) && (activePlayerRobotLocation.getY() == 11);
     }
