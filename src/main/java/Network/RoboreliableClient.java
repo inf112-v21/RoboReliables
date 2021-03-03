@@ -9,18 +9,19 @@ public class RoboreliableClient {
     private int playerID;
     private int player;
 
-
+    // Connection to server
     public void connectToServer() {
         csc = new ClientSideConnection();
     }
 
-    //Client connection Inner Class
+    // Client connection Inner Class
     private class ClientSideConnection {
 
         private Socket socket;
         private DataInputStream dataIn;
         private DataOutputStream dataOut;
 
+        // Sets up socket and prints out connection-message
         public ClientSideConnection() {
             try {
                 socket = new Socket("localhost", 51734);
@@ -33,6 +34,7 @@ public class RoboreliableClient {
             }
         }
 
+        // Closes connection from Client
         public void closeConnection() {
             try {
                 socket.close();
@@ -43,7 +45,8 @@ public class RoboreliableClient {
         }
     }
 
-
+    // Main-method
     public static void main(String[] args) {
+
     }
 }

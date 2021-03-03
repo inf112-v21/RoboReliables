@@ -13,6 +13,7 @@ public class RoboreliableServer {
     private ServerSideConnection player4;
     private int numPlayers;
 
+    // Sets new Server-socket
     public RoboreliableServer() {
         System.out.println("Server");
 
@@ -23,6 +24,7 @@ public class RoboreliableServer {
         }
     }
 
+    // Lets up to 4 players enter the game
     public void acceptConnections() {
         try {
             System.out.println("Waiting for connections....");
@@ -49,6 +51,7 @@ public class RoboreliableServer {
         }
     }
 
+    // The Server-side
     private static class ServerSideConnection implements Runnable {
 
         private Socket socket;
@@ -56,7 +59,7 @@ public class RoboreliableServer {
         private DataOutputStream dataOut;
         private int playerID;
 
-
+        // Takes socket and playerID
         public ServerSideConnection(Socket s, int id) {
             playerID = id;
             try {
@@ -68,6 +71,7 @@ public class RoboreliableServer {
 
         }
 
+        // run-method
         public void run() {
             try {
                 dataOut.writeInt(playerID);
@@ -76,6 +80,7 @@ public class RoboreliableServer {
             }
         }
 
+        // Closes connection from Server
         public void closeConnection() {
             try {
                 socket.close();
