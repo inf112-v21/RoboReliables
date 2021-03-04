@@ -97,12 +97,14 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 "Som spiller ønsker jeg at det er andre spillere med sånn at jeg kan spille mot de."
 
 Akseptansekriterier:
+
 - Man kan spesifisere antall spillere.
 - Hver spiller vises som en brikke på brettet.
 - Den aktive spiller byttes på mellom hver runde.
 - Den aktive spiller får kontroll over bevegelse og å endre sin runde.
 
 Arbeidsoppgaver:
+
 - Gi mulighet til å spesifisere antall spillere i begynnelsen av spillet.
 - Implementere runder.
 ```
@@ -111,11 +113,13 @@ Arbeidsoppgaver:
 "Som spiller ønsker jeg å få utdelt kort fra en kortstokk for å kunne bruke kortene mine senere."
 
 Akseptansekriterier:
+
 - Hver spiller har en inventory hvor kortene til spilleren oppbevares.
 - Spillet gir ut x antall kort til hver spiller.
 - Ha en sentral kortstokk som inneholder spillets kort.
 
 Arbeidsoppgaver:
+
 - Implementere inventory til en spiller.
 - Lage funksjon som deler ut kort.
 - Representere alle spillets kort.
@@ -123,7 +127,27 @@ Arbeidsoppgaver:
 ```
 
 ```
-*" "*
+" "
+
+Akseptansekriterier:
+
+
+Arbeidsoppgaver:
+
+```
+
+```
+" "
+
+Akseptansekriterier:
+
+
+Arbeidsoppgaver:
+
+```
+
+```
+" "
 
 Akseptansekriterier:
 
