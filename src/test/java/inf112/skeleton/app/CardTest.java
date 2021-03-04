@@ -138,7 +138,7 @@ public class CardTest {
         cardDeck.populate(CardValue.F1, 5);
         cardDeck.populate(CardValue.B1, 5);
 		assertEquals("Move forward 1 tile", CardValue.extendedCardValue(cardDeck.getCard(0)));
-		assertEquals("Move forward 1 tile", CardValue.extendedCardValue(cardDeck.getCard(5)));
+		assertEquals("Move backward 1 tile", CardValue.extendedCardValue(cardDeck.getCard(5)));
     }
 
     @Test
