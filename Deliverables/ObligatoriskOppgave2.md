@@ -94,7 +94,7 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 **Brukerhistorie, akseptansekriterie og arbeidsoppgaver**
 
 ```
-*"Som spiller ønsker jeg at det er andre spillere med sånn at jeg kan spille mot de."*
+"Som spiller ønsker jeg at det er andre spillere med sånn at jeg kan spille mot de."
 
 Akseptansekriterier:
 - Man kan spesifisere antall spillere.
@@ -107,6 +107,7 @@ Arbeidsoppgaver:
 - Implementere runder.
 ```
 
+```
 *" "*
 
 Akseptansekriterier:
@@ -114,8 +115,9 @@ Akseptansekriterier:
 
 Arbeidsoppgaver:
 
+```
 
-
+```
 *" "*
 
 Akseptansekriterier:
@@ -123,7 +125,7 @@ Akseptansekriterier:
 
 Arbeidsoppgaver:
 
-
+```
 - - - -
 
 **Prioritering av arbeidsoppgaver**
