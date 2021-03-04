@@ -18,8 +18,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
     private final Robot robot;
     public final static Location abstractLocation = new Location(0,0);
     // ArrayList that contains the cards currently in the player's hand
-    public List<Card> hand = new ArrayList<>();
-
+    private List<Card> hand = new ArrayList<>();
 
     public AbstractPlayer(Location location) {
         robot = new Robot(location);
@@ -43,6 +42,11 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
     }
 
     @Override
+    public int getHandSize() {
+        return this.hand.size();
+    }
+
+    @Override
     public Card getCard(int index) {
         return hand.get(index);
     }
@@ -61,7 +65,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
 
     public CardDeck pickCards(int cardPicks) {
         CardDeck register = new CardDeck();
-        Scanner input = new Scanner(System.in);
+        Scanner  input    = new Scanner(System.in);
         System.out.println("Select " + cardPicks + " cards.");
         while (cardPicks > 0) {
             int cardNr = 1;
@@ -69,10 +73,10 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
             do {
                 valid = true;
                 printHand();
-                System.out.println("Select card ,put: " + 1 + " to " + hand.size());
+                System.out.println("Select card, put: " + 1 + " to " + getHandSize());
                 if (input.hasNextInt()) {
                     cardNr = input.nextInt();
-                    if (cardNr < 1 || cardNr > hand.size()) {
+                    if (cardNr < 1 || cardNr > getHandSize()) {
                         System.out.println("Put a valid card number. Try again.");
                         valid = false;
                     }
@@ -82,8 +86,8 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
                     valid = false;
                 }
             } while (!valid);
-            register.addToTopOfDeck(hand.get(cardNr-1));
-            hand.remove(cardNr-1);
+            register.addToTopOfDeck(getCard(cardNr - 1));
+            hand.remove(cardNr - 1);
             cardPicks--;
         }
         input.close();

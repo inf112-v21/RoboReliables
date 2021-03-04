@@ -72,11 +72,11 @@ public class CardTest {
         cardDeck.populate(CardValue.UT, 6);
 
         assertEquals(84, cardDeck.getSize());
-        assertEquals(0, player.hand.size());
+        assertEquals(0, player.getHandSize());
         cardDeck.dealCard(player);
         assertEquals(83, cardDeck.getSize());
-        assertEquals(1, player.hand.size());
-        assertEquals(CardValue.F1, player.hand.get(0).cardValue);
+        assertEquals(1, player.getHandSize());
+        assertEquals(CardValue.F1, player.getCard(0).cardValue);
     }
 
     /**
@@ -96,7 +96,7 @@ public class CardTest {
 
         Card testCard = cardDeck.getCard(0);
         cardDeck.dealCard(player);
-        assertEquals(testCard, player.hand.get(0));
+        assertEquals(testCard, player.getCard(0));
     }
 
     /**
@@ -116,18 +116,18 @@ public class CardTest {
         cardDeck.shuffle();
 
         assertEquals(84, cardDeck.getSize());
-        assertEquals(0, player.hand.size());
+        assertEquals(0, player.getHandSize());
 
         Card cardDealt = cardDeck.getCard(0);
 
         cardDeck.dealCard(player);
         assertEquals(83, cardDeck.getSize());
-        assertEquals(1, player.hand.size());
+        assertEquals(1, player.getHandSize());
         assertEquals(cardDealt.cardValue, player.getCard(0).cardValue);
 
         player.putInDeck(0, cardDeck);
         assertEquals(84, cardDeck.getSize());
-        assertEquals(0, player.hand.size());
+        assertEquals(0, player.getHandSize());
         assertEquals(cardDealt.cardValue, cardDeck.getCardValueAt(0));
 
     }
