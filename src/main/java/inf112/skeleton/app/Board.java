@@ -78,6 +78,7 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public void setActivePlayerRobotLocation(Location newLocation) {
         activePlayerRobotLocation = newLocation;
+        activePlayer.getRobot().setLocation(newLocation);
     }
 
     /**
