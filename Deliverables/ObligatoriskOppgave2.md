@@ -108,12 +108,17 @@ Arbeidsoppgaver:
 ```
 
 ```
-*" "*
+"Som spiller ønsker jeg å få utdelt kort fra en kortstokk for å kunne bruke kortene mine senere."
 
 Akseptansekriterier:
-
+- Hver spiller har en inventory hvor kortene til spilleren oppbevares.
+- Spillet gir ut x antall kort til hver spiller.
+- Ha en sentral kortstokk som inneholder spillets kort.
 
 Arbeidsoppgaver:
+- Implementere inventory til en spiller.
+- Lage funksjon som deler ut kort.
+- Representere alle spillets kort.
 
 ```
 
