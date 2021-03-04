@@ -19,12 +19,12 @@ public class CardDeck implements ICardDeck {
     }
 
     @Override
-    public void populate(String cardValue) {
+    public void populate(CardValue cardValue) {
         cards.add(new Card(cardValue));
     }
 
     @Override
-    public void populate(String cardValue, int numberOfCards) {
+    public void populate(CardValue cardValue, int numberOfCards) {
         for (int i = 0; i < numberOfCards; i++)
             cards.add(new Card(cardValue));
     }
@@ -54,13 +54,20 @@ public class CardDeck implements ICardDeck {
     }
 
     @Override
-    public String getCardValueAt(int index) {
+    public CardValue getCardValueAt(int index) {
         return cards.get(index).getCardValue();
     }
 
     @Override
     public Card getCard(int index) {
         return cards.get(index);
+    }
+
+    @Override
+    public void printDeck() {
+        for (int i = 0; i < cards.size(); i++) {
+            System.out.println((i + 1) + ": " + CardValue.extendedCardValue(cards.get(i)));
+        }
     }
 }
 

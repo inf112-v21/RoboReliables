@@ -38,13 +38,13 @@ public class CardTest {
     @Test
     public void checkCardDeckSizeAfterPopulated() {
         createCardDeck();
-        for (int i = 0; i < 18; i++) cardDeck.populate("F1");
-        for (int i = 0; i < 12; i++) cardDeck.populate("F2");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("F3");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("B1");
-        for (int i = 0; i < 18; i++) cardDeck.populate("RR");
-        for (int i = 0; i < 18; i++) cardDeck.populate("RL");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("UT");
+        cardDeck.populate(CardValue.F1, 18);
+        cardDeck.populate(CardValue.F2, 12);
+        cardDeck.populate(CardValue.F3, 6);
+        cardDeck.populate(CardValue.B1, 6);
+        cardDeck.populate(CardValue.RR, 18);
+        cardDeck.populate(CardValue.RL, 18);
+        cardDeck.populate(CardValue.UT, 6);
         assertEquals(84, cardDeck.getSize());
         System.out.println("BEFORE SHUFFLE:");
         for (int i = 0; i < cardDeck.getSize(); i++) System.out.print(cardDeck.getCardValueAt(i) + " ");
@@ -63,20 +63,20 @@ public class CardTest {
     @Test
     public void dealCardTest() {
         createCardDeck();
-        for (int i = 0; i < 18; i++) cardDeck.populate("F1");
-        for (int i = 0; i < 12; i++) cardDeck.populate("F2");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("F3");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("B1");
-        for (int i = 0; i < 18; i++) cardDeck.populate("RR");
-        for (int i = 0; i < 18; i++) cardDeck.populate("RL");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("UT");
+        cardDeck.populate(CardValue.F1, 18);
+        cardDeck.populate(CardValue.F2, 12);
+        cardDeck.populate(CardValue.F3, 6);
+        cardDeck.populate(CardValue.B1, 6);
+        cardDeck.populate(CardValue.RR, 18);
+        cardDeck.populate(CardValue.RL, 18);
+        cardDeck.populate(CardValue.UT, 6);
 
         assertEquals(84, cardDeck.getSize());
         assertEquals(0, player.hand.size());
         cardDeck.dealCard(player);
         assertEquals(83, cardDeck.getSize());
         assertEquals(1, player.hand.size());
-        assertEquals("F1", player.hand.get(0).cardValue);
+        assertEquals(CardValue.F1, player.hand.get(0).cardValue);
     }
 
     /**
@@ -86,13 +86,13 @@ public class CardTest {
     @Test
     public void compareCardsTest() {
         createCardDeck();
-        for (int i = 0; i < 18; i++) cardDeck.populate("F1");
-        for (int i = 0; i < 12; i++) cardDeck.populate("F2");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("F3");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("B1");
-        for (int i = 0; i < 18; i++) cardDeck.populate("RR");
-        for (int i = 0; i < 18; i++) cardDeck.populate("RL");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("UT");
+        cardDeck.populate(CardValue.F1, 18);
+        cardDeck.populate(CardValue.F2, 12);
+        cardDeck.populate(CardValue.F3, 6);
+        cardDeck.populate(CardValue.B1, 6);
+        cardDeck.populate(CardValue.RR, 18);
+        cardDeck.populate(CardValue.RL, 18);
+        cardDeck.populate(CardValue.UT, 6);
 
         Card testCard = cardDeck.getCard(0);
         cardDeck.dealCard(player);
@@ -106,13 +106,13 @@ public class CardTest {
     @Test
     public void putCardInDeckTest() {
         createCardDeck();
-        for (int i = 0; i < 18; i++) cardDeck.populate("F1");
-        for (int i = 0; i < 12; i++) cardDeck.populate("F2");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("F3");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("B1");
-        for (int i = 0; i < 18; i++) cardDeck.populate("RR");
-        for (int i = 0; i < 18; i++) cardDeck.populate("RL");
-        for (int i = 0; i < 6;  i++) cardDeck.populate("UT");
+        cardDeck.populate(CardValue.F1, 18);
+        cardDeck.populate(CardValue.F2, 12);
+        cardDeck.populate(CardValue.F3, 6);
+        cardDeck.populate(CardValue.B1, 6);
+        cardDeck.populate(CardValue.RR, 18);
+        cardDeck.populate(CardValue.RL, 18);
+        cardDeck.populate(CardValue.UT, 6);
         cardDeck.shuffle();
 
         assertEquals(84, cardDeck.getSize());
@@ -130,6 +130,23 @@ public class CardTest {
         assertEquals(0, player.hand.size());
         assertEquals(cardDealt.cardValue, cardDeck.getCardValueAt(0));
 
+    }
+
+    @Test
+    public void CardValuesEnumTest() {
+        createCardDeck();
+        cardDeck.populate(CardValue.F1, 5);
+        cardDeck.populate(CardValue.B1, 5);
+		assertEquals("Move forward 1 tile", CardValue.extendedCardValue(cardDeck.getCard(0)));
+		assertEquals("Move forward 1 tile", CardValue.extendedCardValue(cardDeck.getCard(5)));
+    }
+
+    @Test
+    public void PrintDeckTest() {
+        createCardDeck();
+        cardDeck.populate(CardValue.F1, 5);
+        cardDeck.populate(CardValue.B1, 5);
+        cardDeck.printDeck();
     }
 
 }

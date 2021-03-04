@@ -2,19 +2,21 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import inf112.skeleton.app.Cards.CardDeck;
 import inf112.skeleton.app.Cards.ProgramCardDeck;
 import inf112.skeleton.app.player.Player;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
+import static java.lang.String.valueOf;
+
 /**
  * Sets up gdx to create a new game of RoboRally.
  */
-public class RoboRally {
-    private int nrOfPlayers = 4; // Pre-determined number of players
-    private Queue<Player> players = new LinkedList<>();
-    private Player activePlayer;
+public class   RoboRally {
+    private final int nrOfPlayers = 4; // Pre-determined number of players
+    protected Queue<Player> players = new LinkedList<>();
     private ProgramCardDeck programCardDeck;
 
     public RoboRally() {
@@ -25,33 +27,26 @@ public class RoboRally {
 
         programCardDeck = new ProgramCardDeck();
 
-        Board board = new Board();
-
-        Player player1 = new Player();
-        Player player2 = new Player();
-        Player player3 = new Player();
-        Player player4 = new Player();
+        Player player1 = new Player(new Location(0,0));
+        Player player2 = new Player(new Location(1,0));
+        Player player3 = new Player(new Location(2,0));
+        Player player4 = new Player(new Location(3,0));
 
         players.add(player1);
         players.add(player2);
         players.add(player3);
         players.add(player4);
 
+        Board board = new Board(players);
+
         // Deal cards to player1 and print their hand
         programCardDeck.dealCard(player1, 9);
-        player1.printHand();
-
-        activePlayer = players.peek();
-        System.out.println(activePlayer);
-
-        takeTurn(activePlayer);
-
+        //player1.printHand();
+        CardDeck pickedCards = player1.pickCards(5);
+        System.out.println("Picked cards:");
+        pickedCards.printDeck();
         new Lwjgl3Application(board, cfg);
     }
 
-    public void takeTurn(Player currentActivePlayer) {
-        activePlayer = players.poll();
-        players.add(currentActivePlayer);
-    }
 }
 

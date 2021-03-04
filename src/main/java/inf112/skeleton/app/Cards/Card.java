@@ -1,14 +1,14 @@
 package inf112.skeleton.app.Cards;
 
 public class Card implements ICard {
-    public String cardValue;
+    public CardValue cardValue;
 
-    public Card(String cardValue) {
+    public Card(CardValue cardValue) {
         this.cardValue = cardValue;
     }
 
-    public String getCardValue() {
-        return cardValue;
+    public CardValue getCardValue() {
+        return this.cardValue;
     }
 }
 
