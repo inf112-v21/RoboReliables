@@ -41,4 +41,15 @@ public interface IAbstractPlayer {
      */
     Robot getRobot();
 
+    void printHand();
+
+    /**
+     * View program cards that are dealt to players hand, then pick one card at a time. (in the terminal).
+     * Cards are placed by pick-order in the robot-register.
+     * Loops until all picks have been executed.
+     *
+     * @param cardPicks: (int) number of cards player must pick from hand (dealt cards).
+     * @return register: (CardDeck) an updated -ready to execute- robot-register.
+     */
+    CardDeck pickCards(int cardPicks);
 }

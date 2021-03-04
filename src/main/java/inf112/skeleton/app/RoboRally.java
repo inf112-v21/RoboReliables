@@ -28,10 +28,10 @@ public class   RoboRally {
 
         programCardDeck = new ProgramCardDeck();
 
-        Player player1 = new Player(new Location(0,0));
-        Player player2 = new Player(new Location(1,0));
-        Player player3 = new Player(new Location(2,0));
-        Player player4 = new Player(new Location(3,0));
+        AbstractPlayer player1 = new Player(new Location(0,0));
+        AbstractPlayer player2 = new Player(new Location(1,0));
+        AbstractPlayer player3 = new Player(new Location(2,0));
+        AbstractPlayer player4 = new Player(new Location(3,0));
 
         players.add(player1);
         players.add(player2);
@@ -43,9 +43,9 @@ public class   RoboRally {
         // Deal cards to player1 and print their hand
         programCardDeck.dealCard(player1, 9);
         //player1.printHand();
-        CardDeck pickedCards = player1.pickCards(5);
+        player1.getRobot().updateRegister(player1.pickCards(5));
         System.out.println("Picked cards:");
-        pickedCards.printDeck();
+        player1.getRobot().getRegister().printDeck();
         new Lwjgl3Application(board, cfg);
     }
 
