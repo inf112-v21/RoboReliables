@@ -31,6 +31,14 @@ public class Player extends AbstractPlayer {
         }
     }
 
+    /**
+     * View program cards that are dealt to players hand, then pick one card at a time. (in the terminal).
+     * Cards are placed by pick-order in the robot-register.
+     * Loops until all picks have been executed.
+     *
+     * @param cardPicks: (int) number of cards player must pick from hand (dealt cards).
+     * @return register: (CardDeck) an updated -ready to execute- robot-register.
+     */
     public CardDeck pickCards(int cardPicks) {
         CardDeck register = new CardDeck();
         Scanner input = new Scanner(System.in);
