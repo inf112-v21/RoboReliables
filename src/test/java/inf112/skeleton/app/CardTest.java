@@ -19,7 +19,7 @@ public class CardTest {
     private void createCardDeck() {
         cardDeck = new CardDeck();
         board    = new Board();
-        player   = new TestPlayer(new Location(0,0), board);
+        player   = new TestPlayer(new Location(0,0));
     }
 
     /**
