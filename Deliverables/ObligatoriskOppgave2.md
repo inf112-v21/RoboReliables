@@ -186,16 +186,19 @@ Arbeidsoppgaver:
 - - - -
 
 **Prioritering av arbeidsoppgaver**
+
 Framover vil grupper prioritere å få på plass nettverks-løsningen og optimalisere denne, samt finne en god løsning på kortene. Etter dette vil det også bli prioritert å få på plass et reelt brett som blir mulig å teste spillet i en større skala på.
 
 - - - -
 
 **Endringer i MVP**
 
+Det er ikke gjort noen endringer i bestillingen fra kunde.
 
 - - - -
 
 **Prograsjon**
+
 Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere teamet, slik at vi arbeidet mer målrettet og strukturert, samt å få på plass en del kode for danne grunn-funksjoner i prosjektet. Dette er ting som
 
 - - - -
