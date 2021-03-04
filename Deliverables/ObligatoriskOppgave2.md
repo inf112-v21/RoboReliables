@@ -32,6 +32,14 @@
 
 ### Referat
 
+**15.03.21**
+-
+
+**17.03.21**
+- 
+
+**22.03.21**
+-
 
 ### Forbedringspunkter
 1.
@@ -60,6 +68,7 @@
 # Deloppgave 3
 
 ### Dokumentering av prosjekt
+
 
 ### Kjørbarhet
 
