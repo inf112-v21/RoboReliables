@@ -58,7 +58,6 @@ public class Board extends InputAdapter implements IBoard {
 //  HashMap of all entities and their locations. Parsed from layers on startup.
 //  private HashMap<Location, ArrayList<Entity>> entities = new HashMap<>();
 
-
     public Board(Queue<AbstractPlayer> players) {
         this.players = players;
     }
@@ -87,15 +86,15 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        font = new BitmapFont();
+        font  = new BitmapFont();
         font.setColor(Color.RED);
 
         // Sets the map and various layers
         map = new TmxMapLoader().load("gameboard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
-        flagLayer = (TiledMapTileLayer) map.getLayers().get("flag");
-        holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
+        flagLayer  = (TiledMapTileLayer) map.getLayers().get("flag");
+        holeLayer  = (TiledMapTileLayer) map.getLayers().get("hole");
 
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
@@ -109,8 +108,8 @@ public class Board extends InputAdapter implements IBoard {
 
         // Splits the textures of the player into different states and sets them to the given Cell
         TextureRegion[][] robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
-        robotCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
-        robotWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
+        robotCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
+        robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
 
         initializeFlags();
@@ -186,12 +185,13 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public boolean activePlayerHasMoved() {
         return activePlayerRobotLocation.getX() != activePlayerInitialRobotLocation.getX() ||
-                activePlayerRobotLocation.getY() != activePlayerInitialRobotLocation.getY();
+               activePlayerRobotLocation.getY() != activePlayerInitialRobotLocation.getY();
     }
 
     @Override
     public boolean checkIfWon() {
-        return (activePlayerRobotLocation.getX() == 11) && (activePlayerRobotLocation.getY() == 11);
+        return (activePlayerRobotLocation.getX() == 11) &&
+               (activePlayerRobotLocation.getY() == 11);
     }
 
     @Override

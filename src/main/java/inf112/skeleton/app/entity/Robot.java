@@ -22,6 +22,7 @@ public class Robot extends Entity {
     public void updateRegister(CardDeck newRegister) {
         register = newRegister;
     }
+
     public CardDeck getRegister() {
         return register;
     }
