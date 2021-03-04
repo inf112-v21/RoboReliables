@@ -3,6 +3,18 @@
 ### Rollene i teamet
 
 
+**Leder**
+
+**Nettverksansvarlig**
+
+**Arkitekt**
+
+**Kode**
+
+
+**Kundekontakt**
+- Skal fungere som teamets kontaktperson opp imot kunden. Dette gjelder presentasjon, dokumentering og markedsføring.
+
 ### Prosjektmetodikk
 
 
