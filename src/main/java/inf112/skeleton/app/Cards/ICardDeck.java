@@ -2,8 +2,6 @@ package inf112.skeleton.app.Cards;
 
 import inf112.skeleton.app.player.AbstractPlayer;
 
-import java.util.ArrayList;
-
 public interface ICardDeck {
     /**
      * Shuffle the deck in random order.

@@ -2,7 +2,6 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import inf112.skeleton.app.Cards.CardDeck;
 import inf112.skeleton.app.Cards.ProgramCardDeck;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
@@ -10,12 +9,10 @@ import inf112.skeleton.app.player.Player;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import static java.lang.String.valueOf;
-
 /**
  * Sets up gdx to create a new game of RoboRally.
  */
-public class   RoboRally {
+public class RoboRally {
     private final int nrOfPlayers = 4; // Pre-determined number of players
     protected Queue<AbstractPlayer> players = new LinkedList<>();
     private ProgramCardDeck programCardDeck;
