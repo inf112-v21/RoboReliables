@@ -4,7 +4,7 @@
 - Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som er reelle å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave. 
 - Det eneste vi har endret på, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring.
 
-- - - -
+- 
 
 **Rollene i teamet nå er:**
 
@@ -27,7 +27,7 @@ Kundekontakt (Sebastian)
 
 **Prosjektmetodikk**
 
-- - - -
+- - 
 
 **Gruppedynamikk og kommunikasjon**
 Gruppen han i stor grad en god dynamikk og en god kommunikasjon. Etter vi opprettet hyppigere møter og med briefing, så har gruppen fått en ganske naturlig og oversiktlig måte å kommunisere på. Alle i gruppen jobber og samarbeidet bra sammen og hjelper hverandre med ansvarsområdet ved behov.
