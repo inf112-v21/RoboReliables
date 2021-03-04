@@ -4,7 +4,7 @@
 - Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som er reelle å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave. 
 - Det eneste vi har endret på, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring.
 
-- - - 
+- - - -
 
 **Rollene i teamet nå er:**
 
@@ -27,7 +27,7 @@ Kundekontakt (Sebastian)
 
 **Prosjektmetodikk**
 
-- - 
+- - - -
 
 **Gruppedynamikk og kommunikasjon**
 Gruppen han i stor grad en god dynamikk og en god kommunikasjon. Etter vi opprettet hyppigere møter og med briefing, så har gruppen fått en ganske naturlig og oversiktlig måte å kommunisere på. Alle i gruppen jobber og samarbeidet bra sammen og hjelper hverandre med ansvarsområdet ved behov.
@@ -42,6 +42,8 @@ Gruppen han i stor grad en god dynamikk og en god kommunikasjon. Etter vi oppret
 
 **Commit**
 Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt arbeid, men grunnet at noen arbeidsoppgaver gjør at det vil naturlig være en større del å committe kode enn andre. Enten ved at de jobber lenger med research, jobber med mer administrative arbeidsoppgaver osv. Arbeidsmengden er fordelt på en god og rettferdig måte og om et team-medlem er ferdig med sitt ansvarsområde, hjelper den personen en annen.
+
+- - - -
 
 **Referat
 
@@ -79,28 +81,36 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 05.03.21
 - Teamet går igjennom innlevering og dokumenter for en siste sjekk om at alt er som det skal. 
 
+- - - -
 
 **Forbedringspunkter**
 1. Teamet skal bli bedre på å benytte og hyggig oppdatere Github, slik at den kan brukes som et godt verktøy for å orientere seg om gjeldende issues og status på arbeidsoppgaver mellom team-møtene.
 2. Teamet skal tidligere sette seg inn i innlevering, for å jobber mer målrettet.
 
-
+- - - -
 
 # Deloppgave 2
 
 **Brukerhistorie, akseptansekriterie og arbeidsoppgaver**
 
+- - - -
 
 **Prioritering av arbeidsoppgaver**
 Framover vil grupper prioritere å få på plass nettverks-løsningen og optimalisere denne, samt finne en god løsning på kortene. Etter dette vil det også bli prioritert å få på plass et reelt brett som blir mulig å teste spillet i en større skala på.
 
+- - - -
+
 **MVP**
 
+- - - -
 
 **Prograsjon**
 Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere teamet, slik at vi arbeidet mer målrettet og strukturert, samt å få på plass en del kode for danne grunn-funksjoner i prosjektet. Dette er ting som
 
+- - - -
+
 **Bugs**
+
 
 
 
