@@ -206,13 +206,17 @@ Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere tea
 **Bugs i prosjektet**
 
 
-
+- - - - 
 
 # Deloppgave 3
 
 **Dokumentering av prosjekt**
 
 Prosjektet er bygget opp slik at en spiller får tildelt kort. Med disse kortene skal en spiller avgjøre bevegelsen til.....
+
+De forskjellige testene i spillet tester om....
+
+Når programmet kjøres vil....
 
 
 **Klassediagram**
