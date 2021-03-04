@@ -7,7 +7,7 @@ import java.util.Collections;
 
 public class CardDeck implements ICardDeck {
 
-    ArrayList<Card> cards;
+    private ArrayList<Card> cards;
 
     public CardDeck() {
         cards = new ArrayList<>();
