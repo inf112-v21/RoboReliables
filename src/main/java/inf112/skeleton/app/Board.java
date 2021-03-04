@@ -47,8 +47,8 @@ public class Board extends InputAdapter implements IBoard {
     private final ArrayList<Flag> flags = new ArrayList<>(nrOfFlags);
 
     // Variables for the current active player
-    private Player activePlayer = new Player();
-    private Location activePlayerRobotLocation = activePlayer.getRobot().getLocation();
+    private Player activePlayer;
+    private Location activePlayerRobotLocation;
     private Location activePlayerInitialRobotLocation;
 
     protected Queue<Player> players = new LinkedList<>();
@@ -117,6 +117,9 @@ public class Board extends InputAdapter implements IBoard {
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
 
         setRobots();
+        // Initializes active robot
+        activePlayer = players.peek();
+        activePlayerRobotLocation = activePlayer.getRobot().getLocation();
 
         initializeFlags();
         activePlayerInitialRobotLocation = activePlayerRobotLocation;
@@ -150,6 +153,7 @@ public class Board extends InputAdapter implements IBoard {
         Player previousActivePlayer = players.poll();
         players.add(previousActivePlayer);
         activePlayer = players.peek();
+        activePlayerRobotLocation = activePlayer.getRobot().getLocation();
         System.out.println(activePlayer);
     }
 
