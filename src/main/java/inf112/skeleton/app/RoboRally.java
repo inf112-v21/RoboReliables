@@ -4,6 +4,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import inf112.skeleton.app.Cards.CardDeck;
 import inf112.skeleton.app.Cards.ProgramCardDeck;
+import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
 
 import java.util.LinkedList;
@@ -16,7 +17,7 @@ import static java.lang.String.valueOf;
  */
 public class   RoboRally {
     private final int nrOfPlayers = 4; // Pre-determined number of players
-    protected Queue<Player> players = new LinkedList<>();
+    protected Queue<AbstractPlayer> players = new LinkedList<>();
     private ProgramCardDeck programCardDeck;
 
     public RoboRally() {

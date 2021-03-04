@@ -1,6 +1,8 @@
 package inf112.skeleton.app;
 
 import com.badlogic.gdx.ApplicationListener;
+import inf112.skeleton.app.player.AbstractPlayer;
+import inf112.skeleton.app.player.Player;
 
 /**
  *
@@ -21,6 +23,12 @@ public interface IBoard extends ApplicationListener {
      *
      */
     void startNewRound();
+
+    /**
+     *
+     * @return
+     */
+    AbstractPlayer getActivePlayer();
 
     /**
      * Cycles the activePlayer to the next in the players queue.

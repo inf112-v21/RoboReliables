@@ -16,7 +16,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import inf112.skeleton.app.entity.Flag;
-import inf112.skeleton.app.entity.Robot;
+import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
 
 import java.util.ArrayList;
@@ -47,11 +47,11 @@ public class Board extends InputAdapter implements IBoard {
     private final ArrayList<Flag> flags = new ArrayList<>(nrOfFlags);
 
     // Variables for the current active player
-    private Player activePlayer;
-    private Location activePlayerRobotLocation;
-    private Location activePlayerInitialRobotLocation;
+    private AbstractPlayer activePlayer = new Player();
+    protected Location activePlayerRobotLocation = activePlayer.getRobot().getLocation();
+    protected Location activePlayerInitialRobotLocation;
 
-    protected Queue<Player> players = new LinkedList<>();
+    protected Queue<AbstractPlayer> players = new LinkedList<>();
 
     private boolean turnIsOver = false;
 
@@ -59,7 +59,7 @@ public class Board extends InputAdapter implements IBoard {
 //  private HashMap<Location, ArrayList<Entity>> entities = new HashMap<>();
 
 
-    public Board(Queue<Player> players) {
+    public Board(Queue<AbstractPlayer> players) {
         this.players = players;
     }
 
@@ -78,7 +78,6 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public void setActivePlayerRobotLocation(Location newLocation) {
         activePlayerRobotLocation = newLocation;
-        activePlayer.getRobot().setLocation(newLocation);
     }
 
     /**
@@ -98,8 +97,6 @@ public class Board extends InputAdapter implements IBoard {
         flagLayer = (TiledMapTileLayer) map.getLayers().get("flag");
         holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
 
-
-
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, MAP_SIZE_X, MAP_SIZE_Y);
@@ -116,24 +113,10 @@ public class Board extends InputAdapter implements IBoard {
         robotWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
 
-        setRobots();
-        // Initializes active robot
-        activePlayer = players.peek();
-        activePlayerRobotLocation = activePlayer.getRobot().getLocation();
-
         initializeFlags();
         activePlayerInitialRobotLocation = activePlayerRobotLocation;
 
         Gdx.input.setInputProcessor(this);
-    }
-
-    private void setRobots() {
-        for (Player player : players) {
-            Robot robot = player.getRobot();
-            int robotX = robot.getLocation().getX();
-            int robotY = robot.getLocation().getY();
-            robotLayer.setCell(robotX, robotY, robotCell);
-        }
     }
 
     /**
@@ -148,12 +131,16 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     @Override
+    public AbstractPlayer getActivePlayer() {
+        return activePlayer;
+    }
+
+    @Override
     public void switchActivePlayer() {
         System.out.println("Switching active player. Next player up: ");
-        Player previousActivePlayer = players.poll();
+        AbstractPlayer previousActivePlayer = players.poll();
         players.add(previousActivePlayer);
         activePlayer = players.peek();
-        activePlayerRobotLocation = activePlayer.getRobot().getLocation();
         System.out.println(activePlayer);
     }
 
@@ -307,6 +294,4 @@ public class Board extends InputAdapter implements IBoard {
     }
 }
 */
-
-
 

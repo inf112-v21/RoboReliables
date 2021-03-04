@@ -14,11 +14,9 @@ import inf112.skeleton.app.Cards.CardDeck;
 
 public class TestPlayer extends AbstractPlayer  {
     private Location location;
-    private final Board board;
 
-    public TestPlayer(Location location, Board board) {
+    public TestPlayer(Location location) {
         super(location);
-        this.board = board;
     }
     public void printHand() {
         for (int i = 0; i < getHand().size(); i++) {
