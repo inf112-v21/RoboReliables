@@ -1,45 +1,62 @@
 # Deloppgave 1
 
 **Rollene i teamet**
-- Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som nå er reell å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave.
+- Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som nå er reell å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave. 
+- Det eneste vi har endret på, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring.
 
-Leder
-- 
 
-Nettverksansvarlig
--
+**Rollene i teamet nå er:**
 
-Arkitekt
+Leder (Sigurd)
+- Leder sørger for at alle medlemmene i teamet er oppdatert på prosjektets status, sørger for sette prioriteringer for arbeidsoppgaver og deltar ellers aktivt på utvikling av prosjekt.
+
+Nettverksansvarlig (Sebastian)
+- Nettverksansvarlig skal sette opp client-server løsning for prosjektet, samt sette opp nødvendige funksjoner for at nettverket skal fungere best mulig.
+
+Arkitekter (
 -
 
 Kodeansavrlig
 -
 
-Kundekontakt
+Kundekontakt (Sebastian)
 - Skal fungere som teamets kontaktperson opp imot kunden. Dette gjelder presentasjon, dokumentering og markedsføring.
+
 
 **Prosjektmetodikk**
 
 
 **Gruppedynamikk og kommunikasjon**
-
+Gruppen han i stor grad en god dynamikk og en god kommunikasjon. Etter vi opprettet hyppigere møter og med briefing, så har gruppen fått en ganske naturlig og oversiktlig måte å kommunisere på. Alle i gruppen jobber og samarbeidet bra sammen og hjelper hverandre med ansvarsområdet ved behov.
 
 **Retrospektiv**
-
+- Tidlig i prosjektet bestemte vi oss for at vi avtalte neste møtetid ved slutten av hvert møte, grunnet at alle hadde ganske varierende timaplanet. Dette viste seg å være litt knotete, da det var vanskelig å ha full kontroll på tider og oppmøte fra gang til gang. Vi satt derfor opp faste møtetider, som har resultert i at vi nå har bedre kontroll over møtetid.
+- I starten jobbet vi en del mens hele gruppen var i samme kanal, da vi alle var litt ny på prosjektet og ville få med oss mest mulig. Det kunne være noe forstyrrende, så vi strukturerte møtene slik at alle møtes, så briefer vi alle og planlegger videre arbeid, så går de som arbeider sammen i egen chat. Dermed har vi fått effektivisert måten vi jobber på.
 
 **Commit**
-
+Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt arbeid, men grunnet at noen arbeidsoppgaver gjør at det vil naturlig være en større del å committe kode enn andre. Enten ved at de jobber lenger med research, jobber med mer administrative arbeidsoppgaver osv. Arbeidsmengden er fordelt på en god og rettferdig måte og om et team-medlem er ferdig med sitt ansvarsområde, hjelper den personen en annen.
 
 **Referat
 
 15.03.21
 -
 
-17.03.21
+22.02.21
+- Teamet briefer hverandre på status rundt arbeidsoppgavene de holder på med, samt hva som gjenstår før de er ferdig med gjeldende oppgave.
+- Teamet ønsker å endre fra å avtale møtedato hvert møte til å sette faste tider for møte ila uken. Det enes om et system der vi har hyppige møter og med kortere felles brief.
 - 
 
-22.03.21
--
+03.03.21
+- Teamet breifer hverandre på status for deres respektive område av prosjektet, samt gjenstående element før innlevering. 
+- Teamet setter opp ressurs
+
+04.03.21
+- Teamet briefer hverandre på status mtp på innlevering av obligatorisk oppgave. 
+- Det blir gjort små endring i arbeidsoppgaver og fokus-område fram mot innlevering.
+
+05.03.21
+- Teamet går igjennom innlevering og dokumenter for en siste sjekk om at alt er som det skal. 
+
 
 **Forbedringspunkter**
 1.
