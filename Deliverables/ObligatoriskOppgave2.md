@@ -1,7 +1,7 @@
 # Deloppgave 1
 
 **Rollene i teamet**
-- Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som nå er reell å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave. 
+- Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som er reelle å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave. 
 - Det eneste vi har endret på, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring.
 
 
@@ -13,14 +13,14 @@ Leder (Sigurd)
 Nettverksansvarlig (Sebastian)
 - Nettverksansvarlig skal sette opp client-server løsning for prosjektet, samt sette opp nødvendige funksjoner for at nettverket skal fungere best mulig.
 
-Arkitekter (
--
+Arkitekter (Julian & Heming)
+- Akritektene er ansvarlig for å strukturere prosjektet og sørge for en gjennomgående sammenheng og "rød tråd" i prosjektet.
 
-Kodeansavrlig
--
+Kodeansavrlig (Anders)
+- Kodeansvarlig skal sørge for god, strukturert og effektiv kode. Dette innebærer å reformatere kode, endre ineffektiv kode og sørge for at metodene samstemmer bra.
 
 Kundekontakt (Sebastian)
-- Skal fungere som teamets kontaktperson opp imot kunden. Dette gjelder presentasjon, dokumentering og markedsføring.
+- Skal fungere som teamets kontaktperson opp imot kunden. Dette gjelder presentasjon, dokumentering og markedsføring av prosjektet.
 
 
 **Prosjektmetodikk**
@@ -39,12 +39,27 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 **Referat
 
 15.03.21
--
+- Teamet planlegger videre arbeid med prosjektet.
+- Det gjøres små endringer i team-strukturen og team-medlemmens roller i teamet.
+- Det blir satt opp arbeidsoppgaver og fordelt på teamets medlemmer.
+- Det avtales nytt møte for teamet.
 
 22.02.21
 - Teamet briefer hverandre på status rundt arbeidsoppgavene de holder på med, samt hva som gjenstår før de er ferdig med gjeldende oppgave.
 - Teamet ønsker å endre fra å avtale møtedato hvert møte til å sette faste tider for møte ila uken. Det enes om et system der vi har hyppige møter og med kortere felles brief.
 - 
+
+24.02.21
+- Teamet går igjennom ny obligatorisk oppgave og kriterende som skal jobbes og etterstebes.
+- 
+
+26.02.21
+- Teamet briefer hverandre på status i arbeidsprosessen og oppdaterer prosjektet på Github slik at oppgave samstemmer med status.
+- Det blir satt opp arbeidsplan for kommende uke og fokusområdet.
+
+
+01.03.21
+-
 
 03.03.21
 - Teamet breifer hverandre på status for deres respektive område av prosjektet, samt gjenstående element før innlevering. 
