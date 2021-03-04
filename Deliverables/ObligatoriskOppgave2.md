@@ -218,6 +218,7 @@ De forskjellige testene i spillet tester om....
 
 Når programmet kjøres vil....
 
+- - - - 
 
 **Klassediagram**
 
