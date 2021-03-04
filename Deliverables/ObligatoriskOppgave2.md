@@ -4,7 +4,7 @@
 - Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som er reelle å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave. 
 - Det eneste vi har endret på, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring.
 
-- 
+- - - 
 
 **Rollene i teamet nå er:**
 
