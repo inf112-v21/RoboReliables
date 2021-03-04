@@ -14,24 +14,14 @@ import inf112.skeleton.app.Cards.CardDeck;
 
 public class TestPlayer extends AbstractPlayer  {
     private Location location;
-    private final Board board;
 
-    public TestPlayer(Location location, Board board) {
+    public TestPlayer(Location location) {
         super(location);
-        this.board = board;
     }
     public void printHand() {
         for (int i = 0; i < getHand().size(); i++) {
             System.out.println((i + 1) + ": " + getHand().get(i).getCardValue());
         }
-    /**
-     * View program cards that are dealt to players hand, then pick one card at a time. (in the terminal).
-     * Cards are placed by pick-order in the robot-register.
-     * Loops until all picks have been executed.
-     *
-     * @param cardPicks: (int) number of cards player must pick from hand (dealt cards).
-     * @return register: (CardDeck) an updated -ready to execute- robot-register.
-     */
     }
     public CardDeck pickCards(int cardPicks) {
         CardDeck register = new CardDeck();

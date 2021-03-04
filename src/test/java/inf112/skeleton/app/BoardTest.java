@@ -4,9 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.player.AbstractPlayer;
+import inf112.skeleton.app.player.Player;
 import inf112.skeleton.app.player.TestPlayer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Tests for the Board class.
@@ -16,13 +20,16 @@ public class BoardTest {
     private AbstractPlayer testPlayer;
     private Location testPlayerLocation;
     private Robot robot;
+    private Queue<AbstractPlayer> players = new LinkedList<>();
 
     @BeforeEach
     private void createBoard() {
-        board = new Board();
-        testPlayer = new TestPlayer(new Location(0,0), board);
+        testPlayer = new TestPlayer(new Location(0,0));
+        players.add(testPlayer);
+        board = new Board(players);
         testPlayerLocation = testPlayer.getRobot().getLocation();
         robot = testPlayer.getRobot();
+        board.activePlayerInitialRobotLocation = board.activePlayerRobotLocation;
     }
 
     /**
@@ -38,6 +45,40 @@ public class BoardTest {
 
         board.setActivePlayerRobotLocation(winningPos);
         assertTrue(board.checkIfWon());
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void switchActivePlayerTest() {
+        System.out.println(board.players.size());
+        AbstractPlayer activePlayer = board.getActivePlayer();
+
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void setActivePlayerRobotLocationTest() {
+        int expectedX = 1;
+        int expectedY = 1;
+
+        int actualX = robot.getLocation().getX();
+        int actualY = robot.getLocation().getY();
+
+        // Checks that the initial location is not the same.
+        assertNotEquals(expectedX, actualX);
+        assertNotEquals(expectedY, actualY);
+
+        board.setActivePlayerRobotLocation(new Location(1,1));
+
+        actualX = robot.getLocation().getX();
+        actualY = robot.getLocation().getY();
+
+        assertEquals(expectedX, actualX);
+        assertEquals(expectedY, actualY);
     }
 
     /**

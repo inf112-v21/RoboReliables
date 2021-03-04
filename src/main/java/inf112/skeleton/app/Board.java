@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import inf112.skeleton.app.entity.Flag;
+import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
 
 import java.util.ArrayList;
@@ -46,11 +47,11 @@ public class Board extends InputAdapter implements IBoard {
     private final ArrayList<Flag> flags = new ArrayList<>(nrOfFlags);
 
     // Variables for the current active player
-    private Player activePlayer = new Player();
-    private Location activePlayerRobotLocation = activePlayer.getRobot().getLocation();
-    private Location activePlayerInitialRobotLocation;
+    private AbstractPlayer activePlayer = new Player();
+    protected Location activePlayerRobotLocation = activePlayer.getRobot().getLocation();
+    protected Location activePlayerInitialRobotLocation;
 
-    protected Queue<Player> players = new LinkedList<>();
+    protected Queue<AbstractPlayer> players = new LinkedList<>();
 
     private boolean turnIsOver = false;
 
@@ -58,7 +59,7 @@ public class Board extends InputAdapter implements IBoard {
 //  private HashMap<Location, ArrayList<Entity>> entities = new HashMap<>();
 
 
-    public Board(Queue<Player> players) {
+    public Board(Queue<AbstractPlayer> players) {
         this.players = players;
     }
 
@@ -130,9 +131,14 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     @Override
+    public AbstractPlayer getActivePlayer() {
+        return activePlayer;
+    }
+
+    @Override
     public void switchActivePlayer() {
         System.out.println("Switching active player. Next player up: ");
-        Player previousActivePlayer = players.poll();
+        AbstractPlayer previousActivePlayer = players.poll();
         players.add(previousActivePlayer);
         activePlayer = players.peek();
         System.out.println(activePlayer);
@@ -288,3 +294,4 @@ public class Board extends InputAdapter implements IBoard {
     }
 }
 */
+
