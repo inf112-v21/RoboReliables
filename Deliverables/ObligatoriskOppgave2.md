@@ -4,6 +4,7 @@
 - Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som er reelle å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave. 
 - Det eneste vi har endret på, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring.
 
+- - - -
 
 **Rollene i teamet nå er:**
 
@@ -22,16 +23,22 @@ Kodeansavrlig (Anders)
 Kundekontakt (Sebastian)
 - Skal fungere som teamets kontaktperson opp imot kunden. Dette gjelder presentasjon, dokumentering og markedsføring av prosjektet.
 
+- - - -
 
 **Prosjektmetodikk**
 
+- - - -
 
 **Gruppedynamikk og kommunikasjon**
 Gruppen han i stor grad en god dynamikk og en god kommunikasjon. Etter vi opprettet hyppigere møter og med briefing, så har gruppen fått en ganske naturlig og oversiktlig måte å kommunisere på. Alle i gruppen jobber og samarbeidet bra sammen og hjelper hverandre med ansvarsområdet ved behov.
 
+- - - -
+
 **Retrospektiv**
 - Tidlig i prosjektet bestemte vi oss for at vi avtalte neste møtetid ved slutten av hvert møte, grunnet at alle hadde ganske varierende timaplanet. Dette viste seg å være litt knotete, da det var vanskelig å ha full kontroll på tider og oppmøte fra gang til gang. Vi satt derfor opp faste møtetider, som har resultert i at vi nå har bedre kontroll over møtetid.
 - I starten jobbet vi en del mens hele gruppen var i samme kanal, da vi alle var litt ny på prosjektet og ville få med oss mest mulig. Det kunne være noe forstyrrende, så vi strukturerte møtene slik at alle møtes, så briefer vi alle og planlegger videre arbeid, så går de som arbeider sammen i egen chat. Dermed har vi fått effektivisert måten vi jobber på.
+
+- - - -
 
 **Commit**
 Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt arbeid, men grunnet at noen arbeidsoppgaver gjør at det vil naturlig være en større del å committe kode enn andre. Enten ved at de jobber lenger med research, jobber med mer administrative arbeidsoppgaver osv. Arbeidsmengden er fordelt på en god og rettferdig måte og om et team-medlem er ferdig med sitt ansvarsområde, hjelper den personen en annen.
