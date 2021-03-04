@@ -74,9 +74,9 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 
 
 **Forbedringspunkter**
-1. 
-2.
-3. 
+1. Teamet skal bli bedre på å benytte og hyggig oppdatere Github, slik at den kan brukes som et godt verktøy for å orientere seg om gjeldende issues og status på arbeidsoppgaver mellom team-møtene.
+2. Teamet skal tidligere sette seg inn i innlevering, for å jobber mer målrettet.
+
 
 
 # Deloppgave 2
