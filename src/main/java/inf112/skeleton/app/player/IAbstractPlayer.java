@@ -23,6 +23,12 @@ public interface IAbstractPlayer {
     List<Card> getHand();
 
     /**
+     * Get the number of cards in a player's hand
+     * @return the number of cards
+     */
+    int getHandSize();
+
+    /**
      * Add an existing card to a player's hand.
      * @param card the card
      */
@@ -41,6 +47,9 @@ public interface IAbstractPlayer {
      */
     Robot getRobot();
 
+    /**
+     * Print a player's hand in an easily readable format.
+     */
     void printHand();
 
     /**

@@ -41,16 +41,14 @@ public interface IBoard extends ApplicationListener {
     void initializeFlags();
 
     /**
-     *
-     * @return
+     * @return true if the active player has moved, and false if not.
      */
     boolean activePlayerHasMoved();
 
     /**
      * Checks if a player has won by checking that the player has gone through
      * the flags in the appropriate order.
-     *
-     * @return true if won
+     * @return true if won, false if not.
      */
     boolean checkIfWon();
 }
