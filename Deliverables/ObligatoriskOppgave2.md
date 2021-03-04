@@ -18,19 +18,19 @@
 **Kundekontakt**
 - Skal fungere som teamets kontaktperson opp imot kunden. Dette gjelder presentasjon, dokumentering og markedsføring.
 
-### Prosjektmetodikk
+#### Prosjektmetodikk
 
 
-### Gruppedynamikk og kommunikasjon
+#### Gruppedynamikk og kommunikasjon
 
 
-### Retrospektiv
+#### Retrospektiv
 
 
-### Commit
+#### Commit
 
 
-### Referat
+#### Referat
 
 **15.03.21**
 -
@@ -41,7 +41,7 @@
 **22.03.21**
 -
 
-### Forbedringspunkter
+#### Forbedringspunkter
 1.
 2.
 3. 
@@ -49,31 +49,31 @@
 
 # Deloppgave 2
 
-### Brukerhistorie, akseptansekriterie og arbeidsoppgaver
+#### Brukerhistorie, akseptansekriterie og arbeidsoppgaver
 
 
-### Prioritering av arbeidsoppgaver
+#### Prioritering av arbeidsoppgaver
 
 
-### MVP
+#### MVP
 
 
-### Prograsjon
+#### Prograsjon
 
 
-### Bugs
+#### Bugs
 
 
 
 # Deloppgave 3
 
-### Dokumentering av prosjekt
+#### Dokumentering av prosjekt
 
 
-### Kjørbarhet
+#### Kjørbarhet
 
 
-### Klassediagram
+#### Klassediagram
 
 
-### 
+####
