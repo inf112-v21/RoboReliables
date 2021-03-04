@@ -49,6 +49,7 @@ Kundekontakt (Sebastian)
 - - - -
 
 **Commit**
+
 Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt arbeid, men grunnet at noen arbeidsoppgaver gjør at det vil naturlig være en større del å committe kode for en enn andre. Enten ved at noen jobber lenger med research, noen jobber med mer administrative arbeidsoppgaver osv. 
 - - - -
 
