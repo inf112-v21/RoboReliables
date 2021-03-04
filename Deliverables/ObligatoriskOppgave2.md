@@ -97,7 +97,7 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 - - - -
 
 **Forbedringspunkter**
-1. Teamet skal bli bedre på å benytte og hyggig oppdatere Github, slik at den kan brukes som et godt verktøy for å orientere seg om gjeldende issues og status på arbeidsoppgaver mellom team-møtene.
+1. Teamet skal bli bedre på å benytte og hyppig oppdatere Github, slik at den kan brukes som et godt verktøy for å orientere seg om gjeldende issues og status på arbeidsoppgaver mellom team-møtene.
 2. Teamet skal tidligere sette seg inn i innlevering, for å jobber mer målrettet.
 
 - - - -
@@ -203,7 +203,7 @@ Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere tea
 
 - - - -
 
-**Bugs**
+**Bugs i prosjektet**
 
 
 
@@ -212,8 +212,7 @@ Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere tea
 
 **Dokumentering av prosjekt**
 
-
-**Kjørbarhet**
+Prosjektet er bygget opp slik at en spiller får tildelt kort. Med disse kortene skal en spiller avgjøre bevegelsen til.....
 
 
 **Klassediagram**
