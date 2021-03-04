@@ -45,7 +45,7 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 
 - - - -
 
-**Referat
+**Referat**
 
 15.03.21
 - Teamet planlegger videre arbeid med prosjektet.
@@ -68,7 +68,7 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 
 
 01.03.21
--
+- 
 
 03.03.21
 - Teamet breifer hverandre på status for deres respektive område av prosjektet, samt gjenstående element før innlevering. 
@@ -93,6 +93,16 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 
 **Brukerhistorie, akseptansekriterie og arbeidsoppgaver**
 
+--
+*"Som spiller ønsker jeg å kunne spille med venner"*
+
+Akseptansekriterier:
+
+
+Arbeidsoppgaver:
+
+--
+
 - - - -
 
 **Prioritering av arbeidsoppgaver**
@@ -101,6 +111,7 @@ Framover vil grupper prioritere å få på plass nettverks-løsningen og optimal
 - - - -
 
 **MVP**
+
 
 - - - -
 
@@ -125,4 +136,3 @@ Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere tea
 **Klassediagram**
 
 
-**
