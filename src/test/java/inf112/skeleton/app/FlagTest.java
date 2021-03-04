@@ -22,10 +22,4 @@ public class FlagTest {
         new Lwjgl3Application(board, cfg);
     }
 
-    @Test
-    public void setPositionOfFlagTest() {
-        Location flagLocation = flag.getLocation();
-
-        assertEquals(new Location(0,0), flagLocation);
-    }
 }
