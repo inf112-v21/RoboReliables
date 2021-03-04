@@ -9,7 +9,7 @@
 
 **Arkitekt**
 
-**Kode**
+**Kodeansavrlig**
 
 
 **Kundekontakt**
@@ -31,7 +31,9 @@
 
 
 ### Forbedringspunkter
-
+1.
+2.
+3. 
 
 
 # Deloppgave 2
