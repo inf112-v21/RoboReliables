@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import inf112.skeleton.app.entity.Flag;
+import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.player.Player;
 
 import java.util.ArrayList;
@@ -96,6 +97,8 @@ public class Board extends InputAdapter implements IBoard {
         flagLayer = (TiledMapTileLayer) map.getLayers().get("flag");
         holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
 
+
+
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, MAP_SIZE_X, MAP_SIZE_Y);
@@ -112,10 +115,21 @@ public class Board extends InputAdapter implements IBoard {
         robotWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
 
+        setRobots();
+
         initializeFlags();
         activePlayerInitialRobotLocation = activePlayerRobotLocation;
 
         Gdx.input.setInputProcessor(this);
+    }
+
+    private void setRobots() {
+        for (Player player : players) {
+            Robot robot = player.getRobot();
+            int robotX = robot.getLocation().getX();
+            int robotY = robot.getLocation().getY();
+            robotLayer.setCell(robotX, robotY, robotCell);
+        }
     }
 
     /**
