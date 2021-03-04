@@ -93,15 +93,35 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 
 **Brukerhistorie, akseptansekriterie og arbeidsoppgaver**
 
---
-*"Som spiller ønsker jeg å kunne spille med venner"*
+
+*"Som spiller ønsker jeg at det er andre spillere med sånn at jeg kan spille mot de."*
+
+Akseptansekriterier:
+- Man kan spesifisere antall spillere.
+- Hver spiller vises som en brikke på brettet.
+- Den aktive spiller byttes på mellom hver runde.
+- Den aktive spiller får kontroll over bevegelse og å endre sin runde.
+
+Arbeidsoppgaver:
+- Gi mulighet til å spesifisere antall spillere i begynnelsen av spillet.
+- Implementere runder.
+
+*" "*
 
 Akseptansekriterier:
 
 
 Arbeidsoppgaver:
 
---
+
+
+*" "*
+
+Akseptansekriterier:
+
+
+Arbeidsoppgaver:
+
 
 - - - -
 
