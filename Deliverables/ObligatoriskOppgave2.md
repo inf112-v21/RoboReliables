@@ -2,7 +2,8 @@
 
 **Rollene i teamet**
 - Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som er reelle å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave. 
-- Det eneste vi har endret på, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring.
+- Det eneste vi har endret på mtp rollestruktur, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring. Bakgrunnen for dette er at vi så at dette ville bli nødvendig etter hvert som prosjektet utviklet seg.
+- Arbeidsmengden er fordelt på en god og rettferdig måte.
 
 - - - -
 
@@ -10,12 +11,15 @@
 
 Leder (Sigurd)
 - Leder sørger for at alle medlemmene i teamet er oppdatert på prosjektets status, sørger for sette prioriteringer for arbeidsoppgaver og deltar ellers aktivt på utvikling av prosjekt.
+- Lede møtene og disksjoner.
+- Sørge for at team-medlemmer som ikke kan møte til møter, blir oppdatert på informasjonen.
 
 Nettverksansvarlig (Sebastian)
 - Nettverksansvarlig skal sette opp client-server løsning for prosjektet, samt sette opp nødvendige funksjoner for at nettverket skal fungere best mulig.
 
 Arkitekter (Julian & Heming)
 - Akritektene er ansvarlig for å strukturere prosjektet og sørge for en gjennomgående sammenheng og "rød tråd" i prosjektet.
+- Ansvarlig for å merge branch til master, slik at det ikke oppstår feil eller problemer.
 
 Kodeansavrlig (Anders)
 - Kodeansvarlig skal sørge for god, strukturert og effektiv kode. Dette innebærer å reformatere kode, endre ineffektiv kode og sørge for at metodene samstemmer bra.
@@ -26,11 +30,15 @@ Kundekontakt (Sebastian)
 - - - -
 
 **Prosjektmetodikk**
+- I all hovedsak har teamet gjort sammenstemte og gjennomtenke valg. Dette har resultert i at teamet er enige om de valgene som er tatt og at det også er diskutert og drøftet op forhånd av iverksettelse. 
+- De momentene som teamet må bli bedre på er å oppdatere Githib prosjektet oftere med oppgaver som er under arbeid, ferdig osv. Samt at vi må tenke litt mer innleverings-rettet enn å ville lage alt mulig kult. Blir vi hakket bedre på disse tingene, så skal det flyte veldig bra videre.
 
 - - - -
 
 **Gruppedynamikk og kommunikasjon**
-Gruppen han i stor grad en god dynamikk og en god kommunikasjon. Etter vi opprettet hyppigere møter og med briefing, så har gruppen fått en ganske naturlig og oversiktlig måte å kommunisere på. Alle i gruppen jobber og samarbeidet bra sammen og hjelper hverandre med ansvarsområdet ved behov.
+- Gruppen han i stor grad en god dynamikk og en god kommunikasjon. Etter vi opprettet hyppigere møter med briefing, så har gruppen fått en ganske naturlig og oversiktlig måte å kommunisere på. 
+- Alle i gruppen jobber og samarbeider bra sammen, og hjelper hverandre med deres ansvarsområdet ved behov. 
+- Alle team-medlemmene utviser respekt for hverandre sine meninger og lytter godt til andre sine ideer. 
 
 - - - -
 
@@ -41,34 +49,38 @@ Gruppen han i stor grad en god dynamikk og en god kommunikasjon. Etter vi oppret
 - - - -
 
 **Commit**
-Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt arbeid, men grunnet at noen arbeidsoppgaver gjør at det vil naturlig være en større del å committe kode enn andre. Enten ved at de jobber lenger med research, jobber med mer administrative arbeidsoppgaver osv. Arbeidsmengden er fordelt på en god og rettferdig måte og om et team-medlem er ferdig med sitt ansvarsområde, hjelper den personen en annen.
-
+Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt arbeid, men grunnet at noen arbeidsoppgaver gjør at det vil naturlig være en større del å committe kode for en enn andre. Enten ved at noen jobber lenger med research, noen jobber med mer administrative arbeidsoppgaver osv. 
 - - - -
 
 **Referat**
 
-15.03.21
+15.02.21
 - Teamet planlegger videre arbeid med prosjektet.
 - Det gjøres små endringer i team-strukturen og team-medlemmens roller i teamet.
 - Det blir satt opp arbeidsoppgaver og fordelt på teamets medlemmer.
 - Det avtales nytt møte for teamet.
 
+17.02.21
+- Raskt breif på status på arbeid og gjennomgang av kriterier vi skal jobbe etter.
+- Reviderer fordeling av oppgaver.
+
+19.02.21
+- Teamet briefer hverandre på status i ansavrsområde og på oppgaver.
+- Det blir satt opp nye mål og arbeidsoppgaver for kommende uke.
+
 22.02.21
 - Teamet briefer hverandre på status rundt arbeidsoppgavene de holder på med, samt hva som gjenstår før de er ferdig med gjeldende oppgave.
-- Teamet ønsker å endre fra å avtale møtedato hvert møte til å sette faste tider for møte ila uken. Det enes om et system der vi har hyppige møter og med kortere felles brief.
-- 
+- Teamet ønsker å endre fra å avtale møtedato etter hvert møte til å sette faste tider for møte ila uken. Det enes om et system der vi heller har hyppige møter og med kortere felles brief, for å gå til respektive oppgaver å jobbe (enten aleine eller i makkerpar).
 
 24.02.21
 - Teamet går igjennom ny obligatorisk oppgave og kriterende som skal jobbes og etterstebes.
-- 
 
 26.02.21
 - Teamet briefer hverandre på status i arbeidsprosessen og oppdaterer prosjektet på Github slik at oppgave samstemmer med status.
 - Det blir satt opp arbeidsplan for kommende uke og fokusområdet.
 
-
 01.03.21
-- 
+- Teamet har en rask gjennomgang av ukens mål og arbeidsfordeling, så fortsetter teamets makkerpar arbeidet fra forrige uke.
 
 03.03.21
 - Teamet breifer hverandre på status for deres respektive område av prosjektet, samt gjenstående element før innlevering. 
@@ -127,32 +139,47 @@ Arbeidsoppgaver:
 ```
 
 ```
-" "
+"Som spiller ønsker jeg å kunne flytte brikken min til flagget for å kunne vinne spillet."
 
 Akseptansekriterier:
 
+- Brikken og flagget kan okkupere samme felt på spillebrettet.
+- Spilleren kan flytte på brikken sin.
+- Det må være et flagg på brettet.
+- Spiller får vite at de har vunnet dersom de flytter brikken sin gjennom alle flaggene på brettet i riktig rekkefølge.
 
 Arbeidsoppgaver:
 
+- Vise flagg.
+- Implementere kode for «win-condition».
+- Implementere funksjonalitet for å sjekke posisjon til spiller.
+- Feilhåndtering av «win-condition».
+
 ```
 
 ```
-" "
+"Som utvikler ønsker jeg å kunne flytte posisjonen til en brikke for å kunne teste «victory-condition»."
 
 Akseptansekriterier:
 
+- Robot beveger seg i relasjon til input fra tastatur.
 
 Arbeidsoppgaver:
 
+- Implementere input funksjon fra spiller.
+
 ```
 
 ```
-" "
+"Som utvikler ønsker jeg et større brett for å kunne teste spillet i en større skala."
 
 Akseptansekriterier:
 
+- Spiller kan bevege seg over flere området
 
 Arbeidsoppgaver:
+
+- Legge til flere området på brettet
 
 ```
 - - - -
@@ -162,7 +189,7 @@ Framover vil grupper prioritere å få på plass nettverks-løsningen og optimal
 
 - - - -
 
-**MVP**
+**Endringer i MVP**
 
 
 - - - -
