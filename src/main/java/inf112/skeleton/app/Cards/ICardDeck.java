@@ -28,6 +28,12 @@ public interface ICardDeck {
     void addToTopOfDeck(Card card);
 
     /**
+     * Add a deck of cards to the top of another deck.
+     * @param cardDeck the card deck to add
+     */
+    void addToTopOfDeck(CardDeck cardDeck);
+
+    /**
      * Deal a card from the deck to a player.
      * @param player the player to whom the card will be dealt
      */
