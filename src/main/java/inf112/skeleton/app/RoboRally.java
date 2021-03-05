@@ -2,12 +2,9 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import inf112.skeleton.app.Cards.ProgramCardDeck;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
-import inf112.skeleton.app.player.TestPlayer;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 

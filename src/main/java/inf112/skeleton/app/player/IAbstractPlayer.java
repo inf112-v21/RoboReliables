@@ -1,7 +1,7 @@
 package inf112.skeleton.app.player;
 
-import inf112.skeleton.app.Cards.Card;
-import inf112.skeleton.app.Cards.CardDeck;
+import inf112.skeleton.app.cards.Card;
+import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.entity.Robot;
 
 import java.util.List;
@@ -54,7 +54,7 @@ public interface IAbstractPlayer {
 
     /**
      * View program cards that are dealt to players hand, then pick one card at a time. (in the terminal).
-     * Cards are placed by pick-order in the robot-register.
+     * cards are placed by pick-order in the robot-register.
      * Loops until all picks have been executed.
      *
      * @param cardPicks: (int) number of cards player must pick from hand (dealt cards).

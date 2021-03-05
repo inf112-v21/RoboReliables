@@ -1,8 +1,8 @@
 package inf112.skeleton.app.entity;
 
-import inf112.skeleton.app.Cards.Card;
-import inf112.skeleton.app.Cards.CardDeck;
-import inf112.skeleton.app.Cards.ProgramCardDeck;
+import inf112.skeleton.app.cards.Card;
+import inf112.skeleton.app.cards.CardDeck;
+import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.Direction;
 import inf112.skeleton.app.Location;
 
@@ -129,10 +129,6 @@ public class Robot extends Entity {
 
     public Direction getDirection() {
         return direction;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
     }
 
 

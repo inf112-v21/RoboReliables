@@ -1,4 +1,4 @@
-package inf112.skeleton.app.Cards;
+package inf112.skeleton.app.cards;
 
 public enum CardValue {
     F1, // forwards  1

@@ -1,4 +1,4 @@
-package inf112.skeleton.app.Cards;
+package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.player.AbstractPlayer;
 

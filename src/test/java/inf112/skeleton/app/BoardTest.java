@@ -2,7 +2,7 @@ package inf112.skeleton.app;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import inf112.skeleton.app.Cards.ProgramCardDeck;
+import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
@@ -24,7 +24,7 @@ public class BoardTest {
     private Queue<AbstractPlayer> players = new LinkedList<>();
 
     @BeforeEach
-    private void createBoard() {
+    public void createBoard() {
         testPlayer = new TestPlayer(new Location(0,0));
         players.add(testPlayer);
         board = new Board(players);

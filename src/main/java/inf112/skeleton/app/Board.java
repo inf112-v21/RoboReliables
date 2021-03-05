@@ -15,10 +15,9 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import inf112.skeleton.app.Cards.ProgramCardDeck;
+import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.player.AbstractPlayer;
-import inf112.skeleton.app.player.Player;
 import inf112.skeleton.app.player.TestPlayer;
 
 import java.util.ArrayList;
@@ -57,7 +56,7 @@ public class Board extends InputAdapter implements IBoard {
     protected boolean turnIsOver = true;
     private boolean hasStartedMoving = false;
 
-    // Cards
+    // cards
     protected ProgramCardDeck programCardDeck;
 
 
@@ -80,6 +79,10 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void setActivePlayerRobotLocation(Location newLocation) {
+        int x = activePlayer.getRobot().getLocation().getX();
+        int y = activePlayer.getRobot().getLocation().getY();
+        robotLayer.setCell(x, y, null);
+
         activePlayer.getRobot().setLocation(newLocation);
     }
 
@@ -123,7 +126,7 @@ public class Board extends InputAdapter implements IBoard {
         assert activePlayer != null;
         activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
 
-        // Cards
+        // cards
         programCardDeck = new ProgramCardDeck();
 
         Gdx.input.setInputProcessor(this);
@@ -218,6 +221,7 @@ public class Board extends InputAdapter implements IBoard {
             }
         }
     }
+
 
     @Override
     public boolean activePlayerHasMoved() {
