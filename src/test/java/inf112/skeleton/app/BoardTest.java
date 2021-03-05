@@ -106,7 +106,7 @@ public class BoardTest {
     }
 
     /**
-     *
+     * Makes sure that the active player actually switches.
      */
     @Test
     public void switchActivePlayerTest() {
@@ -146,13 +146,7 @@ public class BoardTest {
     @Test
     public void activePlayerHasMovedTest() {
         assertFalse(board.activePlayerHasMoved()); // Should be false by default
-        //System.out.println("Active player location: " + board.getActivePlayer().getRobot().getLocation());
         board.setActivePlayerRobotLocation(new Location(1,1));
-        //System.out.println("Active player moved.");
-        //System.out.println("Active player location: " + board.getActivePlayer().getRobot().getLocation());
-        //System.out.println("ActivePlayerRobotLocation.getX() = " + board.activePlayerRobotLocation.getX());
-        //System.out.println("ActivePlayerRobotLocation.getX() = " + board.activePlayerRobotLocation.getY());
-
         assertTrue(board.activePlayerHasMoved());
     }
 
