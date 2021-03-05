@@ -2,21 +2,47 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import inf112.skeleton.app.Cards.ProgramCardDeck;
+import inf112.skeleton.app.player.AbstractPlayer;
+import inf112.skeleton.app.player.Player;
+import inf112.skeleton.app.player.TestPlayer;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
+/**
+ * Sets up gdx to create a new game of RoboRally.
+ */
 public class RoboRally {
+    private final static int nrOfPlayers = 1; // Pre-determined number of players
+    private final Queue<AbstractPlayer> players = new LinkedList<>();
 
     public RoboRally() {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         cfg.setTitle("RoboRally");
-        cfg.setWindowedMode(500, 500);
+        cfg.setWindowedMode(1000, 1000);
+        cfg.disableAudio(true);
 
-        Board board = new Board();
-        AbstractPlayer testPlayer = new TestPlayer(0, 0, board);
+        addPlayers(nrOfPlayers);
 
-        int posX = testPlayer.getRobot().getPosX();
-        int posY = testPlayer.getRobot().getPosY();
 
-        board.setRobotPosition(posX, posY);
+        Board board = new Board(players);
+
+        // Initializes game window
         new Lwjgl3Application(board, cfg);
     }
+
+    /**
+     *
+     * @param nrOfPlayers
+     */
+    public void addPlayers(int nrOfPlayers) {
+        for (int i = 0; i < nrOfPlayers; i++) {
+            players.add(new Player(new Location(5,5)));
+        }
+    }
+
+
 }
+
