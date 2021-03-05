@@ -18,13 +18,6 @@ public class Robot extends Entity {
         direction = Direction.UP;
     }
 
-    public void executeRegister() {
-        for (int i = 0; i < register.getSize(); i++) {
-            move(register.getCard(i));
-        }
-        register.clearDeck();
-    }
-
     public void executeNext() {
         System.out.println("Moved once.");
         move(register.getCard(0));
