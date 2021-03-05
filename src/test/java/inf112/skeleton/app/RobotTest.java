@@ -8,13 +8,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests for the Robot class.
+ */
 public class RobotTest {
-    private Board board;
     private Robot robot;
 
     @BeforeEach
     public void makeRobot() {
-        board = new Board();
         robot = new Robot(new Location(0,0));
     }
 
