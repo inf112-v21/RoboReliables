@@ -251,8 +251,11 @@ public class Board extends InputAdapter implements IBoard {
      */
     @Override
     public boolean keyUp(int intCode) {
-        int x = activePlayerRobotLocation.getX();
-        int y = activePlayerRobotLocation.getY();
+        if (!(activePlayer instanceof TestPlayer))
+            return false;
+
+        int x = activePlayer.getRobot().getLocation().getX();
+        int y = activePlayer.getRobot().getLocation().getY();
 
         if (intCode == Input.Keys.UP && !(y == MAP_SIZE_Y - 1)) {
             robotLayer.setCell(x, y, null);
