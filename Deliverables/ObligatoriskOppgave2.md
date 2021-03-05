@@ -2,7 +2,7 @@
 
 **Rollene i teamet**
 - Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som er reelle å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave. 
-- Det eneste vi har endret på mtp rollestruktur, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring. Bakgrunnen for dette er at vi så at dette ville bli nødvendig etter hvert som prosjektet utviklet seg.
+- Det vi har endret på mtp rollestruktur, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring. Samt at vi har endret litt på hvilke personer som har hvilke roller.
 - Arbeidsmengden er fordelt på en god og rettferdig måte.
 
 - - - -
@@ -51,6 +51,8 @@ Kundekontakt (Sebastian)
 **Commit-fordeling**
 
 Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt arbeid, men grunnet at noen arbeidsoppgaver gjør at det vil naturlig være en større del å committe kode for en enn andre. Enten ved at noen jobber lenger med research, noen jobber med mer administrative arbeidsoppgaver osv. 
+
+Vi bruker også "Code with me" som gjør at personen som er vert vil være den som committer.
 - - - -
 
 **Referat**
