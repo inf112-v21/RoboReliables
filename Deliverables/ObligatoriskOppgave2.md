@@ -3,7 +3,7 @@
 **Rollene i teamet**
 - Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som er reelle å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave. 
 - Det vi har endret på mtp rollestruktur, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring. Samt at vi har endret litt på hva de forskjellige rollene gjør (små endringer).
-- Arbeidsmengden er fordelt på en god og rettferdig måte.
+- Arbeidsmengden er fordelt på en god og rettferdig måte, og team-medlemme føler de fått oppgaver som de er tilfreds med.
 
 - - - -
 
