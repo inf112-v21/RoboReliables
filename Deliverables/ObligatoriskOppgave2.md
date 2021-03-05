@@ -209,7 +209,10 @@ Det er ikke gjort noen endringer i bestillingen fra kunde. Vi har prioritert å 
 
 **Prograsjon**
 
-Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere teamet, slik at vi arbeidet mer målrettet og strukturert, samt å få på plass en del kode for danne grunn-funksjoner i prosjektet. Dette er ting som
+Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere teamet, slik at vi arbeidet mer målrettet og strukturert, samt å få på plass en del kode for danne grunn-funksjoner i prosjektet. Dette er ting som:
+- Bevegelse på brettet
+- Kort på hånden
+- 
 
 - - - -
 
