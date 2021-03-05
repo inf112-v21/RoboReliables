@@ -131,5 +131,9 @@ public class Robot extends Entity {
         return direction;
     }
 
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
 
 }
