@@ -16,11 +16,9 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import inf112.skeleton.app.cards.ProgramCardDeck;
-import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.TestPlayer;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -42,10 +40,6 @@ public class Board extends InputAdapter implements IBoard {
     public final int MAP_SIZE_Y = 12;
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
-
-    // Variables for the flags
-    protected final int nrOfFlags = 1;
-    protected final ArrayList<Flag> flags = new ArrayList<>(nrOfFlags);
 
     // Variables for the current active player
     protected AbstractPlayer activePlayer;
@@ -119,8 +113,6 @@ public class Board extends InputAdapter implements IBoard {
         robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
 
-        initializeFlags();
-
         // Active player
         activePlayer = players.peek();
         assert activePlayer != null;
@@ -159,13 +151,6 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public void setActivePlayer(AbstractPlayer newActivePlayer) {
         activePlayer = newActivePlayer;
-    }
-
-
-    @Override
-    public void initializeFlags() {
-        for (int i = 0; i < nrOfFlags; i++)
-            flags.add(new Flag(new Location(0, 0)));
     }
 
     @Override
@@ -294,51 +279,3 @@ public class Board extends InputAdapter implements IBoard {
         return false;
     }
 }
-
-/*
-    public void layerReader(TiledMapTileLayer layer) {
-        for (int x = 0; x < layer.getWidth(); x++) {
-            for (int y = 0; y < layer.getHeight(); y++) {
-                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
-                if (cell != null) {
-                    Location location = new Location(x, y);
-                    assignEntities(location, cell);
-                }
-            }
-        }
-    }
-
-*/
-
-/*    public void checkCell(int x, int y) {
-        for (int i = 0; i < map.getLayers().size(); i++) {
-            TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(i);
-            layer.getCell(x, y);
-        }
-    }*/
-/*
-
-    public void assignEntities(Location location, TiledMapTileLayer.Cell cell) {
-        Entity entity;
-        switch (cell.getTile().getId()) {
-            case 6:
-                entity = new Hole(location);
-                break;
-            case 55:
-                entity = new Flag(location);
-                break;
-            default:
-                entity = null;
-        }
-        if (entity != null) {
-            addEntityToBoard(location, entity);
-        }
-    }
-
-    public void addEntityToBoard(Location location, Entity entity) {
-        ArrayList<Entity> entityList = entities.getOrDefault(location, new ArrayList<>());
-        entityList.add(entity);
-    }
-}
-*/
-
