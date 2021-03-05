@@ -18,6 +18,9 @@ public class Robot extends Entity {
         direction = Direction.UP;
     }
 
+    /**
+     * Executes the next associated move in the register depending on the card.
+     */
     public void executeNext() {
         System.out.println("Moved once.");
         move(register.getCard(0));
@@ -30,6 +33,10 @@ public class Robot extends Entity {
         }
     }
 
+    /**
+     * Moves the robot according to the cardvalue of the card
+     * @param card
+     */
     public void move(Card card) {
         switch (card.getCardValue()) {
             case F1:
@@ -58,6 +65,10 @@ public class Robot extends Entity {
         }
     }
 
+    /**
+     * Moves the robot forward steps times. Uses the direction of the robot to know which way is forward
+     * @param steps
+     */
     public void moveForward(int steps) {
         for (int i = 0; i < steps; i++) {
             int x = this.getLocation().getX();
@@ -80,6 +91,10 @@ public class Robot extends Entity {
         }
     }
 
+    /**
+     * Moves the robot backward steps times. Uses the direction of the robot to know which way is forward
+     * @param steps
+     */
     public void moveBackward(int steps) {
         for (int i = 0; i < steps; i++) {
             int x = this.getLocation().getX();
