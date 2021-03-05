@@ -65,16 +65,16 @@ public class Robot extends Entity {
 
             switch (direction) {
                 case UP:
-                    this.setLocation(new Location(x + 1, y));
+                    this.setLocation(new Location(x, y + 1));
                     break;
                 case DOWN:
-                    this.setLocation(new Location(x - 1, y));
+                    this.setLocation(new Location(x, y -1));
                     break;
                 case LEFT:
-                    this.setLocation(new Location(x, y - 1));
+                    this.setLocation(new Location(x - 1, y));
                     break;
                 case RIGHT:
-                    this.setLocation(new Location(x, y + 1));
+                    this.setLocation(new Location(x + 1, y));
                     break;
             }
         }
@@ -87,16 +87,16 @@ public class Robot extends Entity {
 
             switch (direction) {
                 case UP:
-                    this.setLocation(new Location(x - 1, y));
+                    this.setLocation(new Location(x, y - 1));
                     break;
                 case DOWN:
-                    this.setLocation(new Location(x + 1, y));
-                    break;
-                case LEFT:
                     this.setLocation(new Location(x, y + 1));
                     break;
+                case LEFT:
+                    this.setLocation(new Location(x + 1, y));
+                    break;
                 case RIGHT:
-                    this.setLocation(new Location(x, y - 1));
+                    this.setLocation(new Location(x - 1, y));
                     break;
             }
         }
