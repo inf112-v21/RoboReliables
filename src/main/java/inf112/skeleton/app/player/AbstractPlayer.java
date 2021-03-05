@@ -22,7 +22,6 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
 
     public AbstractPlayer(Location location) {
         robot = new Robot(location);
-        robot.setLocation(location);
     }
 
     @Override
@@ -82,7 +81,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
                     }
                 }
                 else {
-                    System.out.println("Invalid. Try again. " + input.nextLine());
+                    //System.out.println("Invalid. Try again. " + input.nextLine());
                     valid = false;
                 }
             } while (!valid);

@@ -5,7 +5,10 @@ package inf112.skeleton.app;
  * direction of a robot either left or right.
  */
 public enum Direction {
-    UP, DOWN, LEFT, RIGHT;
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT;
 
     /**
      * Rotates the robot one step to the left.

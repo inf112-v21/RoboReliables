@@ -37,10 +37,17 @@ public interface IBoard extends ApplicationListener {
 
     /**
      *
+     * @param newActivePlayer
+     */
+    void setActivePlayer(AbstractPlayer newActivePlayer);
+
+    /**
+     *
      */
     void initializeFlags();
 
     /**
+     * Checks whether or not the active player is done with their turn.
      * @return true if the active player has moved, and false if not.
      */
     boolean activePlayerHasMoved();
@@ -51,4 +58,11 @@ public interface IBoard extends ApplicationListener {
      * @return true if won, false if not.
      */
     boolean checkIfWon();
+
+    /**
+     * Chooses which sprite of a given player to render based on the status of that player.
+     * A player can either be alive, dead or has won. The proper sprite is selected based on
+     * these criteria.
+     */
+    void renderPlayerTextures();
 }

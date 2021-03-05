@@ -24,8 +24,6 @@ public abstract class Entity implements IEntity {
     public void setLocation(Location newLoc) {
         location = newLoc;
     }
-    @Override
-    public void updatePosition(Location loc, TiledMapTileLayer layer) {
-        setLocation(loc);
-    }
+
+
 }

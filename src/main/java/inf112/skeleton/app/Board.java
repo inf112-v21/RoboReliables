@@ -15,9 +15,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import inf112.skeleton.app.Cards.ProgramCardDeck;
 import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
+import inf112.skeleton.app.player.TestPlayer;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -43,20 +45,21 @@ public class Board extends InputAdapter implements IBoard {
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
 
     // Variables for the flags
-    private final int nrOfFlags = 1;
-    private final ArrayList<Flag> flags = new ArrayList<>(nrOfFlags);
+    protected final int nrOfFlags = 1;
+    protected final ArrayList<Flag> flags = new ArrayList<>(nrOfFlags);
 
     // Variables for the current active player
-    private AbstractPlayer activePlayer = new Player();
-    protected Location activePlayerRobotLocation = activePlayer.getRobot().getLocation();
+    protected AbstractPlayer activePlayer;
     protected Location activePlayerInitialRobotLocation;
 
     protected Queue<AbstractPlayer> players = new LinkedList<>();
 
-    private boolean turnIsOver = false;
+    protected boolean turnIsOver = true;
 
-//  HashMap of all entities and their locations. Parsed from layers on startup.
-//  private HashMap<Location, ArrayList<Entity>> entities = new HashMap<>();
+    // Cards
+    protected ProgramCardDeck programCardDeck;
+
+
 
     public Board(Queue<AbstractPlayer> players) {
         this.players = players;
@@ -76,7 +79,7 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void setActivePlayerRobotLocation(Location newLocation) {
-        activePlayerRobotLocation = newLocation;
+        activePlayer.getRobot().setLocation(newLocation);
     }
 
     /**
@@ -113,20 +116,27 @@ public class Board extends InputAdapter implements IBoard {
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
 
         initializeFlags();
-        activePlayerInitialRobotLocation = activePlayerRobotLocation;
+
+        // Active player
+        activePlayer = players.peek();
+        assert activePlayer != null;
+        activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
+
+        // Cards
+        programCardDeck = new ProgramCardDeck();
 
         Gdx.input.setInputProcessor(this);
     }
 
-    /**
-     *
-     */
-
     @Override
     public void startNewRound() {
-        turnIsOver = false;
         switchActivePlayer();
-        activePlayerInitialRobotLocation = activePlayerRobotLocation;
+        activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
+
+        programCardDeck.dealCard(getActivePlayer(), 9);
+        getActivePlayer().getRobot().updateRegister(getActivePlayer().pickCards(5));
+        System.out.println("Picked cards:");
+        getActivePlayer().getRobot().getRegister().printDeck();
     }
 
     @Override
@@ -136,12 +146,17 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void switchActivePlayer() {
-        System.out.println("Switching active player. Next player up: ");
-        AbstractPlayer previousActivePlayer = players.poll();
+        AbstractPlayer previousActivePlayer = getActivePlayer();
+        players.remove(activePlayer);
         players.add(previousActivePlayer);
-        activePlayer = players.peek();
-        System.out.println(activePlayer);
+        setActivePlayer(players.peek());
     }
+
+    @Override
+    public void setActivePlayer(AbstractPlayer newActivePlayer) {
+        activePlayer = newActivePlayer;
+    }
+
 
     @Override
     public void initializeFlags() {
@@ -159,39 +174,50 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
-        int x = activePlayerRobotLocation.getX();
-        int y = activePlayerRobotLocation.getY();
-
-        if ((x == 11) && (y == 11)) {
-            robotLayer.setCell(x, y, robotWonCell);
-        } else if ((x == 0) && (y == 11)) {
-            robotLayer.setCell(x, y, robotDiedCell);
-        } else {
-            robotLayer.setCell(x, y, robotCell);
-        }
+        renderPlayerTextures();
 
         if (checkIfWon()) {
             System.out.println("Player won!");
             System.out.close();
         }
 
-        turnIsOver = activePlayerHasMoved();
-        if (turnIsOver) {
-            System.out.println("Turn is over");
+        //System.out.println(turnIsOver);
+
+        if (turnIsOver)
             startNewRound();
+
+        turnIsOver = activePlayerHasMoved();
+    }
+
+    @Override
+    public void renderPlayerTextures() {
+        for (AbstractPlayer player : players) {
+            int x = player.getRobot().getLocation().getX();
+            int y = player.getRobot().getLocation().getY();
+
+            if (checkIfWon()) {
+                robotLayer.setCell(x, y, robotWonCell);
+            } else if ((x == 0) && (y == 11)) {
+                robotLayer.setCell(x, y, robotDiedCell);
+            } else {
+                robotLayer.setCell(x, y, robotCell);
+            }
         }
     }
 
     @Override
     public boolean activePlayerHasMoved() {
-        return activePlayerRobotLocation.getX() != activePlayerInitialRobotLocation.getX() ||
-               activePlayerRobotLocation.getY() != activePlayerInitialRobotLocation.getY();
+        if (!(activePlayer instanceof TestPlayer))
+            return false;
+
+        return activePlayer.getRobot().getRegister().getSize() == 0;
     }
 
     @Override
     public boolean checkIfWon() {
-        return (activePlayerRobotLocation.getX() == 11) &&
-               (activePlayerRobotLocation.getY() == 11);
+        // TODO: check for the location of the flag and the order of movement from flag to flag instead of static position.
+        return (activePlayer.getRobot().getLocation().getX() == 11) &&
+               (activePlayer.getRobot().getLocation().getY() == 11);
     }
 
     @Override
