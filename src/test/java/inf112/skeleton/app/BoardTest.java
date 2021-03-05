@@ -140,15 +140,6 @@ public class BoardTest {
         assertEquals(board.activePlayer, player2);
     }
 
-    @Test
-    public void initializeFlagsTest() {
-        // flags should be empty to begin with
-        assertEquals(0, board.flags.size());
-
-        board.initializeFlags();
-        assertEquals(board.nrOfFlags, board.flags.size());
-    }
-
     /**
      * When the active player is done with their turn, the function should be true.
      */
