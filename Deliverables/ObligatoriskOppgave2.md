@@ -66,10 +66,12 @@ Vi bruker også "Code with me" som gjør at personen som er vert vil være den s
 17.02.21 - 13:00
 - Raskt breif på status på arbeid og gjennomgang av kriterier vi skal jobbe etter.
 - Reviderer fordeling av oppgaver.
+- Det avtales nytt møte for teamet.
 
 19.02.21 - 14:30
 - Teamet briefer hverandre på status i ansavrsområde og på oppgaver.
 - Det blir satt opp nye mål og arbeidsoppgaver for kommende uke.
+- Det avtales nytt møte for teamet.
 
 22.02.21 - 14:30
 - Teamet briefer hverandre på status rundt arbeidsoppgavene de holder på med, samt hva som gjenstår før de er ferdig med gjeldende oppgave.
