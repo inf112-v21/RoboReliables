@@ -10,7 +10,7 @@ import inf112.skeleton.app.Location;
  * Maps the robots position on the board
  */
 public class Robot extends Entity {
-    private final Direction direction;
+    private Direction direction;
     private CardDeck register = new ProgramCardDeck();
 
     public Robot(Location location) {
@@ -129,6 +129,10 @@ public class Robot extends Entity {
 
     public Direction getDirection() {
         return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
 
