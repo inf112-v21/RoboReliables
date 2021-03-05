@@ -135,7 +135,9 @@ Det ble committet ofte fra skrivingen av ObligatoriskOppgave2, dette er da nette
 
 **Prioritering av arbeidsoppgaver**
 
-Framover vil grupper prioritere å få på plass nettverks-løsningen og optimalisere denne, samt finne en god løsning på kortene slik at de fungerer optimalt. Etter dette vil det også bli prioritert å få på plass et funksjonelt brett som blir mulig å teste spillet i en større skala på.
+Framover vil grupper prioritere å få på plass nettverks-løsningen og optimalisere denne, samt finne en god løsning på kortene slik at de fungerer optimalt. Etter dette vil det også bli prioritert å få på plass et funksjonelt brett som blir mulig å teste spillet i en større skala på. 
+
+Vi skal få ProgramCard til å tolke kortene, men forløpig ligger det i Robot-classen. Dette vil flytte over til ProgramCard-classen, slik at den er på riktig sted.
 
 - - - -
 
