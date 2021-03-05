@@ -57,50 +57,52 @@ Vi bruker også "Code with me" som gjør at personen som er vert vil være den s
 
 **Referat**
 
-15.02.21
+15.02.21 - 16:30
 - Teamet planlegger videre arbeid med prosjektet.
 - Det gjøres små endringer i team-strukturen og team-medlemmens roller i teamet.
 - Det blir satt opp arbeidsoppgaver og fordelt på teamets medlemmer.
 - Det avtales nytt møte for teamet.
 
-17.02.21
+17.02.21 - 13:00
 - Raskt breif på status på arbeid og gjennomgang av kriterier vi skal jobbe etter.
 - Reviderer fordeling av oppgaver.
 
-19.02.21
+19.02.21 - 14:30
 - Teamet briefer hverandre på status i ansavrsområde og på oppgaver.
 - Det blir satt opp nye mål og arbeidsoppgaver for kommende uke.
 
-22.02.21
+22.02.21 - 14:30
 - Teamet briefer hverandre på status rundt arbeidsoppgavene de holder på med, samt hva som gjenstår før de er ferdig med gjeldende oppgave.
 - Teamet ønsker å endre fra å avtale møtedato etter hvert møte til å sette faste tider for møte ila uken. Det enes om et system der vi heller har hyppige møter og med kortere felles brief, for å gå til respektive oppgaver å jobbe (enten aleine eller i makkerpar).
 
-24.02.21
+24.02.21 - 12:00
 - Teamet går igjennom ny obligatorisk oppgave og kriterende som skal jobbes og etterstebes.
 - Det vurderes arbeidsoppgaver ut i fra innlevering og settes tidsfrister for ferdigstilling.
 
-26.02.21
+26.02.21 - 14:30
 - Teamet briefer hverandre på status i arbeidsprosessen og oppdaterer prosjektet på Github slik at oppgave samstemmer med status.
 - Det blir satt opp arbeidsplan for kommende uke og fokusområdet.
 
-01.03.21
+01.03.21 - 14:30
 - Teamet har en rask gjennomgang av ukens mål og arbeidsfordeling.
 - Medlemmene går igjennom oppgavene for å få innspill fra de andre vedrørende problemer på deres ansvarsområde.
 - Fortsetter å arbeide i teamets makkerpar arbeidet fra forrige uke.
 
-03.03.21
+03.03.21 - 12:00
 - Teamet breifer hverandre på status for deres respektive område av prosjektet, samt gjenstående element før innlevering. 
 - Teamet setter opp ressurskart.
 - Klassediagrammet blir gått igjennom for revidering.
 - Det blir revidert arbeidsoppgaver fram mot innlevering.
 
-04.03.21
+04.03.21 - 14:30
 - Teamet briefer hverandre på status mtp på innlevering av obligatorisk oppgave. 
 - Det blir gjort små endring i arbeidsoppgaver og fokus-område fram mot innlevering.
 
-05.03.21
+05.03.21 - 12:00
 - Teamet går igjennom innlevering og dokumenter for en siste sjekk om at alt er som det skal. 
 - Teamet prøvekjører programmet for å se at det fungerer som det skal.
+- Det gjennomføres et par siste tweeks og ferdigstilles for levering.
+- Oppgave er ferdigstilt og teamet leverer.
 
 - - - -
 
@@ -195,13 +197,13 @@ Arbeidsoppgaver:
 
 **Prioritering av arbeidsoppgaver**
 
-Framover vil grupper prioritere å få på plass nettverks-løsningen og optimalisere denne, samt finne en god løsning på kortene. Etter dette vil det også bli prioritert å få på plass et reelt brett som blir mulig å teste spillet i en større skala på.
+Framover vil grupper prioritere å få på plass nettverks-løsningen og optimalisere denne, samt finne en god løsning på kortene slik at de fungerer optimalt. Etter dette vil det også bli prioritert å få på plass et funksjonelt brett som blir mulig å teste spillet i en større skala på.
 
 - - - -
 
 **Endringer i MVP**
 
-Det er ikke gjort noen endringer i bestillingen fra kunde.
+Det er ikke gjort noen endringer i bestillingen fra kunde. Vi har prioritert å levere på kundens bestilling og følge kundens krav.
 
 - - - -
 
