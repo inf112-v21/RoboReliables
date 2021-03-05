@@ -69,4 +69,16 @@ public class CardDeck implements ICardDeck {
             System.out.println((i + 1) + ": " + CardValue.extendedCardValue(cards.get(i)));
         }
     }
+
+    @Override
+    public void clearDeck() {
+        for (int i = 0; i < cards.size(); i++) {
+            cards.remove(i);
+        }
+    }
+
+    @Override
+    public void remove(int i) {
+        cards.remove(i);
+    }
 }

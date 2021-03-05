@@ -21,7 +21,7 @@ Arkitekter (Julian & Heming)
 - Akritektene er ansvarlig for å strukturere prosjektet og sørge for en gjennomgående sammenheng og "rød tråd" i prosjektet.
 - Ansvarlig for å merge branch til master, slik at det ikke oppstår feil eller problemer.
 
-Kodeansavrlig (Anders)
+Kodeansvarlig (Anders)
 - Kodeansvarlig skal sørge for god, strukturert og effektiv kode. Dette innebærer å reformatere kode, endre ineffektiv kode og sørge for at metodene samstemmer bra.
 
 Kundekontakt (Sebastian)

@@ -55,6 +55,7 @@ public class Board extends InputAdapter implements IBoard {
     protected Queue<AbstractPlayer> players = new LinkedList<>();
 
     protected boolean turnIsOver = true;
+    private boolean hasStartedMoving = false;
 
     // Cards
     protected ProgramCardDeck programCardDeck;
@@ -131,7 +132,7 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public void startNewRound() {
         switchActivePlayer();
-        activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
+        activePlayerInitialRobotLocation = players.peek().getRobot().getLocation();
 
         programCardDeck.dealCard(getActivePlayer(), 9);
         getActivePlayer().getRobot().updateRegister(getActivePlayer().pickCards(5));
@@ -147,7 +148,7 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public void switchActivePlayer() {
         AbstractPlayer previousActivePlayer = getActivePlayer();
-        players.remove(activePlayer);
+        players.remove(players.peek());
         players.add(previousActivePlayer);
         setActivePlayer(players.peek());
     }
@@ -181,12 +182,25 @@ public class Board extends InputAdapter implements IBoard {
             System.out.close();
         }
 
-        //System.out.println(turnIsOver);
-
         if (turnIsOver)
             startNewRound();
 
+
+        if (players.peek().getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
+            System.out.println("Execute register");
+            programCardDeck.addToTopOfDeck(players.peek().getRobot().getRegister().getCard(0));
+            players.peek().getRobot().executeNext();
+            setActivePlayerRobotLocation(players.peek().getRobot().getLocation());
+            programCardDeck.shuffle();
+            hasStartedMoving = true;
+        }
+
+        if (players.peek().getRobot().getRegister().getSize() == 0) {
+            hasStartedMoving = false;
+        }
+
         turnIsOver = activePlayerHasMoved();
+
     }
 
     @Override

@@ -64,4 +64,8 @@ public interface ICardDeck {
      * Print the extended values of the cards in a deck.
      */
     void printDeck();
+
+    void clearDeck();
+
+    void remove(int i);
 }
