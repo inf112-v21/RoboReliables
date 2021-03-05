@@ -75,17 +75,22 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 
 24.02.21
 - Teamet går igjennom ny obligatorisk oppgave og kriterende som skal jobbes og etterstebes.
+- Det vurderes arbeidsoppgaver ut i fra innlevering og settes tidsfrister for ferdigstilling.
 
 26.02.21
 - Teamet briefer hverandre på status i arbeidsprosessen og oppdaterer prosjektet på Github slik at oppgave samstemmer med status.
 - Det blir satt opp arbeidsplan for kommende uke og fokusområdet.
 
 01.03.21
-- Teamet har en rask gjennomgang av ukens mål og arbeidsfordeling, så fortsetter teamets makkerpar arbeidet fra forrige uke.
+- Teamet har en rask gjennomgang av ukens mål og arbeidsfordeling.
+- Medlemmene går igjennom oppgavene for å få innspill fra de andre vedrørende problemer på deres ansvarsområde.
+- Fortsetter å arbeide i teamets makkerpar arbeidet fra forrige uke.
 
 03.03.21
 - Teamet breifer hverandre på status for deres respektive område av prosjektet, samt gjenstående element før innlevering. 
-- Teamet setter opp ressurs
+- Teamet setter opp ressurskart.
+- Klassediagrammet blir gått igjennom for revidering.
+- Det blir revidert arbeidsoppgaver fram mot innlevering.
 
 04.03.21
 - Teamet briefer hverandre på status mtp på innlevering av obligatorisk oppgave. 
@@ -93,6 +98,7 @@ Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt
 
 05.03.21
 - Teamet går igjennom innlevering og dokumenter for en siste sjekk om at alt er som det skal. 
+- Teamet prøvekjører programmet for å se at det fungerer som det skal.
 
 - - - -
 
