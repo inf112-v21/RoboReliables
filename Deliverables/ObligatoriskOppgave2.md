@@ -2,14 +2,14 @@
 
 **Rollene i teamet**
 - Rollene i teamet fungerer ganske bra slik sammensetningen er nå. Vi har delt opp teamet i de arbedisoppgavene som er reelle å arbeide med nå og alle teamets medlemmer trives i nåværende arbeidsoppgave. 
-- Det vi har endret på mtp rollestruktur, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring. Samt at vi har endret litt på hvilke personer som har hvilke roller.
+- Det vi har endret på mtp rollestruktur, er at vi har opprettet *Kundekontakt* som skal ta seg av kunder, bestillinger, framstilling og eventuell markedsføring. Samt at vi har endret litt på hva de forskjellige rollene gjør (små endringer).
 - Arbeidsmengden er fordelt på en god og rettferdig måte.
 
 - - - -
 
 **Rollene i teamet nå er:**
 
-Leder (Sigurd)
+Team leder (Sigurd)
 - Leder sørger for at alle medlemmene i teamet er oppdatert på prosjektets status, sørger for sette prioriteringer for arbeidsoppgaver og deltar ellers aktivt på utvikling av prosjekt.
 - Lede møtene og disksjoner.
 - Sørge for at team-medlemmer som ikke kan møte til møter, blir oppdatert på informasjonen.
