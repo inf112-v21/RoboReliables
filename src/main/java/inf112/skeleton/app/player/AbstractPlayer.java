@@ -85,7 +85,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
                     valid = false;
                 }
             } while (!valid);
-            register.addToTopOfDeck(getCard(cardNr - 1));
+            register.addToDeck(getCard(cardNr - 1));
             hand.remove(cardNr - 1);
             cardPicks--;
         }
