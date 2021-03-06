@@ -81,7 +81,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
                     }
                 }
                 else {
-                    //System.out.println("Invalid. Try again. " + input.nextLine());
+                    System.out.println("Invalid input. Try again.");
                     valid = false;
                 }
             } while (!valid);
