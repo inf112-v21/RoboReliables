@@ -81,7 +81,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
                     }
                 }
                 else {
-                    System.out.println("Invalid input. Try again.");
+                    System.out.println("Input '" + input.nextLine() + "' is invalid. Put a valid card number.");
                     valid = false;
                 }
             } while (!valid);
