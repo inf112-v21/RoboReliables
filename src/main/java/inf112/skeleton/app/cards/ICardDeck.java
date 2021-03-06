@@ -21,6 +21,8 @@ public interface ICardDeck {
      */
     void populate(CardValue cardValue, int numberOfCards);
 
+    void addToDeck(Card card);
+
     /**
      * Add a card to the top of the deck.
      * @param card the card to add

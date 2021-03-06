@@ -30,6 +30,11 @@ public class CardDeck implements ICardDeck {
     }
 
     @Override
+    public void addToDeck(Card card) {
+        cards.add(card);
+    }
+
+    @Override
     public void addToTopOfDeck(Card card) {
         cards.add(0, card);
     }
