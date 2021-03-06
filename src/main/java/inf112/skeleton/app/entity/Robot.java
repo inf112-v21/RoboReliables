@@ -118,12 +118,15 @@ public class Robot extends Entity {
     }
 
     public void rotateLeft(int steps) {
-        setDirection(Direction.rotateLeft(this.direction));
+        for (int i = 1; i <= steps; i++) {
+            setDirection(Direction.rotateLeft(this.direction));
+        }
     }
 
-
     public void rotateRight(int steps) {
-        setDirection(Direction.rotateRight(this.direction));
+        for (int i = 1; i <= steps; i++) {
+            setDirection(Direction.rotateRight(this.direction));
+        }
     }
 
 
