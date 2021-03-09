@@ -170,24 +170,27 @@ public class Board extends InputAdapter implements IBoard {
             System.out.close();
         }
 
-        if (turnIsOver)
-            startNewRound();
 
 
-        if (time%60 == 0) {
 
-            if (players.peek().getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
+        if (!(activePlayer instanceof TestPlayer)) {
+            if (turnIsOver)
+                startNewRound();
 
-                int x = players.peek().getRobot().getLocation().getX();
-                int y = players.peek().getRobot().getLocation().getY();
-                robotLayer.setCell(x, y, null);
-                System.out.println("Execute register");
-                programCardDeck.addToTopOfDeck(players.peek().getRobot().getRegister().getCard(0));
-                players.peek().getRobot().executeNext();
-                setActivePlayerRobotLocation(players.peek().getRobot().getLocation());
+            if (time % 60 == 0) {
+                if (players.peek().getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
 
-                programCardDeck.shuffle();
-                hasStartedMoving = true;
+                    int x = players.peek().getRobot().getLocation().getX();
+                    int y = players.peek().getRobot().getLocation().getY();
+                    robotLayer.setCell(x, y, null);
+                    System.out.println("Execute register");
+                    programCardDeck.addToTopOfDeck(players.peek().getRobot().getRegister().getCard(0));
+                    players.peek().getRobot().executeNext();
+                    setActivePlayerRobotLocation(players.peek().getRobot().getLocation());
+
+                    programCardDeck.shuffle();
+                    hasStartedMoving = true;
+                }
             }
         }
         if (players.peek().getRobot().getRegister().getSize() == 0) {

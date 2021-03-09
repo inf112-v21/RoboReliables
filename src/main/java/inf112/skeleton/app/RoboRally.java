@@ -4,6 +4,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
+import inf112.skeleton.app.player.TestPlayer;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -36,7 +37,7 @@ public class RoboRally {
      */
     public void addPlayers(int nrOfPlayers) {
         for (int i = 0; i < nrOfPlayers; i++) {
-            players.add(new Player(new Location(0,0)));
+            players.add(new TestPlayer(new Location(0,0)));
         }
     }
 
