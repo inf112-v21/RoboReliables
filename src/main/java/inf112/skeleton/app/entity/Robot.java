@@ -25,12 +25,6 @@ public class Robot extends Entity {
         System.out.println("Moved once.");
         move(register.getCard(0));
         register.remove(0);
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
