@@ -53,7 +53,7 @@ public class Board extends InputAdapter implements IBoard {
     // cards
     protected ProgramCardDeck programCardDeck;
 
-
+    int time = 1;
 
     public Board(Queue<AbstractPlayer> players) {
         this.players = players;
@@ -174,19 +174,26 @@ public class Board extends InputAdapter implements IBoard {
             startNewRound();
 
 
-        if (players.peek().getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
-            System.out.println("Execute register");
-            programCardDeck.addToTopOfDeck(players.peek().getRobot().getRegister().getCard(0));
-            players.peek().getRobot().executeNext();
-            setActivePlayerRobotLocation(players.peek().getRobot().getLocation());
-            programCardDeck.shuffle();
-            hasStartedMoving = true;
-        }
+        if (time%60 == 0) {
 
+            if (players.peek().getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
+
+                int x = players.peek().getRobot().getLocation().getX();
+                int y = players.peek().getRobot().getLocation().getY();
+                robotLayer.setCell(x, y, null);
+                System.out.println("Execute register");
+                programCardDeck.addToTopOfDeck(players.peek().getRobot().getRegister().getCard(0));
+                players.peek().getRobot().executeNext();
+                setActivePlayerRobotLocation(players.peek().getRobot().getLocation());
+
+                programCardDeck.shuffle();
+                hasStartedMoving = true;
+            }
+        }
         if (players.peek().getRobot().getRegister().getSize() == 0) {
             hasStartedMoving = false;
         }
-
+        time++;
         turnIsOver = activePlayerHasMoved();
 
     }
@@ -196,13 +203,21 @@ public class Board extends InputAdapter implements IBoard {
         for (AbstractPlayer player : players) {
             int x = player.getRobot().getLocation().getX();
             int y = player.getRobot().getLocation().getY();
+            Direction dir = player.getRobot().getDirection();
 
             if (checkIfWon()) {
                 robotLayer.setCell(x, y, robotWonCell);
             } else if ((x == 0) && (y == 11)) {
                 robotLayer.setCell(x, y, robotDiedCell);
             } else {
-                robotLayer.setCell(x, y, robotCell);
+                if (dir == Direction.DOWN) {
+                    robotLayer.setCell(x, y, robotCell.setRotation(2));
+                } else if (dir == Direction.RIGHT) {
+                    robotLayer.setCell(x, y, robotCell.setRotation(3));
+                } else if (dir == Direction.LEFT) {
+                    robotLayer.setCell(x, y, robotCell.setRotation(1));
+                } else { robotLayer.setCell(x, y, robotCell); }
+
             }
         }
     }
