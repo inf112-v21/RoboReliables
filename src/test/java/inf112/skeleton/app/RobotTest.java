@@ -26,8 +26,8 @@ public class RobotTest {
 
         robot.move(card);
 
-        int expectedPositionX = 1;
-        int expectedPositionY = 0;
+        int expectedPositionX = 0;
+        int expectedPositionY = 1;
         assertEquals(expectedPositionX, robot.getLocation().getX());
         assertEquals(expectedPositionY, robot.getLocation().getY());
 
@@ -35,8 +35,8 @@ public class RobotTest {
 
         robot.move(card);
 
-        expectedPositionX = 3;
-        expectedPositionY = 0;
+        expectedPositionX = 0;
+        expectedPositionY = 3;
         assertEquals(expectedPositionX, robot.getLocation().getX());
         assertEquals(expectedPositionY, robot.getLocation().getY());
     }
@@ -45,8 +45,8 @@ public class RobotTest {
     public void moveForwardTest() {
         robot.moveForward(1);
 
-        int expectedPositionX = 1;
-        int expectedPositionY = 0;
+        int expectedPositionX = 0;
+        int expectedPositionY = 1;
         assertEquals(expectedPositionX, robot.getLocation().getX());
         assertEquals(expectedPositionY, robot.getLocation().getY());
 
@@ -61,7 +61,7 @@ public class RobotTest {
 
     @Test
     public void moveBackwardsTest() {
-        robot.setLocation(new Location(1,0));
+        robot.setLocation(new Location(0,1));
         robot.moveBackward(1);
 
         int expectedPositionX = 0;
