@@ -219,7 +219,7 @@ public class Board extends InputAdapter implements IBoard {
                     robotLayer.setCell(x, y, robotCell.setRotation(3));
                 } else if (dir == Direction.LEFT) {
                     robotLayer.setCell(x, y, robotCell.setRotation(1));
-                } else { robotLayer.setCell(x, y, robotCell); }
+                } else { robotLayer.setCell(x, y, robotCell.setRotation(0)); }
 
             }
         }
