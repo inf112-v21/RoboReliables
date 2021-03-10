@@ -118,7 +118,7 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public void startNewRound() {
         switchActivePlayer();
-        activePlayerInitialRobotLocation = players.peek().getRobot().getLocation();
+        activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
 
         programCardDeck.dealCard(getActivePlayer(), 9);
         getActivePlayer().getRobot().updateRegister(getActivePlayer().pickCards(5));
@@ -165,7 +165,7 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
-        renderPlayerTextures(players.peek());
+        renderPlayerTextures(activePlayer);
 
         if (checkIfWon()) {
             System.out.println("Player won!");
@@ -180,22 +180,22 @@ public class Board extends InputAdapter implements IBoard {
                 startNewRound();
 
             if (time % 60 == 0) {
-                if (players.peek().getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
+                if (activePlayer.getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
 
-                    int x = players.peek().getRobot().getLocation().getX();
-                    int y = players.peek().getRobot().getLocation().getY();
+                    int x = activePlayer.getRobot().getLocation().getX();
+                    int y = activePlayer.getRobot().getLocation().getY();
                     robotLayer.setCell(x, y, null);
                     System.out.println("Execute register");
-                    programCardDeck.addToTopOfDeck(players.peek().getRobot().getRegister().getCard(0));
-                    players.peek().getRobot().executeNext();
-                    setActivePlayerRobotLocation(players.peek().getRobot().getLocation(), false);
+                    programCardDeck.addToTopOfDeck(activePlayer.getRobot().getRegister().getCard(0));
+                    activePlayer.getRobot().executeNext();
+                    setActivePlayerRobotLocation(activePlayer.getRobot().getLocation(), false);
 
                     programCardDeck.shuffle();
                     hasStartedMoving = true;
                 }
             }
         }
-        if (players.peek().getRobot().getRegister().getSize() == 0) {
+        if (activePlayer.getRobot().getRegister().getSize() == 0) {
             hasStartedMoving = false;
         }
         time++;
