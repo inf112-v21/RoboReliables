@@ -30,6 +30,7 @@ public class BoardTest {
         board = new Board(players);
         testPlayerLocation = testPlayer.getRobot().getLocation();
         robot = testPlayer.getRobot();
+        board.setActivePlayer(testPlayer);
         board.activePlayerInitialRobotLocation = board.activePlayer.getRobot().getLocation();
         board.programCardDeck = new ProgramCardDeck();
     }
@@ -78,7 +79,7 @@ public class BoardTest {
         assertNotEquals(expectedX, actualX);
         assertNotEquals(expectedY, actualY);
 
-        board.setActivePlayerRobotLocation(new Location(1,1));
+        board.setActivePlayerRobotLocation(new Location(1,1), true);
 
         int actualXX = board.getActivePlayer().getRobot().getLocation().getX();
         System.out.println(actualXX);
@@ -98,10 +99,10 @@ public class BoardTest {
     public void checkIfWonTest() {
         createBoard();
         Location winningPos = new Location(11,11);
-        board.setActivePlayerRobotLocation(testPlayerLocation);
+        board.setActivePlayerRobotLocation(testPlayerLocation, true);
         assertFalse(board.checkIfWon());
 
-        board.setActivePlayerRobotLocation(winningPos);
+        board.setActivePlayerRobotLocation(winningPos, true);
         assertTrue(board.checkIfWon());
     }
 
@@ -146,7 +147,7 @@ public class BoardTest {
     @Test
     public void activePlayerHasMovedTest() {
         assertFalse(board.activePlayerHasMoved()); // Should be false by default
-        board.setActivePlayerRobotLocation(new Location(1,1));
+        board.setActivePlayerRobotLocation(new Location(1,1), true);
         assertTrue(board.activePlayerHasMoved());
     }
 

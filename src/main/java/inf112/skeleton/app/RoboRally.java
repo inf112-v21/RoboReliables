@@ -32,12 +32,13 @@ public class RoboRally {
     }
 
     /**
-     *
+     * Initializes a specified amount of players and adds them to a list of players.
+     * To test movement without cards: Change Player to TestPlayer.
      * @param nrOfPlayers
      */
     public void addPlayers(int nrOfPlayers) {
         for (int i = 0; i < nrOfPlayers; i++) {
-            players.add(new TestPlayer(new Location(0,0)));
+            players.add(new TestPlayer(new Location(0,0))); // Change ´new Player´ with ´new TestPlayer´
         }
     }
 

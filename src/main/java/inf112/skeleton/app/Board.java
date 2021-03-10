@@ -71,15 +71,6 @@ public class Board extends InputAdapter implements IBoard {
         return MAP_SIZE_Y;
     }
 
-    @Override
-    public void setActivePlayerRobotLocation(Location newLocation) {
-        int x = activePlayer.getRobot().getLocation().getX();
-        int y = activePlayer.getRobot().getLocation().getY();
-        robotLayer.setCell(x, y, null);
-
-        activePlayer.getRobot().setLocation(newLocation);
-    }
-
     /**
      * Initializes the camera and renderer as well as sets the textures for the map and various
      * layers. Also assigns the textures of the player sprite.
@@ -136,6 +127,22 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     @Override
+    public void setActivePlayerRobotLocation(Location newLocation, boolean testing) {
+        int x = activePlayer.getRobot().getLocation().getX();
+        int y = activePlayer.getRobot().getLocation().getY();
+
+        if (!testing)
+            robotLayer.setCell(x, y, null);
+
+        activePlayer.getRobot().setLocation(newLocation);
+    }
+
+    @Override
+    public void setActivePlayer(AbstractPlayer newPlayer) {
+        activePlayer = newPlayer;
+    }
+
+    @Override
     public AbstractPlayer getActivePlayer() {
         return activePlayer;
     }
@@ -146,11 +153,6 @@ public class Board extends InputAdapter implements IBoard {
         players.remove(players.peek());
         players.add(previousActivePlayer);
         setActivePlayer(players.peek());
-    }
-
-    @Override
-    public void setActivePlayer(AbstractPlayer newActivePlayer) {
-        activePlayer = newActivePlayer;
     }
 
     @Override
@@ -186,7 +188,7 @@ public class Board extends InputAdapter implements IBoard {
                     System.out.println("Execute register");
                     programCardDeck.addToTopOfDeck(players.peek().getRobot().getRegister().getCard(0));
                     players.peek().getRobot().executeNext();
-                    setActivePlayerRobotLocation(players.peek().getRobot().getLocation());
+                    setActivePlayerRobotLocation(players.peek().getRobot().getLocation(), false);
 
                     programCardDeck.shuffle();
                     hasStartedMoving = true;
@@ -280,19 +282,19 @@ public class Board extends InputAdapter implements IBoard {
 
         if (intCode == Input.Keys.UP && !(y == MAP_SIZE_Y - 1)) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x, y+1));
+            setActivePlayerRobotLocation(new Location(x, y+1), false);
         }
         if (intCode == Input.Keys.DOWN && !(y == 0)) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x, y-1));
+            setActivePlayerRobotLocation(new Location(x, y-1), false);
         }
         if (intCode == Input.Keys.LEFT && !(x == 0)) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x-1, y));
+            setActivePlayerRobotLocation(new Location(x-1, y), false);
         }
         if (intCode == Input.Keys.RIGHT && !(x == MAP_SIZE_X - 1)) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x+1, y));
+            setActivePlayerRobotLocation(new Location(x+1, y), false);
         }
         return false;
     }
