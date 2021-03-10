@@ -165,7 +165,7 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
-        renderPlayerTextures();
+        renderPlayerTextures(players.peek());
 
         if (checkIfWon()) {
             System.out.println("Player won!");
@@ -204,26 +204,26 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     @Override
-    public void renderPlayerTextures() {
-        for (AbstractPlayer player : players) {
-            int x = player.getRobot().getLocation().getX();
-            int y = player.getRobot().getLocation().getY();
-            Direction dir = player.getRobot().getDirection();
+    public void renderPlayerTextures(AbstractPlayer player) {
 
-            if (checkIfWon()) {
-                robotLayer.setCell(x, y, robotWonCell);
-            } else if ((x == 0) && (y == 11)) {
-                robotLayer.setCell(x, y, robotDiedCell);
-            } else {
-                if (dir == Direction.DOWN) {
-                    robotLayer.setCell(x, y, robotCell.setRotation(2));
-                } else if (dir == Direction.RIGHT) {
-                    robotLayer.setCell(x, y, robotCell.setRotation(3));
-                } else if (dir == Direction.LEFT) {
-                    robotLayer.setCell(x, y, robotCell.setRotation(1));
-                } else { robotLayer.setCell(x, y, robotCell.setRotation(0)); }
+        int x = player.getRobot().getLocation().getX();
+        int y = player.getRobot().getLocation().getY();
+        Direction dir = player.getRobot().getDirection();
 
-            }
+        if (checkIfWon()) {
+            robotLayer.setCell(x, y, robotWonCell);
+        } else if ((x == 0) && (y == 11)) {
+            robotLayer.setCell(x, y, robotDiedCell);
+        } else {
+            if (dir == Direction.DOWN) {
+                robotLayer.setCell(x, y, robotCell.setRotation(2));
+            } else if (dir == Direction.RIGHT) {
+                robotLayer.setCell(x, y, robotCell.setRotation(3));
+            } else if (dir == Direction.LEFT) {
+                robotLayer.setCell(x, y, robotCell.setRotation(1));
+            } else { robotLayer.setCell(x, y, robotCell.setRotation(0)); }
+
+
         }
     }
 

@@ -13,7 +13,7 @@ import java.util.Queue;
  * Sets up gdx to create a new game of RoboRally.
  */
 public class RoboRally {
-    private final static int nrOfPlayers = 1; // Pre-determined number of players
+    private final static int nrOfPlayers = 4; // Pre-determined number of players
     private final Queue<AbstractPlayer> players = new LinkedList<>();
 
     public RoboRally() {
@@ -38,7 +38,7 @@ public class RoboRally {
      */
     public void addPlayers(int nrOfPlayers) {
         for (int i = 0; i < nrOfPlayers; i++) {
-            players.add(new TestPlayer(new Location(0,0))); // Change ´new Player´ with ´new TestPlayer´
+            players.add(new Player(new Location(0,i+1))); // Change ´new Player´ with ´new TestPlayer´
         }
     }
 
