@@ -16,8 +16,9 @@ public interface IBoard extends ApplicationListener {
     /**
      *
      * @param newLocation
+     * @param testing says whether or not the function is used for testing
      */
-    void setActivePlayerRobotLocation(Location newLocation);
+    void setActivePlayerRobotLocation(Location newLocation, boolean testing);
 
     /**
      *
@@ -37,14 +38,9 @@ public interface IBoard extends ApplicationListener {
 
     /**
      *
-     * @param newActivePlayer
+     * @param newPlayer
      */
-    void setActivePlayer(AbstractPlayer newActivePlayer);
-
-    /**
-     *
-     */
-    void initializeFlags();
+    void setActivePlayer(AbstractPlayer newPlayer);
 
     /**
      * Checks whether or not the active player is done with their turn.
@@ -64,5 +60,5 @@ public interface IBoard extends ApplicationListener {
      * A player can either be alive, dead or has won. The proper sprite is selected based on
      * these criteria.
      */
-    void renderPlayerTextures();
+    void renderPlayerTextures(AbstractPlayer player);
 }

@@ -1,4 +1,4 @@
-package inf112.skeleton.app.Cards;
+package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.player.AbstractPlayer;
 
@@ -27,6 +27,11 @@ public class CardDeck implements ICardDeck {
     public void populate(CardValue cardValue, int numberOfCards) {
         for (int i = 0; i < numberOfCards; i++)
             cards.add(new Card(cardValue));
+    }
+
+    @Override
+    public void addToDeck(Card card) {
+        cards.add(card);
     }
 
     @Override

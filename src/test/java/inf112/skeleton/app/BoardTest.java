@@ -2,7 +2,7 @@ package inf112.skeleton.app;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import inf112.skeleton.app.Cards.ProgramCardDeck;
+import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
@@ -24,12 +24,13 @@ public class BoardTest {
     private Queue<AbstractPlayer> players = new LinkedList<>();
 
     @BeforeEach
-    private void createBoard() {
+    public void createBoard() {
         testPlayer = new TestPlayer(new Location(0,0));
         players.add(testPlayer);
         board = new Board(players);
         testPlayerLocation = testPlayer.getRobot().getLocation();
         robot = testPlayer.getRobot();
+        board.setActivePlayer(testPlayer);
         board.activePlayerInitialRobotLocation = board.activePlayer.getRobot().getLocation();
         board.programCardDeck = new ProgramCardDeck();
     }
@@ -78,7 +79,7 @@ public class BoardTest {
         assertNotEquals(expectedX, actualX);
         assertNotEquals(expectedY, actualY);
 
-        board.setActivePlayerRobotLocation(new Location(1,1));
+        board.setActivePlayerRobotLocation(new Location(1,1), true);
 
         int actualXX = board.getActivePlayer().getRobot().getLocation().getX();
         System.out.println(actualXX);
@@ -98,15 +99,15 @@ public class BoardTest {
     public void checkIfWonTest() {
         createBoard();
         Location winningPos = new Location(11,11);
-        board.setActivePlayerRobotLocation(testPlayerLocation);
+        board.setActivePlayerRobotLocation(testPlayerLocation, true);
         assertFalse(board.checkIfWon());
 
-        board.setActivePlayerRobotLocation(winningPos);
+        board.setActivePlayerRobotLocation(winningPos, true);
         assertTrue(board.checkIfWon());
     }
 
     /**
-     *
+     * Makes sure that the active player actually switches.
      */
     @Test
     public void switchActivePlayerTest() {
@@ -140,28 +141,13 @@ public class BoardTest {
         assertEquals(board.activePlayer, player2);
     }
 
-    @Test
-    public void initializeFlagsTest() {
-        // flags should be empty to begin with
-        assertEquals(0, board.flags.size());
-
-        board.initializeFlags();
-        assertEquals(board.nrOfFlags, board.flags.size());
-    }
-
     /**
      * When the active player is done with their turn, the function should be true.
      */
     @Test
     public void activePlayerHasMovedTest() {
         assertFalse(board.activePlayerHasMoved()); // Should be false by default
-        //System.out.println("Active player location: " + board.getActivePlayer().getRobot().getLocation());
-        board.setActivePlayerRobotLocation(new Location(1,1));
-        //System.out.println("Active player moved.");
-        //System.out.println("Active player location: " + board.getActivePlayer().getRobot().getLocation());
-        //System.out.println("ActivePlayerRobotLocation.getX() = " + board.activePlayerRobotLocation.getX());
-        //System.out.println("ActivePlayerRobotLocation.getX() = " + board.activePlayerRobotLocation.getY());
-
+        board.setActivePlayerRobotLocation(new Location(1,1), true);
         assertTrue(board.activePlayerHasMoved());
     }
 

@@ -15,13 +15,10 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import inf112.skeleton.app.Cards.ProgramCardDeck;
-import inf112.skeleton.app.entity.Flag;
+import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.player.AbstractPlayer;
-import inf112.skeleton.app.player.Player;
 import inf112.skeleton.app.player.TestPlayer;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -44,10 +41,6 @@ public class Board extends InputAdapter implements IBoard {
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
 
-    // Variables for the flags
-    protected final int nrOfFlags = 1;
-    protected final ArrayList<Flag> flags = new ArrayList<>(nrOfFlags);
-
     // Variables for the current active player
     protected AbstractPlayer activePlayer;
     protected Location activePlayerInitialRobotLocation;
@@ -57,10 +50,10 @@ public class Board extends InputAdapter implements IBoard {
     protected boolean turnIsOver = true;
     private boolean hasStartedMoving = false;
 
-    // Cards
+    // cards
     protected ProgramCardDeck programCardDeck;
 
-
+    int time = 1;
 
     public Board(Queue<AbstractPlayer> players) {
         this.players = players;
@@ -76,11 +69,6 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public int getMAP_SIZE_Y() {
         return MAP_SIZE_Y;
-    }
-
-    @Override
-    public void setActivePlayerRobotLocation(Location newLocation) {
-        activePlayer.getRobot().setLocation(newLocation);
     }
 
     /**
@@ -116,14 +104,12 @@ public class Board extends InputAdapter implements IBoard {
         robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
 
-        initializeFlags();
-
         // Active player
         activePlayer = players.peek();
         assert activePlayer != null;
         activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
 
-        // Cards
+        // cards
         programCardDeck = new ProgramCardDeck();
 
         Gdx.input.setInputProcessor(this);
@@ -141,6 +127,22 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     @Override
+    public void setActivePlayerRobotLocation(Location newLocation, boolean testing) {
+        int x = activePlayer.getRobot().getLocation().getX();
+        int y = activePlayer.getRobot().getLocation().getY();
+
+        if (!testing)
+            robotLayer.setCell(x, y, null);
+
+        activePlayer.getRobot().setLocation(newLocation);
+    }
+
+    @Override
+    public void setActivePlayer(AbstractPlayer newPlayer) {
+        activePlayer = newPlayer;
+    }
+
+    @Override
     public AbstractPlayer getActivePlayer() {
         return activePlayer;
     }
@@ -154,18 +156,6 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     @Override
-    public void setActivePlayer(AbstractPlayer newActivePlayer) {
-        activePlayer = newActivePlayer;
-    }
-
-
-    @Override
-    public void initializeFlags() {
-        for (int i = 0; i < nrOfFlags; i++)
-            flags.add(new Flag(new Location(0, 0)));
-    }
-
-    @Override
     public void resize(int width, int height) {
     }
 
@@ -175,49 +165,68 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
-        renderPlayerTextures();
+        renderPlayerTextures(players.peek());
 
         if (checkIfWon()) {
             System.out.println("Player won!");
             System.out.close();
         }
 
-        if (turnIsOver)
-            startNewRound();
 
 
-        if (players.peek().getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
-            System.out.println("Execute register");
-            programCardDeck.addToTopOfDeck(players.peek().getRobot().getRegister().getCard(0));
-            players.peek().getRobot().executeNext();
-            setActivePlayerRobotLocation(players.peek().getRobot().getLocation());
-            programCardDeck.shuffle();
-            hasStartedMoving = true;
+
+        if (!(activePlayer instanceof TestPlayer)) {
+            if (turnIsOver)
+                startNewRound();
+
+            if (time % 60 == 0) {
+                if (players.peek().getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
+
+                    int x = players.peek().getRobot().getLocation().getX();
+                    int y = players.peek().getRobot().getLocation().getY();
+                    robotLayer.setCell(x, y, null);
+                    System.out.println("Execute register");
+                    programCardDeck.addToTopOfDeck(players.peek().getRobot().getRegister().getCard(0));
+                    players.peek().getRobot().executeNext();
+                    setActivePlayerRobotLocation(players.peek().getRobot().getLocation(), false);
+
+                    programCardDeck.shuffle();
+                    hasStartedMoving = true;
+                }
+            }
         }
-
         if (players.peek().getRobot().getRegister().getSize() == 0) {
             hasStartedMoving = false;
         }
-
+        time++;
         turnIsOver = activePlayerHasMoved();
 
     }
 
     @Override
-    public void renderPlayerTextures() {
-        for (AbstractPlayer player : players) {
-            int x = player.getRobot().getLocation().getX();
-            int y = player.getRobot().getLocation().getY();
+    public void renderPlayerTextures(AbstractPlayer player) {
 
-            if (checkIfWon()) {
-                robotLayer.setCell(x, y, robotWonCell);
-            } else if ((x == 0) && (y == 11)) {
-                robotLayer.setCell(x, y, robotDiedCell);
-            } else {
-                robotLayer.setCell(x, y, robotCell);
-            }
+        int x = player.getRobot().getLocation().getX();
+        int y = player.getRobot().getLocation().getY();
+        Direction dir = player.getRobot().getDirection();
+
+        if (checkIfWon()) {
+            robotLayer.setCell(x, y, robotWonCell);
+        } else if ((x == 0) && (y == 11)) {
+            robotLayer.setCell(x, y, robotDiedCell);
+        } else {
+            if (dir == Direction.DOWN) {
+                robotLayer.setCell(x, y, robotCell.setRotation(2));
+            } else if (dir == Direction.RIGHT) {
+                robotLayer.setCell(x, y, robotCell.setRotation(3));
+            } else if (dir == Direction.LEFT) {
+                robotLayer.setCell(x, y, robotCell.setRotation(1));
+            } else { robotLayer.setCell(x, y, robotCell.setRotation(0)); }
+
+
         }
     }
+
 
     @Override
     public boolean activePlayerHasMoved() {
@@ -271,70 +280,22 @@ public class Board extends InputAdapter implements IBoard {
         int x = activePlayer.getRobot().getLocation().getX();
         int y = activePlayer.getRobot().getLocation().getY();
 
-        if (intCode == Input.Keys.UP && !(y == MAP_SIZE_Y - 1)) {
+        if (intCode == Input.Keys.UP) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x, y+1));
+            activePlayer.getRobot().moveForward(1);
         }
-        if (intCode == Input.Keys.DOWN && !(y == 0)) {
+        if (intCode == Input.Keys.DOWN) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x, y-1));
+            activePlayer.getRobot().moveBackward(1);
         }
-        if (intCode == Input.Keys.LEFT && !(x == 0)) {
+        if (intCode == Input.Keys.LEFT) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x-1, y));
+            activePlayer.getRobot().rotateLeft(1);
         }
-        if (intCode == Input.Keys.RIGHT && !(x == MAP_SIZE_X - 1)) {
+        if (intCode == Input.Keys.RIGHT) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x+1, y));
+            activePlayer.getRobot().rotateRight(1);
         }
         return false;
     }
 }
-
-/*
-    public void layerReader(TiledMapTileLayer layer) {
-        for (int x = 0; x < layer.getWidth(); x++) {
-            for (int y = 0; y < layer.getHeight(); y++) {
-                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
-                if (cell != null) {
-                    Location location = new Location(x, y);
-                    assignEntities(location, cell);
-                }
-            }
-        }
-    }
-
-*/
-
-/*    public void checkCell(int x, int y) {
-        for (int i = 0; i < map.getLayers().size(); i++) {
-            TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(i);
-            layer.getCell(x, y);
-        }
-    }*/
-/*
-
-    public void assignEntities(Location location, TiledMapTileLayer.Cell cell) {
-        Entity entity;
-        switch (cell.getTile().getId()) {
-            case 6:
-                entity = new Hole(location);
-                break;
-            case 55:
-                entity = new Flag(location);
-                break;
-            default:
-                entity = null;
-        }
-        if (entity != null) {
-            addEntityToBoard(location, entity);
-        }
-    }
-
-    public void addEntityToBoard(Location location, Entity entity) {
-        ArrayList<Entity> entityList = entities.getOrDefault(location, new ArrayList<>());
-        entityList.add(entity);
-    }
-}
-*/
-

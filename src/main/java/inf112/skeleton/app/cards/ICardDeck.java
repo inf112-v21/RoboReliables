@@ -1,4 +1,4 @@
-package inf112.skeleton.app.Cards;
+package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.player.AbstractPlayer;
 
@@ -20,6 +20,8 @@ public interface ICardDeck {
      * @param numberOfCards the number of cards that will be added to the deck
      */
     void populate(CardValue cardValue, int numberOfCards);
+
+    void addToDeck(Card card);
 
     /**
      * Add a card to the top of the deck.

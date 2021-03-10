@@ -1,11 +1,11 @@
 package inf112.skeleton.app.player;
 
 import com.badlogic.gdx.InputAdapter;
-import inf112.skeleton.app.Cards.CardDeck;
-import inf112.skeleton.app.Cards.CardValue;
+import inf112.skeleton.app.cards.CardDeck;
+import inf112.skeleton.app.cards.CardValue;
 import inf112.skeleton.app.Location;
 import inf112.skeleton.app.entity.Robot;
-import inf112.skeleton.app.Cards.Card;
+import inf112.skeleton.app.cards.Card;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,11 +81,11 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
                     }
                 }
                 else {
-                    //System.out.println("Invalid. Try again. " + input.nextLine());
+                    System.out.println("Input '" + input.nextLine() + "' is invalid. Put a valid card number.");
                     valid = false;
                 }
             } while (!valid);
-            register.addToTopOfDeck(getCard(cardNr - 1));
+            register.addToDeck(getCard(cardNr - 1));
             hand.remove(cardNr - 1);
             cardPicks--;
         }

@@ -1,6 +1,6 @@
 package inf112.skeleton.app;
 
-import inf112.skeleton.app.Cards.*;
+import inf112.skeleton.app.cards.*;
 import inf112.skeleton.app.player.TestPlayer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

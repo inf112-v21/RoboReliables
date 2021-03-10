@@ -53,6 +53,9 @@ Kundekontakt (Sebastian)
 Det er noe forskjell i commit til prosjektet, dette er ikke grunnet skjevfordelt arbeid, men grunnet at noen arbeidsoppgaver gjør at det vil naturlig være en større del å committe kode for en enn andre. Enten ved at noen jobber lenger med research, noen jobber med mer administrative arbeidsoppgaver osv. 
 
 Vi bruker også "Code with me" som gjør at personen som er vert vil være den som committer.
+
+Det ble committet ofte fra skrivingen av ObligatoriskOppgave2, dette er da nettet hos ansavrlige er svært dårlig, som resulterte i at mange ting ikke lagret seg som det skulle tidligere i oppgaven. Derfor ble det lagret trutt og ofte, noe som resulterte i mye committs som lagde litt rot i committ-systemet. Det Det vil derfor bli skrevet kladd utenfor prosjektet videre, slik at de mange unødvendige committsene ikke roter til committ-historien og gjør ting uoversiktlig.
+
 - - - -
 
 **Referat**
@@ -66,14 +69,22 @@ Vi bruker også "Code with me" som gjør at personen som er vert vil være den s
 17.02.21 - 13:00
 - Raskt breif på status på arbeid og gjennomgang av kriterier vi skal jobbe etter.
 - Reviderer fordeling av oppgaver.
+- Det avtales nytt møte for teamet.
 
 19.02.21 - 14:30
 - Teamet briefer hverandre på status i ansavrsområde og på oppgaver.
 - Det blir satt opp nye mål og arbeidsoppgaver for kommende uke.
+- Det avtales nytt møte for teamet.
 
 22.02.21 - 14:30
 - Teamet briefer hverandre på status rundt arbeidsoppgavene de holder på med, samt hva som gjenstår før de er ferdig med gjeldende oppgave.
+- Teamet snakker om oblig 2 og veien videre.
 - Teamet ønsker å endre fra å avtale møtedato etter hvert møte til å sette faste tider for møte ila uken. Det enes om et system der vi heller har hyppige møter og med kortere felles brief, for å gå til respektive oppgaver å jobbe (enten aleine eller i makkerpar).
+- - Mandager 14:30 - 16:30
+- - Onsdager 12:00 - 14: 00
+- - Torsdager 14:30 - 16:30
+- Sebastian bytter til Kundekontakt når nettverket er ferdig.
+- Går igjennom nye brukerhistorier vi vil få definert til neste oblig.
 
 24.02.21 - 12:00
 - Teamet går igjennom ny obligatorisk oppgave og kriterende som skal jobbes og etterstebes.
@@ -109,6 +120,7 @@ Vi bruker også "Code with me" som gjør at personen som er vert vil være den s
 **Forbedringspunkter**
 1. Teamet skal bli bedre på å benytte og hyppig oppdatere Github, slik at den kan brukes som et godt verktøy for å orientere seg om gjeldende issues og status på arbeidsoppgaver mellom team-møtene.
 2. Teamet skal tidligere sette seg inn i innlevering, for å jobber mer målrettet.
+3. Teamet skal være flinkere til å kladde utenfor prosjektet, slik at det ikke blir mange unødvendige committs, spesielt mtp dokumentering fram mot innlevering.
 
 - - - -
 
@@ -116,108 +128,39 @@ Vi bruker også "Code with me" som gjør at personen som er vert vil være den s
 
 **Brukerhistorie, akseptansekriterie og arbeidsoppgaver**
 
-```
-"Som spiller ønsker jeg at det er andre spillere med sånn at jeg kan spille mot de."
 
-Akseptansekriterier:
+*Refererer til 'documents/UserStories.md'* 
 
-- Man kan spesifisere antall spillere.
-- Hver spiller vises som en brikke på brettet.
-- Den aktive spiller byttes på mellom hver runde.
-- Den aktive spiller får kontroll over bevegelse og å endre sin runde.
-
-Arbeidsoppgaver:
-
-- Gi mulighet til å spesifisere antall spillere i begynnelsen av spillet.
-- Implementere runder.
-```
-
-```
-"Som spiller ønsker jeg å få utdelt kort fra en kortstokk for å kunne bruke kortene mine senere."
-
-Akseptansekriterier:
-
-- Hver spiller har en inventory hvor kortene til spilleren oppbevares.
-- Spillet gir ut x antall kort til hver spiller.
-- Ha en sentral kortstokk som inneholder spillets kort.
-
-Arbeidsoppgaver:
-
-- Implementere inventory til en spiller.
-- Lage funksjon som deler ut kort.
-- Representere alle spillets kort.
-
-```
-
-```
-"Som spiller ønsker jeg å kunne flytte brikken min til flagget for å kunne vinne spillet."
-
-Akseptansekriterier:
-
-- Brikken og flagget kan okkupere samme felt på spillebrettet.
-- Spilleren kan flytte på brikken sin.
-- Det må være et flagg på brettet.
-- Spiller får vite at de har vunnet dersom de flytter brikken sin gjennom alle flaggene på brettet i riktig rekkefølge.
-
-Arbeidsoppgaver:
-
-- Vise flagg.
-- Implementere kode for «win-condition».
-- Implementere funksjonalitet for å sjekke posisjon til spiller.
-- Feilhåndtering av «win-condition».
-
-```
-
-```
-"Som utvikler ønsker jeg å kunne flytte posisjonen til en brikke for å kunne teste «victory-condition»."
-
-Akseptansekriterier:
-
-- Robot beveger seg i relasjon til input fra tastatur.
-
-Arbeidsoppgaver:
-
-- Implementere input funksjon fra spiller.
-
-```
-
-```
-"Som utvikler ønsker jeg et større brett for å kunne teste spillet i en større skala."
-
-Akseptansekriterier:
-
-- Spiller kan bevege seg over flere området
-
-Arbeidsoppgaver:
-
-- Legge til flere området på brettet
-
-```
 - - - -
 
 **Prioritering av arbeidsoppgaver**
 
-Framover vil grupper prioritere å få på plass nettverks-løsningen og optimalisere denne, samt finne en god løsning på kortene slik at de fungerer optimalt. Etter dette vil det også bli prioritert å få på plass et funksjonelt brett som blir mulig å teste spillet i en større skala på.
+Framover vil grupper prioritere å få på plass nettverks-løsningen og optimalisere denne, samt finne en god løsning på kortene slik at de fungerer optimalt. Etter dette vil det også bli prioritert å få på plass et funksjonelt brett som blir mulig å teste spillet i en større skala på. 
+
+Vi skal få ProgramCard til å tolke kortene, men forløpig ligger det i Robot-classen. Dette vil flytte over til ProgramCard-classen, slik at den er på riktig sted.
 
 - - - -
 
 **Endringer i MVP**
 
-Det er ikke gjort noen endringer i bestillingen fra kunde. Vi har prioritert å levere på kundens bestilling og følge kundens krav.
+Det eneste som er endret er at vi ikke er ferdig med en komplett nettverksløsning. Vi prøvde å sette opp en løsning, men vi slet litt med å få den til å kjøre 100% innen innleveringen da det var såpass komplekst.
 
 - - - -
 
-**Prograsjon**
+**Progresjon**
 
 Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere teamet, slik at vi arbeidet mer målrettet og strukturert, samt å få på plass en del kode for danne grunn-funksjoner i prosjektet. Dette er ting som:
-- Bevegelse på brettet
-- Kort på hånden
-- 
+- Bevege roboten med kort
+- Velge antall spillere
+- Få kort til hånden
 
 - - - -
 
 **Bugs i prosjektet**
-
+- Tidligere Playertexture fjernes ikke når det oppdateres.
+- Board: når en prøver å spille med en testspiller, så tar den ikke imot key-inputs.
+- Hånd: Når hånden printes, så printes den i feil rekkefølge.
+- Spiller: spiller kan bevege seg utenfor brettet.
 
 - - - - 
 
@@ -225,14 +168,24 @@ Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere tea
 
 **Dokumentering av prosjekt**
 
-Prosjektet er bygget opp slik at en spiller får tildelt kort. Med disse kortene skal en spiller avgjøre bevegelsen til.....
+For å kjøre programmet:
+Last ned spillet som en .zip-fil gjennom den grønne knappen "Code". Kjør prosjektet i IDE'en og "run" prosjektet.
 
-De forskjellige testene i spillet tester om....
+Når programmet kjøres:
+- Før spillet blir rendret der bruker kan velge 5 kort. 
+- Etter dette blir spillet endret og så utføres programmeringen av disse valgte kortene.
+- Etter dette er det neste spåiller sin tur, da velger også denne spiller sine 5 kort.
 
-Når programmet kjøres vil....
+For å kjøre testene:  
+- Lag en konfigurasjon av alle testene i pakken "test" og kjør denne. Husk å velg "All in package". Vi bruker JUnit Jupiter.
+
+
 
 - - - - 
 
 **Klassediagram**
+
+![image](https://user-images.githubusercontent.com/43097835/110129416-391c0180-7dc8-11eb-9d2a-255ed5efd205.png)
+
 
 

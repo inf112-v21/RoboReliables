@@ -1,8 +1,8 @@
 package inf112.skeleton.app.entity;
 
-import inf112.skeleton.app.Cards.Card;
-import inf112.skeleton.app.Cards.CardDeck;
-import inf112.skeleton.app.Cards.ProgramCardDeck;
+import inf112.skeleton.app.cards.Card;
+import inf112.skeleton.app.cards.CardDeck;
+import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.Direction;
 import inf112.skeleton.app.Location;
 
@@ -18,25 +18,19 @@ public class Robot extends Entity {
         direction = Direction.UP;
     }
 
-    public void executeRegister() {
-        for (int i = 0; i < register.getSize(); i++) {
-            move(register.getCard(i));
-        }
-        register.clearDeck();
-    }
-
+    /**
+     * Executes the next associated move in the register depending on the card.
+     */
     public void executeNext() {
         System.out.println("Moved once.");
         move(register.getCard(0));
         register.remove(0);
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
+    /**
+     * Moves the robot according to the cardvalue of the card
+     * @param card
+     */
     public void move(Card card) {
         switch (card.getCardValue()) {
             case F1:
@@ -65,6 +59,10 @@ public class Robot extends Entity {
         }
     }
 
+    /**
+     * Moves the robot forward steps times. Uses the direction of the robot to know which way is forward
+     * @param steps
+     */
     public void moveForward(int steps) {
         for (int i = 0; i < steps; i++) {
             int x = this.getLocation().getX();
@@ -72,21 +70,25 @@ public class Robot extends Entity {
 
             switch (direction) {
                 case UP:
-                    this.setLocation(new Location(x + 1, y));
+                    this.setLocation(new Location(x, y + 1));
                     break;
                 case DOWN:
-                    this.setLocation(new Location(x - 1, y));
+                    this.setLocation(new Location(x, y -1));
                     break;
                 case LEFT:
-                    this.setLocation(new Location(x, y - 1));
+                    this.setLocation(new Location(x - 1, y));
                     break;
                 case RIGHT:
-                    this.setLocation(new Location(x, y + 1));
+                    this.setLocation(new Location(x + 1, y));
                     break;
             }
         }
     }
 
+    /**
+     * Moves the robot backward steps times. Uses the direction of the robot to know which way is forward
+     * @param steps
+     */
     public void moveBackward(int steps) {
         for (int i = 0; i < steps; i++) {
             int x = this.getLocation().getX();
@@ -94,28 +96,31 @@ public class Robot extends Entity {
 
             switch (direction) {
                 case UP:
-                    this.setLocation(new Location(x - 1, y));
+                    this.setLocation(new Location(x, y - 1));
                     break;
                 case DOWN:
-                    this.setLocation(new Location(x + 1, y));
-                    break;
-                case LEFT:
                     this.setLocation(new Location(x, y + 1));
                     break;
+                case LEFT:
+                    this.setLocation(new Location(x + 1, y));
+                    break;
                 case RIGHT:
-                    this.setLocation(new Location(x, y - 1));
+                    this.setLocation(new Location(x - 1, y));
                     break;
             }
         }
     }
 
     public void rotateLeft(int steps) {
-        setDirection(Direction.rotateLeft(this.direction));
+        for (int i = 1; i <= steps; i++) {
+            setDirection(Direction.rotateLeft(this.direction));
+        }
     }
 
-
     public void rotateRight(int steps) {
-        setDirection(Direction.rotateRight(this.direction));
+        for (int i = 1; i <= steps; i++) {
+            setDirection(Direction.rotateRight(this.direction));
+        }
     }
 
 
