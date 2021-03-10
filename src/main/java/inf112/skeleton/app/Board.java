@@ -280,21 +280,21 @@ public class Board extends InputAdapter implements IBoard {
         int x = activePlayer.getRobot().getLocation().getX();
         int y = activePlayer.getRobot().getLocation().getY();
 
-        if (intCode == Input.Keys.UP && !(y == MAP_SIZE_Y - 1)) {
+        if (intCode == Input.Keys.UP) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x, y+1), false);
+            activePlayer.getRobot().moveForward(1);
         }
-        if (intCode == Input.Keys.DOWN && !(y == 0)) {
+        if (intCode == Input.Keys.DOWN) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x, y-1), false);
+            activePlayer.getRobot().moveBackward(1);
         }
-        if (intCode == Input.Keys.LEFT && !(x == 0)) {
+        if (intCode == Input.Keys.LEFT) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x-1, y), false);
+            activePlayer.getRobot().rotateLeft(1);
         }
-        if (intCode == Input.Keys.RIGHT && !(x == MAP_SIZE_X - 1)) {
+        if (intCode == Input.Keys.RIGHT) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x+1, y), false);
+            activePlayer.getRobot().rotateRight(1);
         }
         return false;
     }
