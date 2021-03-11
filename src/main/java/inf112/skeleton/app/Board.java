@@ -39,7 +39,7 @@ public class Board extends InputAdapter implements IBoard {
     public final int MAP_SIZE_X = 12;
     public final int MAP_SIZE_Y = 12;
 
-    private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
+    private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell, robotUpCell, robotDownCell, robotRightCell, robotLeftCell;
 
     // Variables for the current active player
     protected AbstractPlayer activePlayer;
@@ -53,7 +53,9 @@ public class Board extends InputAdapter implements IBoard {
     // cards
     protected ProgramCardDeck programCardDeck;
 
-    int time = 1;
+    int numberOfPlayers = players.size();
+    int time = 1; // tracks time in game.
+    int round = 0; // round Nr
 
     public Board(Queue<AbstractPlayer> players) {
         this.players = players;
@@ -103,7 +105,10 @@ public class Board extends InputAdapter implements IBoard {
         robotCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
         robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
-
+        robotUpCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(0);
+        robotDownCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(2);
+        robotRightCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(3);
+        robotLeftCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(1);
         // Active player
         activePlayer = players.peek();
         assert activePlayer != null;
@@ -165,7 +170,7 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
-        renderPlayerTextures(activePlayer);
+        renderPlayerTextures();
 
         if (checkIfWon()) {
             System.out.println("Player won!");
@@ -204,26 +209,27 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     @Override
-    public void renderPlayerTextures(AbstractPlayer player) {
+    public void renderPlayerTextures() {
+        for (AbstractPlayer player : players) {
+            int x = player.getRobot().getLocation().getX();
+            int y = player.getRobot().getLocation().getY();
+            Direction dir = player.getRobot().getDirection();
 
-        int x = player.getRobot().getLocation().getX();
-        int y = player.getRobot().getLocation().getY();
-        Direction dir = player.getRobot().getDirection();
-
-        if (checkIfWon()) {
-            robotLayer.setCell(x, y, robotWonCell);
-        } else if ((x == 0) && (y == 11)) {
-            robotLayer.setCell(x, y, robotDiedCell);
-        } else {
-            if (dir == Direction.DOWN) {
-                robotLayer.setCell(x, y, robotCell.setRotation(2));
-            } else if (dir == Direction.RIGHT) {
-                robotLayer.setCell(x, y, robotCell.setRotation(3));
-            } else if (dir == Direction.LEFT) {
-                robotLayer.setCell(x, y, robotCell.setRotation(1));
-            } else { robotLayer.setCell(x, y, robotCell.setRotation(0)); }
-
-
+            if (checkIfWon()) {
+                robotLayer.setCell(x, y, robotWonCell);
+            } else if ((x == 0) && (y == 11)) {
+                robotLayer.setCell(x, y, robotDiedCell);
+            } else {
+                if (dir == Direction.DOWN) {
+                    robotLayer.setCell(x, y, robotDownCell);
+                } else if (dir == Direction.RIGHT) {
+                    robotLayer.setCell(x, y, robotRightCell);
+                } else if (dir == Direction.LEFT) {
+                    robotLayer.setCell(x, y, robotLeftCell);
+                } else {
+                    robotLayer.setCell(x, y, robotUpCell);
+                }
+            }
         }
     }
 

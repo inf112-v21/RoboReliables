@@ -60,5 +60,5 @@ public interface IBoard extends ApplicationListener {
      * A player can either be alive, dead or has won. The proper sprite is selected based on
      * these criteria.
      */
-    void renderPlayerTextures(AbstractPlayer player);
+    void renderPlayerTextures();
 }
