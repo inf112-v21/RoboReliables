@@ -1,7 +1,7 @@
 package inf112.skeleton.app.player;
 
-import inf112.skeleton.app.Cards.Card;
-import inf112.skeleton.app.Cards.CardDeck;
+import inf112.skeleton.app.cards.Card;
+import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.entity.Robot;
 
 import java.util.List;
@@ -23,6 +23,12 @@ public interface IAbstractPlayer {
     List<Card> getHand();
 
     /**
+     * Get the number of cards in a player's hand
+     * @return the number of cards
+     */
+    int getHandSize();
+
+    /**
      * Add an existing card to a player's hand.
      * @param card the card
      */
@@ -41,4 +47,18 @@ public interface IAbstractPlayer {
      */
     Robot getRobot();
 
+    /**
+     * Print a player's hand in an easily readable format.
+     */
+    void printHand();
+
+    /**
+     * View program cards that are dealt to players hand, then pick one card at a time. (in the terminal).
+     * cards are placed by pick-order in the robot-register.
+     * Loops until all picks have been executed.
+     *
+     * @param cardPicks: (int) number of cards player must pick from hand (dealt cards).
+     * @return register: (CardDeck) an updated -ready to execute- robot-register.
+     */
+    CardDeck pickCards(int cardPicks);
 }

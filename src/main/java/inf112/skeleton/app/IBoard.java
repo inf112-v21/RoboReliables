@@ -16,8 +16,9 @@ public interface IBoard extends ApplicationListener {
     /**
      *
      * @param newLocation
+     * @param testing says whether or not the function is used for testing
      */
-    void setActivePlayerRobotLocation(Location newLocation);
+    void setActivePlayerRobotLocation(Location newLocation, boolean testing);
 
     /**
      *
@@ -37,20 +38,27 @@ public interface IBoard extends ApplicationListener {
 
     /**
      *
+     * @param newPlayer
      */
-    void initializeFlags();
+    void setActivePlayer(AbstractPlayer newPlayer);
 
     /**
-     *
-     * @return
+     * Checks whether or not the active player is done with their turn.
+     * @return true if the active player has moved, and false if not.
      */
     boolean activePlayerHasMoved();
 
     /**
      * Checks if a player has won by checking that the player has gone through
      * the flags in the appropriate order.
-     *
-     * @return true if won
+     * @return true if won, false if not.
      */
     boolean checkIfWon();
+
+    /**
+     * Chooses which sprite of a given player to render based on the status of that player.
+     * A player can either be alive, dead or has won. The proper sprite is selected based on
+     * these criteria.
+     */
+    void renderPlayerTextures(AbstractPlayer player);
 }

@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import inf112.skeleton.app.RoboRally;
 

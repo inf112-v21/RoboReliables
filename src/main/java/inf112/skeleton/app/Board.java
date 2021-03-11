@@ -15,11 +15,10 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import inf112.skeleton.app.entity.Flag;
+import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.player.AbstractPlayer;
-import inf112.skeleton.app.player.Player;
+import inf112.skeleton.app.player.TestPlayer;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -42,22 +41,19 @@ public class Board extends InputAdapter implements IBoard {
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell;
 
-    // Variables for the flags
-    private final int nrOfFlags = 1;
-    private final ArrayList<Flag> flags = new ArrayList<>(nrOfFlags);
-
     // Variables for the current active player
-    private AbstractPlayer activePlayer = new Player();
-    protected Location activePlayerRobotLocation = activePlayer.getRobot().getLocation();
+    protected AbstractPlayer activePlayer;
     protected Location activePlayerInitialRobotLocation;
 
     protected Queue<AbstractPlayer> players = new LinkedList<>();
 
-    private boolean turnIsOver = false;
+    protected boolean turnIsOver = true;
+    private boolean hasStartedMoving = false;
 
-//  HashMap of all entities and their locations. Parsed from layers on startup.
-//  private HashMap<Location, ArrayList<Entity>> entities = new HashMap<>();
+    // cards
+    protected ProgramCardDeck programCardDeck;
 
+    int time = 1;
 
     public Board(Queue<AbstractPlayer> players) {
         this.players = players;
@@ -75,11 +71,6 @@ public class Board extends InputAdapter implements IBoard {
         return MAP_SIZE_Y;
     }
 
-    @Override
-    public void setActivePlayerRobotLocation(Location newLocation) {
-        activePlayerRobotLocation = newLocation;
-    }
-
     /**
      * Initializes the camera and renderer as well as sets the textures for the map and various
      * layers. Also assigns the textures of the player sprite.
@@ -87,15 +78,15 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        font = new BitmapFont();
+        font  = new BitmapFont();
         font.setColor(Color.RED);
 
         // Sets the map and various layers
         map = new TmxMapLoader().load("gameboard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
-        flagLayer = (TiledMapTileLayer) map.getLayers().get("flag");
-        holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
+        flagLayer  = (TiledMapTileLayer) map.getLayers().get("flag");
+        holeLayer  = (TiledMapTileLayer) map.getLayers().get("hole");
 
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
@@ -109,25 +100,46 @@ public class Board extends InputAdapter implements IBoard {
 
         // Splits the textures of the player into different states and sets them to the given Cell
         TextureRegion[][] robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
-        robotCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
-        robotWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
+        robotCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
+        robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
         robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
 
-        initializeFlags();
-        activePlayerInitialRobotLocation = activePlayerRobotLocation;
+        // Active player
+        activePlayer = players.peek();
+        assert activePlayer != null;
+        activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
+
+        // cards
+        programCardDeck = new ProgramCardDeck();
 
         Gdx.input.setInputProcessor(this);
     }
 
-    /**
-     *
-     */
-
     @Override
     public void startNewRound() {
-        turnIsOver = false;
         switchActivePlayer();
-        activePlayerInitialRobotLocation = activePlayerRobotLocation;
+        activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
+
+        programCardDeck.dealCard(getActivePlayer(), 9);
+        getActivePlayer().getRobot().updateRegister(getActivePlayer().pickCards(5));
+        System.out.println("Picked cards:");
+        getActivePlayer().getRobot().getRegister().printDeck();
+    }
+
+    @Override
+    public void setActivePlayerRobotLocation(Location newLocation, boolean testing) {
+        int x = activePlayer.getRobot().getLocation().getX();
+        int y = activePlayer.getRobot().getLocation().getY();
+
+        if (!testing)
+            robotLayer.setCell(x, y, null);
+
+        activePlayer.getRobot().setLocation(newLocation);
+    }
+
+    @Override
+    public void setActivePlayer(AbstractPlayer newPlayer) {
+        activePlayer = newPlayer;
     }
 
     @Override
@@ -137,17 +149,10 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void switchActivePlayer() {
-        System.out.println("Switching active player. Next player up: ");
-        AbstractPlayer previousActivePlayer = players.poll();
+        AbstractPlayer previousActivePlayer = getActivePlayer();
+        players.remove(players.peek());
         players.add(previousActivePlayer);
-        activePlayer = players.peek();
-        System.out.println(activePlayer);
-    }
-
-    @Override
-    public void initializeFlags() {
-        for (int i = 0; i < nrOfFlags; i++)
-            flags.add(new Flag(new Location(0, 0)));
+        setActivePlayer(players.peek());
     }
 
     @Override
@@ -160,38 +165,82 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
-        int x = activePlayerRobotLocation.getX();
-        int y = activePlayerRobotLocation.getY();
-
-        if ((x == 11) && (y == 11)) {
-            robotLayer.setCell(x, y, robotWonCell);
-        } else if ((x == 0) && (y == 11)) {
-            robotLayer.setCell(x, y, robotDiedCell);
-        } else {
-            robotLayer.setCell(x, y, robotCell);
-        }
+        renderPlayerTextures(activePlayer);
 
         if (checkIfWon()) {
             System.out.println("Player won!");
             System.out.close();
         }
 
-        turnIsOver = activePlayerHasMoved();
-        if (turnIsOver) {
-            System.out.println("Turn is over");
-            startNewRound();
+
+
+
+        if (!(activePlayer instanceof TestPlayer)) {
+            if (turnIsOver)
+                startNewRound();
+
+            if (time % 60 == 0) {
+                if (activePlayer.getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
+
+                    int x = activePlayer.getRobot().getLocation().getX();
+                    int y = activePlayer.getRobot().getLocation().getY();
+                    robotLayer.setCell(x, y, null);
+                    System.out.println("Execute register");
+                    programCardDeck.addToTopOfDeck(activePlayer.getRobot().getRegister().getCard(0));
+                    activePlayer.getRobot().executeNext();
+                    setActivePlayerRobotLocation(activePlayer.getRobot().getLocation(), false);
+
+                    programCardDeck.shuffle();
+                    hasStartedMoving = true;
+                }
+            }
         }
+        if (activePlayer.getRobot().getRegister().getSize() == 0) {
+            hasStartedMoving = false;
+        }
+        time++;
+        turnIsOver = activePlayerHasMoved();
+
     }
 
     @Override
+    public void renderPlayerTextures(AbstractPlayer player) {
+
+        int x = player.getRobot().getLocation().getX();
+        int y = player.getRobot().getLocation().getY();
+        Direction dir = player.getRobot().getDirection();
+
+        if (checkIfWon()) {
+            robotLayer.setCell(x, y, robotWonCell);
+        } else if ((x == 0) && (y == 11)) {
+            robotLayer.setCell(x, y, robotDiedCell);
+        } else {
+            if (dir == Direction.DOWN) {
+                robotLayer.setCell(x, y, robotCell.setRotation(2));
+            } else if (dir == Direction.RIGHT) {
+                robotLayer.setCell(x, y, robotCell.setRotation(3));
+            } else if (dir == Direction.LEFT) {
+                robotLayer.setCell(x, y, robotCell.setRotation(1));
+            } else { robotLayer.setCell(x, y, robotCell.setRotation(0)); }
+
+
+        }
+    }
+
+
+    @Override
     public boolean activePlayerHasMoved() {
-        return activePlayerRobotLocation.getX() != activePlayerInitialRobotLocation.getX() ||
-                activePlayerRobotLocation.getY() != activePlayerInitialRobotLocation.getY();
+        if (!(activePlayer instanceof TestPlayer))
+            return false;
+
+        return activePlayer.getRobot().getRegister().getSize() == 0;
     }
 
     @Override
     public boolean checkIfWon() {
-        return (activePlayerRobotLocation.getX() == 11) && (activePlayerRobotLocation.getY() == 11);
+        // TODO: check for the location of the flag and the order of movement from flag to flag instead of static position.
+        return (activePlayer.getRobot().getLocation().getX() == 11) &&
+               (activePlayer.getRobot().getLocation().getY() == 11);
     }
 
     @Override
@@ -225,73 +274,28 @@ public class Board extends InputAdapter implements IBoard {
      */
     @Override
     public boolean keyUp(int intCode) {
-        int x = activePlayerRobotLocation.getX();
-        int y = activePlayerRobotLocation.getY();
+        if (!(activePlayer instanceof TestPlayer))
+            return false;
 
-        if (intCode == Input.Keys.UP && !(y == MAP_SIZE_Y - 1)) {
+        int x = activePlayer.getRobot().getLocation().getX();
+        int y = activePlayer.getRobot().getLocation().getY();
+
+        if (intCode == Input.Keys.UP) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x, y+1));
+            activePlayer.getRobot().moveForward(1);
         }
-        if (intCode == Input.Keys.DOWN && !(y == 0)) {
+        if (intCode == Input.Keys.DOWN) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x, y-1));
+            activePlayer.getRobot().moveBackward(1);
         }
-        if (intCode == Input.Keys.LEFT && !(x == 0)) {
+        if (intCode == Input.Keys.LEFT) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x-1, y));
+            activePlayer.getRobot().rotateLeft(1);
         }
-        if (intCode == Input.Keys.RIGHT && !(x == MAP_SIZE_X - 1)) {
+        if (intCode == Input.Keys.RIGHT) {
             robotLayer.setCell(x, y, null);
-            setActivePlayerRobotLocation(new Location(x+1, y));
+            activePlayer.getRobot().rotateRight(1);
         }
         return false;
     }
 }
-
-/*
-    public void layerReader(TiledMapTileLayer layer) {
-        for (int x = 0; x < layer.getWidth(); x++) {
-            for (int y = 0; y < layer.getHeight(); y++) {
-                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
-                if (cell != null) {
-                    Location location = new Location(x, y);
-                    assignEntities(location, cell);
-                }
-            }
-        }
-    }
-
-*/
-
-/*    public void checkCell(int x, int y) {
-        for (int i = 0; i < map.getLayers().size(); i++) {
-            TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(i);
-            layer.getCell(x, y);
-        }
-    }*/
-/*
-
-    public void assignEntities(Location location, TiledMapTileLayer.Cell cell) {
-        Entity entity;
-        switch (cell.getTile().getId()) {
-            case 6:
-                entity = new Hole(location);
-                break;
-            case 55:
-                entity = new Flag(location);
-                break;
-            default:
-                entity = null;
-        }
-        if (entity != null) {
-            addEntityToBoard(location, entity);
-        }
-    }
-
-    public void addEntityToBoard(Location location, Entity entity) {
-        ArrayList<Entity> entityList = entities.getOrDefault(location, new ArrayList<>());
-        entityList.add(entity);
-    }
-}
-*/
-

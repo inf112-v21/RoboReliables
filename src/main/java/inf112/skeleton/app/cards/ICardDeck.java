@@ -1,8 +1,6 @@
-package inf112.skeleton.app.Cards;
+package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.player.AbstractPlayer;
-
-import java.util.ArrayList;
 
 public interface ICardDeck {
     /**
@@ -23,11 +21,19 @@ public interface ICardDeck {
      */
     void populate(CardValue cardValue, int numberOfCards);
 
+    void addToDeck(Card card);
+
     /**
      * Add a card to the top of the deck.
      * @param card the card to add
      */
     void addToTopOfDeck(Card card);
+
+    /**
+     * Add a deck of cards to the top of another deck.
+     * @param cardDeck the card deck to add
+     */
+    void addToTopOfDeck(CardDeck cardDeck);
 
     /**
      * Deal a card from the deck to a player.
@@ -66,5 +72,9 @@ public interface ICardDeck {
      * Print the extended values of the cards in a deck.
      */
     void printDeck();
+
+    void clearDeck();
+
+    void remove(int i);
 }
 

@@ -12,10 +12,5 @@ public interface IEntity {
     Location getLocation();
 
     void setLocation(Location newLocation);
-
-    /**
-     *
-     */
-    void updatePosition(Location location, TiledMapTileLayer layer);
 }
 

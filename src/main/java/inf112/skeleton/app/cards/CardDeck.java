@@ -1,4 +1,4 @@
-package inf112.skeleton.app.Cards;
+package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.player.AbstractPlayer;
 
@@ -7,7 +7,7 @@ import java.util.Collections;
 
 public class CardDeck implements ICardDeck {
 
-    ArrayList<Card> cards;
+    private ArrayList<Card> cards;
 
     public CardDeck() {
         cards = new ArrayList<>();
@@ -30,8 +30,20 @@ public class CardDeck implements ICardDeck {
     }
 
     @Override
+    public void addToDeck(Card card) {
+        cards.add(card);
+    }
+
+    @Override
     public void addToTopOfDeck(Card card) {
         cards.add(0, card);
+    }
+
+    @Override
+    public void addToTopOfDeck(CardDeck cardDeck) {
+        for (int i = 0; i < cardDeck.getSize(); i++) {
+            cards.add(0, cardDeck.getCard(0));
+        }
     }
 
     @Override
@@ -68,6 +80,18 @@ public class CardDeck implements ICardDeck {
         for (int i = 0; i < cards.size(); i++) {
             System.out.println((i + 1) + ": " + CardValue.extendedCardValue(cards.get(i)));
         }
+    }
+
+    @Override
+    public void clearDeck() {
+        for (int i = 0; i < cards.size(); i++) {
+            cards.remove(i);
+        }
+    }
+
+    @Override
+    public void remove(int i) {
+        cards.remove(i);
     }
 }
 

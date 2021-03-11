@@ -5,14 +5,17 @@ package inf112.skeleton.app;
  * direction of a robot either left or right.
  */
 public enum Direction {
-    UP, DOWN, LEFT, RIGHT;
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT;
 
     /**
      * Rotates the robot one step to the left.
      * @param direction The current direction the robot is facing before rotating.
      * @return The new direction the robot is facing.
      */
-    public Direction rotateLeft(Direction direction) {
+    public static Direction rotateLeft(Direction direction) {
         try {
         switch (direction) {
             case UP:
@@ -35,7 +38,7 @@ public enum Direction {
      * @param direction The current direction the robot is facing before rotating.
      * @return The new direction the robot is facing.
      */
-    public Direction rotateRight(Direction direction) {
+    public static Direction rotateRight(Direction direction) {
         try {
             switch (direction) {
                 case UP:
