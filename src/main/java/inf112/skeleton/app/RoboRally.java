@@ -2,10 +2,12 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
 import inf112.skeleton.app.player.TestPlayer;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -13,8 +15,10 @@ import java.util.Queue;
  * Sets up gdx to create a new game of RoboRally.
  */
 public class RoboRally {
-    private final static int nrOfPlayers = 4; // Pre-determined number of players
+    private final static int nrOfPlayers = 1; // Pre-determined number of players
+    private final static int nrOfFlags = 4;
     private final Queue<AbstractPlayer> players = new LinkedList<>();
+    private final ArrayList<Flag> flags = new ArrayList<>();
 
     public RoboRally() {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
@@ -22,8 +26,7 @@ public class RoboRally {
         cfg.setWindowedMode(1000, 1000);
         cfg.disableAudio(true);
 
-        addPlayers(nrOfPlayers);
-
+        addPlayers();
 
         Board board = new Board(players);
 
@@ -34,14 +37,11 @@ public class RoboRally {
     /**
      * Initializes a specified amount of players and adds them to a list of players.
      * To test movement without cards: Change Player to TestPlayer.
-     * @param nrOfPlayers
      */
-    public void addPlayers(int nrOfPlayers) {
-        for (int i = 0; i < nrOfPlayers; i++) {
-            players.add(new Player(new Location(0,i+1))); // Change ´new Player´ with ´new TestPlayer´
-        }
+    public void addPlayers() {
+        for (int i = 0; i < nrOfPlayers; i++)
+            players.add(new TestPlayer(new Location(0,i+1))); // Change ´new Player´ with ´new TestPlayer´
     }
-
 
 }
 

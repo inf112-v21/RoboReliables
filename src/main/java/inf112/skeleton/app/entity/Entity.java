@@ -10,9 +10,12 @@ import inf112.skeleton.app.Location;
 public abstract class Entity implements IEntity {
     private Location location;
 
+    public Entity() {
+
+    }
+
     public Entity(Location location) {
         this.location = location;
-
     }
 
     @Override
