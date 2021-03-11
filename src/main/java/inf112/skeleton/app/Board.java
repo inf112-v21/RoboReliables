@@ -56,6 +56,8 @@ public class Board extends InputAdapter implements IBoard {
     int numberOfPlayers = players.size();
     int time = 1; // tracks time in game.
     int round = 0; // round Nr
+    int numberOfPhases = 5;
+    int currentPhase;
 
     public Board(Queue<AbstractPlayer> players) {
         this.players = players;
@@ -122,8 +124,8 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void startNewRound() {
-        switchActivePlayer();
-        activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
+
+//        activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
 
         programCardDeck.dealCard(getActivePlayer(), 9);
         getActivePlayer().getRobot().updateRegister(getActivePlayer().pickCards(5));
@@ -164,23 +166,53 @@ public class Board extends InputAdapter implements IBoard {
     public void resize(int width, int height) {
     }
 
-    @Override
-    public void render() {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        renderer.render();
-
-        renderPlayerTextures();
-
+    public void dealCardsToPlayers() {
+        for (AbstractPlayer player : players) {
+            programCardDeck.dealCard(player, 9);
+            player.getRobot().updateRegister(player.pickCards(5));
+            System.out.println("Picked cards:");
+            player.getRobot().getRegister().printDeck();
+        }
+    }
+    public void executeRobotRegister() {
+        for (AbstractPlayer player : players) {
+            int x = player.getRobot().getLocation().getX();
+            int y = player.getRobot().getLocation().getY();
+            robotLayer.setCell(x, y, null);
+            System.out.println("Execute register");
+            programCardDeck.addToTopOfDeck(player.getRobot().getRegister().getCard(0));
+            player.getRobot().executeNext();
+        }
+    }
+    public void gameLoop() {
+        startNewRound();
+        dealCardsToPlayers();
         if (checkIfWon()) {
             System.out.println("Player won!");
             System.out.close();
         }
+        if (time % 60 == 0) {
+            executeRobotRegister();
+        }
+
+        switchActivePlayer();
+        time++;
+    }
+
+
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+        renderPlayerTextures();
+        gameLoop();
+        renderer.render();
 
 
 
 
-        if (!(activePlayer instanceof TestPlayer)) {
+
+/*        if (!(activePlayer instanceof TestPlayer)) {
             if (turnIsOver)
                 startNewRound();
 
@@ -203,8 +235,8 @@ public class Board extends InputAdapter implements IBoard {
         if (activePlayer.getRobot().getRegister().getSize() == 0) {
             hasStartedMoving = false;
         }
-        time++;
         turnIsOver = activePlayerHasMoved();
+        }*/
 
     }
 
@@ -246,7 +278,7 @@ public class Board extends InputAdapter implements IBoard {
     public boolean checkIfWon() {
         // TODO: check for the location of the flag and the order of movement from flag to flag instead of static position.
         return (activePlayer.getRobot().getLocation().getX() == 11) &&
-               (activePlayer.getRobot().getLocation().getY() == 11);
+                (activePlayer.getRobot().getLocation().getY() == 11);
     }
 
     @Override
