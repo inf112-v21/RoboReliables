@@ -5,13 +5,14 @@ import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.Direction;
 import inf112.skeleton.app.Location;
+import inf112.skeleton.app.Board;
 
 /**
  * Maps the robots position on the board
  */
 public class Robot extends Entity {
     private Direction direction;
-    private CardDeck register = new ProgramCardDeck();
+    private CardDeck register = new CardDeck();
 
     public Robot(Location location) {
         super(location);
@@ -70,16 +71,20 @@ public class Robot extends Entity {
 
             switch (direction) {
                 case UP:
-                    this.setLocation(new Location(x, y + 1));
+                    if (!(y == Board.MAP_SIZE_Y-1)) {
+                    this.setLocation(new Location(x, y + 1)); }
                     break;
                 case DOWN:
-                    this.setLocation(new Location(x, y -1));
+                    if (!(y == 0)) {
+                    this.setLocation(new Location(x, y -1)); }
                     break;
                 case LEFT:
-                    this.setLocation(new Location(x - 1, y));
+                    if (!(x == 0)) {
+                    this.setLocation(new Location(x - 1, y)); }
                     break;
                 case RIGHT:
-                    this.setLocation(new Location(x + 1, y));
+                    if (!(y == Board.MAP_SIZE_Y-1)) {
+                    this.setLocation(new Location(x + 1, y)); }
                     break;
             }
         }
@@ -96,16 +101,20 @@ public class Robot extends Entity {
 
             switch (direction) {
                 case UP:
-                    this.setLocation(new Location(x, y - 1));
+                    if (!(y == 0)) {
+                        this.setLocation(new Location(x, y - 1)); }
                     break;
                 case DOWN:
-                    this.setLocation(new Location(x, y + 1));
+                    if (!(y == Board.MAP_SIZE_Y-1)) {
+                        this.setLocation(new Location(x, y + 1)); }
                     break;
                 case LEFT:
-                    this.setLocation(new Location(x + 1, y));
+                    if (!(y == Board.MAP_SIZE_Y-1)) {
+                        this.setLocation(new Location(x + 1, y)); }
                     break;
                 case RIGHT:
-                    this.setLocation(new Location(x - 1, y));
+                    if (!(y == 0)) {
+                        this.setLocation(new Location(x - 1, y)); }
                     break;
             }
         }

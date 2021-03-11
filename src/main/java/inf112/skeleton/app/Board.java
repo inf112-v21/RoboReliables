@@ -36,8 +36,8 @@ public class Board extends InputAdapter implements IBoard {
 
     private OrthogonalTiledMapRenderer renderer;
 
-    public final int MAP_SIZE_X = 12;
-    public final int MAP_SIZE_Y = 12;
+    public static final int MAP_SIZE_X = 12;
+    public static final int MAP_SIZE_Y = 12;
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell, robotUpCell, robotDownCell, robotRightCell, robotLeftCell;
 
@@ -167,35 +167,38 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     public void dealCardsToPlayers() {
-        for (AbstractPlayer player : players) {
-            programCardDeck.dealCard(player, 9);
-            player.getRobot().updateRegister(player.pickCards(5));
-            System.out.println("Picked cards:");
-            player.getRobot().getRegister().printDeck();
+        for (int i = 1; i <= numberOfPlayers; i++) {
+            programCardDeck.dealCard(activePlayer, 9);
+            activePlayer.getRobot().updateRegister(activePlayer.pickCards(5));
+            System.out.println("Player " + i + ", Picked cards:");
+            activePlayer.getRobot().getRegister().printDeck();
+            switchActivePlayer();
         }
     }
     public void executeRobotRegister() {
-        for (AbstractPlayer player : players) {
-            int x = player.getRobot().getLocation().getX();
-            int y = player.getRobot().getLocation().getY();
-            robotLayer.setCell(x, y, null);
-            System.out.println("Execute register");
-            programCardDeck.addToTopOfDeck(player.getRobot().getRegister().getCard(0));
-            player.getRobot().executeNext();
-        }
+
+        int x = activePlayer.getRobot().getLocation().getX();
+        int y = activePlayer.getRobot().getLocation().getY();
+        robotLayer.setCell(x, y, null);
+        System.out.println("DeckSize: " + programCardDeck.getSize());
+        System.out.println("Register: " + activePlayer.getRobot().getRegister().getSize());
+        System.out.println(activePlayer + " Execute register " + activePlayer.getRobot().getRegister().getCard(0));
+        programCardDeck.addToTopOfDeck(activePlayer.getRobot().getRegister().getCard(0));
+        activePlayer.getRobot().executeNext();
+
     }
     public void gameLoop() {
-        startNewRound();
-        dealCardsToPlayers();
         if (checkIfWon()) {
             System.out.println("Player won!");
             System.out.close();
         }
-        if (time % 60 == 0) {
-            executeRobotRegister();
+        if (activePlayer.getRobot().getRegister().getSize() == 0) {
+            dealCardsToPlayers();
         }
-
-        switchActivePlayer();
+        if (time % 10 == 0) {
+            executeRobotRegister();
+            switchActivePlayer();
+        }
         time++;
     }
 
