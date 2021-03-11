@@ -10,17 +10,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import inf112.skeleton.app.cards.ProgramCardDeck;
+import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.TestPlayer;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 /**
  * The Board.java class is responsible for creating the board and displaying a graphical
@@ -46,6 +50,7 @@ public class Board extends InputAdapter implements IBoard {
     protected Location activePlayerInitialRobotLocation;
 
     protected Queue<AbstractPlayer> players = new LinkedList<>();
+    protected ArrayList<Flag> flags = new ArrayList<>();
 
     protected boolean turnIsOver = true;
     private boolean hasStartedMoving = false;
@@ -57,8 +62,14 @@ public class Board extends InputAdapter implements IBoard {
     int time = 1; // tracks time in game.
     int round = 0; // round Nr
 
+
     public Board(Queue<AbstractPlayer> players) {
         this.players = players;
+    }
+
+    public Board(Queue<AbstractPlayer> players, ArrayList<Flag> flags) {
+        this.players = players;
+        this.flags = flags;
     }
 
     public Board() {}
@@ -117,8 +128,69 @@ public class Board extends InputAdapter implements IBoard {
         // cards
         programCardDeck = new ProgramCardDeck();
 
+        setFlagLayer();
+
+        for (Flag flag : flags) {
+            System.out.println("Flag #" + flag.getFlagNumber() + " @ x " + flag.getLocation().getX() + " y " + flag.getLocation().getY());
+        }
+
+        System.out.println("flags size: " + flags.size());
         Gdx.input.setInputProcessor(this);
     }
+
+    public void setLayers() {
+        setFlagLayer();
+        setBoardLayer();
+        setHoleLayer();
+    }
+
+    public void setFlagLayer() {
+        for (int x = 0; x < getMAP_SIZE_X(); x++) {
+            for (int y = 0; y < getMAP_SIZE_Y(); y++) {
+                if (flagLayer.getCell(x, y) != null) {
+                    int flagIndex = flagLayer.getCell(x,y).getTile().getId();
+                    switch(flagIndex) {
+                        case 55:
+                            flagIndex = 1;
+                            break;
+                        case 63:
+                            flagIndex = 2;
+                            break;
+                        case 71:
+                            flagIndex = 3;
+                            break;
+                        case 79:
+                            flagIndex = 4;
+                            break;
+                    }
+
+                    System.out.println("Found flag @ x " + x + " y " + y);
+                    flags.add(new Flag(flagIndex, new Location(x, y)));
+                }
+            }
+        }
+    }
+
+    public void setBoardLayer() {
+        for (int x = 0; x < getMAP_SIZE_X(); x++) {
+            for (int y = 0; y < getMAP_SIZE_Y(); y++) {
+                if (boardLayer.getCell(x, y) != null) {
+
+                }
+            }
+        }
+    }
+
+    public void setHoleLayer() {
+        for (int x = 0; x < getMAP_SIZE_X(); x++) {
+            for (int y = 0; y < getMAP_SIZE_Y(); y++) {
+                if (holeLayer.getCell(x, y) != null) {
+
+                }
+            }
+        }
+    }
+
 
     @Override
     public void startNewRound() {
@@ -178,8 +250,6 @@ public class Board extends InputAdapter implements IBoard {
         }
 
 
-
-
         if (!(activePlayer instanceof TestPlayer)) {
             if (turnIsOver)
                 startNewRound();
@@ -206,7 +276,10 @@ public class Board extends InputAdapter implements IBoard {
         time++;
         turnIsOver = activePlayerHasMoved();
 
+        checkIfActivePlayerOnFlag();
+        checkIfWon();
     }
+
 
     @Override
     public void renderPlayerTextures() {
@@ -233,6 +306,13 @@ public class Board extends InputAdapter implements IBoard {
         }
     }
 
+    public void checkIfActivePlayerOnFlag() {
+        for (Flag flag : flags) {
+            if (flag.getLocation().equals(activePlayer.getRobot().getLocation()))
+                if (canVisitFlag(flag))
+                    activePlayer.addToVisitedFlags(flag);
+        }
+    }
 
     @Override
     public boolean activePlayerHasMoved() {
@@ -243,10 +323,16 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     @Override
+    public boolean canVisitFlag(Flag flag) {
+        if (activePlayer.getVisitedFlags().size() > 0)
+                return flag.getFlagNumber() > activePlayer.getVisitedFlags().size();
+        return true;
+    }
+
+    @Override
     public boolean checkIfWon() {
-        // TODO: check for the location of the flag and the order of movement from flag to flag instead of static position.
-        return (activePlayer.getRobot().getLocation().getX() == 11) &&
-               (activePlayer.getRobot().getLocation().getY() == 11);
+        System.out.println("active player visited flags size: " + activePlayer.getVisitedFlags().size());
+        return activePlayer.getVisitedFlags().size() == flags.size();
     }
 
     @Override

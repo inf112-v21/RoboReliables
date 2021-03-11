@@ -1,6 +1,7 @@
 package inf112.skeleton.app;
 
 import com.badlogic.gdx.ApplicationListener;
+import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
 
@@ -47,6 +48,13 @@ public interface IBoard extends ApplicationListener {
      * @return true if the active player has moved, and false if not.
      */
     boolean activePlayerHasMoved();
+
+    /**
+     *
+     * @param flag
+     * @return
+     */
+    boolean canVisitFlag(Flag flag);
 
     /**
      * Checks if a player has won by checking that the player has gone through
