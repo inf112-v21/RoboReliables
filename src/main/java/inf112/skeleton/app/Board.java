@@ -167,13 +167,18 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     public void dealCardsToPlayers() {
-        for (int i = 1; i <= numberOfPlayers; i++) {
+        //for (int i = 1; i <= numberOfPlayers; i++)
             programCardDeck.dealCard(activePlayer, 9);
             activePlayer.getRobot().updateRegister(activePlayer.pickCards(5));
-            System.out.println("Player " + i + ", Picked cards:");
+            int cardsLeftOverInHand = activePlayer.getHandSize();
+            for (int i = 0; i < cardsLeftOverInHand; i++) {
+                programCardDeck.addToTopOfDeck(activePlayer.getHand().get(0));
+                activePlayer.getHand().remove(0);
+            }
+            System.out.println("Player, Picked cards:");
             activePlayer.getRobot().getRegister().printDeck();
             switchActivePlayer();
-        }
+
     }
     public void executeRobotRegister() {
 
@@ -195,7 +200,7 @@ public class Board extends InputAdapter implements IBoard {
         if (activePlayer.getRobot().getRegister().getSize() == 0) {
             dealCardsToPlayers();
         }
-        if (time % 10 == 0) {
+        if (time % 60 == 0) {
             executeRobotRegister();
             switchActivePlayer();
         }
@@ -208,6 +213,7 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderPlayerTextures();
+        activePlayer = players.peek();
         gameLoop();
         renderer.render();
 
