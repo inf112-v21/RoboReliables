@@ -19,11 +19,23 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
     private final Robot robot;
     public final static Location abstractLocation = new Location(0,0);
     private ArrayList<Flag> visitedFlags = new ArrayList<>();
+    private String name;
     // ArrayList that contains the cards currently in the player's hand
     private List<Card> hand = new ArrayList<>();
 
-    public AbstractPlayer(Location location) {
+    public AbstractPlayer(Location location, int index) {
         robot = new Robot(location);
+        name = "player " + index;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override

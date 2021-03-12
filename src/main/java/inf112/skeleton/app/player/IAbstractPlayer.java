@@ -19,6 +19,18 @@ public interface IAbstractPlayer {
 
     /**
      *
+     * @param name
+     */
+    void setName(String name);
+
+    /**
+     *
+     * @return
+     */
+    String getName();
+
+    /**
+     *
      * @param flag
      */
     void addToVisitedFlags(Flag flag);

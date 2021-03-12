@@ -130,11 +130,6 @@ public class Board extends InputAdapter implements IBoard {
 
         setFlagLayer();
 
-        for (Flag flag : flags) {
-            System.out.println("Flag #" + flag.getFlagNumber() + " @ x " + flag.getLocation().getX() + " y " + flag.getLocation().getY());
-        }
-
-        System.out.println("flags size: " + flags.size());
         Gdx.input.setInputProcessor(this);
     }
 
@@ -164,7 +159,6 @@ public class Board extends InputAdapter implements IBoard {
                             break;
                     }
 
-                    System.out.println("Found flag @ x " + x + " y " + y);
                     flags.add(new Flag(flagIndex, new Location(x, y)));
                 }
             }
@@ -194,6 +188,8 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void startNewRound() {
+        System.out.println("- It's " + activePlayer.getName() + "'s turn -");
+        System.out.println();
         switchActivePlayer();
         activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
 
@@ -245,10 +241,9 @@ public class Board extends InputAdapter implements IBoard {
         renderPlayerTextures();
 
         if (checkIfWon()) {
-            System.out.println("Player won!");
+            System.out.println(activePlayer.getName() + " won!");
             System.out.close();
         }
-
 
         if (!(activePlayer instanceof TestPlayer)) {
             if (turnIsOver)
@@ -331,7 +326,6 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public boolean checkIfWon() {
-        System.out.println("active player visited flags size: " + activePlayer.getVisitedFlags().size());
         return activePlayer.getVisitedFlags().size() == flags.size();
     }
 

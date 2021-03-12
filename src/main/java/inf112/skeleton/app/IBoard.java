@@ -3,7 +3,6 @@ package inf112.skeleton.app;
 import com.badlogic.gdx.ApplicationListener;
 import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.player.AbstractPlayer;
-import inf112.skeleton.app.player.Player;
 
 /**
  *

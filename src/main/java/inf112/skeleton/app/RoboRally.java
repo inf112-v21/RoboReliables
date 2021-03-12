@@ -15,7 +15,7 @@ import java.util.Queue;
  * Sets up gdx to create a new game of RoboRally.
  */
 public class RoboRally {
-    private final static int nrOfPlayers = 1; // Pre-determined number of players
+    private final static int nrOfPlayers = 4; // Pre-determined number of players
     private final static int nrOfFlags = 4;
     private final Queue<AbstractPlayer> players = new LinkedList<>();
     private final ArrayList<Flag> flags = new ArrayList<>();
@@ -39,8 +39,8 @@ public class RoboRally {
      * To test movement without cards: Change Player to TestPlayer.
      */
     public void addPlayers() {
-        for (int i = 0; i < nrOfPlayers; i++)
-            players.add(new TestPlayer(new Location(0,i+1))); // Change ´new Player´ with ´new TestPlayer´
+        for (int i = 1; i <= nrOfPlayers; i++)
+            players.add(new Player(new Location(i+1,0), i)); // Change ´new Player´ with ´new TestPlayer´
     }
 
 }
