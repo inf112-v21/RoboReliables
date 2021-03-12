@@ -255,7 +255,6 @@ public class Board extends InputAdapter implements IBoard {
                     int x = activePlayer.getRobot().getLocation().getX();
                     int y = activePlayer.getRobot().getLocation().getY();
                     robotLayer.setCell(x, y, null);
-                    System.out.println("Execute register");
                     programCardDeck.addToTopOfDeck(activePlayer.getRobot().getRegister().getCard(0));
                     activePlayer.getRobot().executeNext();
                     setActivePlayerRobotLocation(activePlayer.getRobot().getLocation(), false);
