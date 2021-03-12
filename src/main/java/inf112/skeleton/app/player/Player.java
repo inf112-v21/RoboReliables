@@ -4,6 +4,7 @@ import inf112.skeleton.app.Location;
 
 public class Player extends AbstractPlayer {
 
+
     public Player(Location location, int index) {
         super(location, index);
     }

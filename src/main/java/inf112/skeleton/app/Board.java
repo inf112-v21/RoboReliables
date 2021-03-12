@@ -10,13 +10,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.cards.ProgramCardDeck;
+import inf112.skeleton.app.entity.Entity;
 import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.TestPlayer;
@@ -24,7 +25,6 @@ import inf112.skeleton.app.player.TestPlayer;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Random;
 
 /**
  * The Board.java class is responsible for creating the board and displaying a graphical
@@ -51,6 +51,7 @@ public class Board extends InputAdapter implements IBoard {
 
     protected Queue<AbstractPlayer> players = new LinkedList<>();
     protected ArrayList<Flag> flags = new ArrayList<>();
+    protected ArrayList<Entity> entities = new ArrayList<>();
 
     protected boolean turnIsOver = true;
     private boolean hasStartedMoving = false;
@@ -133,12 +134,6 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.input.setInputProcessor(this);
     }
 
-    public void setLayers() {
-        setFlagLayer();
-        setBoardLayer();
-        setHoleLayer();
-    }
-
     public void setFlagLayer() {
         for (int x = 0; x < getMAP_SIZE_X(); x++) {
             for (int y = 0; y < getMAP_SIZE_Y(); y++) {
@@ -158,28 +153,7 @@ public class Board extends InputAdapter implements IBoard {
                             flagIndex = 4;
                             break;
                     }
-
                     flags.add(new Flag(flagIndex, new Location(x, y)));
-                }
-            }
-        }
-    }
-
-    public void setBoardLayer() {
-        for (int x = 0; x < getMAP_SIZE_X(); x++) {
-            for (int y = 0; y < getMAP_SIZE_Y(); y++) {
-                if (boardLayer.getCell(x, y) != null) {
-
-                }
-            }
-        }
-    }
-
-    public void setHoleLayer() {
-        for (int x = 0; x < getMAP_SIZE_X(); x++) {
-            for (int y = 0; y < getMAP_SIZE_Y(); y++) {
-                if (holeLayer.getCell(x, y) != null) {
-
                 }
             }
         }
@@ -190,13 +164,16 @@ public class Board extends InputAdapter implements IBoard {
     public void startNewRound() {
         System.out.println("- It's " + activePlayer.getName() + "'s turn -");
         System.out.println();
-        switchActivePlayer();
         activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
 
         programCardDeck.dealCard(getActivePlayer(), 9);
-        getActivePlayer().getRobot().updateRegister(getActivePlayer().pickCards(5));
+
+        CardDeck selectedCards;
+        selectedCards = activePlayer.pickCards(5);
+        activePlayer.getRobot().updateRegister(selectedCards);
+
         System.out.println("Picked cards:");
-        getActivePlayer().getRobot().getRegister().printDeck();
+        activePlayer.getRobot().getRegister().printDeck();
     }
 
     @Override
@@ -222,10 +199,11 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void switchActivePlayer() {
-        AbstractPlayer previousActivePlayer = getActivePlayer();
+        AbstractPlayer previousActivePlayer = activePlayer;
         players.remove(players.peek());
         players.add(previousActivePlayer);
         setActivePlayer(players.peek());
+        System.out.println("Switched active player. New active player: " + activePlayer.getName());
     }
 
     @Override
@@ -264,12 +242,9 @@ public class Board extends InputAdapter implements IBoard {
                 }
             }
         }
-        if (activePlayer.getRobot().getRegister().getSize() == 0) {
-            hasStartedMoving = false;
-        }
         time++;
-        turnIsOver = activePlayerHasMoved();
 
+        checkIfTurnIsOver();
         checkIfActivePlayerOnFlag();
         checkIfWon();
     }
@@ -309,11 +284,18 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     @Override
-    public boolean activePlayerHasMoved() {
+    public void checkIfTurnIsOver() {
+        // Checks if the player is a test player
         if (!(activePlayer instanceof TestPlayer))
-            return false;
+            turnIsOver = false;
 
-        return activePlayer.getRobot().getRegister().getSize() == 0;
+        if (activePlayer.getRobot().getRegister().getSize() == 0) {
+            if (hasStartedMoving) {
+                turnIsOver = true;
+                switchActivePlayer();
+            }
+            hasStartedMoving = false;
+        }
     }
 
     @Override

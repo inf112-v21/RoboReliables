@@ -141,15 +141,6 @@ public class BoardTest {
         assertEquals(board.activePlayer, player2);
     }
 
-    /**
-     * When the active player is done with their turn, the function should be true.
-     */
-    @Test
-    public void activePlayerHasMovedTest() {
-        assertFalse(board.activePlayerHasMoved()); // Should be false by default
-        board.setActivePlayerRobotLocation(new Location(1,1), true);
-        assertTrue(board.activePlayerHasMoved());
-    }
 
     @Test
     public void startNewRoundTest() {

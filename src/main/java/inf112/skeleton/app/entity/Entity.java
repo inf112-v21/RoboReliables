@@ -1,6 +1,5 @@
 package inf112.skeleton.app.entity;
 
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import inf112.skeleton.app.Location;
 
 /**

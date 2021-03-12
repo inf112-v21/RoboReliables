@@ -46,7 +46,7 @@ public interface IBoard extends ApplicationListener {
      * Checks whether or not the active player is done with their turn.
      * @return true if the active player has moved, and false if not.
      */
-    boolean activePlayerHasMoved();
+    void checkIfTurnIsOver();
 
     /**
      *
