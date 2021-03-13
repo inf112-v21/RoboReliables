@@ -76,14 +76,14 @@ public class Robot extends Entity {
                     break;
                 case DOWN:
                     if (!(y == 0)) {
-                    this.setLocation(new Location(x, y -1)); }
+                    this.setLocation(new Location(x, y - 1)); }
                     break;
                 case LEFT:
                     if (!(x == 0)) {
                     this.setLocation(new Location(x - 1, y)); }
                     break;
                 case RIGHT:
-                    if (!(y == Board.MAP_SIZE_Y-1)) {
+                    if (!(x == Board.MAP_SIZE_X-1)) {
                     this.setLocation(new Location(x + 1, y)); }
                     break;
             }
@@ -109,11 +109,11 @@ public class Robot extends Entity {
                         this.setLocation(new Location(x, y + 1)); }
                     break;
                 case LEFT:
-                    if (!(y == Board.MAP_SIZE_Y-1)) {
+                    if (!(x == Board.MAP_SIZE_X-1)) {
                         this.setLocation(new Location(x + 1, y)); }
                     break;
                 case RIGHT:
-                    if (!(y == 0)) {
+                    if (!(x == 0)) {
                         this.setLocation(new Location(x - 1, y)); }
                     break;
             }

@@ -55,7 +55,7 @@ public class Board extends InputAdapter implements IBoard {
 
     int numberOfPlayers = players.size();
     int time = 1; // tracks time in game.
-    int round = 0; // round Nr
+    int round = 1; // round Nr
     int numberOfPhases = 5;
     int currentPhase;
 
@@ -167,27 +167,26 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     public void dealCardsToPlayers() {
-        //for (int i = 1; i <= numberOfPlayers; i++)
-            programCardDeck.dealCard(activePlayer, 9);
-            activePlayer.getRobot().updateRegister(activePlayer.pickCards(5));
-            int cardsLeftOverInHand = activePlayer.getHandSize();
-            for (int i = 0; i < cardsLeftOverInHand; i++) {
-                programCardDeck.addToTopOfDeck(activePlayer.getHand().get(0));
-                activePlayer.getHand().remove(0);
-            }
-            System.out.println("Player, Picked cards:");
-            activePlayer.getRobot().getRegister().printDeck();
-            switchActivePlayer();
+        programCardDeck.dealCard(activePlayer, 9);
+        System.out.println("Player " );
+        activePlayer.getRobot().updateRegister(activePlayer.pickCards(5));
+        int cardsLeftOverInHand = activePlayer.getHandSize();
+        for (int i = 0; i < cardsLeftOverInHand; i++) {
+            programCardDeck.addToTopOfDeck(activePlayer.getHand().get(0));
+            activePlayer.getHand().remove(0);
+        }
+        System.out.println("Player, Picked cards:");
+        activePlayer.getRobot().getRegister().printDeck();
+        switchActivePlayer();
 
     }
     public void executeRobotRegister() {
-
         int x = activePlayer.getRobot().getLocation().getX();
         int y = activePlayer.getRobot().getLocation().getY();
         robotLayer.setCell(x, y, null);
         System.out.println("DeckSize: " + programCardDeck.getSize());
         System.out.println("Register: " + activePlayer.getRobot().getRegister().getSize());
-        System.out.println(activePlayer + " Execute register " + activePlayer.getRobot().getRegister().getCard(0));
+        System.out.println(activePlayer + " Execute register " + activePlayer.getRobot().getRegister().getCard(0).getCardValue());
         programCardDeck.addToTopOfDeck(activePlayer.getRobot().getRegister().getCard(0));
         activePlayer.getRobot().executeNext();
 
@@ -198,10 +197,12 @@ public class Board extends InputAdapter implements IBoard {
             System.out.close();
         }
         if (activePlayer.getRobot().getRegister().getSize() == 0) {
+            round++;
             dealCardsToPlayers();
         }
         if (time % 60 == 0) {
             executeRobotRegister();
+            System.out.println(activePlayer.getRobot().getLocation() + " Direction: " + activePlayer.getRobot().getDirection());
             switchActivePlayer();
         }
         time++;
@@ -212,9 +213,9 @@ public class Board extends InputAdapter implements IBoard {
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        renderPlayerTextures();
         activePlayer = players.peek();
         gameLoop();
+        renderPlayerTextures();
         renderer.render();
 
 
