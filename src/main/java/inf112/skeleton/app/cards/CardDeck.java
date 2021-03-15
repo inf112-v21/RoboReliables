@@ -10,7 +10,7 @@ public class CardDeck implements ICardDeck {
     private ArrayList<Card> cards;
 
     public CardDeck() {
-        cards = new ArrayList<>();
+        this.cards = new ArrayList<>();
     }
 
     @Override

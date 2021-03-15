@@ -112,7 +112,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
             hand.remove(cardNr - 1);
             cardPicks--;
         }
-        input.close();
+
         return register;
     }
 }
