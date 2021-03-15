@@ -40,8 +40,8 @@ public class Board extends InputAdapter implements IBoard {
 
     private OrthogonalTiledMapRenderer renderer;
 
-    public final int MAP_SIZE_X = 12;
-    public final int MAP_SIZE_Y = 12;
+    public static final int MAP_SIZE_X = 12;
+    public static final int MAP_SIZE_Y = 12;
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell, robotUpCell, robotDownCell, robotRightCell, robotLeftCell;
 
@@ -61,8 +61,9 @@ public class Board extends InputAdapter implements IBoard {
 
     int numberOfPlayers = players.size();
     int time = 1; // tracks time in game.
-    int round = 0; // round Nr
-
+    int round = 1; // round Nr
+    int numberOfPhases = 5;
+    int currentPhase;
 
     public Board(Queue<AbstractPlayer> players) {
         this.players = players;
@@ -160,7 +161,6 @@ public class Board extends InputAdapter implements IBoard {
     }
 
 
-    @Override
     public void startNewRound() {
         System.out.println("- It's " + activePlayer.getName() + "'s turn -");
         System.out.println();
@@ -210,45 +210,61 @@ public class Board extends InputAdapter implements IBoard {
     public void resize(int width, int height) {
     }
 
+    public void dealCardsToPlayers() {
+        programCardDeck.dealCard(activePlayer, 9);
+        System.out.println("Player " );
+        activePlayer.getRobot().updateRegister(activePlayer.pickCards(5));
+        int cardsLeftOverInHand = activePlayer.getHandSize();
+        for (int i = 0; i < cardsLeftOverInHand; i++) {
+            programCardDeck.addToTopOfDeck(activePlayer.getHand().get(0));
+            activePlayer.getHand().remove(0);
+        }
+        System.out.println("Player, Picked cards:");
+        activePlayer.getRobot().getRegister().printDeck();
+        switchActivePlayer();
+
+    }
+    public void executeRobotRegister() {
+        int x = activePlayer.getRobot().getLocation().getX();
+        int y = activePlayer.getRobot().getLocation().getY();
+        robotLayer.setCell(x, y, null);
+        System.out.println("DeckSize: " + programCardDeck.getSize());
+        System.out.println("Register: " + activePlayer.getRobot().getRegister().getSize());
+        System.out.println(activePlayer + " Execute register " + activePlayer.getRobot().getRegister().getCard(0).getCardValue());
+        programCardDeck.addToTopOfDeck(activePlayer.getRobot().getRegister().getCard(0));
+        activePlayer.getRobot().executeNext();
+
+    }
+    public void gameLoop() {
+        if (checkIfWon()) {
+            System.out.println("Player won!");
+            System.out.close();
+        }
+        if (activePlayer.getRobot().getRegister().getSize() == 0) {
+            round++;
+            dealCardsToPlayers();
+        }
+        if (time % 60 == 0) {
+            executeRobotRegister();
+            System.out.println(activePlayer.getRobot().getLocation() + " Direction: " + activePlayer.getRobot().getDirection());
+            switchActivePlayer();
+        }
+        time++;
+    }
+
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        renderer.render();
-
+        activePlayer = players.peek();
+        gameLoop();
         renderPlayerTextures();
-
-        if (checkIfWon()) {
-            System.out.println(activePlayer.getName() + " won!");
-            System.out.close();
-        }
-
-        if (!(activePlayer instanceof TestPlayer)) {
-            if (turnIsOver)
-                startNewRound();
-
-            if (time % 60 == 0) {
-                if (activePlayer.getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
-
-                    int x = activePlayer.getRobot().getLocation().getX();
-                    int y = activePlayer.getRobot().getLocation().getY();
-                    robotLayer.setCell(x, y, null);
-                    programCardDeck.addToTopOfDeck(activePlayer.getRobot().getRegister().getCard(0));
-                    activePlayer.getRobot().executeNext();
-                    setActivePlayerRobotLocation(activePlayer.getRobot().getLocation(), false);
-
-                    programCardDeck.shuffle();
-                    hasStartedMoving = true;
-                }
-            }
-        }
-        time++;
+        renderer.render();
 
         checkIfTurnIsOver();
         checkIfActivePlayerOnFlag();
         checkIfWon();
     }
-
 
     @Override
     public void renderPlayerTextures() {

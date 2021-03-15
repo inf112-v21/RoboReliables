@@ -22,11 +22,6 @@ public interface IBoard extends ApplicationListener {
 
     /**
      *
-     */
-    void startNewRound();
-
-    /**
-     *
      * @return
      */
     AbstractPlayer getActivePlayer();
