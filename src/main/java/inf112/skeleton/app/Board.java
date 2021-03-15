@@ -221,20 +221,20 @@ public class Board extends InputAdapter implements IBoard {
         }
         System.out.println("Player, Picked cards:");
         activePlayer.getRobot().getRegister().printDeck();
-        switchActivePlayer();
-
     }
+
     public void executeRobotRegister() {
         int x = activePlayer.getRobot().getLocation().getX();
         int y = activePlayer.getRobot().getLocation().getY();
         robotLayer.setCell(x, y, null);
         System.out.println("DeckSize: " + programCardDeck.getSize());
         System.out.println("Register: " + activePlayer.getRobot().getRegister().getSize());
-        System.out.println(activePlayer + " Execute register " + activePlayer.getRobot().getRegister().getCard(0).getCardValue());
+        System.out.println(activePlayer.getName() + " Execute register " + activePlayer.getRobot().getRegister().getCard(0).getCardValue());
         programCardDeck.addToTopOfDeck(activePlayer.getRobot().getRegister().getCard(0));
         activePlayer.getRobot().executeNext();
 
     }
+
     public void gameLoop() {
         if (checkIfWon()) {
             System.out.println("Player won!");
@@ -243,12 +243,22 @@ public class Board extends InputAdapter implements IBoard {
         if (activePlayer.getRobot().getRegister().getSize() == 0) {
             round++;
             dealCardsToPlayers();
+            switchActivePlayer();
         }
         if (time % 60 == 0) {
             executeRobotRegister();
-            System.out.println(activePlayer.getRobot().getLocation() + " Direction: " + activePlayer.getRobot().getDirection());
             switchActivePlayer();
         }
+        time++;
+    }
+
+    public void testPlayerGameLoop() {
+        if (checkIfWon()) {
+            System.out.println("Player won!");
+            System.out.close();
+        }
+        if (time % 60 == 0)
+            System.out.println(activePlayer.getRobot().getLocation() + " Direction: " + activePlayer.getRobot().getDirection());
         time++;
     }
 
@@ -257,13 +267,14 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         activePlayer = players.peek();
-        gameLoop();
+
+        if (activePlayer instanceof TestPlayer)
+            testPlayerGameLoop();
+        else
+            gameLoop();
+
         renderPlayerTextures();
         renderer.render();
-
-        checkIfTurnIsOver();
-        checkIfActivePlayerOnFlag();
-        checkIfWon();
     }
 
     @Override
@@ -300,21 +311,6 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     @Override
-    public void checkIfTurnIsOver() {
-        // Checks if the player is a test player
-        if (!(activePlayer instanceof TestPlayer))
-            turnIsOver = false;
-
-        if (activePlayer.getRobot().getRegister().getSize() == 0) {
-            if (hasStartedMoving) {
-                turnIsOver = true;
-                switchActivePlayer();
-            }
-            hasStartedMoving = false;
-        }
-    }
-
-    @Override
     public boolean canVisitFlag(Flag flag) {
         if (activePlayer.getVisitedFlags().size() > 0)
                 return flag.getFlagNumber() > activePlayer.getVisitedFlags().size();
@@ -323,6 +319,7 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public boolean checkIfWon() {
+        checkIfActivePlayerOnFlag();
         return activePlayer.getVisitedFlags().size() == flags.size();
     }
 
