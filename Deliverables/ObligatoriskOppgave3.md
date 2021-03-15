@@ -1,12 +1,26 @@
+# Deloppgave 1
+
+
+- - - -
+
+# Deloppgave 2
+
+
+- - - -
+
+# Deloppgave 3
+
+**REFERAT**
+
 **Referat 08.03.21 – 14:30**
-Oppmøte - - -
+Oppmøte:
 Tilstede: Julian, Heming, Anders, Sigurd
 Borte: Sebastian (grunnet sykdom)
 
-Agenda - - -
+Agenda:
 Få satt arbeidsplan og mål for UKE 10
 
-Møte punkt - - -
+Møte punkt:
 - Teamet gjennomgår elementer som bør ordnes først
 - Det blir satt opp arbeidsplan for tiden fram mot neste innlevering
 	- Fikse nettverkt
@@ -22,14 +36,14 @@ Møte punkt - - -
 
 
 **Referat 10.03.21 – 12:00**
-Oppmøte - - -
+Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd
 Borte: 
 
-Agenda - - -
+Agenda:
 Status på arbeid og videre arbeidsoppgaver  
 
-Møte punkt - - -
+Møte punkt:
 - Alle i teamet går igjennom sin status på sine problemer og sitt arbeid
 - Spillet testes og det konkluderes med at vi må ordne ting slik at spillet kjører mer feilfritt og uten delay, dette da spillet bruker lang tid på å starte.
 - Teamet ønsker også å forbedre måten spillet kjører på og gjennomgår mulige løsninger.
@@ -37,14 +51,14 @@ Møte punkt - - -
 
 
 **Referat 11.03.21 – 14:30**
-Oppmøte - - -
+Oppmøte:
 Tilstede: Julian, Heming, Anders, Sigurd
 Borte: Sebastian (grunnet jobb)
 
-Agenda - - -
+Agenda:
 Oppsummering av UKE 10
 
-Møte punkt - - -
+Møte punkt:
 - Status på gjeldende problemer
 - Oppdatering av Github sitt prosjekt med ferdigstilte oppgaver og nye issues
 - Teamet går igjennom utbedringer som er gjort per nå
@@ -52,14 +66,14 @@ Møte punkt - - -
 
 
 **Referat 15.03.21 – 14:30**
-Oppmøte - - -
+Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd
 Borte:
 
-Agenda - - -
+Agenda:
 Få satt arbeidsplan og mål for UKE 11 
 
-Møte punkt: - - -
+Møte punkt:
 - Det blir gått igjennom endringer siden forrige uke
 - Hver enkelt team-medlem (makkerpar) går igjennom sin progresjon og sine gjenstående problemer
 - Enkeltfunksjoner blir diskutert og revidert
