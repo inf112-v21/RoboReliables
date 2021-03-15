@@ -122,16 +122,7 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.input.setInputProcessor(this);
     }
 
-    @Override
-    public void startNewRound() {
 
-//        activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
-
-        programCardDeck.dealCard(getActivePlayer(), 9);
-        getActivePlayer().getRobot().updateRegister(getActivePlayer().pickCards(5));
-        System.out.println("Picked cards:");
-        getActivePlayer().getRobot().getRegister().printDeck();
-    }
 
     @Override
     public void setActivePlayerRobotLocation(Location newLocation, boolean testing) {
@@ -208,7 +199,6 @@ public class Board extends InputAdapter implements IBoard {
         time++;
     }
 
-
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -217,36 +207,6 @@ public class Board extends InputAdapter implements IBoard {
         gameLoop();
         renderPlayerTextures();
         renderer.render();
-
-
-
-
-
-/*        if (!(activePlayer instanceof TestPlayer)) {
-            if (turnIsOver)
-                startNewRound();
-
-            if (time % 60 == 0) {
-                if (activePlayer.getRobot().getRegister().getSize() == 5 || hasStartedMoving) {
-
-                    int x = activePlayer.getRobot().getLocation().getX();
-                    int y = activePlayer.getRobot().getLocation().getY();
-                    robotLayer.setCell(x, y, null);
-                    System.out.println("Execute register");
-                    programCardDeck.addToTopOfDeck(activePlayer.getRobot().getRegister().getCard(0));
-                    activePlayer.getRobot().executeNext();
-                    setActivePlayerRobotLocation(activePlayer.getRobot().getLocation(), false);
-
-                    programCardDeck.shuffle();
-                    hasStartedMoving = true;
-                }
-            }
-        }
-        if (activePlayer.getRobot().getRegister().getSize() == 0) {
-            hasStartedMoving = false;
-        }
-        turnIsOver = activePlayerHasMoved();
-        }*/
 
     }
 
