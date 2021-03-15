@@ -211,6 +211,7 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     public void dealCardsToPlayers() {
+        programCardDeck.shuffle();
         programCardDeck.dealCard(activePlayer, 9);
         System.out.println("Player " );
         activePlayer.getRobot().updateRegister(activePlayer.pickCards(5));
