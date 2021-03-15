@@ -15,16 +15,16 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import inf112.skeleton.app.cards.Card;
 import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.entity.Entity;
 import inf112.skeleton.app.entity.Flag;
+import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.TestPlayer;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * The Board.java class is responsible for creating the board and displaying a graphical
@@ -245,6 +245,23 @@ public class Board extends InputAdapter implements IBoard {
             dealCardsToPlayers();
         }
         if (time % 60 == 0) {
+            for (AbstractPlayer player : players) {
+                // TODO: Change lines where robot.getRegister().getCard(0)) is used with getNextRegisterCard()
+                // Populate the PriorityQueue (registerQueue) with the next card in each robot's register,
+                // along with which robot it belongs to.
+                // This way, we can sort the PriorityQueue based on the priorityValue of each card in the
+                // PriorityQueue, and execute it in this order.
+                Robot playerRobot = player.getRobot();
+                Card nextCard = playerRobot.getNextRegisterCard();
+                // Association between a card in a robot's register and the robot
+                HashMap<Card, Robot> robotCard = new HashMap<>();
+                robotCard.put(nextCard, playerRobot);
+                registerQueue.add(robotCard);
+
+
+            }
+
+
             executeRobotRegister();
             System.out.println(activePlayer.getRobot().getLocation() + " Direction: " + activePlayer.getRobot().getDirection());
             switchActivePlayer();
