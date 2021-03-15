@@ -161,7 +161,6 @@ public class Board extends InputAdapter implements IBoard {
     }
 
 
-    @Override
     public void startNewRound() {
         System.out.println("- It's " + activePlayer.getName() + "'s turn -");
         System.out.println();
