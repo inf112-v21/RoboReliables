@@ -1,8 +1,8 @@
 package inf112.skeleton.app;
 
 import com.badlogic.gdx.ApplicationListener;
+import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.player.AbstractPlayer;
-import inf112.skeleton.app.player.Player;
 
 /**
  *
@@ -22,11 +22,6 @@ public interface IBoard extends ApplicationListener {
 
     /**
      *
-     */
-    void startNewRound();
-
-    /**
-     *
      * @return
      */
     AbstractPlayer getActivePlayer();
@@ -43,10 +38,11 @@ public interface IBoard extends ApplicationListener {
     void setActivePlayer(AbstractPlayer newPlayer);
 
     /**
-     * Checks whether or not the active player is done with their turn.
-     * @return true if the active player has moved, and false if not.
+     *
+     * @param flag
+     * @return
      */
-    boolean activePlayerHasMoved();
+    boolean canVisitFlag(Flag flag);
 
     /**
      * Checks if a player has won by checking that the player has gone through
@@ -60,5 +56,5 @@ public interface IBoard extends ApplicationListener {
      * A player can either be alive, dead or has won. The proper sprite is selected based on
      * these criteria.
      */
-    void renderPlayerTextures(AbstractPlayer player);
+    void renderPlayerTextures();
 }

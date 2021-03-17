@@ -4,6 +4,7 @@ import com.badlogic.gdx.InputAdapter;
 import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.cards.CardValue;
 import inf112.skeleton.app.Location;
+import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.cards.Card;
 
@@ -17,11 +18,34 @@ import java.util.Scanner;
 public abstract class AbstractPlayer extends InputAdapter implements IAbstractPlayer {
     private final Robot robot;
     public final static Location abstractLocation = new Location(0,0);
+    private ArrayList<Flag> visitedFlags = new ArrayList<>();
+    private String name;
     // ArrayList that contains the cards currently in the player's hand
     private List<Card> hand = new ArrayList<>();
 
-    public AbstractPlayer(Location location) {
+    public AbstractPlayer(Location location, int index) {
         robot = new Robot(location);
+        name = "player " + index;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public ArrayList<Flag> getVisitedFlags() {
+        return visitedFlags;
+    }
+
+    @Override
+    public void addToVisitedFlags(Flag flag) {
+        visitedFlags.add(flag);
     }
 
     @Override
@@ -81,7 +105,6 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
                     }
                 }
                 else {
-                    System.out.println("Input '" + input.nextLine() + "' is invalid. Put a valid card number.");
                     valid = false;
                 }
             } while (!valid);
@@ -89,7 +112,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
             hand.remove(cardNr - 1);
             cardPicks--;
         }
-        input.close();
+
         return register;
     }
 }

@@ -12,5 +12,6 @@ public interface IEntity {
     Location getLocation();
 
     void setLocation(Location newLocation);
+
 }
 

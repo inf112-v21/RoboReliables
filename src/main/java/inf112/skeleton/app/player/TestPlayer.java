@@ -10,7 +10,11 @@ public class TestPlayer extends AbstractPlayer  {
     private Location location;
 
     public TestPlayer(Location location) {
-        super(location);
+        super(location, 1);
+    }
+
+    public TestPlayer(Location location, int index) {
+        super(location, index);
     }
 
     public void printHand() {
