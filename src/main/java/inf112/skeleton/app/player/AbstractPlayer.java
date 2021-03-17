@@ -15,7 +15,7 @@ import java.util.Scanner;
 /**
  * An abstract class for the player.
  */
-public abstract class AbstractPlayer extends InputAdapter implements IAbstractPlayer {
+public abstract class AbstractPlayer extends InputAdapter implements IAbstractPlayer, Comparable<AbstractPlayer> {
     private final Robot robot;
     public final static Location abstractLocation = new Location(0,0);
     private ArrayList<Flag> visitedFlags = new ArrayList<>();
@@ -114,6 +114,15 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
         }
 
         return register;
+    }
+
+    @Override
+    public int compareTo(AbstractPlayer otherPlayer) {
+        try {
+            return (getRobot().getNextRegisterCard().compareTo(otherPlayer.getRobot().getNextRegisterCard()));
+        } catch (Exception e) {
+            throw new NullPointerException("Can't compare empty registers");
+        }
     }
 }
 
