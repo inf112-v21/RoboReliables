@@ -15,16 +15,16 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import inf112.skeleton.app.cards.Card;
 import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.entity.Entity;
 import inf112.skeleton.app.entity.Flag;
+import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.TestPlayer;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * The Board.java class is responsible for creating the board and displaying a graphical
@@ -55,6 +55,8 @@ public class Board extends InputAdapter implements IBoard {
 
     protected boolean turnIsOver = true;
     private boolean hasStartedMoving = false;
+
+    private PriorityQueue<AbstractPlayer> phaseQueue = new PriorityQueue<>(Collections.reverseOrder());
 
     // cards
     protected ProgramCardDeck programCardDeck;
@@ -115,11 +117,12 @@ public class Board extends InputAdapter implements IBoard {
 
         // Splits the textures of the player into different states and sets them to the given Cell
         TextureRegion[][] robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
-        robotCell     = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
-        robotWonCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
-        robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
-        robotUpCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(0);
-        robotDownCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(2);
+        robotCell      = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
+        robotDiedCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
+        robotWonCell   = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
+        robotUpCell    = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(0);
+        robotLeftCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(1);
+        robotDownCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(2);
         robotRightCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(3);
         robotLeftCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(1);
         // Active player
@@ -162,18 +165,11 @@ public class Board extends InputAdapter implements IBoard {
 
 
     public void startNewRound() {
-        System.out.println("- It's " + activePlayer.getName() + "'s turn -");
-        System.out.println();
-        activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
-
-        programCardDeck.dealCard(getActivePlayer(), 9);
-
-        CardDeck selectedCards;
-        selectedCards = activePlayer.pickCards(5);
-        activePlayer.getRobot().updateRegister(selectedCards);
-
-        System.out.println("Picked cards:");
-        activePlayer.getRobot().getRegister().printDeck();
+        round++;
+        for (AbstractPlayer player : players) {
+            dealCardsToPlayer(player);
+        }
+        updatePhaseQueue();
     }
 
     @Override
@@ -199,10 +195,7 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void switchActivePlayer() {
-        AbstractPlayer previousActivePlayer = activePlayer;
-        players.remove(players.peek());
-        players.add(previousActivePlayer);
-        setActivePlayer(players.peek());
+        setActivePlayer(phaseQueue.peek());
         System.out.println("Switched active player. New active player: " + activePlayer.getName());
     }
 
@@ -210,57 +203,57 @@ public class Board extends InputAdapter implements IBoard {
     public void resize(int width, int height) {
     }
 
-    public void dealCardsToPlayers() {
-        programCardDeck.shuffle();
-        programCardDeck.dealCard(activePlayer, 9);
+    public void dealCardsToPlayer(AbstractPlayer player) {
+        programCardDeck.dealCard(player, 9);
         System.out.println("Player " );
-        activePlayer.getRobot().updateRegister(activePlayer.pickCards(5));
-        int cardsLeftOverInHand = activePlayer.getHandSize();
+        player.getRobot().updateRegister(player.pickCards(5));
+        int cardsLeftOverInHand = player.getHandSize();
         for (int i = 0; i < cardsLeftOverInHand; i++) {
-            programCardDeck.addToTopOfDeck(activePlayer.getHand().get(0));
-            activePlayer.getHand().remove(0);
+            programCardDeck.addToTopOfDeck(player.getHand().get(0));
+            player.getHand().remove(0);
         }
         System.out.println("Player, Picked cards:");
-        activePlayer.getRobot().getRegister().printDeck();
+        player.getRobot().getRegister().printDeck();
     }
 
-    public void executeRobotRegister() {
-        int x = activePlayer.getRobot().getLocation().getX();
-        int y = activePlayer.getRobot().getLocation().getY();
+    public void executeNextRobotRegister() {
+        AbstractPlayer player = phaseQueue.poll();
+        Robot robot = player.getRobot();
+        int x = robot.getLocation().getX();
+        int y = robot.getLocation().getY();
         robotLayer.setCell(x, y, null);
         System.out.println("DeckSize: " + programCardDeck.getSize());
-        System.out.println("Register: " + activePlayer.getRobot().getRegister().getSize());
-        System.out.println(activePlayer.getName() + " Execute register " + activePlayer.getRobot().getRegister().getCard(0).getCardValue());
-        programCardDeck.addToTopOfDeck(activePlayer.getRobot().getRegister().getCard(0));
-        activePlayer.getRobot().executeNext();
-
+        System.out.println("Register: " + robot.getRegister().getSize());
+        System.out.println(player.getName() + " Execute register " + robot.getRegister().getCard(0).getCardValue());
+        programCardDeck.addToTopOfDeck(robot.getRegister().getCard(0));
+        robot.executeNext();
     }
 
+    }
     public void gameLoop() {
         if (checkIfWon()) {
             System.out.println("Player won!");
             System.out.close();
         }
-        if (activePlayer.getRobot().getRegister().getSize() == 0) {
-            round++;
-            dealCardsToPlayers();
-            switchActivePlayer();
-        }
-        if (time % 60 == 0) {
-            executeRobotRegister();
-            switchActivePlayer();
+        // if all robots have performed their phase
+        if (phaseQueue.isEmpty()) {
+            if (players.peek().getRobot().getRegister().getSize() == 0) {
+                startNewRound();
+            } else {
+                updatePhaseQueue();
+            }
+        } else if (time % 400 == 0) {
+            executeNextRobotRegister();
         }
         time++;
     }
 
-    public void testPlayerGameLoop() {
-        if (checkIfWon()) {
-            System.out.println("Player won!");
-            System.out.close();
+    public void updatePhaseQueue() {
+        for (AbstractPlayer player : players) {
+            phaseQueue.add(player);
+            System.out.println("The priority value of " + player.getName() +"'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
         }
-        if (time % 60 == 0)
-            System.out.println(activePlayer.getRobot().getLocation() + " Direction: " + activePlayer.getRobot().getDirection());
-        time++;
+
     }
 
     @Override
@@ -268,14 +261,13 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         activePlayer = players.peek();
-
-        if (activePlayer instanceof TestPlayer)
-            testPlayerGameLoop();
-        else
-            gameLoop();
-
+        gameLoop();
         renderPlayerTextures();
         renderer.render();
+
+        checkIfTurnIsOver();
+        checkIfActivePlayerOnFlag();
+        checkIfWon();
     }
 
     @Override
@@ -312,15 +304,29 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     @Override
+    public void checkIfTurnIsOver() {
+        // Checks if the player is a test player
+        if (!(activePlayer instanceof TestPlayer))
+            turnIsOver = false;
+
+        if (activePlayer.getRobot().getRegister().getSize() == 0) {
+            if (hasStartedMoving) {
+                turnIsOver = true;
+                switchActivePlayer();
+            }
+            hasStartedMoving = false;
+        }
+    }
+
+    @Override
     public boolean canVisitFlag(Flag flag) {
         if (activePlayer.getVisitedFlags().size() > 0)
-                return flag.getFlagNumber() > activePlayer.getVisitedFlags().size();
+            return flag.getFlagNumber() > activePlayer.getVisitedFlags().size();
         return true;
     }
 
     @Override
     public boolean checkIfWon() {
-        checkIfActivePlayerOnFlag();
         return activePlayer.getVisitedFlags().size() == flags.size();
     }
 
