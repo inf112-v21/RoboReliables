@@ -1,18 +1,9 @@
 # Deloppgave 1
 
-
-- - - -
-
-# Deloppgave 2
-
-
-- - - -
-
-# Deloppgave 3
-
 **REFERAT**
 
 **Referat 08.03.21 – 14:30**
+
 Oppmøte:
 Tilstede: Julian, Heming, Anders, Sigurd
 Borte: Sebastian (grunnet sykdom)
@@ -36,6 +27,7 @@ Møte punkt:
 
 
 **Referat 10.03.21 – 12:00**
+
 Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd
 Borte: 
@@ -51,6 +43,7 @@ Møte punkt:
 
 
 **Referat 11.03.21 – 14:30**
+
 Oppmøte:
 Tilstede: Julian, Heming, Anders, Sigurd
 Borte: Sebastian (grunnet jobb)
@@ -66,6 +59,7 @@ Møte punkt:
 
 
 **Referat 15.03.21 – 14:30**
+
 Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd
 Borte:
@@ -81,4 +75,142 @@ Møte punkt:
  	- Spillet starter raskere og brikkene beveger seg fortrolig
 - Vi må få satt på plass nettverket innen kommende fredag, så på kommende onsdag skal Nettverkansvarlig gå igjennom nettverket og få hjelp til å ferdigstille det.
 - Teamet fordeler oppgaver fram til neste måte og går tilbake til selvstendig arbeid.
+
+- - - -
+
+**ROLLER**
+
+- Rollene i teamet fungerer veldig bra slik det er nå og vil ut Obligatorisk innlevering 3 være tilpasset medlemmets funksjon i teamet. 
+
+
+Per nå er rollene:
+
+Team leder (Sigurd)
+- Leder sørger for at alle medlemmene i teamet er oppdatert på prosjektets status, sørger for sette prioriteringer for arbeidsoppgaver og deltar ellers aktivt på utvikling av prosjekt.
+- Lede møtene og disksjoner.
+- Sørge for at team-medlemmer som ikke kan møte til møter, blir oppdatert på informasjonen.
+
+Nettverksansvarlig (Sebastian)
+- Nettverksansvarlig skal sette opp client-server løsning for prosjektet, samt sette opp nødvendige funksjoner for at nettverket skal fungere best mulig.
+
+Arkitekter (Julian & Heming)
+- Akritektene er ansvarlig for å strukturere prosjektet og sørge for en gjennomgående sammenheng og "rød tråd" i prosjektet.
+- Ansvarlig for å merge branch til master, slik at det ikke oppstår feil eller problemer.
+
+Kodeansvarlig (Anders)
+- Kodeansvarlig skal sørge for god, strukturert og effektiv kode. Dette innebærer å reformatere kode, endre ineffektiv kode og sørge for at metodene samstemmer bra.
+
+Kundekontakt (Sebastian)
+- Skal fungere som teamets kontaktperson opp imot kunden. Dette gjelder presentasjon, dokumentering og markedsføring av prosjektet.
+
+
+- - - -
+
+**ERFARINGER**
+
+
+- - - -
+
+**RETROSPEKTIV**
+
+
+- - - -
+
+**FORBEDRINGSPUNKTER**
+
+1.
+2.
+3.
+
+- - - -
+
+**PRIORITERING AV OPPGAVENE FRAMOVER**
+
+- - - -
+
+**GRUPPEDYNAMIKK OG KOMMUNIKASJON**
+
+
+
+- - - -
+
+# Deloppgave 2
+
+**PROGRESJON I PROSJEKT**
+
+Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere teamet, slik at vi arbeidet mer målrettet og strukturert, samt å få på plass en del kode for danne grunn-funksjoner i prosjektet. Dette er ting som:
+
+- - - -
+
+**OPPGAVER VI HAR GJENNOMFØRT**
+
+*Refererer til 'documents/UserStories.md'* 
+
+- - - -
+
+**OPPGAVER VI SKAL BEGYNNE PÅ**
+
+```
+Brukerhistorie:
+
+Akseptansekriterier:
+
+Arbeidsoppgaver:
+
+```
+
+- - - -
+
+**BUGS**
+
+
+
+- - - -
+
+**MVP**
+
+
+
+- - - -
+
+
+
+# Deloppgave 3
+
+**PROSJEKTETS BYGGING, TESTING OG KJØRING**
+
+For å kjøre programmet:
+Last ned spillet som en .zip-fil gjennom den grønne knappen "Code". Kjør prosjektet i IDE'en og "run" prosjektet.
+
+Når programmet kjøres:
+- Før spillet blir rendret der bruker kan velge 5 kort. 
+- Etter dette blir spillet endret og så utføres programmeringen av disse valgte kortene.
+- Etter dette er det neste spåiller sin tur, da velger også denne spiller sine 5 kort.
+
+For å kjøre testene:  
+- Lag en konfigurasjon av alle testene i pakken "test" og kjør denne. Husk å velg "All in package". Vi bruker JUnit Jupiter.
+
+
+
+- - - -
+
+
+**KLASSEDIAGRAM**
+
+![image](https://user-images.githubusercontent.com/43097835/110129416-391c0180-7dc8-11eb-9d2a-255ed5efd205.png)
+
+- - - -
+
+**BIDRAG TIL KODEBASEN**
+
+- Som ved forrige innlevering benytter vi "Code with me" for kodingen vår, dette medfører at alt som blir committet vises som om hosten commiter. 
+
+
+- - - -
+
+**PRESENTASJON AV PROSJEKT**
+
+
+- - - -
+
 
