@@ -229,7 +229,6 @@ public class Board extends InputAdapter implements IBoard {
         robot.executeNext();
     }
 
-    }
     public void gameLoop() {
         if (checkIfWon()) {
             System.out.println("Player won!");
@@ -303,7 +302,6 @@ public class Board extends InputAdapter implements IBoard {
         }
     }
 
-    @Override
     public void checkIfTurnIsOver() {
         // Checks if the player is a test player
         if (!(activePlayer instanceof TestPlayer))
