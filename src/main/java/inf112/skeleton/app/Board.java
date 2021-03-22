@@ -223,12 +223,10 @@ public class Board extends InputAdapter implements IBoard {
         robotLayer.setCell(x, y, null);
         System.out.println("DeckSize: " + programCardDeck.getSize());
         System.out.println("Register: " + robot.getRegister().getSize());
-        System.out.println(player.getName() + " Execute register " + robot.getRegister().getCard(0).getCardValue());
-        programCardDeck.addToTopOfDeck(robot.getRegister().getCard(0));
+        System.out.println(player.getName() + " Execute register " + robot.getNextRegisterCard().getCardValue());
+        programCardDeck.addToTopOfDeck(robot.getNextRegisterCard());
         robot.executeNext();
     }
-
-    // TODO: Change lines where robot.getRegister().getCard(0)) is used with getNextRegisterCard()
 
     public void gameLoop() {
         if (checkIfWon()) {
