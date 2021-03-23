@@ -1,9 +1,14 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.cards.*;
+import inf112.skeleton.app.player.AbstractPlayer;
+import inf112.skeleton.app.player.Player;
 import inf112.skeleton.app.player.TestPlayer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -147,6 +152,18 @@ public class CardTest {
         cardDeck.populate(CardValue.F1, 5);
         cardDeck.populate(CardValue.B1, 5);
         cardDeck.printDeck();
+    }
+
+    @Test
+    public void PriorityQueueTest() {
+        createCardDeck();
+        int nrOfPlayers = 4;
+        Queue<AbstractPlayer> players = new LinkedList<>();
+
+        for (int i = 1; i <= nrOfPlayers; i++) {
+            players.add(new Player(new Location(i+1,0), i));
+        }
+
     }
 
 }

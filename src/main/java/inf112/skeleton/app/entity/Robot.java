@@ -28,6 +28,10 @@ public class Robot extends Entity {
         register.remove(0);
     }
 
+    public Card getNextRegisterCard() {
+        return getRegister().getCard(0);
+    }
+
     /**
      * Moves the robot according to the cardvalue of the card
      * @param card
