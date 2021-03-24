@@ -6,6 +6,7 @@
 
 Oppmøte:
 Tilstede: Julian, Heming, Anders, Sigurd
+
 Borte: Sebastian (grunnet sykdom)
 
 Agenda:
@@ -14,20 +15,20 @@ Få satt arbeidsplan for UKE 10 og milepæler for innlevering 3
 Møte punkt:
 - Teamet gjennomgår elementer som bør ordnes først
 - Det blir satt opp arbeidsplan for tiden fram mot neste innlevering
-	- - Fikse nettverkt
-	- - Få grafikken på kort på plass
- 	- - Endre 
- 	- - Fikse små bugs
+	- Fikse nettverkt
+	- Få grafikken på kort på plass
+ 	- Endre 
+ 	- Fikse små bugs
 - Teamet diskuterer mulige løsninger for gjenstående arbeid
 - De fra teamet som ønsker input viser sin oppgave og får tilbakemeldinger
 - Det bestemmes hvem som holder presentasjon 09.03.21
- 	- - Sigurd (team-leder) framfører prosjektet da Sebastian (kundekontakt) ikke kan.
+ 	- Sigurd (team-leder) framfører prosjektet da Sebastian (kundekontakt) ikke kan.
 - Det blir gått igjennom hva som skal nevnes og vises på presentasjonen
 - Det blir satt milepøler for veien videre til innlevering 3
-	- - Få nettverket på plass og funksjonibelt
-	- - Få kortene og brikkene til å fungere mer optimalt
- 	- - Sørge for at brikker ikke kan gå utenfor banen
- 	- - At spillet starter raskere 
+	- Få nettverket på plass og funksjonibelt
+	- Få kortene og brikkene til å fungere mer optimalt
+ 	- Sørge for at brikker ikke kan gå utenfor banen
+ 	- At spillet starter raskere 
 - Teamet går i makkerpar som skal arbeide sammen 
 
 
@@ -36,6 +37,7 @@ Møte punkt:
 
 Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd
+
 Borte: 
 
 Agenda:
@@ -43,12 +45,12 @@ Status på arbeid og videre arbeidsoppgaver
 
 Møte punkt:
 - Alle i teamet går igjennom sin status på sine problemer og sitt arbeid
- 	- - Hva funker?
- 	- - Hva funker nesten?
- 	- - Hva funker ikke?
+ 	- Hva funker?
+ 	- Hva funker nesten?
+ 	- Hva funker ikke?
 - Spillet testes og det konkluderes med at vi må ordne ting slik at spillet kjører mer feilfritt og uten delay, dette da spillet bruker lang tid på å starte.
 - Teamet ønsker også å forbedre måten spillet kjører på og gjennomgår mulige løsninger.
-	- - Reformater, slik at det blir raskere eller omstrukturere klassene litt
+	- Reformater, slik at det blir raskere eller omstrukturere klassene litt
 - Det blir satt opp makkerpar som skal arbeide med implementering av de forskjellige løsningene videre.
 
 
@@ -56,6 +58,7 @@ Møte punkt:
 
 Oppmøte:
 Tilstede: Julian, Heming, Anders, Sigurd
+
 Borte: Sebastian (grunnet jobb)
 
 Agenda:
@@ -63,11 +66,11 @@ Oppsummering av UKE 10 og status gjenstående arbeid
 
 Møte punkt:
 - Status på gjeldende problemer
- 	- - Nettverk funker, men kjører ikke optimalt.
- 	- - Spillet starter bedre, men enda ikke så raskt som vi ønsker.
- 	- - Brikke kan ikke gå utenfor brettet lenger.
+ 	- Nettverk funker, men kjører ikke optimalt.
+ 	- Spillet starter bedre, men enda ikke så raskt som vi ønsker.
+ 	- Brikke kan ikke gå utenfor brettet lenger.
 - Oppdatering av Github sitt prosjekt med ferdigstilte oppgaver og nye issues.
- 	- - Alle oppdater og går igjennom sine "issues"
+ 	- Alle oppdater og går igjennom sine "issues"
 - Teamet går igjennom utbedringer som er gjort per nå, for å kartlegge at det fungerer som det skal.
 - Oppsummerer kort hvilke oppgaver som må fokuseres på neste uke og må bli gått igjennom på mandagens møte.
 
@@ -76,6 +79,7 @@ Møte punkt:
 
 Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd
+
 Borte:
 
 Agenda:
@@ -84,9 +88,9 @@ Få satt arbeidsplan og mål for UKE 11
 Møte punkt:
 - Det blir gått igjennom endringer siden forrige uke
 - Hver enkelt team-medlem (makkerpar) går igjennom sin progresjon og sine gjenstående problemer.
- 	- - Nettverk nærmer seg en grei løsning på nettverket og kan snart merge inn i Master
-	- - Brikke beveger seg bra og testene viser gode resultat
-	- - Gjenstår en del arbeid for å få en optimal opplevelse for spillerne.
+ 	- Nettverk nærmer seg en grei løsning på nettverket og kan snart merge inn i Master
+	- Brikke beveger seg bra og testene viser gode resultat
+	- Gjenstår en del arbeid for å få en optimal opplevelse for spillerne.
 - Enkeltfunksjoner blir diskutert og revidert
 - Det blir vist fram forbedringer i spillet og hvordan det kjører per nå
 - Vi må få satt på plass nettverket innen kommende fredag, så på kommende onsdag skal Nettverkansvarlig gå igjennom nettverket og få hjelp til å ferdigstille det.
@@ -97,6 +101,7 @@ Møte punkt:
 
 Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd.
+
 Borte:
 
 Agenda:
@@ -112,6 +117,7 @@ Møte punkt:
 
 Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd
+
 Borte:
 
 Agenda:
@@ -120,9 +126,9 @@ Få satt arbeidsplan og mål for UKE 12 (Obligatorisk innlevering)
 Møte punkt:
 - Status på arbeidsoppgaver og hva folk skal fokusere på ut uken og fram til innlevering.
 - Hvilke funksjoner skal gjøres ferdig før innlevering:
-	- - Nettverksløsningen
- 	- - Få spilling av kort til å funke mer optimalt
- 	- - 
+	- Nettverksløsningen
+ 	- Få spilling av kort til å funke mer optimalt
+ 	- 
 - Hvilke "bonus-funksjoner" skal vi heller gjøre ferdig til neste innlevering
  	- - Legge til lyder
  	- - Legge til Spesialeffekter når en dør eller tar flagget 
@@ -133,18 +139,28 @@ Møte punkt:
 
 Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd
+
 Borte:
 
 Agenda:
 Statusmøte for Obligatorisk innlevering 3
 
 Møte punkt:
+- Status for oppgavene:
+ 	- Nettverk er klart, men gjenstår litt små tweeks.
+	- Kortene funker bra og kjører fint
+- Gjennomgang av programmets kjørbarhet og bugs
+- Planlegging av arbeids-sessions ut uken
+	- Møte torsdag
+ 	- Arbeids-økt på fredagen for å se over den siste finpussen.
+- Teamet går inn i makkerpar og jobber videre med arbeidsoppgavene
 
 
 **Referat 25.03.21 – 12:00**
 
 Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd
+
 Borte:
 
 Agenda:
@@ -233,6 +249,7 @@ Det er en gjensidig respekt for de andre i teamet og et felles ønske om å få 
 Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere teamet, slik at vi arbeidet mer målrettet og strukturert, samt å få på plass en del kode for danne grunn-funksjoner i prosjektet. Dette er ting som:
 
 - Kladde oppgaven og committe ved etapper istedet for hyppige committer som roter til committ-schedulen.
+- Nettverket funker og spillet kan ha flere spillere som spiller samtidig
 - 
 
 - - - -
@@ -271,6 +288,8 @@ Arbeidsoppgaver:
 
 **BUGS**
 
+- Spiller slutter å kjøre (svarer ikke) når en klikker på det og en ikke har valgt nye kort
+
 - 
 
 
@@ -278,7 +297,15 @@ Arbeidsoppgaver:
 
 **MVP**
 
-- 
+- Det skal være mulig å velge antall spillere til et spill
+
+- Serveren skal kunne koble seg opp imot klientene
+
+- Spillerne skal kunne observere motspillerne i sanntid
+
+- Det skal være mulig å velge kort
+
+- Det skal være mulig å 
 
 
 - - - -
