@@ -2,7 +2,9 @@ package inf112.skeleton.app.player;
 
 import inf112.skeleton.app.Location;
 
-public class Player extends AbstractPlayer {
+import java.io.Serializable;
+
+public class Player extends AbstractPlayer implements Serializable {
 
     public Player(Location location, int playerId, boolean isHost) {
         super(location, playerId, isHost);

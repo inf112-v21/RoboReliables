@@ -6,11 +6,12 @@ import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.Direction;
 import inf112.skeleton.app.Location;
 import inf112.skeleton.app.Board;
+import java.io.Serializable;
 
 /**
  * Maps the robots position on the board
  */
-public class Robot extends Entity {
+public class Robot extends Entity implements Serializable {
     private Direction direction;
     private CardDeck register = new CardDeck();
 
@@ -76,19 +77,19 @@ public class Robot extends Entity {
             switch (direction) {
                 case UP:
                     if (!(y == Board.MAP_SIZE_Y-1)) {
-                    this.setLocation(new Location(x, y + 1)); }
+                        this.setLocation(new Location(x, y + 1)); }
                     break;
                 case DOWN:
                     if (!(y == 0)) {
-                    this.setLocation(new Location(x, y - 1)); }
+                        this.setLocation(new Location(x, y - 1)); }
                     break;
                 case LEFT:
                     if (!(x == 0)) {
-                    this.setLocation(new Location(x - 1, y)); }
+                        this.setLocation(new Location(x - 1, y)); }
                     break;
                 case RIGHT:
                     if (!(x == Board.MAP_SIZE_X-1)) {
-                    this.setLocation(new Location(x + 1, y)); }
+                        this.setLocation(new Location(x + 1, y)); }
                     break;
             }
         }
@@ -155,4 +156,3 @@ public class Robot extends Entity {
 
 
 }
-

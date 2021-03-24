@@ -11,6 +11,7 @@ import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.cards.Card;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ import java.util.Scanner;
 /**
  * An abstract class for the player.
  */
-public abstract class AbstractPlayer extends InputAdapter implements IAbstractPlayer, Comparable<AbstractPlayer> {
+public abstract class AbstractPlayer extends InputAdapter implements IAbstractPlayer, Comparable<AbstractPlayer>, Serializable {
     private final Robot robot;
     public final static Location abstractLocation = new Location(0,0);
     private ArrayList<Flag> visitedFlags = new ArrayList<>();
