@@ -29,9 +29,9 @@ public class RoboreliableServer {
             // accept players until the number of players entered has been reached
             // setup
             while (clients.size() < players-1) {
-                System.out.println("[SERVER] " + (clients.size()+1) + " players connected");
+                System.out.println("[HOST] " + (clients.size()+1) + " players in lobby, including you");
                 Socket client = listener.accept();
-                System.out.println("[SERVER] Connected to client!");
+                System.out.println("[HOST] Connected to player!");
                 ClientHandler clientHandler = new ClientHandler(client, clients);
                 clients.add(clientHandler);
 
@@ -41,7 +41,8 @@ public class RoboreliableServer {
                 dataOut.flush();
             }
             // at this point all clients should be set up and have a connection to the server
-            System.out.println("All players connected :). Starting game");
+            sendNumberOfPlayers();
+            System.out.println("All players connected. Starting game");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -49,6 +50,10 @@ public class RoboreliableServer {
 
     private static void setNumberOfPlayers(int players) {
         numberOfPlayers = players;
+    }
+
+    public static void sendNumberOfPlayers() throws IOException {
+        clients.get(0).sendNumberOfPlayersToClient(numberOfPlayers);
     }
 
     public static ArrayList<AbstractPlayer> getPlayerList() {

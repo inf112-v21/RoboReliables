@@ -28,7 +28,6 @@ public class ClientHandler {
             client.dataOut.writeBoolean(true);
             client.dataOut.flush();
         }
-
     }
 
     public AbstractPlayer receivePlayerFromClient() throws IOException, ClassNotFoundException {
@@ -38,6 +37,14 @@ public class ClientHandler {
         AbstractPlayer player = (AbstractPlayer) objIn.readObject();
         System.out.println("after read player");
         return player;
+    }
+
+    public void sendNumberOfPlayersToClient(int numberOfPlayers) throws IOException {
+        for (ClientHandler client : clients) {
+//            client.dataOut = new DataOutputStream(client.client.getOutputStream());
+            client.dataOut.writeInt(numberOfPlayers);
+            client.dataOut.flush();
+        }
     }
 
     public void sendPlayersToAll(ArrayList<AbstractPlayer> playerList) throws IOException {

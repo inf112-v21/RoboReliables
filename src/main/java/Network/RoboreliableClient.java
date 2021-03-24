@@ -58,5 +58,16 @@ public class RoboreliableClient {
         }
         return 0;
     }
+
+    public static int getNumberOfPlayers() {
+        try {
+            DataInputStream dataIn = new DataInputStream(socket.getInputStream());
+            int numberOfPlayers = dataIn.readInt();
+            return numberOfPlayers;
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
 }
 
