@@ -49,7 +49,7 @@ public class RoboRally {
         if (input.equals("1")) {
             addPlayers(selectPlayerType());
 
-            Board board = new Board(players);
+            board = new Board(players);
         }
         else if (input.equals("2")) {
             selectHostOrGuest();
@@ -90,10 +90,15 @@ public class RoboRally {
 
         String input = s.nextLine();
 
-        if (input.equals("1"))
+        if (input.equals("1")) {
+            System.out.println("How many players will there be?");
+            nrOfPlayers = s.nextInt();
             return "player";
-        else if (input.equals("2"))
+        }
+        else if (input.equals("2")) {
+            nrOfPlayers = 1;
             return "testplayer";
+        }
         else
             return "";
     }
