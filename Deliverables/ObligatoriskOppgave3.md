@@ -167,6 +167,15 @@ Agenda:
 Oppsummering og innføring av siste elementer til Innlevering
 
 Møte punkt:
+- Gå igjennom kjørbarheten til spillet og kartlegge gjenstående bugs og/eller feil
+	- Noen ting kjører bra, men enda et par små tweeks som må gjøres
+ 	- Makkerpar setter seg opp på oppgaver som gjenstår
+- Revidering av InnleveringsOppgave, er alt som skal skrives inn gjort?
+ 	- Et par småting som må føres inn og et par små endringer mtp framgang de siste dagene
+- Vi må endre noen punkt i innleveringen som nå muligens er fikset 
+- Alle som er tilgjengelig for å arbeide i morgen (fredag 26.03) kan enten være i Discord-chatten eller gi en lyd om de vil prate om noe
+- Siste sammensying 14:00 i morgen (fredag 26.03)
+- Makkerpar går hver til sitt arbeid og gir en lyd om de trenger noe ila dagen
 
 
 - - - -
@@ -251,6 +260,9 @@ Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere tea
 - Kladde oppgaven og committe ved etapper istedet for hyppige committer som roter til committ-schedulen.
 - Nettverket funker og spillet kan ha flere spillere som spiller samtidig
 - 
+
+Vi har pågynt arbeidet med å implementere en Meny-skjerm. Dette er noe som er nytt for alle på teamet. Vi har brukt undeveloped-branchen for å funksjonsteste denne menyen. Klassene er satt opp og det er funnet noen assets for å vise knapper/fonts, men har ikke kommet fram til en endelig løsning som fungerer optimalt. Vi har søkt en del på nett og fulgt diverse tutorials i håp om å få det til å fungere, men har enda ikke funner årsaken til at det ikke funker grunnet prosjektets kompleksitet. Framover vil vi fortsette å lete etter nye kilder som kan hjelpe oss i å kartlegge og gi oss en avklaring på hva vi må gjøre videre.
+
 
 - - - -
 
