@@ -103,8 +103,11 @@ public class RoboRally {
      * To test movement without cards: Change Player to TestPlayer.
      */
     public void addPlayers() {
-        for (int i = 1; i <= nrOfPlayers; i++)
-            players.add(new Player(new Location(i+1,i), i+1, false)); // Change ´new Player´ with ´new TestPlayer´
+        // adds the host player
+        players.add(new Player(new Location(0,0), 1, true));
+        // adds the guest players
+        for (int i = 2; i <= nrOfPlayers; i++)
+            players.add(new Player(new Location(i+1,i), i, false)); // Change ´new Player´ with ´new TestPlayer´
     }
 
     public void addPlayers(String playerType) {
