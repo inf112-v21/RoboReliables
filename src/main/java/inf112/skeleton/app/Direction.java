@@ -1,10 +1,12 @@
 package inf112.skeleton.app;
 
+import java.io.Serializable;
+
 /**
  * An enum representing the way a given robot is facing. Includes functions for rotating the
  * direction of a robot either left or right.
  */
-public enum Direction {
+public enum Direction implements Serializable {
     UP,
     DOWN,
     LEFT,
@@ -56,3 +58,4 @@ public enum Direction {
         return direction;
     }
 }
+

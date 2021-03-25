@@ -1,5 +1,7 @@
 package inf112.skeleton.app;
 
+import Network.RoboreliableClient;
+import Network.RoboreliableServer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -24,6 +26,7 @@ import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.TestPlayer;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -45,13 +48,15 @@ public class Board extends InputAdapter implements IBoard {
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell, robotUpCell, robotDownCell, robotRightCell, robotLeftCell;
 
-    // Variables for the current active player
-    protected AbstractPlayer activePlayer;
-    protected Location activePlayerInitialRobotLocation;
-
-    protected Queue<AbstractPlayer> players = new LinkedList<>();
+    protected ArrayList<AbstractPlayer> players;
     protected ArrayList<Flag> flags = new ArrayList<>();
     protected ArrayList<Entity> entities = new ArrayList<>();
+    int playerId;
+    // The player this instance of the game is responsible for during online play
+    private AbstractPlayer networkPlayer;
+    // The player that is in the front of the PhaseQueue at start of a phase
+    protected AbstractPlayer activePlayer;
+    protected Location activePlayerInitialRobotLocation;
 
     protected boolean turnIsOver = true;
     private boolean hasStartedMoving = false;
@@ -61,7 +66,8 @@ public class Board extends InputAdapter implements IBoard {
     // cards
     protected ProgramCardDeck programCardDeck;
 
-    int numberOfPlayers = players.size();
+    private boolean playingOnline;
+
     int time = 1; // tracks time in game.
     int round = 1; // round Nr
     int numberOfPhases = 5;
@@ -70,11 +76,20 @@ public class Board extends InputAdapter implements IBoard {
 
 
 
-    public Board(Queue<AbstractPlayer> players) {
+
+
+    public Board(ArrayList<AbstractPlayer> players) {
         this.players = players;
     }
 
-    public Board(Queue<AbstractPlayer> players, ArrayList<Flag> flags) {
+    public Board(ArrayList<AbstractPlayer> players, boolean playingOnline, int playerId) {
+        this.players = players;
+        this.playingOnline = playingOnline;
+        this.playerId = playerId;
+        this.networkPlayer = players.get(playerId-1);
+    }
+
+    public Board(ArrayList<AbstractPlayer> players, ArrayList<Flag> flags) {
         this.players = players;
         this.flags = flags;
     }
@@ -127,9 +142,8 @@ public class Board extends InputAdapter implements IBoard {
         robotLeftCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(1);
         robotDownCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(2);
         robotRightCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(3);
-        robotLeftCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(1);
         // Active player
-        activePlayer = players.peek();
+        activePlayer = players.get(0);
         assert activePlayer != null;
         activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
 
@@ -168,12 +182,32 @@ public class Board extends InputAdapter implements IBoard {
         }
     }
 
-
     public void startNewRound() {
+        if (!playingOnline) {
+            startNewRoundOffline();
+        } else {
+            startNewRoundOnline();
+        }
+        // sets the first active player in a round
+    }
+
+    private void startNewRoundOffline() {
         round++;
         for (AbstractPlayer player : players) {
             dealCardsToPlayer(player);
         }
+        updatePhaseQueue();
+    }
+
+    public void startNewRoundOnline() {
+        if (networkPlayer.getIsHost()) {
+            RoboreliableServer.players = new ArrayList<>();
+        }
+        round++;
+        dealCardsToPlayer(networkPlayer);
+        sendNetworkPlayerToServer();
+        updatePlayersFromServer();
+        assignNetworkPlayer();
         updatePhaseQueue();
     }
 
@@ -198,6 +232,14 @@ public class Board extends InputAdapter implements IBoard {
         return activePlayer;
     }
 
+    public void sendNetworkPlayerToServer() {
+        try {
+            networkPlayer.sendToServer();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
     @Override
     public void switchActivePlayer() {
         setActivePlayer(phaseQueue.peek());
@@ -210,7 +252,8 @@ public class Board extends InputAdapter implements IBoard {
 
     public void dealCardsToPlayer(AbstractPlayer player) {
         programCardDeck.dealCard(player, 9);
-        System.out.println("Player " );
+        System.out.println("This board is responsible for player" + playerId );
+
         player.getRobot().updateRegister(player.pickCards(5));
         int cardsLeftOverInHand = player.getHandSize();
         for (int i = 0; i < cardsLeftOverInHand; i++) {
@@ -221,6 +264,17 @@ public class Board extends InputAdapter implements IBoard {
         player.getRobot().getRegister().printDeck();
     }
 
+    // finds the player this instance of the game is responsible for during online play and
+    // assigns it as the networkPlayer
+    public void assignNetworkPlayer() {
+        for (AbstractPlayer player : players) {
+            if (player.getPlayerId() == this.playerId) {
+                networkPlayer = player;
+                return;
+            }
+        }
+    }
+
     public void executeNextRobotRegister() {
         AbstractPlayer player = phaseQueue.poll();
         Robot robot = player.getRobot();
@@ -229,27 +283,39 @@ public class Board extends InputAdapter implements IBoard {
         robotLayer.setCell(x, y, null);
         System.out.println("DeckSize: " + programCardDeck.getSize());
         System.out.println("Register: " + robot.getRegister().getSize());
-        System.out.println(player.getName() + " Execute register " + robot.getRegister().getCard(0).getCardValue());
-        programCardDeck.addToTopOfDeck(robot.getRegister().getCard(0));
+        System.out.println(player.getName() + " Execute register " + robot.getNextRegisterCard().getCardValue());
+        programCardDeck.addToTopOfDeck(robot.getNextRegisterCard());
         robot.executeNext();
     }
 
     public void gameLoop() {
-        if (checkIfWon()) {
-            System.out.println("Player won!");
-            System.out.close();
-        }
         // if all robots have performed their phase
         if (phaseQueue.isEmpty()) {
-            if (players.peek().getRobot().getRegister().getSize() == 0) {
+            if (players.get(0).getRobot().getRegister().getSize() == 0) {
                 startNewRound();
+                switchActivePlayer();
             } else {
                 updatePhaseQueue();
+
             }
-        } else if (time % 400 == 0) {
+        } else if (time % 288 == 0) {
+            switchActivePlayer();
             executeNextRobotRegister();
+            if (checkIfWon()) {
+                System.out.println("Player won!");
+                System.out.close();
+            }
         }
         time++;
+    }
+
+    public void updatePlayersFromServer() {
+        try {
+            players = networkPlayer.getPlayersFromServer();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+
     }
 
     public void updatePhaseQueue() {
@@ -258,13 +324,13 @@ public class Board extends InputAdapter implements IBoard {
             System.out.println("The priority value of " + player.getName() +"'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
         }
 
+>>>>>>>>> Temporary merge branch 2
     }
 
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        activePlayer = players.peek();
         renderer.render();
         renderPlayerTextures();
 

@@ -2,10 +2,11 @@ package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.player.AbstractPlayer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CardDeck implements ICardDeck {
+public class CardDeck implements ICardDeck, Serializable {
 
     private ArrayList<Card> cards;
 

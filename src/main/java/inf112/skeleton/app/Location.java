@@ -1,8 +1,9 @@
 package inf112.skeleton.app;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Location {
+public class Location implements Serializable {
     private int x;
     private int y;
 

@@ -1,8 +1,9 @@
 package inf112.skeleton.app.cards;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Card implements ICard, Comparable<Card> {
+public class Card implements ICard, Comparable<Card>, Serializable {
     public CardValue cardValue;
     private int priorityValue;
     Random random = new Random();

@@ -1,5 +1,7 @@
 package inf112.skeleton.app.player;
 
+import Network.RoboreliableClient;
+import Network.RoboreliableServer;
 import com.badlogic.gdx.InputAdapter;
 import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.cards.CardValue;
@@ -8,6 +10,8 @@ import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.cards.Card;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,17 +19,34 @@ import java.util.Scanner;
 /**
  * An abstract class for the player.
  */
-public abstract class AbstractPlayer extends InputAdapter implements IAbstractPlayer, Comparable<AbstractPlayer> {
+public abstract class AbstractPlayer extends InputAdapter implements IAbstractPlayer, Comparable<AbstractPlayer>, Serializable {
     private final Robot robot;
     public final static Location abstractLocation = new Location(0,0);
     private ArrayList<Flag> visitedFlags = new ArrayList<>();
     private String name;
+    private int playerId;
     // ArrayList that contains the cards currently in the player's hand
     private List<Card> hand = new ArrayList<>();
 
-    public AbstractPlayer(Location location, int index) {
+    private boolean isHost;
+
+    // constructor for offline and testing purposes
+    public AbstractPlayer(Location location, int playerId) {
         robot = new Robot(location);
-        name = "player " + index;
+        name = "player " + playerId;
+        this.playerId = playerId;
+    }
+
+    // constructor for network
+    public AbstractPlayer(Location location, int playerId, boolean isHost) {
+        robot = new Robot(location);
+        name = "player " + playerId;
+        this.playerId = playerId;
+        this.isHost = isHost;
+    }
+
+    public int getPlayerId() {
+        return playerId;
     }
 
     @Override
@@ -112,8 +133,36 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
             hand.remove(cardNr - 1);
             cardPicks--;
         }
-
+        System.out.println(register.getCard(0).getPriorityValue());
         return register;
+    }
+
+
+    public ArrayList<AbstractPlayer> getPlayersFromServer() throws IOException, ClassNotFoundException {
+        if (isHost) {
+            // read in new players to server as long as the server hasn't received all players
+            while (!RoboreliableServer.checkIfAllPlayersReceived()) {
+                RoboreliableServer.receivePlayersFromClients();
+            }
+            return RoboreliableServer.getPlayerList();
+        } else {
+            while (!RoboreliableClient.allPlayersReceived()) {
+            }
+            ArrayList<AbstractPlayer> players = RoboreliableClient.getPlayersFromServer();
+            return players;
+        }
+    }
+
+    public void sendToServer() throws IOException {
+        if (isHost) {
+            RoboreliableServer.receiveHostPlayer(this);
+        } else {
+            RoboreliableClient.sendPlayerToServer(this);
+        }
+    }
+
+    public boolean getIsHost() {
+        return isHost;
     }
 
     @Override

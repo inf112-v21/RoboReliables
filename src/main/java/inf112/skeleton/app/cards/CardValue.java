@@ -1,6 +1,8 @@
 package inf112.skeleton.app.cards;
 
-public enum CardValue {
+import java.io.Serializable;
+
+public enum CardValue implements Serializable {
     F1, // forwards  1
     F2, // forwards  2
     F3, // forwards  3
