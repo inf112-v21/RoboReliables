@@ -32,7 +32,6 @@ Møte punkt:
 - Teamet går i makkerpar som skal arbeide sammen 
 
 
-
 **Referat 10.03.21 – 12:00**
 
 Oppmøte:
@@ -130,9 +129,9 @@ Møte punkt:
  	- Få spilling av kort til å funke mer optimalt
  	- 
 - Hvilke "bonus-funksjoner" skal vi heller gjøre ferdig til neste innlevering
- 	- - Legge til lyder
- 	- - Legge til Spesialeffekter når en dør eller tar flagget 
-- 
+ 	- Legge til lyder
+ 	- Legge til Spesialeffekter når en dør eller tar flagget 
+- Teamet går videre til makker-par arbeid og om noen vil ha tak i noen så tagger de i chatten
 
 
 **Referat 24.03.21 – 12:00**
@@ -237,7 +236,9 @@ Det vil også være en fordel at vi setter opp utfyllende kommentarer / funksjon
 
 **PRIORITERING AV OPPGAVENE FRAMOVER**
 
-Prioriteringen av oppgavene framover vil i hovedsak dreie seg om å få på plass et solid spill som kjører bra og har lite til ingen bugs. Etter dette er målet å få på plass litt gøye elementer som lyder, musikk og kanskje noe spesialeffekter.
+Prioriteringen av oppgavene framover vil i hovedsak dreie seg om å få på plass et solid spill som kjører bra og har lite til ingen bugs. Vi ønsker å få på plass en MENY-skjerm slik som spillerne møter når de starter spillet.
+
+Etter dette er målet å få på plass litt gøye elementer som lyder, musikk og kanskje noe spesialeffekter. 
 
 - - - -
 
@@ -255,13 +256,24 @@ Det er en gjensidig respekt for de andre i teamet og et felles ønske om å få 
 
 **PROGRESJON I PROSJEKT**
 
-Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere teamet, slik at vi arbeidet mer målrettet og strukturert, samt å få på plass en del kode for danne grunn-funksjoner i prosjektet. Dette er ting som:
+Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere teamet, slik at vi arbeidet mer målrettet og ryddig, samt å få på plass en del kode for danne de ønskede funksjonene i prosjektet. 
+
+
+TEAM
 
 - Kladde oppgaven og committe ved etapper istedet for hyppige committer som roter til committ-schedulen.
-- Nettverket funker og spillet kan ha flere spillere som spiller samtidig
-- 
+- Føre inn pågående oppgaver i "prosjektet" på Github og oppdatere det når oppgaven endrer status
+- Ha oftere status på om andre i teamet trenger hjelp med oppgaver
+- ha oftere status på om andre i teamet ønsker å bytte oppgaver eller rollet
+- Jevnere flyt i arbeidet med innleveringsdokument og innføring av referat
 
-Vi har pågynt arbeidet med å implementere en Meny-skjerm. Dette er noe som er nytt for alle på teamet. Vi har brukt undeveloped-branchen for å funksjonsteste denne menyen. Klassene er satt opp og det er funnet noen assets for å vise knapper/fonts, men har ikke kommet fram til en endelig løsning som fungerer optimalt. Vi har søkt en del på nett og fulgt diverse tutorials i håp om å få det til å fungere, men har enda ikke funner årsaken til at det ikke funker grunnet prosjektets kompleksitet. Framover vil vi fortsette å lete etter nye kilder som kan hjelpe oss i å kartlegge og gi oss en avklaring på hva vi må gjøre videre.
+KODE
+
+- Spillere kan velge kort i starten av spillet
+- Nettverket funker og spillet kan ha flere spillere som spiller samtidig
+- Spillere kan se motspilleres bevegelse i sanntid
+- Vi har pågynt arbeidet med å implementere en Meny-skjerm. Dette er noe som er nytt for alle på teamet. Vi har brukt undeveloped-branchen for å funksjonsteste denne menyen.
+Klassene er satt opp og det er funnet noen assets for å vise knapper/fonts, men har ikke kommet fram til en endelig løsning som fungerer optimalt. Vi har søkt en del på nett og fulgt diverse tutorials i håp om å få det til å fungere, men har enda ikke funner årsaken til at det ikke funker grunnet prosjektets kompleksitet. Framover vil vi fortsette å lete etter nye kilder som kan hjelpe oss i å kartlegge og gi oss en avklaring på hva vi må gjøre videre.
 
 
 - - - -
@@ -287,7 +299,7 @@ Arbeidsoppgaver:
 
 ```
 Brukerhistorie:
-"Jeg som bruker ønsker at det skal være en gøy lyd når jeg tar flagget"
+"Jeg som bruker ønsker at det skal være en MENY i starten av spillet som jeg kan navigere med"
 
 Akseptansekriterier:
 
@@ -316,8 +328,6 @@ Arbeidsoppgaver:
 - Spillerne skal kunne observere motspillerne i sanntid
 
 - Det skal være mulig å velge kort
-
-- Det skal være mulig å 
 
 
 - - - -
