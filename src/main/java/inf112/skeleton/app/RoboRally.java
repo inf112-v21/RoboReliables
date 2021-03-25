@@ -27,24 +27,39 @@ public class RoboRally {
     private boolean playingOnline;
     int playerId;
 
-    Scanner scanner = new Scanner(System.in);
+    Scanner s = new Scanner(System.in);
 
     public RoboRally() throws IOException {
-
-
 
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         cfg.setTitle("RoboRally");
         cfg.setWindowedMode(1000, 1000);
         cfg.disableAudio(true);
 
+        selectOfflineOrOnline();
 
+        // Initializes game window
+        new Lwjgl3Application(board, cfg);
+    }
 
+    private void selectOfflineOrOnline() throws IOException {
+        System.out.println("Select offline or online mode. 1 for offline and 2 for online");
+        String input = s.nextLine();
+        if (input.equals("1")) {
+            //offline stuff
+        }
+        else if (input.equals("2")) {
+            selectHostOrGuest();
+        }
+
+    }
+
+    private void selectHostOrGuest() throws IOException {
         System.out.println("Enter 1 for host, 2 for join");
-        int choice = scanner.nextInt();
+        int choice = s.nextInt();
         if (choice == 1) {
             System.out.println("How many players will the game have in total?");
-            nrOfPlayers = scanner.nextInt();
+            nrOfPlayers = s.nextInt();
             RoboreliableServer.start(nrOfPlayers);
             playingOnline = true;
             playerId = 1;
@@ -64,9 +79,6 @@ public class RoboRally {
             System.out.println("Did not enter correct value to start online play, starting offline mode");
             board = new Board(players);
         }
-
-        // Initializes game window
-        new Lwjgl3Application(board, cfg);
     }
 
     /**
@@ -78,6 +90,4 @@ public class RoboRally {
         for (int i = 1; i <= nrOfPlayers; i++)
             players.add(new Player(new Location(i+1,i), i+1, false)); // Change ´new Player´ with ´new TestPlayer´
     }
-
 }
-
