@@ -4,8 +4,6 @@
 
 - Vise et komplett brett.
 
-- - - - 
-
 **Arbeidsoppgaver**:
 
 - Lage GUI.
