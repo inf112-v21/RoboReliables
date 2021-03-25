@@ -7,9 +7,7 @@ import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
 import inf112.skeleton.app.player.TestPlayer;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Sets up gdx to create a new game of RoboRally.
@@ -26,7 +24,7 @@ public class RoboRally {
         cfg.setWindowedMode(1000, 1000);
         cfg.disableAudio(true);
 
-        addPlayers();
+        addPlayers(selectPlayerType());
 
         Board board = new Board(players);
 
@@ -34,13 +32,36 @@ public class RoboRally {
         new Lwjgl3Application(board, cfg);
     }
 
+    public String selectPlayerType() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Select a player type. 1 for normal player and 2 for test player.");
+
+        String input = s.nextLine();
+
+        if (input.equals("1"))
+            return "player";
+        else if (input.equals("2"))
+            return "testplayer";
+        else
+            return "";
+    }
+
     /**
      * Initializes a specified amount of players and adds them to a list of players.
      * To test movement without cards: Change Player to TestPlayer.
      */
-    public void addPlayers() {
+    public void addPlayers(String playerType) {
+
         for (int i = 1; i <= nrOfPlayers; i++)
-            players.add(new Player(new Location(i+1,0), i)); // Change ´new Player´ with ´new TestPlayer´
+
+            switch (playerType) {
+                case "player":
+                    players.add(new Player(new Location(i+1,0), i)); // Change ´new Player´ with ´new TestPlayer´
+                    break;
+                case "testplayer":
+                    players.add(new TestPlayer(new Location(i+1,0), i)); // Change ´new Player´ with ´new TestPlayer´
+                    break;
+            }
     }
 
 }

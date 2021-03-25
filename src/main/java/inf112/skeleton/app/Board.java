@@ -66,6 +66,9 @@ public class Board extends InputAdapter implements IBoard {
     int round = 1; // round Nr
     int numberOfPhases = 5;
     int currentPhase;
+    static boolean firstRender = true;
+
+
 
     public Board(Queue<AbstractPlayer> players) {
         this.players = players;
@@ -134,6 +137,8 @@ public class Board extends InputAdapter implements IBoard {
         programCardDeck = new ProgramCardDeck();
 
         setFlagLayer();
+
+        renderer.render();
 
         Gdx.input.setInputProcessor(this);
     }
@@ -260,13 +265,17 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         activePlayer = players.peek();
-        gameLoop();
-        renderPlayerTextures();
         renderer.render();
+        renderPlayerTextures();
 
-        checkIfTurnIsOver();
-        checkIfActivePlayerOnFlag();
-        checkIfWon();
+        if (!firstRender) {
+            gameLoop();
+
+            checkIfTurnIsOver();
+            checkIfActivePlayerOnFlag();
+            checkIfWon();
+        }
+        firstRender = false;
     }
 
     @Override
