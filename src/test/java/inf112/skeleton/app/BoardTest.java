@@ -110,24 +110,24 @@ public class BoardTest {
     /**
      * Makes sure that the active player actually switches.
      */
-    @Test
-    public void switchActivePlayerTest() {
-        AbstractPlayer activePlayer = board.getActivePlayer();
-        int sizeOfPlayersBeforeSwitch = board.players.size();
-
-        board.switchActivePlayer();
-
-        AbstractPlayer newActivePlayer = board.getActivePlayer();
-
-        // Check that the active player is a different player than before the function was called
-        assertNotEquals(activePlayer, newActivePlayer);
-        // Check that the previous player is still in the list of players
-        assertTrue(board.players.contains(activePlayer));
-        // Check that the rotated player is the same as before
-        assertEquals(activePlayer, board.players.peek());
-        // Check that the previous player is not at the back of the queue
-        assertEquals(sizeOfPlayersBeforeSwitch, board.players.size());
-    }
+//    @Test
+//    public void switchActivePlayerTest() {
+//        AbstractPlayer activePlayer = board.getActivePlayer();
+//        int sizeOfPlayersBeforeSwitch = board.players.size();
+//
+//        board.switchActivePlayer();
+//
+//        AbstractPlayer newActivePlayer = board.getActivePlayer();
+//
+//        // Check that the active player is a different player than before the function was called
+//        assertNotEquals(activePlayer, newActivePlayer);
+//        // Check that the previous player is still in the list of players
+//        assertTrue(board.players.contains(activePlayer));
+//        // Check that the rotated player is the same as before
+//        assertEquals(activePlayer, board.players.peek());
+//        // Check that the previous player is not at the back of the queue
+//        assertEquals(sizeOfPlayersBeforeSwitch, board.players.size());
+//    }
 
     @Test
     public void getActivePlayerTest() {
