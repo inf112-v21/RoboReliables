@@ -323,8 +323,6 @@ public class Board extends InputAdapter implements IBoard {
             phaseQueue.add(player);
             System.out.println("The priority value of " + player.getName() +"'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
         }
-
->>>>>>>>> Temporary merge branch 2
     }
 
     @Override
@@ -335,12 +333,15 @@ public class Board extends InputAdapter implements IBoard {
         renderPlayerTextures();
 
         if (!firstRender) {
-            gameLoop();
-
-            checkIfTurnIsOver();
-            checkIfActivePlayerOnFlag();
-            checkIfWon();
+            if (!(activePlayer instanceof TestPlayer))
+                gameLoop();
+            else {
+                checkIfTurnIsOver();
+                checkIfActivePlayerOnFlag();
+                checkIfWon();
+            }
         }
+
         firstRender = false;
     }
 
