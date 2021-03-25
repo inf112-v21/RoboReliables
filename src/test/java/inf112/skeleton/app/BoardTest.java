@@ -10,6 +10,7 @@ import inf112.skeleton.app.player.TestPlayer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -21,7 +22,7 @@ public class BoardTest {
     private AbstractPlayer testPlayer;
     private Location testPlayerLocation;
     private Robot robot;
-    private Queue<AbstractPlayer> players = new LinkedList<>();
+    private ArrayList<AbstractPlayer> players = new ArrayList<>();
 
     @BeforeEach
     public void createBoard() {
