@@ -161,6 +161,10 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
         }
     }
 
+    public boolean getIsHost() {
+        return isHost;
+    }
+
     @Override
     public int compareTo(AbstractPlayer otherPlayer) {
         try {
