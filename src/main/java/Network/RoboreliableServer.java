@@ -53,7 +53,9 @@ public class RoboreliableServer {
     }
 
     public static void sendNumberOfPlayers() throws IOException {
-        clients.get(0).sendNumberOfPlayersToClient(numberOfPlayers);
+        for (ClientHandler client : clients) {
+            client.sendNumberOfPlayersToClient(numberOfPlayers);
+        }
     }
 
     public static ArrayList<AbstractPlayer> getPlayerList() {
@@ -64,7 +66,10 @@ public class RoboreliableServer {
         boolean ready = numberOfPlayers == players.size();
         if (ready) {
             sendAllPlayersReceivedSignal();
-            clients.get(0).sendPlayersToAll(players);
+            for (ClientHandler client : clients) {
+                client.sendPlayersToAll(players);
+
+            }
         }
         return (numberOfPlayers == players.size());
     }
@@ -81,7 +86,10 @@ public class RoboreliableServer {
 
 
     private static void sendAllPlayersReceivedSignal() throws IOException {
-        clients.get(0).sendAllPlayersReceivedToClient();
+        for (ClientHandler client : clients) {
+            client.sendAllPlayersReceivedToClient();
+
+        }
     }
 }
 

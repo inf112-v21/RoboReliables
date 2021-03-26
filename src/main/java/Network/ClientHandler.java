@@ -24,10 +24,8 @@ public class ClientHandler {
     }
 
     public void sendAllPlayersReceivedToClient() throws IOException {
-        for (ClientHandler client : clients) {
-            client.dataOut.writeBoolean(true);
-            client.dataOut.flush();
-        }
+        dataOut.writeBoolean(true);
+        dataOut.flush();
     }
 
     public AbstractPlayer receivePlayerFromClient() throws IOException, ClassNotFoundException {
@@ -40,19 +38,16 @@ public class ClientHandler {
     }
 
     public void sendNumberOfPlayersToClient(int numberOfPlayers) throws IOException {
-        for (ClientHandler client : clients) {
 //            client.dataOut = new DataOutputStream(client.client.getOutputStream());
-            client.dataOut.writeInt(numberOfPlayers);
-            client.dataOut.flush();
-        }
+        dataOut.writeInt(numberOfPlayers);
+        dataOut.flush();
     }
 
-    public void sendPlayersToAll(ArrayList<AbstractPlayer> playerList) throws IOException {
-        for (ClientHandler client : clients) {
-            client.objOut = new ObjectOutputStream(client.client.getOutputStream());
-            client.objOut.writeObject(playerList);
-            client.objOut.flush();
 
-        }
+    public void sendPlayersToAll(ArrayList<AbstractPlayer> playerList) throws IOException {
+        objOut = new ObjectOutputStream(client.getOutputStream());
+        objOut.writeObject(playerList);
+        objOut.flush();
+
     }
 }
