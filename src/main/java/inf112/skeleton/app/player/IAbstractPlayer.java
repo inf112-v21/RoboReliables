@@ -12,16 +12,10 @@ import java.util.List;
 public interface IAbstractPlayer {
 
     /**
-     *
-     * @return
+     * Get a list of flags that the player has visited.
+     * @return the list of flags
      */
     ArrayList<Flag> getVisitedFlags();
-
-    /**
-     *
-     * @param name
-     */
-    void setName(String name);
 
     /**
      *
