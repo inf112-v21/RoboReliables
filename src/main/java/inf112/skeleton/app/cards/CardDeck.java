@@ -6,9 +6,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * This class represents a list of cards, a card deck.
+ */
 public class CardDeck implements ICardDeck, Serializable {
 
-    private ArrayList<Card> cards;
+    private final ArrayList<Card> cards;
 
     public CardDeck() {
         this.cards = new ArrayList<>();
@@ -17,11 +20,6 @@ public class CardDeck implements ICardDeck, Serializable {
     @Override
     public void shuffle() {
         Collections.shuffle(cards);
-    }
-
-    @Override
-    public void populate(CardValue cardValue) {
-        cards.add(new Card(cardValue));
     }
 
     @Override
@@ -38,13 +36,6 @@ public class CardDeck implements ICardDeck, Serializable {
     @Override
     public void addToTopOfDeck(Card card) {
         cards.add(0, card);
-    }
-
-    @Override
-    public void addToTopOfDeck(CardDeck cardDeck) {
-        for (int i = 0; i < cardDeck.getSize(); i++) {
-            cards.add(0, cardDeck.getCard(0));
-        }
     }
 
     @Override
@@ -80,13 +71,6 @@ public class CardDeck implements ICardDeck, Serializable {
     public void printDeck() {
         for (int i = 0; i < cards.size(); i++) {
             System.out.println((i + 1) + ": " + CardValue.extendedCardValue(cards.get(i)) + ", priorityvalue: " + getCard(i).getPriorityValue());
-        }
-    }
-
-    @Override
-    public void clearDeck() {
-        for (int i = 0; i < cards.size(); i++) {
-            cards.remove(i);
         }
     }
 

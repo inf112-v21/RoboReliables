@@ -9,12 +9,6 @@ public interface ICardDeck {
     void shuffle();
 
     /**
-     * Create a new card, with a given value, and add it to the deck.
-     * @param cardValue the card's value
-     */
-    void populate(CardValue cardValue);
-
-    /**
      * Create a number of new cards, with a given value, and add them to the deck.
      * @param cardValue the card's value
      * @param numberOfCards the number of cards that will be added to the deck
@@ -28,12 +22,6 @@ public interface ICardDeck {
      * @param card the card to add
      */
     void addToTopOfDeck(Card card);
-
-    /**
-     * Add a deck of cards to the top of another deck.
-     * @param cardDeck the card deck to add
-     */
-    void addToTopOfDeck(CardDeck cardDeck);
 
     /**
      * Deal a card from the deck to a player.
@@ -73,8 +61,10 @@ public interface ICardDeck {
      */
     void printDeck();
 
-    void clearDeck();
-
+    /**
+     *
+     * @param i index of card to remove
+     */
     void remove(int i);
 }
 

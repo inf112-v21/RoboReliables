@@ -1,6 +1,5 @@
 package inf112.skeleton.app;
 
-import Network.RoboreliableClient;
 import Network.RoboreliableServer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -17,10 +16,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import inf112.skeleton.app.cards.Card;
-import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.cards.ProgramCardDeck;
-import inf112.skeleton.app.entity.Entity;
 import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.player.AbstractPlayer;
@@ -50,7 +46,6 @@ public class Board extends InputAdapter implements IBoard {
 
     protected ArrayList<AbstractPlayer> players;
     protected ArrayList<Flag> flags = new ArrayList<>();
-    protected ArrayList<Entity> entities = new ArrayList<>();
     int playerId;
     // The player this instance of the game is responsible for during online play
     private AbstractPlayer networkPlayer;
@@ -70,12 +65,8 @@ public class Board extends InputAdapter implements IBoard {
 
     int time = 1; // tracks time in game.
     int round = 1; // round Nr
-    int numberOfPhases = 5;
-    int currentPhase;
+
     static boolean firstRender = true;
-
-
-
 
 
     public Board(ArrayList<AbstractPlayer> players) {
@@ -153,10 +144,10 @@ public class Board extends InputAdapter implements IBoard {
         setFlagLayer();
 
         renderer.render();
-
         Gdx.input.setInputProcessor(this);
     }
 
+    @Override
     public void setFlagLayer() {
         for (int x = 0; x < getMAP_SIZE_X(); x++) {
             for (int y = 0; y < getMAP_SIZE_Y(); y++) {
@@ -182,6 +173,7 @@ public class Board extends InputAdapter implements IBoard {
         }
     }
 
+    @Override
     public void startNewRound() {
         if (!playingOnline) {
             startNewRoundOffline();
@@ -191,7 +183,8 @@ public class Board extends InputAdapter implements IBoard {
         // sets the first active player in a round
     }
 
-    private void startNewRoundOffline() {
+    @Override
+    public void startNewRoundOffline() {
         round++;
         for (AbstractPlayer player : players) {
             dealCardsToPlayer(player);
@@ -199,6 +192,7 @@ public class Board extends InputAdapter implements IBoard {
         updatePhaseQueue();
     }
 
+    @Override
     public void startNewRoundOnline() {
         if (networkPlayer.getIsHost()) {
             RoboreliableServer.players = new ArrayList<>();
@@ -250,6 +244,7 @@ public class Board extends InputAdapter implements IBoard {
     public void resize(int width, int height) {
     }
 
+    @Override
     public void dealCardsToPlayer(AbstractPlayer player) {
         programCardDeck.dealCard(player, 9);
         System.out.println("This board is responsible for player" + playerId );
@@ -264,8 +259,7 @@ public class Board extends InputAdapter implements IBoard {
         player.getRobot().getRegister().printDeck();
     }
 
-    // finds the player this instance of the game is responsible for during online play and
-    // assigns it as the networkPlayer
+    @Override
     public void assignNetworkPlayer() {
         for (AbstractPlayer player : players) {
             if (player.getPlayerId() == this.playerId) {
@@ -275,8 +269,10 @@ public class Board extends InputAdapter implements IBoard {
         }
     }
 
+    @Override
     public void executeNextRobotRegister() {
         AbstractPlayer player = phaseQueue.poll();
+        assert player != null;
         Robot robot = player.getRobot();
         int x = robot.getLocation().getX();
         int y = robot.getLocation().getY();
@@ -288,6 +284,7 @@ public class Board extends InputAdapter implements IBoard {
         robot.executeNext();
     }
 
+    @Override
     public void gameLoop() {
         // if all robots have performed their phase
         if (phaseQueue.isEmpty()) {
@@ -309,6 +306,7 @@ public class Board extends InputAdapter implements IBoard {
         time++;
     }
 
+    @Override
     public void updatePlayersFromServer() {
         try {
             players = networkPlayer.getPlayersFromServer();
@@ -318,6 +316,7 @@ public class Board extends InputAdapter implements IBoard {
 
     }
 
+    @Override
     public void updatePhaseQueue() {
         for (AbstractPlayer player : players) {
             phaseQueue.add(player);
@@ -370,6 +369,7 @@ public class Board extends InputAdapter implements IBoard {
         }
     }
 
+    @Override
     public void checkIfActivePlayerOnFlag() {
         for (Flag flag : flags) {
             if (flag.getLocation().equals(activePlayer.getRobot().getLocation()))
@@ -378,6 +378,7 @@ public class Board extends InputAdapter implements IBoard {
         }
     }
 
+    @Override
     public void checkIfTurnIsOver() {
         // Checks if the player is a test player
         if (!(activePlayer instanceof TestPlayer))

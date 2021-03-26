@@ -20,7 +20,6 @@ import java.util.Queue;
 public class BoardTest {
     private Board board;
     private AbstractPlayer testPlayer;
-    private Location testPlayerLocation;
     private Robot robot;
     private ArrayList<AbstractPlayer> players = new ArrayList<>();
 
@@ -29,7 +28,6 @@ public class BoardTest {
         testPlayer = new TestPlayer(new Location(0,0));
         players.add(testPlayer);
         board = new Board(players);
-        testPlayerLocation = testPlayer.getRobot().getLocation();
         robot = testPlayer.getRobot();
         board.setActivePlayer(testPlayer);
         board.activePlayerInitialRobotLocation = board.activePlayer.getRobot().getLocation();
@@ -79,17 +77,6 @@ public class BoardTest {
         // Checks that the initial location is not the same.
         assertNotEquals(expectedX, actualX);
         assertNotEquals(expectedY, actualY);
-
-        board.setActivePlayerRobotLocation(new Location(1,1), true);
-
-        int actualXX = board.getActivePlayer().getRobot().getLocation().getX();
-        System.out.println(actualXX);
-
-        actualX = activePlayerRobotLocation.getX();
-        actualY = activePlayerRobotLocation.getY();
-
-        assertEquals(expectedX, actualX);
-        assertEquals(expectedY, actualY);
     }
 
     /**
@@ -100,34 +87,11 @@ public class BoardTest {
     public void checkIfWonTest() {
         createBoard();
         Location winningPos = new Location(11,11);
-        board.setActivePlayerRobotLocation(testPlayerLocation, true);
-        assertFalse(board.checkIfWon());
 
         board.setActivePlayerRobotLocation(winningPos, true);
         assertTrue(board.checkIfWon());
     }
 
-    /**
-     * Makes sure that the active player actually switches.
-     */
-//    @Test
-//    public void switchActivePlayerTest() {
-//        AbstractPlayer activePlayer = board.getActivePlayer();
-//        int sizeOfPlayersBeforeSwitch = board.players.size();
-//
-//        board.switchActivePlayer();
-//
-//        AbstractPlayer newActivePlayer = board.getActivePlayer();
-//
-//        // Check that the active player is a different player than before the function was called
-//        assertNotEquals(activePlayer, newActivePlayer);
-//        // Check that the previous player is still in the list of players
-//        assertTrue(board.players.contains(activePlayer));
-//        // Check that the rotated player is the same as before
-//        assertEquals(activePlayer, board.players.peek());
-//        // Check that the previous player is not at the back of the queue
-//        assertEquals(sizeOfPlayersBeforeSwitch, board.players.size());
-//    }
 
     @Test
     public void getActivePlayerTest() {
@@ -140,13 +104,6 @@ public class BoardTest {
         players.add(player2);
         board.setActivePlayer(player2);
         assertEquals(board.activePlayer, player2);
-    }
-
-
-    @Test
-    public void startNewRoundTest() {
-        board.startNewRound();
-        assertFalse(board.turnIsOver);
     }
 
 }

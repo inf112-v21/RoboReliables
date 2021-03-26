@@ -3,9 +3,12 @@ package inf112.skeleton.app.cards;
 import java.io.Serializable;
 import java.util.Random;
 
+/**
+ * Represents a single card in the game.
+ */
 public class Card implements ICard, Comparable<Card>, Serializable {
     public CardValue cardValue;
-    private int priorityValue;
+    private final int priorityValue;
     Random random = new Random();
 
     public Card(CardValue cardValue) {
@@ -13,6 +16,7 @@ public class Card implements ICard, Comparable<Card>, Serializable {
         priorityValue = random.nextInt(255);
     }
 
+    @Override
     public CardValue getCardValue() {
         return this.cardValue;
     }
