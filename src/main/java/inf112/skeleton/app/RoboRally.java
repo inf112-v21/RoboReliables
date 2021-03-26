@@ -112,14 +112,16 @@ public class RoboRally {
 
     /**
      * Initializes a specified amount of players and adds them to a list of players.
-     * To test movement without cards: Change Player to TestPlayer.
      */
     public void addPlayers() {
         // adds the host player
-        players.add(new Player(new Location(0,0), 1, true));
+        players.add(new Player(new Location(2,0), 1, true));
         // adds the guest players
-        for (int i = 2; i <= nrOfPlayers; i++)
-            players.add(new Player(new Location(i+1,i), i, false)); // Change ´new Player´ with ´new TestPlayer´
+        int x = 0;
+        for (int i = 1; i <= nrOfPlayers; i++) {
+            players.add(new Player(new Location(x + 2, i), i, false)); // Change ´new Player´ with ´new TestPlayer´
+            x+=3;
+        }
     }
 
     /**
@@ -127,17 +129,18 @@ public class RoboRally {
      * @param playerType either TestPlayer or Player
      */
     public void addPlayers(String playerType) {
-
-        for (int i = 1; i <= nrOfPlayers; i++)
-
+        int x = 0;
+        for (int i = 1; i <= nrOfPlayers; i++) {
             switch (playerType) {
                 case "player":
-                    players.add(new Player(new Location(i+1,0), i)); // Change ´new Player´ with ´new TestPlayer´
+                    players.add(new Player(new Location(x+2, 0), i)); // Change ´new Player´ with ´new TestPlayer´
                     break;
                 case "testplayer":
-                    players.add(new TestPlayer(new Location(i+1,0), i)); // Change ´new Player´ with ´new TestPlayer´
+                    players.add(new TestPlayer(new Location(2, 0), i)); // Change ´new Player´ with ´new TestPlayer´
                     break;
             }
+            x+=3;
+        }
     }
 }
 
