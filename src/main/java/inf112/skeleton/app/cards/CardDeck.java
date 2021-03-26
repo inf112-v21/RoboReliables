@@ -79,7 +79,7 @@ public class CardDeck implements ICardDeck, Serializable {
     @Override
     public void printDeck() {
         for (int i = 0; i < cards.size(); i++) {
-            System.out.println((i + 1) + ": " + CardValue.extendedCardValue(cards.get(i)));
+            System.out.println((i + 1) + ": " + CardValue.extendedCardValue(cards.get(i)) + ", priorityvalue: " + getCard(i).getPriorityValue());
         }
     }
 

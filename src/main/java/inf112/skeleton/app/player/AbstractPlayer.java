@@ -103,7 +103,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
     public void printHand() {
         System.out.println("Player hand:");
         for (int i = 0; i < getHand().size(); i++) {
-            System.out.println((i + 1) + ": " + CardValue.extendedCardValue(getHand().get(i)));
+            System.out.println((i + 1) + ": " + CardValue.extendedCardValue(getHand().get(i)) + ", priorityvalue: " + getHand().get(i).getPriorityValue());
         }
     }
 
