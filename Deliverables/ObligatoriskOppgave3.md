@@ -17,7 +17,7 @@ Få satt arbeidsplan for UKE 10 og milepæler for innlevering 3
 Møte punkt:
 - Teamet gjennomgår elementer som bør ordnes først
 - Det blir satt opp arbeidsplan for tiden fram mot neste innlevering
-	- Fikse nettverkt
+	- Fikse nettverket
 	- Få grafikken på kort på plass
  	- Endre 
  	- Fikse små bugs
@@ -268,7 +268,7 @@ Det er en gjensidig respekt for de andre i teamet og et felles ønske om å få 
 Siden forrige innlevering har vi i hovedsak jobbet en del med å strukturere teamet, slik at vi arbeidet mer målrettet og ryddig, samt å få på plass en del kode for danne de ønskede funksjonene i prosjektet. 
 
 
-TEAM
+**TEAM**
 
 - Kladde oppgaven og committe ved etapper istedet for hyppige committer som roter til committ-schedulen.
 - Føre inn pågående oppgaver i "prosjektet" på Github og oppdatere det når oppgaven endrer status
@@ -276,7 +276,7 @@ TEAM
 - ha oftere status på om andre i teamet ønsker å bytte oppgaver eller rollet
 - Jevnere flyt i arbeidet med innleveringsdokument og innføring av referat
 
-KODE
+**KODE**
 
 - Spillere kan velge kort i starten av spillet
 - Nettverket funker og spillet kan ha flere spillere som spiller samtidig
@@ -309,6 +309,30 @@ Arbeidsoppgaver:
 
 ```
 Brukerhistorie:
+"Jeg som bruker ønsker at når jeg kræsjer med en annen spiller så skjer det noe"
+
+Akseptansekriterier:
+- Ved kollisjon vil det gi en konsekvens for spillerne
+
+Arbeidsoppgaver:
+- Implementere funksjons som oppdager når spillerne kræsjer i spillet
+
+```
+
+```
+Brukerhistorie:
+"Jeg som utvikler ønsker mer hindre på banen"
+
+Akseptansekriterier:
+- Elementer som skaper mer integrerende opplevelse
+
+Arbeidsoppgaver:
+- Implementere funksjoner som skaper elementer som påvirker spillerne
+
+```
+
+```
+Brukerhistorie:
 "Jeg som bruker ønsker at det skal være en MENY i starten av spillet som jeg kan navigere med"
 
 Akseptansekriterier:
@@ -333,18 +357,22 @@ Arbeidsoppgaver:
 
 - Game freezes when waiting for input from terminal. Unfreezes when cards have been picked.
 
+- Når man vinner som en vanlig spiller, altså en spiller som bruker kort, så fortsetter spillerene å gå etter de har vunnet. I tillegg endres alle robotene sine textures til sin win-texture.
+
 
 - - - -
 
 **MVP**
 
-- Det skal være mulig å velge antall spillere til et spill
+- Det skal være mulig å velge antall spillere til et spill ved oppstart
 
-- Serveren skal kunne koble seg opp imot klientene
+- Serveren skal kunne koble seg opp imot klientene 
 
 - Spillerne skal kunne observere motspillerne i sanntid
 
 - Brikken skal holde seg innenfor spill-brettet
+
+- Om en spiller skal vinne må den gå igjennom alle flagg i riktig rekkefølge
 
 
 - - - -
@@ -367,9 +395,10 @@ For å kjøre testene:
 - Lag en konfigurasjon av alle testene i pakken "test" og kjør denne. Husk å velg "All in package". Vi bruker JUnit Jupiter.
 
 
+*NB:*
+*Hvis en ønsker å spille Roborally online, så må en velge å hoste før de andre kan bli med. Dette gjøres ved å kjøre flere instanser av main()*
 
 - - - -
-
 
 **KLASSEDIAGRAM**
 
@@ -387,6 +416,7 @@ For å kjøre testene:
 
 **PRESENTASJON AV PROSJEKT**
 
+Presentasjon ble gjennomført av Teamleder (Sigurd).
 
 - - - -
 
