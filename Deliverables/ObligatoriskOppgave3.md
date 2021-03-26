@@ -420,4 +420,7 @@ Presentasjon ble gjennomført av Teamleder (Sigurd).
 
 - - - -
 
+**PROJECT BOARD**
+Se "project_board.jpg" i assets.
+![image](jetbrains://idea/navigate/reference?project=mvn-app&path=project_board.jpg)
 
