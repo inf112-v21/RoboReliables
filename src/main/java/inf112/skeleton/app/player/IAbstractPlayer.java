@@ -13,19 +13,19 @@ public interface IAbstractPlayer {
 
     /**
      * Get a list of flags that the player has visited.
-     * @return the list of flags
+     * @return The list of flags
      */
     ArrayList<Flag> getVisitedFlags();
 
     /**
-     *
-     * @return
+     * Get the name of the player.
+     * @return The name of the player
      */
     String getName();
 
     /**
-     *
-     * @param flag
+     * Add a flag to the list of visited flags.
+     * @param flag The flag to be added
      */
     void addToVisitedFlags(Flag flag);
 
@@ -38,26 +38,26 @@ public interface IAbstractPlayer {
 
     /**
      * Get the hand of a player.
-     * @return the player's hand
+     * @return The player's hand
      */
     List<Card> getHand();
 
     /**
      * Get the number of cards in a player's hand
-     * @return the number of cards
+     * @return The number of cards
      */
     int getHandSize();
 
     /**
      * Add an existing card to a player's hand.
-     * @param card the card
+     * @param card The card
      */
     void addToHand(Card card);
 
     /**
      * Get the card residing at a given position in a player's hand.
      * @param index The nth card in the hand
-     * @return the card itself
+     * @return The card itself
      */
     Card getCard(int index);
 

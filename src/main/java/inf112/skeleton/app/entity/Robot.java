@@ -33,8 +33,8 @@ public class Robot extends Entity implements Serializable {
     }
 
     /**
-     * Moves the robot according to the cardvalue of the card
-     * @param card
+     * Moves the robot according to the cardValue of the card
+     * @param card The input card
      */
     public void move(Card card) {
         switch (card.getCardValue()) {
@@ -66,7 +66,7 @@ public class Robot extends Entity implements Serializable {
 
     /**
      * Moves the robot forward steps times. Uses the direction of the robot to know which way is forward
-     * @param steps
+     * @param steps The number of steps
      */
     public void moveForward(int steps) {
         for (int i = 0; i < steps; i++) {
@@ -96,7 +96,7 @@ public class Robot extends Entity implements Serializable {
 
     /**
      * Moves the robot backward steps times. Uses the direction of the robot to know which way is forward
-     * @param steps
+     * @param steps The number of steps
      */
     public void moveBackward(int steps) {
         for (int i = 0; i < steps; i++) {
