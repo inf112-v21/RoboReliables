@@ -237,7 +237,6 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public void switchActivePlayer() {
         setActivePlayer(phaseQueue.peek());
-        System.out.println("Switched active player. New active player: " + activePlayer.getName());
     }
 
     @Override
@@ -247,7 +246,6 @@ public class Board extends InputAdapter implements IBoard {
     @Override
     public void dealCardsToPlayer(AbstractPlayer player) {
         programCardDeck.dealCard(player, 9);
-        System.out.println("This board is responsible for player" + playerId );
 
         player.getRobot().updateRegister(player.pickCards(5));
         int cardsLeftOverInHand = player.getHandSize();
