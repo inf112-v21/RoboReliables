@@ -2,6 +2,8 @@
 
 **REFERAT**
 
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
+
 **Referat 08.03.21 – 14:30**
 
 Oppmøte:
@@ -31,6 +33,7 @@ Møte punkt:
  	- At spillet starter raskere 
 - Teamet går i makkerpar som skal arbeide sammen 
 
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 **Referat 10.03.21 – 12:00**
 
@@ -52,6 +55,7 @@ Møte punkt:
 	- Reformater, slik at det blir raskere eller omstrukturere klassene litt
 - Det blir satt opp makkerpar som skal arbeide med implementering av de forskjellige løsningene videre.
 
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 **Referat 11.03.21 – 14:30**
 
@@ -73,6 +77,7 @@ Møte punkt:
 - Teamet går igjennom utbedringer som er gjort per nå, for å kartlegge at det fungerer som det skal.
 - Oppsummerer kort hvilke oppgaver som må fokuseres på neste uke og må bli gått igjennom på mandagens møte.
 
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 **Referat 15.03.21 – 14:30**
 
@@ -95,6 +100,7 @@ Møte punkt:
 - Vi må få satt på plass nettverket innen kommende fredag, så på kommende onsdag skal Nettverkansvarlig gå igjennom nettverket og få hjelp til å ferdigstille det.
 - Teamet fordeler oppgaver fram til neste møte og går tilbake til arbeid i makkerpar.
 
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 **Referat 17.03.21 – 14:30**
 
@@ -111,6 +117,7 @@ Møte punkt:
 - Julian bistår Sebastian på nettverks-løsningen.
 - Møtet 18.03.21 blir avviklet da alle har store oppgaver de skal arbeide med videre og det ikke vil være noe som er nødvendig å ta opp.
 
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 **Referat 22.03.21 – 14:30**
 
@@ -127,12 +134,12 @@ Møte punkt:
 - Hvilke funksjoner skal gjøres ferdig før innlevering:
 	- Nettverksløsningen
  	- Få spilling av kort til å funke mer optimalt
- 	- 
 - Hvilke "bonus-funksjoner" skal vi heller gjøre ferdig til neste innlevering
  	- Legge til lyder
  	- Legge til Spesialeffekter når en dør eller tar flagget 
 - Teamet går videre til makker-par arbeid og om noen vil ha tak i noen så tagger de i chatten
 
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 **Referat 24.03.21 – 12:00**
 
@@ -154,6 +161,7 @@ Møte punkt:
  	- Arbeids-økt på fredagen for å se over den siste finpussen.
 - Teamet går inn i makkerpar og jobber videre med arbeidsoppgavene
 
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 **Referat 25.03.21 – 12:00**
 
@@ -176,6 +184,7 @@ Møte punkt:
 - Siste sammensying 14:00 i morgen (fredag 26.03)
 - Makkerpar går hver til sitt arbeid og gir en lyd om de trenger noe ila dagen
 
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 - - - -
 
@@ -291,9 +300,10 @@ Brukerhistorie:
 "Jeg som bruker ønsker at det skal være en gøy lyd når jeg tar flagget"
 
 Akseptansekriterier:
-
+- Lyd som spilles av når flagg blir tatt
 
 Arbeidsoppgaver:
+- Implementere en lydfil som spilles av ved berøring av flagg
 
 ```
 
@@ -302,9 +312,10 @@ Brukerhistorie:
 "Jeg som bruker ønsker at det skal være en MENY i starten av spillet som jeg kan navigere med"
 
 Akseptansekriterier:
-
+- Meny som viser valg når spillet starter opp
 
 Arbeidsoppgaver:
+- Legge til en meny-side som kan åpne seg når spiller starter spillet
 
 ```
 
@@ -312,9 +323,15 @@ Arbeidsoppgaver:
 
 **BUGS**
 
-- Spiller slutter å kjøre (svarer ikke) når en klikker på det og en ikke har valgt nye kort
+- Player name does not display correctly in terminal.
 
-- 
+- Player texture is always facing north when player has either won or lost.
+
+- Win message does not display upon victory.
+
+- Players are not rendered before picking the initial cards.
+
+- Game freezes when waiting for input from terminal. Unfreezes when cards have been picked.
 
 
 - - - -
@@ -327,7 +344,7 @@ Arbeidsoppgaver:
 
 - Spillerne skal kunne observere motspillerne i sanntid
 
-- Det skal være mulig å velge kort
+- Brikken skal holde seg innenfor spill-brettet
 
 
 - - - -
@@ -356,7 +373,7 @@ For å kjøre testene:
 
 **KLASSEDIAGRAM**
 
-![image](https://user-images.githubusercontent.com/43097835/110129416-391c0180-7dc8-11eb-9d2a-255ed5efd205.png)
+![image](https://github.com/inf112-v21/RoboReliables/blob/master/assets/klassediagram.png)
 
 - - - -
 

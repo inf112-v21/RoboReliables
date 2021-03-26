@@ -79,7 +79,7 @@ public interface IBoard extends ApplicationListener {
 
     /**
      * Sets the active player.
-     * @param newPlayer
+     * @param newPlayer The player to be set as active
      */
     void setActivePlayer(AbstractPlayer newPlayer);
 
