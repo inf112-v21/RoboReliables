@@ -295,9 +295,10 @@ public class Board extends InputAdapter implements IBoard {
                 updatePhaseQueue();
 
             }
-        } else if (time % 288 == 0) {
+        } else if (time % 150 == 0) {
             switchActivePlayer();
             executeNextRobotRegister();
+            checkIfActivePlayerOnFlag();
             if (checkIfWon()) {
                 System.out.println("Player won!");
                 System.out.close();
@@ -328,8 +329,9 @@ public class Board extends InputAdapter implements IBoard {
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        renderer.render();
         renderPlayerTextures();
+        renderer.render();
+
 
         if (!firstRender) {
             if (!(activePlayer instanceof TestPlayer))
