@@ -118,7 +118,7 @@ public class RoboRally {
         players.add(new Player(new Location(2,0), 1, true));
         // adds the guest players
         int x = 0;
-        for (int i = 1; i <= nrOfPlayers; i++) {
+        for (int i = 2; i <= nrOfPlayers; i++) {
             players.add(new Player(new Location(x + 2, i), i, false)); // Change ´new Player´ with ´new TestPlayer´
             x+=3;
         }
