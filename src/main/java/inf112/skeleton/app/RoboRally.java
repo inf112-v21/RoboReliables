@@ -7,6 +7,8 @@ import inf112.skeleton.app.entity.Flag;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
 import inf112.skeleton.app.player.TestPlayer;
+import inf112.skeleton.app.screen.Assets;
+import inf112.skeleton.app.screen.MenuScreen;
 import inf112.skeleton.app.screen.ScreenEnum;
 import inf112.skeleton.app.screen.ScreenManager;
 
@@ -26,7 +28,7 @@ public class RoboRally extends Game {
     public RoboRally() {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         cfg.setTitle("RoboRally");
-        cfg.setWindowedMode(1000, 1000);
+        cfg.setWindowedMode(1400, 1200);
         cfg.disableAudio(true);
 
         addPlayers();
@@ -49,8 +51,12 @@ public class RoboRally extends Game {
 
     @Override
     public void create() {
-        ScreenManager.getInstance().initialize(this);
-        ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
+        Assets assets = new Assets();
+        assets.loadAll();
+        assets.getAssetManager().finishLoading();
+
+        setScreen(new MenuScreen(assets.getAssetManager()));
+
     }
 }
 
