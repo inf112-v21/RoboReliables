@@ -2,7 +2,6 @@ package inf112.skeleton.app.entity;
 
 import inf112.skeleton.app.cards.Card;
 import inf112.skeleton.app.cards.CardDeck;
-import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.Direction;
 import inf112.skeleton.app.Location;
 import inf112.skeleton.app.Board;
