@@ -1,11 +1,13 @@
 package inf112.skeleton.app.screen;
 
+import inf112.skeleton.app.RoboRally;
+
 public enum ScreenEnum {
 
     MAIN_MENU {
         public AbstractScreen getScreen(Object... params) {
-            //return new MainMenuScreen();
-            return null;
+            return new MainMenuScreen(new RoboRally());
+
         }
     },
     GAME {

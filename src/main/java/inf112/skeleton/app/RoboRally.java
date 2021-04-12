@@ -28,7 +28,7 @@ public class RoboRally extends Game {
     public RoboRally() {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         cfg.setTitle("RoboRally");
-        cfg.setWindowedMode(1400, 1200);
+        cfg.setWindowedMode(1000, 1000);
         cfg.disableAudio(true);
 
         addPlayers();
@@ -47,8 +47,6 @@ public class RoboRally extends Game {
         for (int i = 1; i <= nrOfPlayers; i++)
             players.add(new Player(new Location(i+1,0), i)); // Change ´new Player´ with ´new TestPlayer´
     }
-
-
     @Override
     public void create() {
         Assets assets = new Assets();
@@ -56,7 +54,6 @@ public class RoboRally extends Game {
         assets.getAssetManager().finishLoading();
 
         setScreen(new MenuScreen(assets.getAssetManager()));
-
     }
 }
 
