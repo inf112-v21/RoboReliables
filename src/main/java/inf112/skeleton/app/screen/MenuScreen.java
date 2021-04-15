@@ -22,10 +22,13 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.RoboRally;
+import inf112.skeleton.app.player.AbstractPlayer;
+
+import java.util.Queue;
 
 public class MenuScreen extends ScreenAdapter {
 
-    RoboRally roboRally;
+    private RoboRally game;
     Stage stage;
     private Viewport viewport;
     private AssetManager assetManager;
@@ -36,8 +39,9 @@ public class MenuScreen extends ScreenAdapter {
     private SpriteBatch logo;
     private Sprite sprite;
 
-    public MenuScreen(AssetManager assetManager) {
+    public MenuScreen(RoboRally game, AssetManager assetManager) {
         this.assetManager = assetManager;
+        this.game = game;
         skin = assetManager.get(Assets.menuSKIN);
         img = assetManager.get(Assets.menuIMG);
         logo = new SpriteBatch();
@@ -65,9 +69,7 @@ public class MenuScreen extends ScreenAdapter {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Starting up RoboRally...");
-                dispose();
-                Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
-                new Lwjgl3Application(new RoboRally(), cfg);
+                game.setScreen(new GameScreen(game));
             }
         });
         addButton("Quit").addListener(new ClickListener() {
@@ -79,6 +81,11 @@ public class MenuScreen extends ScreenAdapter {
         });
 
         Gdx.input.setInputProcessor(stage);
+    }
+
+    @Override
+    public void hide() {
+        dispose();
     }
 
     private TextButton addButton(String name) {

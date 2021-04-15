@@ -18,8 +18,8 @@ public class TestPlayer extends AbstractPlayer  {
     }
 
     public void printHand() {
-        for (int i = 0; i < getHand().size(); i++) {
-            System.out.println((i + 1) + ": " + getHand().get(i).getCardValue());
+        for (int i = 0; i < getHand().getSize(); i++) {
+            System.out.println((i + 1) + ": " + getHand().getCard(i).getCardValue());
         }
     }
 }

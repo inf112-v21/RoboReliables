@@ -46,7 +46,7 @@ public interface IAbstractPlayer {
      * Get the hand of a player.
      * @return the player's hand
      */
-    List<Card> getHand();
+    CardDeck getHand();
 
     /**
      * Get the number of cards in a player's hand
