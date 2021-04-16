@@ -3,11 +3,8 @@ package inf112.skeleton.app.screen;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -16,15 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import inf112.skeleton.app.Board;
 import inf112.skeleton.app.RoboRally;
-import inf112.skeleton.app.player.AbstractPlayer;
-
-import java.util.Queue;
 
 public class MenuScreen extends ScreenAdapter {
 
@@ -60,10 +52,7 @@ public class MenuScreen extends ScreenAdapter {
         sprite.setPosition(100,300);
         sprite.setSize(1100,268);
 
-
-
         stage.addActor(mainTable);
-
 
         addButton("Start Game").addListener(new ClickListener() {
             @Override
