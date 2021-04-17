@@ -37,7 +37,7 @@ public class Board extends InputAdapter implements IBoard {
     private TiledMap map;
     public TiledMapTileLayer flagLayer, boardLayer, holeLayer, robotLayer;
 
-    private OrthogonalTiledMapRenderer renderer;
+    public OrthogonalTiledMapRenderer renderer;
 
     public static final int MAP_SIZE_X = 12;
     public static final int MAP_SIZE_Y = 12;
@@ -71,6 +71,7 @@ public class Board extends InputAdapter implements IBoard {
 
     public Board(ArrayList<AbstractPlayer> players) {
         this.players = players;
+        initializeBoard();
     }
 
     public Board(ArrayList<AbstractPlayer> players, boolean playingOnline, int playerId) {
@@ -78,14 +79,16 @@ public class Board extends InputAdapter implements IBoard {
         this.playingOnline = playingOnline;
         this.playerId = playerId;
         this.networkPlayer = players.get(playerId-1);
+        initializeBoard();
     }
 
     public Board(ArrayList<AbstractPlayer> players, ArrayList<Flag> flags) {
         this.players = players;
         this.flags = flags;
+        initializeBoard();
     }
 
-    public Board() {}
+    public Board() { initializeBoard(); }
 
     @Override
     public int getMAP_SIZE_X() {
@@ -103,6 +106,11 @@ public class Board extends InputAdapter implements IBoard {
      */
     @Override
     public void create() {
+        initializeBoard();
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public void initializeBoard() {
         batch = new SpriteBatch();
         font  = new BitmapFont();
         font.setColor(Color.RED);
@@ -144,9 +152,7 @@ public class Board extends InputAdapter implements IBoard {
         setFlagLayer();
 
         renderer.render();
-        Gdx.input.setInputProcessor(this);
     }
-
     @Override
     public void setFlagLayer() {
         for (int x = 0; x < getMAP_SIZE_X(); x++) {
