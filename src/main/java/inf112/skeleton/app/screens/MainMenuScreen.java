@@ -105,12 +105,9 @@ public class MainMenuScreen extends ScreenAdapter {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Starting up RoboRally...");
-
-                if (playingOnline) {playingOnline = false;}
-                else {playingOnline = true;}
-                modeLabel.setText("Mode: " + showMode());
-                System.out.println(playingOnline);
-                //game.setScreen(new GameScreen(game));
+                addPlayers();
+                board = new Board(players);
+                game.setScreen(new GameScreen(game, board));
             }
         });
 

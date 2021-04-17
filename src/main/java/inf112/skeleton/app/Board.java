@@ -66,7 +66,7 @@ public class Board extends InputAdapter implements IBoard {
     int time = 1; // tracks time in game.
     int round = 1; // round Nr
 
-    static boolean firstRender = true;
+    public static boolean firstRender = true;
 
 
     public Board(ArrayList<AbstractPlayer> players) {
@@ -88,7 +88,7 @@ public class Board extends InputAdapter implements IBoard {
         initializeBoard();
     }
 
-    public Board() { initializeBoard(); }
+    public Board() {}
 
     @Override
     public int getMAP_SIZE_X() {
@@ -125,7 +125,8 @@ public class Board extends InputAdapter implements IBoard {
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, MAP_SIZE_X, MAP_SIZE_Y);
-        camera.viewportHeight = (float) 12;
+        camera.viewportHeight = (float) 14.4;
+        camera.viewportWidth = (float) 25.6;
         camera.update();
 
         // Initializes renderer
@@ -150,8 +151,6 @@ public class Board extends InputAdapter implements IBoard {
         programCardDeck = new ProgramCardDeck();
 
         setFlagLayer();
-
-        renderer.render();
     }
     @Override
     public void setFlagLayer() {
