@@ -43,6 +43,8 @@ public class GameScreen extends ScreenAdapter {
     private Hud hud;
     private SpriteBatch batch;
     private BitmapFont font;
+    private FitViewport playerViewport;
+    private AssetManager assetManager;
 
     private TiledMap map;
     public TiledMapTileLayer flagLayer, boardLayer, holeLayer, robotLayer;
@@ -63,10 +65,13 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(RoboRally game) {
         this.game = game;
+        this.assetManager = assetManager;
         players = game.getPlayers();
         batch = new SpriteBatch();
         font  = new BitmapFont();
         font.setColor(Color.RED);
+
+        hud = new Hud(batch, assetManager);
 
 
         // Sets the map and various layers
@@ -80,10 +85,13 @@ public class GameScreen extends ScreenAdapter {
 
         // Initializes camera
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, MAP_SIZE_X, MAP_SIZE_Y);
-        camera.viewportHeight = (float) 14.4;
-        camera.viewportWidth = (float) 25.6;
+        camera.setToOrtho(false, 26, 9);
+        camera.viewportHeight = (float) 15.4;
+        camera.viewportWidth = (float) 26.6;
         camera.update();
+
+
+        playerViewport = new FitViewport(camera.viewportWidth, camera.viewportHeight, camera);
 
         // Initializes renderer
         renderer = new OrthogonalTiledMapRenderer(map, (float) 1 / 300);
@@ -118,6 +126,10 @@ public class GameScreen extends ScreenAdapter {
         renderer.render();
         renderPlayerTextures();
 
+        batch.setProjectionMatrix(hud.getStage().getCamera().combined);
+        hud.getStage().act(delta); //act the Hud
+        hud.getStage().draw(); //draw the Hud
+
         if (checkIfWon()) {
             System.out.println(activePlayer.getName() + " won!");
             System.out.close();
@@ -140,7 +152,8 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        super.resize(width, height);
+        playerViewport.update(width, height); //update our viewports
+        hud.getStage().getViewport().update(width, height);
     }
 
     @Override

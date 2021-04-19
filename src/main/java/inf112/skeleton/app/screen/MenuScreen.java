@@ -58,7 +58,7 @@ public class MenuScreen extends ScreenAdapter {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Starting up RoboRally...");
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new GameScreen(game, assetManager));
             }
         });
         addButton("Quit").addListener(new ClickListener() {
