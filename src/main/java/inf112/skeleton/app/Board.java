@@ -110,7 +110,7 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.input.setInputProcessor(this);
     }
 
-    public void initializeBoard() {
+    private void initializeBoard() {
         batch = new SpriteBatch();
         font  = new BitmapFont();
         font.setColor(Color.RED);
@@ -149,7 +149,6 @@ public class Board extends InputAdapter implements IBoard {
 
         // cards
         programCardDeck = new ProgramCardDeck();
-
         setFlagLayer();
     }
     @Override

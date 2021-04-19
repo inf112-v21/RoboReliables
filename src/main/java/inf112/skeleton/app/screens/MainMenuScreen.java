@@ -26,42 +26,47 @@ import inf112.skeleton.app.player.TestPlayer;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class MainMenuScreen extends ScreenAdapter {
 
 
     private RoboRally game;
-    Stage stage;
+    private Stage stage;
     private Viewport viewport;
     private AssetManager assetManager;
     private Skin skin;
     private TextureAtlas atlas;
+
     private Table mainTable;
+    private Table selectTable;
+    private Table labelTable;
+
+    private TextButton testButton;
     private Slider slider;
-    private CheckBox checkBox;
+    private CheckBox setOnline;
+    private CheckBox setHost;
     private Label modeLabel;
     private Label playersLabel;
+    private Label statusLabel;
 
-    private Texture img;
-    private SpriteBatch logo;
+    private Texture logo;
+    private SpriteBatch batch;
     private Sprite sprite;
 
-    private static int nrOfPlayers;
+    private int nrOfPlayers;
     private final ArrayList<AbstractPlayer> players = new ArrayList<>();
     private Board board;
     private boolean playingOnline;
+    private boolean hosting;
     int playerId;
-
-    Scanner s = new Scanner(System.in);
 
     public MainMenuScreen(RoboRally game, AssetManager assetManager) {
         this.assetManager = assetManager;
         this.game = game;
         skin = assetManager.get(Assets.menuSKIN);
-        img = assetManager.get(Assets.menuIMG);
-        logo = new SpriteBatch();
-        sprite = new Sprite(img);
+        logo = assetManager.get(Assets.menuIMG);
+        batch = new SpriteBatch();
+        nrOfPlayers = 1;
     }
 
     @Override
@@ -69,49 +74,131 @@ public class MainMenuScreen extends ScreenAdapter {
         viewport = new ExtendViewport(1280, 720);
         stage = new Stage(viewport);
 
-        mainTable = new Table();
-        mainTable.setSize(1280, 720);
-        mainTable.setPosition(0,-200);
-
-        sprite.setPosition(100,300);
+        // Menu logo
+        sprite = new Sprite(logo);
+        sprite.setPosition(100,400);
         sprite.setSize(1100,268);
 
+        /**
+         * Create labels, sliders, checkboxes etc
+         */
+        testButton = new TextButton("< Start Testmode >", skin);
+        testButton.addListener(new ClickListener() {
+           @Override
+           public void clicked(InputEvent event, float x, float y) {
+               players.add(new TestPlayer(new Location(2, 0), 1));
+               board = new Board(players);
+               game.setScreen(new GameScreen(game, board));
+           }
+        });
 
-        modeLabel = new Label("Mode :" + showMode(), new Label.LabelStyle(new BitmapFont(), Color.CYAN));
+        modeLabel = new Label("Mode: " + showMode(), new Label.LabelStyle(new BitmapFont(), Color.CYAN));
         playersLabel = new Label("Number of players: " + String.format("%01d", nrOfPlayers), new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        statusLabel = new Label("Network status: " + showStatus(), new Label.LabelStyle(new BitmapFont(), Color.CORAL));
+
         slider = new Slider(1, 4, 1, false, skin);
         slider.setColor(Color.GOLD);
 
-        checkBox = new CheckBox("Online", skin);
-        checkBox.addCaptureListener(new ClickListener() {
+        setOnline = new CheckBox("Online", skin);
+        setOnline.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
-                if (playingOnline) {playingOnline = false;}
-                else {playingOnline = true;}
+                if (playingOnline) {
+                    playingOnline = false;
+                    selectTable.getCell(setHost).clearActor();
+                }
+                else {
+                    selectTable.row();
+                    selectTable.add(setHost);
+                    playingOnline = true;
+                }
                 modeLabel.setText("Mode: " + showMode());
+                statusLabel.setText("Network status: " + showStatus());
                 System.out.println(playingOnline);
             }
         });
 
-        stage.addActor(mainTable);
-        mainTable.add(slider);
-        mainTable.add(playersLabel).padBottom(20);
-        mainTable.row();
-        mainTable.add(checkBox);
-        mainTable.add(modeLabel).padBottom(20);
-        mainTable.row();
-        addButton("Start Game").addListener(new ClickListener() {
+        setHost = new CheckBox("Host", skin);
+        setHost.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Starting up RoboRally...");
-                addPlayers();
-                board = new Board(players);
-                game.setScreen(new GameScreen(game, board));
+                if (hosting) {hosting = false;}
+                else {
+                    hosting = true;
+                }
+                statusLabel.setText("Network status: " + showStatus());
             }
         });
 
-        addButton("Quit").addListener(new ClickListener() {
+        /**
+         * Create Label Table
+         */
+        labelTable = new Table();
+        labelTable.setFillParent(true);
+        labelTable.setSize(1280, 720);
+        labelTable.setPosition(0,0);
+
+        labelTable.add(playersLabel).padRight(20);
+        labelTable.add(modeLabel).padRight(20);
+        labelTable.add(statusLabel);
+
+        /**
+         * Create Main Table
+         */
+        mainTable = new Table();
+        mainTable.setFillParent(true);
+        mainTable.setSize(1280, 720);
+        mainTable.setPosition(0,-200);
+
+        // add buttons
+        addButton(mainTable, "Settings").addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                stage.clear();
+                stage.addActor(labelTable);
+                stage.addActor(selectTable);
+            }
+        });
+
+        addButton(mainTable,"Start game").addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Starting up RoboRally...");
+                if (playingOnline) {
+                    if (hosting) {
+                        try { hostOnlineGame();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        playingOnline = true;
+                        playerId = 1;
+                    }
+                    else {
+                        try { joinOnlineGame();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        playerId = RoboreliableClient.getPlayerId();
+                        System.out.println("You are player " + playerId);
+                        nrOfPlayers = RoboreliableClient.getNumberOfPlayers();
+                        playingOnline = true;
+                    }
+                    addPlayers();
+                    board = new Board(players,playingOnline,playerId);
+                }
+                else {
+                    addPlayers();
+                    board = new Board(players);
+                    game.setScreen(new GameScreen(game, board));
+                }
+            }
+        });
+
+        mainTable.row();
+        mainTable.add(testButton).padBottom(20);
+        mainTable.row();
+
+        addButton(mainTable, "Quit").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("RoboRally quits! See you another time!");
@@ -119,40 +206,47 @@ public class MainMenuScreen extends ScreenAdapter {
             }
         });
 
+        /**
+         * Create Settings Table
+         */
+        selectTable = new Table();
+        selectTable.setFillParent(true);
+        selectTable.setSize(1280, 720);
+        selectTable.setPosition(0,-200);
+
+        selectTable.add(slider).padBottom(20);
+        selectTable.row();
+
+        addButton(selectTable, "Go back").addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                stage.clear();
+                stage.addActor(labelTable);
+                stage.addActor(mainTable);
+            }
+        });
+
+        selectTable.add(setOnline).padBottom(20);
+
+        // Set stage
+        stage.addActor(labelTable);
+        stage.addActor(mainTable);
         Gdx.input.setInputProcessor(stage);
     }
 
-    @Override
-    public void hide() {
-        dispose();
-    }
 
-    private TextButton addButton(String name) {
-        TextButton button = new TextButton(name, skin);
-        mainTable.add(button).width(700).height(60).padBottom(20);
-        mainTable.row();
-        return button;
-    }
-    private void setPlayerCount() {
-        nrOfPlayers = (int)slider.getVisualValue();
-        playersLabel.setText("Number of players: " + String.format("%01d", nrOfPlayers));
-    }
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        logo.begin();
-        sprite.draw(logo);
-
-        logo.end();
+        batch.begin();
+        sprite.draw(batch);
+        batch.end();
 
         stage.act();
-
         stage.draw();
         setPlayerCount();
-
-
     }
 
     @Override
@@ -161,84 +255,49 @@ public class MainMenuScreen extends ScreenAdapter {
     }
 
     @Override
+    public void hide() {
+        dispose();
+    }
+
+    @Override
     public void dispose() {
     }
-    private void selectOfflineOrOnline() throws IOException {
-        System.out.println("Select offline or online mode. 1 for offline and 2 for online");
-        String input = s.nextLine();
-        if (input.equals("1")) {
-            addPlayers(selectPlayerType());
 
-            board = new Board(players);
-        }
-        else if (input.equals("2")) {
-            selectHostOrGuest();
-        }
-
+    private TextButton addButton(Table table, String name) {
+        TextButton button = new TextButton(name, skin);
+        table.add(button).width(700).height(60).padBottom(20);
+        table.row();
+        return button;
     }
 
-    /**
-     * Receives input from the player if the player is the host or not.
-     * @throws IOException .
-     */
+    private void setPlayerCount() {
+        nrOfPlayers = (int)slider.getVisualValue();
+        playersLabel.setText("Number of players: " + String.format("%01d", nrOfPlayers));
+    }
+
     private String showMode() {
         String mode;
-        if (playingOnline) {
-            mode = "Online";
-        } else {
-            mode = "Offline";
-        }
+        if (playingOnline) { mode = "Online";}
+        else { mode = "Offline";}
         return mode;
     }
 
-    private void selectHostOrGuest() throws IOException {
-        System.out.println("Enter 1 for host, 2 for join");
-        int choice = s.nextInt();
-        if (choice == 1) {
-            System.out.println("How many players will the game have in total?");
-            nrOfPlayers = s.nextInt();
-            RoboreliableServer.start(nrOfPlayers);
-            playingOnline = true;
-            playerId = 1;
-            addPlayers();
-            board = new Board(players,playingOnline,playerId);
-        } else if (choice == 2) {
-            RoboreliableClient.connect();
-            playerId = RoboreliableClient.getPlayerId();
-            System.out.println("You are player " + playerId);
-            nrOfPlayers = RoboreliableClient.getNumberOfPlayers();
-            playingOnline = true;
-            addPlayers();
-            board = new Board(players,playingOnline,playerId);
-        } else {
-            playingOnline = false;
-            addPlayers();
-            System.out.println("Did not enter correct value to start online play, starting offline mode");
-            board = new Board(players);
+    private String showStatus() {
+        String status;
+        if (!playingOnline) { status = "n/a";}
+        else {
+            if (hosting) { status = "Host";
+            } else { status = "Guest";}
         }
+        return status;
     }
 
-    /**
-     * Receives input from the player of which type of player is desired for the game.
-     * @return TestPlayer or Player
-     */
-    public String selectPlayerType() {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Select a player type. 1 for normal player and 2 for test player.");
+    private void hostOnlineGame() throws IOException {
+        RoboreliableServer.start(nrOfPlayers);
+    }
 
-        String input = s.nextLine();
-
-        if (input.equals("1")) {
-            System.out.println("How many players will there be?");
-            nrOfPlayers = s.nextInt();
-            return "player";
-        }
-        else if (input.equals("2")) {
-            nrOfPlayers = 1;
-            return "testplayer";
-        }
-        else
-            return "";
+    private void joinOnlineGame() throws IOException {
+        RoboreliableClient.connect();
     }
 
     /**
@@ -251,25 +310,6 @@ public class MainMenuScreen extends ScreenAdapter {
         int x = 2;
         for (int i = 2; i <= nrOfPlayers; i++) {
             players.add(new Player(new Location(x + 3, 0), i, false)); // Change ´new Player´ with ´new TestPlayer´
-            x+=3;
-        }
-    }
-
-    /**
-     * Adds new players to the players list
-     * @param playerType either TestPlayer or Player
-     */
-    public void addPlayers(String playerType) {
-        int x = 0;
-        for (int i = 1; i <= nrOfPlayers; i++) {
-            switch (playerType) {
-                case "player":
-                    players.add(new Player(new Location(x+2, 0), i)); // Change ´new Player´ with ´new TestPlayer´
-                    break;
-                case "testplayer":
-                    players.add(new TestPlayer(new Location(2, 0), i)); // Change ´new Player´ with ´new TestPlayer´
-                    break;
-            }
             x+=3;
         }
     }

@@ -2,7 +2,6 @@ package inf112.skeleton.app.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.RoboRally;
@@ -18,8 +17,8 @@ public class GameScreen extends ScreenAdapter {
     }
 
     @Override
-     public void show() {
-        super.show();
+    public void show() {
+        Gdx.input.setInputProcessor(board);
     }
 
     @Override
@@ -31,7 +30,13 @@ public class GameScreen extends ScreenAdapter {
 
 
         if (!board.firstRender) {
-            board.gameLoop();
+            if (!(board.getActivePlayer() instanceof TestPlayer))
+                board.gameLoop();
+            else {
+                board.checkIfTurnIsOver();
+                board.checkIfActivePlayerOnFlag();
+                board.checkIfWon();
+            }
         }
         board.firstRender = false;
     }
