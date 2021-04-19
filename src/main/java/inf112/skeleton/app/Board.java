@@ -103,7 +103,7 @@ public class Board extends InputAdapter implements IBoard {
 
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
-        camera.setToOrtho(false, MAP_SIZE_X, MAP_SIZE_Y);
+        camera.setToOrtho(false, 20, MAP_SIZE_Y);
         camera.viewportHeight = (float) 15;
         camera.viewportWidth = (float) 15;
         camera.update();

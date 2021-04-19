@@ -63,7 +63,7 @@ public class GameScreen extends ScreenAdapter {
     int time = 1; // tracks time in game.
 
 
-    public GameScreen(RoboRally game) {
+    public GameScreen(RoboRally game, AssetManager assetManager) {
         this.game = game;
         this.assetManager = assetManager;
         players = game.getPlayers();
@@ -108,7 +108,7 @@ public class GameScreen extends ScreenAdapter {
 
         activePlayer = players.peek();
         programCardDeck = new ProgramCardDeck();
-
+        Gdx.input.setInputProcessor(hud.stage);
 
     }
 
