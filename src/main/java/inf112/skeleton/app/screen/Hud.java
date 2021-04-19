@@ -10,7 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import inf112.skeleton.app.player.AbstractPlayer;
+
+import java.util.ArrayList;
 
 import static inf112.skeleton.app.screen.Assets.cardATLAS;
 
@@ -50,10 +54,8 @@ public class Hud {
         stage = new Stage(stageViewport, spriteBatch);
 
         table = new Table();
-        table.setPosition(250,140);
+        table.setPosition(380,140);
         Assets assets = new Assets();
-        //assetManager.load(cardATLAS);
-        //sprites = assetManager.get(cardATLAS);
         sprites = new TextureAtlas("assets/cardAtlas.atlas");
 
         leftTurn = sprites.findRegion("leftTurn");
@@ -99,6 +101,24 @@ public class Hud {
             }
         });
 
+        skin = assetManager.get(Assets.menuSKIN);
+
+        int randomCardValue;
+        TextButton cardValueButton;
+
+        randomCardValue = 50;
+        cardValueButton = new TextButton(String.valueOf(randomCardValue), skin);
+        table.add(cardValueButton);
+
+        randomCardValue = 38;
+        cardValueButton = new TextButton(String.valueOf(randomCardValue), skin);
+        table.add(cardValueButton);
+
+        randomCardValue = 42;
+        cardValueButton = new TextButton(String.valueOf(randomCardValue), skin);
+        table.add(cardValueButton);
+
+
         table.add(leftTurnButton);
         table.add(rightTurnButton);
         table.add(uTurnButton);
@@ -112,7 +132,6 @@ public class Hud {
 
     public void transformButton(Button button) {
         button.padLeft(-100);
-        //button.padLeft(-10);
 
         button.setTransform(true);
         button.setScale(0.45f);

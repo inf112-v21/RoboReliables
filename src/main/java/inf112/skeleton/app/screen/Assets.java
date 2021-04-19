@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-import static com.badlogic.gdx.graphics.g3d.particles.ParticleChannels.TextureRegion;
-
 public class Assets {
     private AssetManager assetManager = new AssetManager();
     public static final AssetDescriptor<Texture> menuIMG = new AssetDescriptor<Texture>
