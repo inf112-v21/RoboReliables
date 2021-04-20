@@ -5,6 +5,8 @@ import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.Direction;
 import inf112.skeleton.app.Location;
 import inf112.skeleton.app.Board;
+import inf112.skeleton.app.player.AbstractPlayer;
+
 import java.io.Serializable;
 
 /**
@@ -13,10 +15,61 @@ import java.io.Serializable;
 public class Robot extends Entity implements Serializable {
     private Direction direction;
     private CardDeck register = new CardDeck();
+    private int lifeTokens = 3;
+    private int damageTokens = 0;
+    private int id;
+    private boolean isDestroyed = false;
+    private AbstractPlayer owner;
+    private ArchiveMarker archiveMarker;
 
-    public Robot(Location location) {
+    public Robot(Location location, int playerId, AbstractPlayer owner) {
         super(location);
+        this.owner = owner;
+        archiveMarker = new ArchiveMarker(location);
+        id = playerId;
         direction = Direction.UP;
+    }
+
+    public void respawn(Location location) {
+        this.setLocation(location);
+        System.out.println("Enter a direction: W,A,S,D");
+        this.setDirection(Direction.interpretInput(this.getOwner().getInput()));
+        isDestroyed = false;
+        dealDamageToken(2);
+    }
+
+    public AbstractPlayer getOwner() {
+        return owner;
+    }
+
+    public void setOwner(AbstractPlayer owner) {
+        this.owner = owner;
+    }
+
+    public boolean getIsDestroyed() {
+        return isDestroyed;
+    }
+
+    public void setIsDestroyed(boolean bool) {
+        this.isDestroyed = bool;
+    }
+
+    @Override
+    public String toString() {
+        return "Robot " + id;
+    }
+
+    public void dealDamageToken(int tokens) {
+        damageTokens += tokens;
+        System.out.println(this + " now has " + damageTokens + " damage tokens");
+    }
+
+    public void destroy() {
+        lifeTokens--;
+        damageTokens = 0;
+        isDestroyed = true;
+
+        System.out.println(this + " lost a life token. It now has " + lifeTokens + " life tokens and 0 damage tokens");
     }
 
     /**
@@ -153,5 +206,36 @@ public class Robot extends Entity implements Serializable {
         this.direction = direction;
     }
 
+    public ArchiveMarker getArchiveMarker() {
+        return archiveMarker;
+    }
 
+    public void setArchiveMarker(ArchiveMarker archiveMarker) {
+        this.archiveMarker = archiveMarker;
+    }
+
+    public int getDamageTokens() {
+        return damageTokens;
+    }
+
+    public boolean registerIsEmpty() {
+        return this.getRegister().getSize() == 0;
+    }
+
+//    public void moveToArchiveMarker() {
+//        setLocation(archiveMarker.getLocation());
+//        isDestroyed = false;
+//        dealDamageToken(2);
+//    }
+
+    @Override
+    public boolean equals(Object otherRobot) {
+        if (this == otherRobot) return true;
+        if (otherRobot == null || getClass() != otherRobot.getClass()) {
+            return false;
+        }
+
+        Robot robot = (Robot) otherRobot;
+        return this.id == robot.id;
+    }
 }

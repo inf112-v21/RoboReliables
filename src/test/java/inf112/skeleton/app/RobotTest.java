@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import inf112.skeleton.app.cards.Card;
 import inf112.skeleton.app.cards.CardValue;
 import inf112.skeleton.app.entity.Robot;
+import inf112.skeleton.app.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ public class RobotTest {
 
     @BeforeEach
     public void makeRobot() {
-        robot = new Robot(new Location(0,0));
+        robot = new Robot(new Location(0,0), 1, new Player());
     }
 
     @Test

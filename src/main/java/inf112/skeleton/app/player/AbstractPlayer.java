@@ -21,7 +21,7 @@ import java.util.Scanner;
  */
 public abstract class AbstractPlayer extends InputAdapter implements IAbstractPlayer, Comparable<AbstractPlayer>, Serializable {
     private final Robot robot;
-    public final static Location abstractLocation = new Location(0,0);
+    public final static Location abstractLocation = new Location(0, 0);
     private ArrayList<Flag> visitedFlags = new ArrayList<>();
     private String name;
     private int playerId;
@@ -32,14 +32,14 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
 
     // constructor for offline and testing purposes
     public AbstractPlayer(Location location, int playerId) {
-        robot = new Robot(location);
+        robot = new Robot(location, playerId, this);
         name = "player " + playerId;
         this.playerId = playerId;
     }
 
     // constructor for network
     public AbstractPlayer(Location location, int playerId, boolean isHost) {
-        robot = new Robot(location);
+        robot = new Robot(location, playerId, this);
         name = "player " + playerId;
         this.playerId = playerId;
         this.isHost = isHost;
@@ -104,7 +104,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
 
     public CardDeck pickCards(int cardPicks) {
         CardDeck register = new CardDeck();
-        Scanner  input    = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Select " + cardPicks + " cards.");
         while (cardPicks > 0) {
             int cardNr = 1;
@@ -119,8 +119,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
                         System.out.println("Put a valid card number. Try again.");
                         valid = false;
                     }
-                }
-                else {
+                } else {
                     valid = false;
                 }
             } while (!valid);
@@ -154,6 +153,13 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
         } else {
             RoboreliableClient.sendPlayerToServer(this);
         }
+    }
+
+    public String getInput() {
+        Scanner input = new Scanner(System.in);
+        String inputString = input.next();
+        System.out.println(inputString);
+        return inputString;
     }
 
     public boolean getIsHost() {
