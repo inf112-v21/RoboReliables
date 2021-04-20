@@ -6,6 +6,7 @@ public class Flag extends Entity {
     private final int flagNumber;
 
     public Flag(int flagNumber, Location location) {
+        super(location);
         this.flagNumber = flagNumber;
         setLocation(location);
     }
