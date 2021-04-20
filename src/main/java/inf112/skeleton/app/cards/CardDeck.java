@@ -33,6 +33,12 @@ public class CardDeck implements ICardDeck, Serializable {
         cards.add(card);
     }
 
+    public void addToDeck(CardDeck cardDeck) {
+        for (int i = 0; i < cardDeck.getSize(); i++) {
+            addToDeck(cardDeck.getCard(i));
+        }
+    }
+
     @Override
     public void addToTopOfDeck(Card card) {
         cards.add(0, card);
@@ -77,5 +83,10 @@ public class CardDeck implements ICardDeck, Serializable {
     @Override
     public void remove(int i) {
         cards.remove(i);
+    }
+
+    @Override
+    public void clear() {
+        for (int i = cards.size() - 1; i >= 0; i--) cards.remove(i);
     }
 }
