@@ -28,6 +28,14 @@ public class Location implements Serializable {
         this.y = newY;
     }
 
+
+    public Location getRelativeLocation(int offsetX, int offsetY) {
+        int x = this.getX();
+        int y = this.getY();
+        return new Location(x + offsetX, y + offsetY);
+    }
+
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
