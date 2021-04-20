@@ -249,7 +249,7 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void dealCardsToPlayer(AbstractPlayer player) {
-        programCardDeck.dealCard(player, 9);
+        programCardDeck.dealCard(player, 5);
 
         player.getRobot().updateRegister(player.getHand());
         int cardsLeftOverInHand = player.getHandSize();
@@ -297,7 +297,7 @@ public class Board extends InputAdapter implements IBoard {
                 updatePhaseQueue();
 
             }
-        } else if (time % 150 == 0) {
+        } else if (time % 60 == 0) {
             switchActivePlayer();
             executeNextRobotRegister();
             checkIfActivePlayerOnFlag();

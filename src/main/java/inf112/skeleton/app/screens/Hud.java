@@ -163,6 +163,18 @@ public class Hud {
         button.setScale(0.45f);
     }
 
+    private void addCardListeners() {
+        for (Actor card : table.getChildren()) {
+            card.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    card.scaleBy(0.05f);
+                }
+            });
+
+        }
+    }
+
     public Stage getStage() {
         return stage;
     }

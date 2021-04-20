@@ -26,7 +26,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
     private String name;
     private int playerId;
     // ArrayList that contains the cards currently in the player's hand
-    private List<Card> hand = new ArrayList<>();
+    private CardDeck hand = new CardDeck();
 
     private boolean isHost;
 
@@ -77,17 +77,17 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
 
     @Override
     public void addToHand(Card card) {
-        hand.add(card);
+        hand.addToDeck(card);
     }
 
     @Override
     public int getHandSize() {
-        return this.hand.size();
+        return this.hand.getSize();
     }
 
     @Override
     public Card getCard(int index) {
-        return hand.get(index);
+        return hand.getCard(index);
     }
 
     @Override
@@ -97,8 +97,8 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
 
     public void printHand() {
         System.out.println("Player hand:");
-        for (int i = 0; i < getHand().size(); i++) {
-            System.out.println((i + 1) + ": " + CardValue.extendedCardValue(getHand().get(i)) + ", priorityvalue: " + getHand().get(i).getPriorityValue());
+        for (int i = 0; i < getHand().getSize(); i++) {
+            System.out.println((i + 1) + ": " + CardValue.extendedCardValue(getHand().getCard(i)) + ", priorityvalue: " + getHand().getCard(i).getPriorityValue());
         }
     }
 

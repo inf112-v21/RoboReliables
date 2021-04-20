@@ -17,11 +17,14 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(RoboRally game, Board board) {
         this.game = game;
         this.board = board;
+        batch = new SpriteBatch();
+
+        hud = new Hud(batch);
     }
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(board);
+
     }
 
     @Override
