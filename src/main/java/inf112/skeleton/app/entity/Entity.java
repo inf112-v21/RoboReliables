@@ -11,10 +11,6 @@ import java.io.Serializable;
 public abstract class Entity implements IEntity, Serializable {
     private Location location;
 
-    public Entity() {
-
-    }
-
     public Entity(Location location) {
         this.location = location;
     }
