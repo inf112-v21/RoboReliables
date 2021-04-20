@@ -1,6 +1,7 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.entity.Robot;
+import inf112.skeleton.app.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -57,7 +58,7 @@ public class DirectionTest {
      */
     @Test
     public void initialRobotDirectionTest() {
-        Robot robot = new Robot(new Location (0,0));
+        Robot robot = new Robot(new Location (0,0), 1, new Player());
         Direction robotDirection = robot.getDirection();
 
         assertEquals(Direction.UP, robotDirection, "Initial direction not correct.");
