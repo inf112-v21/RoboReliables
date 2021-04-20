@@ -66,5 +66,10 @@ public interface ICardDeck {
      * @param i index of card to remove
      */
     void remove(int i);
+
+    /**
+     * Clear all of the cards from the deck.
+     */
+    void clear();
 }
 
