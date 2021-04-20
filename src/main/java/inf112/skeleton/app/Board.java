@@ -279,7 +279,7 @@ public class Board extends InputAdapter implements IBoard {
         player.getRobot().updateRegister(player.pickCards(5));
         int cardsLeftOverInHand = player.getHandSize();
         for (int i = 0; i < cardsLeftOverInHand; i++) {
-            programCardDeck.addToTopOfDeck(player.getHand().get(0));
+            programCardDeck.addToTopOfDeck(player.getHand().getCard(0));
             player.getHand().remove(0);
         }
         System.out.println("Player, Picked cards:");
