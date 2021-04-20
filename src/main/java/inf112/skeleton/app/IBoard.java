@@ -19,7 +19,7 @@ public interface IBoard extends ApplicationListener {
      * case for finding out which flag it is. The values being checked for is the value
      * of that sprite in the texture pack.
      */
-    void setFlagLayer();
+    void setFlags();
 
     /**
      * Initializes a new round. A new round is when every card in a round has been played.
