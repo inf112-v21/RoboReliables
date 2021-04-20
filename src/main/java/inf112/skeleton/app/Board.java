@@ -17,8 +17,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import inf112.skeleton.app.cards.ProgramCardDeck;
-import inf112.skeleton.app.entity.Flag;
-import inf112.skeleton.app.entity.Robot;
+import inf112.skeleton.app.entity.*;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.TestPlayer;
 
@@ -44,8 +43,16 @@ public class Board extends InputAdapter implements IBoard {
 
     private TiledMapTileLayer.Cell robotCell, robotWonCell, robotDiedCell, robotUpCell, robotDownCell, robotRightCell, robotLeftCell;
 
+    // lists of players and entities
+    // the list of players can be used to get the robots
     protected ArrayList<AbstractPlayer> players;
+
+    // List of robots that have been destroyed and are yet to respawn
+    protected ArrayList<Robot> destroyedRobots = new ArrayList<>();
+
     protected ArrayList<Flag> flags = new ArrayList<>();
+    protected ArrayList<Hole> holes = new ArrayList<>();
+
     int playerId;
     // The player this instance of the game is responsible for during online play
     private AbstractPlayer networkPlayer;
@@ -63,6 +70,8 @@ public class Board extends InputAdapter implements IBoard {
 
     private boolean playingOnline;
 
+    private boolean needsCleanup = false;
+
     int time = 1; // tracks time in game.
     int round = 1; // round Nr
 
@@ -77,7 +86,7 @@ public class Board extends InputAdapter implements IBoard {
         this.players = players;
         this.playingOnline = playingOnline;
         this.playerId = playerId;
-        this.networkPlayer = players.get(playerId-1);
+        this.networkPlayer = players.get(playerId - 1);
     }
 
     public Board(ArrayList<AbstractPlayer> players, ArrayList<Flag> flags) {
@@ -141,19 +150,30 @@ public class Board extends InputAdapter implements IBoard {
         // cards
         programCardDeck = new ProgramCardDeck();
 
-        setFlagLayer();
+        setFlags();
+        setHoles();
 
         renderer.render();
         Gdx.input.setInputProcessor(this);
     }
 
-    @Override
-    public void setFlagLayer() {
+    public void setHoles() {
+        for (int x = 0; x < getMAP_SIZE_X(); x++) {
+            for (int y = 0; y < getMAP_SIZE_Y(); y++) {
+                if (holeLayer.getCell(x, y) != null) {
+                    holes.add(new Hole(new Location(x, y)));
+                }
+            }
+        }
+    }
+
+
+    public void setFlags() {
         for (int x = 0; x < getMAP_SIZE_X(); x++) {
             for (int y = 0; y < getMAP_SIZE_Y(); y++) {
                 if (flagLayer.getCell(x, y) != null) {
-                    int flagIndex = flagLayer.getCell(x,y).getTile().getId();
-                    switch(flagIndex) {
+                    int flagIndex = flagLayer.getCell(x, y).getTile().getId();
+                    switch (flagIndex) {
                         case 55:
                             flagIndex = 1;
                             break;
@@ -286,23 +306,34 @@ public class Board extends InputAdapter implements IBoard {
     public void gameLoop() {
         // if all robots have performed their phase
         if (phaseQueue.isEmpty()) {
-            if (players.get(0).getRobot().getRegister().getSize() == 0) {
-                startNewRound();
-                switchActivePlayer();
+            if (registersAreEmpty()) {
+                if (!needsCleanup) {
+                    startNewRound();
+                    switchActivePlayer();
+                } else {
+                    cleanup();
+                }
+                needsCleanup = !needsCleanup;
             } else {
                 updatePhaseQueue();
-
             }
-        } else if (time % 150 == 0) {
+        } else if (time % 240 == 0) {
             switchActivePlayer();
             executeNextRobotRegister();
             checkIfActivePlayerOnFlag();
+            if (activePlayerOnHole()) {
+                robotHoleEvent();
+            }
             if (checkIfWon()) {
                 System.out.println("Player won!");
                 System.out.close();
             }
         }
         time++;
+    }
+
+    private void cleanup() {
+        spawnRobots(destroyedRobots);
     }
 
     @Override
@@ -315,12 +346,23 @@ public class Board extends InputAdapter implements IBoard {
 
     }
 
+    public boolean registersAreEmpty() {
+        for (AbstractPlayer player : players) {
+            if (!player.getRobot().registerIsEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public void updatePhaseQueue() {
 
         for (AbstractPlayer player : players) {
-            phaseQueue.add(player);
-            System.out.println("The priority value of " + player.getName() +"'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
+            if (!player.getRobot().getIsDestroyed()) {
+                phaseQueue.add(player);
+                System.out.println("The priority value of " + player.getName() + "'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
+            }
         }
     }
 
@@ -330,18 +372,21 @@ public class Board extends InputAdapter implements IBoard {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderPlayerTextures();
         renderer.render();
-
-
         if (!firstRender) {
-            if (!(activePlayer instanceof TestPlayer))
+            if (!(activePlayer instanceof TestPlayer)) {
                 gameLoop();
-            else {
+            } else {
+                spawnRobots(destroyedRobots);
                 checkIfTurnIsOver();
                 checkIfActivePlayerOnFlag();
+                if (activePlayerOnHole()) {
+                    robotHoleEvent();
+                }
                 checkIfWon();
             }
         }
-
+        renderPlayerTextures();
+        renderer.render();
         firstRender = false;
     }
 
@@ -354,7 +399,7 @@ public class Board extends InputAdapter implements IBoard {
 
             if (checkIfWon()) {
                 robotLayer.setCell(x, y, robotWonCell);
-            } else if ((x == 0) && (y == 11)) {
+            } else if (player.getRobot().getIsDestroyed()) {
                 robotLayer.setCell(x, y, robotDiedCell);
             } else {
                 if (dir == Direction.DOWN) {
@@ -374,9 +419,42 @@ public class Board extends InputAdapter implements IBoard {
     public void checkIfActivePlayerOnFlag() {
         for (Flag flag : flags) {
             if (flag.getLocation().equals(activePlayer.getRobot().getLocation()))
-                if (canVisitFlag(flag))
+                if (canVisitFlag(flag)) {
                     activePlayer.addToVisitedFlags(flag);
+                    updateArchiveMarker(flag.getLocation());
+                }
         }
+    }
+
+    public void dealDamage(Robot robot, int amount) {
+        robot.dealDamageToken(amount);
+        if (robot.getDamageTokens() >= 10) destroyRobot(robot);
+
+    }
+
+    private void destroyRobot(Robot robot) {
+        robot.destroy();
+        destroyedRobots.add(robot);
+        programCardDeck.addToDeck(robot.getRegister());
+        robot.getRegister().clear();
+    }
+
+    public void updateArchiveMarker(Location location) {
+        activePlayer.getRobot().setArchiveMarker(new ArchiveMarker(location));
+    }
+
+    private boolean activePlayerOnHole() {
+        for (Hole hole : holes) {
+            if (hole.getLocation().equals(activePlayer.getRobot().getLocation())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void robotHoleEvent() {
+        Robot robot = activePlayer.getRobot();
+        dealDamage(robot, 10);
     }
 
     @Override
@@ -420,6 +498,95 @@ public class Board extends InputAdapter implements IBoard {
     public void dispose() {
         batch.dispose();
         font.dispose();
+    }
+
+
+    public boolean holeAtLocation(Location location) {
+        for (Hole hole : holes) {
+            if (hole.getLocation().equals(location)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean robotAtLocation(Location location) {
+        for (AbstractPlayer player : players) {
+            if (player.getRobot().getLocation().equals(location)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean withinBounds(Location location) {
+        int x = location.getX();
+        int y = location.getY();
+        if (x >= 0 && x < getMAP_SIZE_X()) {
+            if (y >= 0 && x < getMAP_SIZE_Y()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public boolean validSpawnLocation(Location location) {
+        boolean hasConflictingEntity = (holeAtLocation(location) || robotAtLocation(location));
+        return ((!hasConflictingEntity) && withinBounds(location));
+    }
+
+    public Location getRelativeSpawnLocation(Location location, AbstractPlayer player) {
+        Location spawnLocation = (new Location(-1, -1));
+        while (!validSpawnLocation(spawnLocation)) {
+            System.out.println("Type relative spawn location, ie: NW, S, SE, NE, W");
+            String input = player.getInput();
+            switch (input) {
+                case "NW":
+                    spawnLocation = location.getRelativeLocation(1, -1);
+                    break;
+                case "N":
+                    spawnLocation = location.getRelativeLocation(1, 0);
+                    break;
+                case "NE":
+                    spawnLocation = location.getRelativeLocation(1, 1);
+                    break;
+                case "W":
+                    spawnLocation = location.getRelativeLocation(0, -1);
+                    break;
+                case "E":
+                    spawnLocation = location.getRelativeLocation(0, 1);
+                    break;
+                case "SW":
+                    spawnLocation = location.getRelativeLocation(-1, -1);
+                    break;
+                case "S":
+                    spawnLocation = location.getRelativeLocation(-1, 0);
+                    break;
+                case "SE":
+                    spawnLocation = location.getRelativeLocation(-1, 1);
+                    break;
+                default:
+                    System.out.println("Invalid input");
+                    spawnLocation = (new Location(-1, -1));
+                    break;
+            }
+        }
+        return spawnLocation;
+    }
+
+    public void spawnRobots(ArrayList<Robot> spawnRobotList) {
+        for (Robot spawnRobot : spawnRobotList) {
+            robotLayer.setCell(spawnRobot.getLocation().getX(), spawnRobot.getLocation().getY(), null);
+            Location archiveMarkerLocation = spawnRobot.getArchiveMarker().getLocation();
+            if (validSpawnLocation(archiveMarkerLocation)) {
+                spawnRobot.respawn(archiveMarkerLocation);
+            } else {
+                Location newSpawnLocation = getRelativeSpawnLocation(archiveMarkerLocation, spawnRobot.getOwner());
+                spawnRobot.respawn(newSpawnLocation);
+            }
+        }
+        destroyedRobots.clear();
     }
 
     /**
