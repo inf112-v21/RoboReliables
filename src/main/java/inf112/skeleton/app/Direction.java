@@ -57,5 +57,19 @@ public enum Direction implements Serializable {
         }
         return direction;
     }
-}
 
+    public static Direction interpretInput(String input) {
+        switch(input.toUpperCase()) {
+            case "W":
+                return UP;
+            case "S":
+                return DOWN;
+            case "A":
+                return LEFT;
+            case "D":
+                return RIGHT;
+            default:
+                throw new IllegalArgumentException("Invalid input");
+        }
+    }
+}
