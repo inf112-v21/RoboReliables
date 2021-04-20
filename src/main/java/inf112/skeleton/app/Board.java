@@ -317,6 +317,7 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void updatePhaseQueue() {
+
         for (AbstractPlayer player : players) {
             phaseQueue.add(player);
             System.out.println("The priority value of " + player.getName() +"'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
