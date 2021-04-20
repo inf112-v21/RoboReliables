@@ -3,6 +3,7 @@ package inf112.skeleton.app.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.RoboRally;
 import inf112.skeleton.app.player.TestPlayer;
@@ -10,6 +11,8 @@ import inf112.skeleton.app.player.TestPlayer;
 public class GameScreen extends ScreenAdapter {
     RoboRally game;
     Board board;
+    SpriteBatch batch;
+    Hud hud;
 
     public GameScreen(RoboRally game, Board board) {
         this.game = game;
@@ -29,6 +32,11 @@ public class GameScreen extends ScreenAdapter {
         board.renderer.render();
 
 
+        batch.setProjectionMatrix(hud.getStage().getCamera().combined);
+        hud.getStage().act(delta); //act the Hud
+        hud.getStage().draw(); //draw the Hud
+        hud.setPlayerHandInHud(board.getActivePlayer().getHand());
+
         if (!board.firstRender) {
             if (!(board.getActivePlayer() instanceof TestPlayer))
                 board.gameLoop();
@@ -39,11 +47,13 @@ public class GameScreen extends ScreenAdapter {
             }
         }
         board.firstRender = false;
+        hud.update();
     }
 
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
+        hud.getStage().getViewport().update(width, height);
     }
 
     @Override

@@ -71,7 +71,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
     }
 
     @Override
-    public List<Card> getHand() {
+    public CardDeck getHand() {
         return this.hand;
     }
 

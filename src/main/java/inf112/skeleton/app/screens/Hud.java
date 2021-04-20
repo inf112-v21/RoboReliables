@@ -1,9 +1,11 @@
 package inf112.skeleton.app.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -35,14 +37,6 @@ public class Hud {
     private TextureRegion moveOnce;
     private TextureRegion moveTwice;
     private TextureRegion moveThrice;
-
-    private ImageButton leftTurnButton;
-    private ImageButton rightTurnButton;
-    private ImageButton uTurnButton;
-    private ImageButton backUpButton;
-    private ImageButton moveOnceButton;
-    private ImageButton moveTwiceButton;
-    private ImageButton moveThriceButton;
 
     private Drawable leftTurnCard;
     private Drawable rightTurnCard;
@@ -89,14 +83,7 @@ public class Hud {
         moveTwiceCard = new TextureRegionDrawable(moveTwice);
         moveThriceCard = new TextureRegionDrawable(moveThrice);
 
-        leftTurnButton = new ImageButton(leftTurnCard);
-        rightTurnButton = new ImageButton(rightTurnCard);
-        uTurnButton = new ImageButton(uTurnCard);
-        backUpButton = new ImageButton(backUpCard);
-        moveOnceButton = new ImageButton(moveOnceCard);
-        moveTwiceButton = new ImageButton(moveTwiceCard);
-        moveThriceButton = new ImageButton(moveThriceCard);
-
+        /*
         leftTurnButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -107,7 +94,7 @@ public class Hud {
                 System.out.println("This card's height is " + backUpButton.getHeight() + " high!");
             }
         });
-
+        */
         /*
         skin = assetManager.get(Assets.menuSKIN);
 
@@ -126,15 +113,16 @@ public class Hud {
         cardValueButton = new TextButton(String.valueOf(randomCardValue), skin);
         table.add(cardValueButton);
         */
+        Gdx.input.setInputProcessor(stage);
 
         if (!(playerHand == null)) {
             for (int i = 0; i < playerHand.getSize(); i++) {
                 Card card = playerHand.getCard(i);
                 convertCardToDrawable(card);
-                //populatePlayerHandDrawable(currentCardDrawable);
                 transformButton(currentCardButton);
                 table.add(currentCardButton);
             }
+            addCardListeners();
         }
 
         stage.addActor(table);
@@ -171,7 +159,6 @@ public class Hud {
 
     public void transformButton(Button button) {
         button.padLeft(-100);
-
         button.setTransform(true);
         button.setScale(0.45f);
     }

@@ -124,9 +124,9 @@ public class Board extends InputAdapter implements IBoard {
 
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
-        camera.setToOrtho(false, MAP_SIZE_X, MAP_SIZE_Y);
-        camera.viewportHeight = (float) 14.4;
-        camera.viewportWidth = (float) 25.6;
+        camera.setToOrtho(false, 26, 9);
+        camera.viewportHeight = (float) 15.4;
+        camera.viewportWidth = (float) 26.6;
         camera.update();
 
         // Initializes renderer
@@ -251,10 +251,10 @@ public class Board extends InputAdapter implements IBoard {
     public void dealCardsToPlayer(AbstractPlayer player) {
         programCardDeck.dealCard(player, 9);
 
-        player.getRobot().updateRegister(player.pickCards(5));
+        player.getRobot().updateRegister(player.getHand());
         int cardsLeftOverInHand = player.getHandSize();
         for (int i = 0; i < cardsLeftOverInHand; i++) {
-            programCardDeck.addToTopOfDeck(player.getHand().get(0));
+            programCardDeck.addToTopOfDeck(player.getHand().getCard(0));
             player.getHand().remove(0);
         }
         System.out.println("Player, Picked cards:");
