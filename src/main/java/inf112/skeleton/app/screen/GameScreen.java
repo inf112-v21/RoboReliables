@@ -34,6 +34,7 @@ import inf112.skeleton.app.player.TestPlayer;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 
 public class GameScreen extends ScreenAdapter {
@@ -71,7 +72,7 @@ public class GameScreen extends ScreenAdapter {
         font  = new BitmapFont();
         font.setColor(Color.RED);
 
-        hud = new Hud(batch, assetManager);
+        hud = new Hud(batch);
 
 
         // Sets the map and various layers
@@ -109,13 +110,10 @@ public class GameScreen extends ScreenAdapter {
         activePlayer = players.peek();
         programCardDeck = new ProgramCardDeck();
         Gdx.input.setInputProcessor(hud.stage);
-
     }
 
     @Override
     public void show() {
-
-
     }
 
     @Override
@@ -143,10 +141,13 @@ public class GameScreen extends ScreenAdapter {
             int y = activePlayer.getRobot().getLocation().getY();
             robotLayer.setCell(x, y, null);
             programCardDeck.addToTopOfDeck(activePlayer.getRobot().getRegister().getCard(0));
+            Scanner s = new Scanner(System.in);
+            System.out.println("Waiting...");
+            //s.nextLine();
             activePlayer.getRobot().executeNext();
             switchActivePlayer();
         }
-
+        hud.update();
         time++;
     }
 
@@ -231,9 +232,14 @@ public class GameScreen extends ScreenAdapter {
         System.out.println("- It's " + activePlayer.getName() + "'s turn -");
         programCardDeck.shuffle();
         programCardDeck.dealCard(activePlayer, 5);
+        hud.setPlayerHandInHud(activePlayer.getHand());
         activePlayer.getRobot().updateRegister(activePlayer.getHand());
         System.out.println("Picked cards:");
         activePlayer.getRobot().getRegister().printDeck();
+
+        Scanner s = new Scanner(System.in);
+        System.out.println("Continue?");
+        //s.nextLine();
         switchActivePlayer();
     }
 
