@@ -36,7 +36,7 @@ public class Board extends InputAdapter implements IBoard {
     private TiledMap map;
     public TiledMapTileLayer flagLayer, boardLayer, holeLayer, robotLayer;
 
-    private OrthogonalTiledMapRenderer renderer;
+    public OrthogonalTiledMapRenderer renderer;
 
     public static final int MAP_SIZE_X = 12;
     public static final int MAP_SIZE_Y = 12;
@@ -75,11 +75,12 @@ public class Board extends InputAdapter implements IBoard {
     int time = 1; // tracks time in game.
     int round = 1; // round Nr
 
-    static boolean firstRender = true;
+    public static boolean firstRender = true;
 
 
     public Board(ArrayList<AbstractPlayer> players) {
         this.players = players;
+        initializeBoard();
     }
 
     public Board(ArrayList<AbstractPlayer> players, boolean playingOnline, int playerId) {
@@ -87,11 +88,13 @@ public class Board extends InputAdapter implements IBoard {
         this.playingOnline = playingOnline;
         this.playerId = playerId;
         this.networkPlayer = players.get(playerId - 1);
+        initializeBoard();
     }
 
     public Board(ArrayList<AbstractPlayer> players, ArrayList<Flag> flags) {
         this.players = players;
         this.flags = flags;
+        initializeBoard();
     }
 
     public Board() {}
@@ -112,6 +115,11 @@ public class Board extends InputAdapter implements IBoard {
      */
     @Override
     public void create() {
+        initializeBoard();
+        Gdx.input.setInputProcessor(this);
+    }
+
+    private void initializeBoard() {
         batch = new SpriteBatch();
         font  = new BitmapFont();
         font.setColor(Color.RED);
@@ -125,8 +133,9 @@ public class Board extends InputAdapter implements IBoard {
 
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
-        camera.setToOrtho(false, MAP_SIZE_X, MAP_SIZE_Y);
-        camera.viewportHeight = (float) 12;
+        camera.setToOrtho(false, 26, 9);
+        camera.viewportHeight = (float) 15.4;
+        camera.viewportWidth = (float) 26.6;
         camera.update();
 
         // Initializes renderer
@@ -317,7 +326,7 @@ public class Board extends InputAdapter implements IBoard {
             } else {
                 updatePhaseQueue();
             }
-        } else if (time % 240 == 0) {
+        } else if (time % 60 == 0) {
             switchActivePlayer();
             executeNextRobotRegister();
             checkIfActivePlayerOnFlag();

@@ -1,0 +1,54 @@
+
+cardAtlas.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+moveOnce
+  rotate: false
+  xy: 1, 537
+  size: 193, 267
+  orig: 193, 267
+  offset: 0, 0
+  index: -1
+moveThrice
+  rotate: false
+  xy: 1, 268
+  size: 193, 267
+  orig: 193, 267
+  offset: 0, 0
+  index: -1
+moveTwice
+  rotate: false
+  xy: 196, 537
+  size: 193, 267
+  orig: 193, 267
+  offset: 0, 0
+  index: -1
+backUp
+  rotate: false
+  xy: 1, 1
+  size: 192, 265
+  orig: 192, 265
+  offset: 0, 0
+  index: -1
+leftTurn
+  rotate: false
+  xy: 196, 270
+  size: 192, 265
+  orig: 192, 265
+  offset: 0, 0
+  index: -1
+rightTurn
+  rotate: false
+  xy: 391, 539
+  size: 191, 265
+  orig: 191, 265
+  offset: 0, 0
+  index: -1
+uTurn
+  rotate: false
+  xy: 584, 540
+  size: 191, 264
+  orig: 191, 264
+  offset: 0, 0
+  index: -1
