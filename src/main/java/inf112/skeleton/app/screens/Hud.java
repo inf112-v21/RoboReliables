@@ -12,14 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import inf112.skeleton.app.cards.Card;
 import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.cards.CardValue;
-import inf112.skeleton.app.player.AbstractPlayer;
-
-import java.util.ArrayList;
 
 
 public class Hud {
@@ -49,21 +45,25 @@ public class Hud {
     protected Drawable currentCardDrawable;
     protected Button currentCardButton;
 
-    private Table table;
+    protected ImageButton leftTurnButton;
+
+    private Table handTable;
 
     protected CardDeck playerHand;
+    private CardDeck selectedCards;
 
     public Hud(SpriteBatch spriteBatch) {
         this.spriteBatch = spriteBatch;
-        update();
+        create();
     }
 
-    public void update() {
+    private void create() {
         stageViewport = new FitViewport(1280, 720);
         stage = new Stage(stageViewport, spriteBatch);
 
-        table = new Table();
-        table.setPosition(380,140);
+        handTable = new Table();
+        handTable.setPosition(380,140);
+
         Assets assets = new Assets();
         sprites = new TextureAtlas("assets/cardAtlas.atlas");
 
@@ -83,6 +83,13 @@ public class Hud {
         moveTwiceCard = new TextureRegionDrawable(moveTwice);
         moveThriceCard = new TextureRegionDrawable(moveThrice);
 
+        leftTurnButton = new ImageButton(leftTurnCard);
+        //moveOnceButton = new ImageButton(moveOnceCard);
+        transformButton(leftTurnButton);
+        update();
+    }
+
+    public void update() {
         /*
         leftTurnButton.addListener(new ClickListener() {
             @Override
@@ -115,17 +122,21 @@ public class Hud {
         */
         Gdx.input.setInputProcessor(stage);
 
-        if (!(playerHand == null)) {
+
+        if (handTable.getChildren().size < 5 && (!(playerHand == null))) {
             for (int i = 0; i < playerHand.getSize(); i++) {
                 Card card = playerHand.getCard(i);
+
                 convertCardToDrawable(card);
                 transformButton(currentCardButton);
-                table.add(currentCardButton);
+                handTable.add(currentCardButton);
             }
             addCardListeners();
         }
 
-        stage.addActor(table);
+        //table.add(leftTurnButton);
+
+        stage.addActor(handTable);
     }
 
     public void convertCardToDrawable(Card card) {
@@ -151,6 +162,8 @@ public class Hud {
             currentCardDrawable = uTurnCard;
             currentCardButton = new ImageButton(uTurnCard);
         }
+        currentCardButton.setName(String.valueOf(card.getCardValue()));
+
     }
 
     public void setPlayerHandInHud(CardDeck hand) {
@@ -161,14 +174,46 @@ public class Hud {
         button.padLeft(-100);
         button.setTransform(true);
         button.setScale(0.45f);
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Du trykket på " + button.getName());
+                button.setScale(0.5f);
+
+                //selectedCards.addToDeck(new Card(getCardValue(button.getName())));
+                //System.out.println("selected cards: " + selectedCards.getSize());
+            }
+        });
+    }
+
+    public CardValue getCardValue(String buttonName) {
+        switch (buttonName) {
+            case "F1":
+                return CardValue.F1;
+            case "F2":
+                return CardValue.F2;
+            case "F3":
+                return CardValue.F3;
+            case "B1":
+                return CardValue.B1;
+            case "RL":
+                return CardValue.RL;
+            case "RR":
+                return CardValue.RR;
+            case "UT":
+                return CardValue.UT;
+        }
+        return null;
     }
 
     private void addCardListeners() {
-        for (Actor card : table.getChildren()) {
+        for (Actor card : handTable.getChildren()) {
             card.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     card.scaleBy(0.05f);
+                    System.out.println(card.getName() + " was clicked.");
+                    //selectedCards.addToDeck(card.getName());
                 }
             });
 

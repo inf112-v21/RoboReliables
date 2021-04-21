@@ -189,7 +189,10 @@ public class Robot extends Entity implements Serializable {
         }
     }
 
-
+    /**
+     * For telling the robot which cards are in the register.
+     * @param newRegister A deck of five or less cards to be played
+     */
     public void updateRegister(CardDeck newRegister) {
         register = newRegister;
     }

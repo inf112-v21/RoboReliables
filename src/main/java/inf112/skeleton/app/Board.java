@@ -274,17 +274,33 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void dealCardsToPlayer(AbstractPlayer player) {
-        programCardDeck.dealCard(player, 9);
+        programCardDeck.dealCard(player, 7);
+        player.getRobot().updateRegister(player.getHand());
+    }
 
-        player.getRobot().updateRegister(player.pickCards(5));
+    /*
+    @Override
+    public void dealCardsToPlayer(AbstractPlayer player) {
+        programCardDeck.dealCard(player, 7);
+
+        // Updates the robots register with the remaining cards
+        player.getRobot().updateRegister(player.getHand());
+
+
         int cardsLeftOverInHand = player.getHandSize();
-        for (int i = 0; i < cardsLeftOverInHand; i++) {
-            programCardDeck.addToTopOfDeck(player.getHand().getCard(0));
-            player.getHand().remove(0);
+        if (cardsLeftOverInHand > 0) {
+            for (int i = 0; i < cardsLeftOverInHand; i++) {
+                programCardDeck.addToTopOfDeck(player.getHand().getCard(0));
+                player.getHand().remove(0);
+            }
         }
-        System.out.println("Player, Picked cards:");
+
+
+        // This is executed to show the player which cards were picked
+        System.out.println("Picked cards:");
         player.getRobot().getRegister().printDeck();
     }
+    */
 
     @Override
     public void assignNetworkPlayer() {
@@ -328,7 +344,7 @@ public class Board extends InputAdapter implements IBoard {
             }
         } else if (time % 60 == 0) {
             switchActivePlayer();
-            executeNextRobotRegister();
+            //executeNextRobotRegister();
             checkIfActivePlayerOnFlag();
             if (activePlayerOnHole()) {
                 robotHoleEvent();

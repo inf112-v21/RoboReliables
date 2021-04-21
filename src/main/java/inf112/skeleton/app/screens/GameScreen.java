@@ -40,7 +40,12 @@ public class GameScreen extends ScreenAdapter {
         hud.getStage().draw(); //draw the Hud
         hud.setPlayerHandInHud(board.getActivePlayer().getHand());
 
-        if (!board.firstRender) {
+        if (board.registersAreEmpty()) {
+            System.out.println("Getting cards from hud...");
+            //hud.selectCards(board.getActivePlayer());
+        }
+
+        if (!Board.firstRender) {
             if (!(board.getActivePlayer() instanceof TestPlayer))
                 board.gameLoop();
             else {
@@ -49,7 +54,7 @@ public class GameScreen extends ScreenAdapter {
                 board.checkIfWon();
             }
         }
-        board.firstRender = false;
+        Board.firstRender = false;
         hud.update();
     }
 
