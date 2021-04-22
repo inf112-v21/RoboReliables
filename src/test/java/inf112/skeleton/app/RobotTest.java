@@ -44,7 +44,7 @@ public class RobotTest {
 
     @Test
     public void moveForwardTest() {
-        robot.moveForward(1);
+        robot.moveForward();
 
         int expectedPositionX = 0;
         int expectedPositionY = 1;
@@ -52,7 +52,7 @@ public class RobotTest {
         assertEquals(expectedPositionY, robot.getLocation().getY());
 
         robot.setDirection(Direction.DOWN);
-        robot.moveForward(1);
+        robot.moveForward();
 
         expectedPositionX = 0;
         expectedPositionY = 0;
@@ -63,7 +63,7 @@ public class RobotTest {
     @Test
     public void moveBackwardsTest() {
         robot.setLocation(new Location(0,1));
-        robot.moveBackward(1);
+        robot.moveBackward();
 
         int expectedPositionX = 0;
         int expectedPositionY = 0;

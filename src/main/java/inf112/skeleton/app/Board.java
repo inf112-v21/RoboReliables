@@ -313,8 +313,9 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void gameLoop() {
-        // if all robots have performed their phase
-        if (phaseQueue.isEmpty()) {
+        // if robot's last phase resulted in a card with multiple steps, make sure it has completed all the steps before
+        // updating phasequeue or starting new round
+        if (phaseQueue.isEmpty() && activePlayer.getRobot().noRemainingStepsOfCard()) {
             if (registersAreEmpty()) {
                 if (!needsCleanup) {
                     startNewRound();
@@ -327,8 +328,14 @@ public class Board extends InputAdapter implements IBoard {
                 updatePhaseQueue();
             }
         } else if (time % 60 == 0) {
-            switchActivePlayer();
-            executeNextRobotRegister();
+            if (activePlayer.getRobot().noRemainingStepsOfCard()) {
+                switchActivePlayer();
+                executeNextRobotRegister();
+            } else {
+                robotLayer.setCell(activePlayer.getRobot().getLocation().getX(), activePlayer.getRobot().getLocation().getY(),null);
+                activePlayer.getRobot().continueCardMovement();
+            }
+            // entity handling
             checkIfActivePlayerOnFlag();
             if (activePlayerOnHole()) {
                 robotHoleEvent();
@@ -621,11 +628,11 @@ public class Board extends InputAdapter implements IBoard {
 
         if (intCode == Input.Keys.UP) {
             robotLayer.setCell(x, y, null);
-            activePlayer.getRobot().moveForward(1);
+            activePlayer.getRobot().moveForward();
         }
         if (intCode == Input.Keys.DOWN) {
             robotLayer.setCell(x, y, null);
-            activePlayer.getRobot().moveBackward(1);
+            activePlayer.getRobot().moveBackward();
         }
         if (intCode == Input.Keys.LEFT) {
             robotLayer.setCell(x, y, null);

@@ -21,6 +21,7 @@ public class Robot extends Entity implements Serializable {
     private boolean isDestroyed = false;
     private AbstractPlayer owner;
     private ArchiveMarker archiveMarker;
+    private int remainingStepsOfCard;
 
     public Robot(Location location, int playerId, AbstractPlayer owner) {
         super(location);
@@ -78,7 +79,10 @@ public class Robot extends Entity implements Serializable {
     public void executeNext() {
         System.out.println("Moved once.");
         move(register.getCard(0));
-        register.remove(0);
+        // removes a card from register only when all its steps have been performed
+        if (remainingStepsOfCard == 0) {
+            register.remove(0);
+        }
     }
 
     public Card getNextRegisterCard() {
@@ -87,29 +91,37 @@ public class Robot extends Entity implements Serializable {
 
     /**
      * Moves the robot according to the cardValue of the card
+     *
      * @param card The input card
      */
     public void move(Card card) {
         switch (card.getCardValue()) {
             case F1:
-                moveForward(1);
+                remainingStepsOfCard = 1;
+                moveForward();
                 break;
             case F2:
-                moveForward(2);
+                remainingStepsOfCard = 2;
+                moveForward();
                 break;
             case F3:
-                moveForward(3);
+                remainingStepsOfCard = 3;
+                moveForward();
                 break;
             case B1:
-                moveBackward(1);
+//                remainingStepsOfCard = 1;
+                moveBackward();
                 break;
             case RR:
+//                remainingStepsOfCard = 1;
                 rotateRight(1);
                 break;
             case RL:
+//                remainingStepsOfCard = 1;
                 rotateLeft(1);
                 break;
             case UT:
+//                remainingStepsOfCard = 1;
                 rotateRight(2);
                 break;
             default:
@@ -118,62 +130,68 @@ public class Robot extends Entity implements Serializable {
     }
 
     /**
-     * Moves the robot forward steps times. Uses the direction of the robot to know which way is forward
-     * @param steps The number of steps
+     * Moves the robot forward. Uses the direction of the robot to know which way is forward
      */
-    public void moveForward(int steps) {
-        for (int i = 0; i < steps; i++) {
-            int x = this.getLocation().getX();
-            int y = this.getLocation().getY();
+    public void moveForward() {
+        int x = this.getLocation().getX();
+        int y = this.getLocation().getY();
 
-            switch (direction) {
-                case UP:
-                    if (!(y == Board.MAP_SIZE_Y-1)) {
-                        this.setLocation(new Location(x, y + 1)); }
-                    break;
-                case DOWN:
-                    if (!(y == 0)) {
-                        this.setLocation(new Location(x, y - 1)); }
-                    break;
-                case LEFT:
-                    if (!(x == 0)) {
-                        this.setLocation(new Location(x - 1, y)); }
-                    break;
-                case RIGHT:
-                    if (!(x == Board.MAP_SIZE_X-1)) {
-                        this.setLocation(new Location(x + 1, y)); }
-                    break;
-            }
+        switch (direction) {
+            case UP:
+                if (!(y == Board.MAP_SIZE_Y - 1)) {
+                    this.setLocation(new Location(x, y + 1));
+                }
+                break;
+            case DOWN:
+                if (!(y == 0)) {
+                    this.setLocation(new Location(x, y - 1));
+                }
+                break;
+            case LEFT:
+                if (!(x == 0)) {
+                    this.setLocation(new Location(x - 1, y));
+                }
+                break;
+            case RIGHT:
+                if (!(x == Board.MAP_SIZE_X - 1)) {
+                    this.setLocation(new Location(x + 1, y));
+                }
+                break;
         }
+        remainingStepsOfCard--;
+//        if (remainingStepsOfCard <!=> null) {
+//            remainingStepsOfCard--;
+//        }
     }
 
     /**
-     * Moves the robot backward steps times. Uses the direction of the robot to know which way is forward
-     * @param steps The number of steps
+     * Moves the robot backward. Uses the direction of the robot to know which way is forward
      */
-    public void moveBackward(int steps) {
-        for (int i = 0; i < steps; i++) {
-            int x = this.getLocation().getX();
-            int y = this.getLocation().getY();
+    public void moveBackward() {
+        int x = this.getLocation().getX();
+        int y = this.getLocation().getY();
 
-            switch (direction) {
-                case UP:
-                    if (!(y == 0)) {
-                        this.setLocation(new Location(x, y - 1)); }
-                    break;
-                case DOWN:
-                    if (!(y == Board.MAP_SIZE_Y-1)) {
-                        this.setLocation(new Location(x, y + 1)); }
-                    break;
-                case LEFT:
-                    if (!(x == Board.MAP_SIZE_X-1)) {
-                        this.setLocation(new Location(x + 1, y)); }
-                    break;
-                case RIGHT:
-                    if (!(x == 0)) {
-                        this.setLocation(new Location(x - 1, y)); }
-                    break;
-            }
+        switch (direction) {
+            case UP:
+                if (!(y == 0)) {
+                    this.setLocation(new Location(x, y - 1));
+                }
+                break;
+            case DOWN:
+                if (!(y == Board.MAP_SIZE_Y - 1)) {
+                    this.setLocation(new Location(x, y + 1));
+                }
+                break;
+            case LEFT:
+                if (!(x == Board.MAP_SIZE_X - 1)) {
+                    this.setLocation(new Location(x + 1, y));
+                }
+                break;
+            case RIGHT:
+                if (!(x == 0)) {
+                    this.setLocation(new Location(x - 1, y));
+                }
+                break;
         }
     }
 
@@ -222,6 +240,21 @@ public class Robot extends Entity implements Serializable {
         return this.getRegister().getSize() == 0;
     }
 
+    public int getRemainingStepsOfCard() {
+        return remainingStepsOfCard;
+    }
+
+    public void continueCardMovement() {
+        moveForward();
+        if (remainingStepsOfCard == 0) {
+            register.remove(0);
+        }
+    }
+
+    public boolean noRemainingStepsOfCard() {
+        return getRemainingStepsOfCard() == 0;
+    }
+
 //    public void moveToArchiveMarker() {
 //        setLocation(archiveMarker.getLocation());
 //        isDestroyed = false;
@@ -229,6 +262,7 @@ public class Robot extends Entity implements Serializable {
 //    }
 
     @Override
+
     public boolean equals(Object otherRobot) {
         if (this == otherRobot) return true;
         if (otherRobot == null || getClass() != otherRobot.getClass()) {
