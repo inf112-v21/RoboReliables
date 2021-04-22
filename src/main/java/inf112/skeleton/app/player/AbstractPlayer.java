@@ -192,4 +192,3 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
         }
     }
 }
-

@@ -77,6 +77,8 @@ public class Board extends InputAdapter implements IBoard {
 
     public static boolean firstRender = true;
 
+    public int counter;
+
 
     public Board(ArrayList<AbstractPlayer> players) {
         this.players = players;
@@ -97,7 +99,8 @@ public class Board extends InputAdapter implements IBoard {
         initializeBoard();
     }
 
-    public Board() {}
+    public Board() {
+    }
 
     @Override
     public int getMAP_SIZE_X() {
@@ -121,15 +124,15 @@ public class Board extends InputAdapter implements IBoard {
 
     private void initializeBoard() {
         batch = new SpriteBatch();
-        font  = new BitmapFont();
+        font = new BitmapFont();
         font.setColor(Color.RED);
 
         // Sets the map and various layers
         map = new TmxMapLoader().load("gameboard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
-        flagLayer  = (TiledMapTileLayer) map.getLayers().get("flag");
-        holeLayer  = (TiledMapTileLayer) map.getLayers().get("hole");
+        flagLayer = (TiledMapTileLayer) map.getLayers().get("flag");
+        holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
 
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
@@ -144,12 +147,12 @@ public class Board extends InputAdapter implements IBoard {
 
         // Splits the textures of the player into different states and sets them to the given Cell
         TextureRegion[][] robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
-        robotCell      = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
-        robotDiedCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
-        robotWonCell   = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
-        robotUpCell    = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(0);
-        robotLeftCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(1);
-        robotDownCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(2);
+        robotCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
+        robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
+        robotWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
+        robotUpCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(0);
+        robotLeftCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(1);
+        robotDownCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(2);
         robotRightCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(3);
         // Active player
         activePlayer = players.get(0);
@@ -222,7 +225,6 @@ public class Board extends InputAdapter implements IBoard {
             putHandBackToDeck(player);
             dealCardsToPlayer(player);
         }
-        updatePhaseQueue();
     }
 
     @Override
@@ -233,8 +235,13 @@ public class Board extends InputAdapter implements IBoard {
         round++;
         putHandBackToDeck(networkPlayer);
         dealCardsToPlayer(networkPlayer);
-        sendNetworkPlayerToServer();
-        updatePlayersFromServer();
+       // sendNetworkPlayerToServer();
+        System.out.println("sent!");
+       // updatePlayersFromServer();
+        System.out.println("reached!");
+        for (AbstractPlayer player : players) {
+            player.getRobot().getRegister().printDeck();
+        }
         assignNetworkPlayer();
         updatePhaseQueue();
     }
@@ -350,6 +357,7 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void gameLoop() {
+        System.out.println("render count " + counter);
         // if all robots have performed their phase
         if (phaseQueue.isEmpty()) {
             if (registersAreEmpty()) {
@@ -363,7 +371,6 @@ public class Board extends InputAdapter implements IBoard {
             } else {
                 updatePhaseQueue();
             }
-
         } else if (readyCheck()) {
             if (time % 60 == 0) {
                 switchActivePlayer();
@@ -395,15 +402,14 @@ public class Board extends InputAdapter implements IBoard {
         return false;
     }
 
-    @Override
     public void updatePlayersFromServer() {
         try {
             players = networkPlayer.getPlayersFromServer();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e);
         }
-
     }
+
 
     /**
      * TODO
@@ -421,11 +427,12 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void updatePhaseQueue() {
-
-        for (AbstractPlayer player : players) {
-            if (!player.getRobot().getIsDestroyed()) {
-                phaseQueue.add(player);
-                //System.out.println("The priority value of " + player.getName() + "'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
+        if (allPlayersReady()) {
+            for (AbstractPlayer player : players) {
+                if (!player.getRobot().getIsDestroyed()) {
+                    phaseQueue.add(player);
+                    //System.out.println("The priority value of " + player.getName() + "'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
+                }
             }
         }
     }
@@ -639,6 +646,10 @@ public class Board extends InputAdapter implements IBoard {
         return spawnLocation;
     }
 
+    public AbstractPlayer getNetworkPlayer() {
+        return networkPlayer;
+    }
+
     public void spawnRobots(ArrayList<Robot> spawnRobotList) {
         for (Robot spawnRobot : spawnRobotList) {
             robotLayer.setCell(spawnRobot.getLocation().getX(), spawnRobot.getLocation().getY(), null);
@@ -651,6 +662,29 @@ public class Board extends InputAdapter implements IBoard {
             }
         }
         destroyedRobots.clear();
+    }
+
+    public boolean allPlayersReady() {
+        for (AbstractPlayer player : players) {
+            if (!player.getReady()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void setAllPlayersNotReady() {
+        for (AbstractPlayer player : players) {
+            player.setReady(false);
+        }
+    }
+
+    public boolean getPlayingOnline() {
+        return playingOnline;
+    }
+
+    public ArrayList<AbstractPlayer> getPlayers() {
+        return players;
     }
 
     /**

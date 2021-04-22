@@ -190,7 +190,6 @@ public class MainMenuScreen extends ScreenAdapter {
                 else {
                     addPlayers();
                     board = new Board(players);
-                    game.setScreen(new GameScreen(game, board));
                 }
                 game.setScreen(new GameScreen(game, board));
 
