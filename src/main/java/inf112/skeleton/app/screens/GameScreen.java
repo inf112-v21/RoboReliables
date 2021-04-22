@@ -13,6 +13,7 @@ public class GameScreen extends ScreenAdapter {
     Board board;
     SpriteBatch batch;
     Hud hud;
+    int time = 1; // tracks time in game.
 
     public GameScreen(RoboRally game, Board board) {
         this.game = game;
@@ -34,20 +35,21 @@ public class GameScreen extends ScreenAdapter {
         board.renderPlayerTextures();
         board.renderer.render();
 
-
-        batch.setProjectionMatrix(hud.getStage().getCamera().combined);
-        hud.getStage().act(delta); //act the Hud
-        hud.getStage().draw(); //draw the Hud
-        hud.setPlayerHandInHud(board.getActivePlayer().getHand());
-
-        if (board.registersAreEmpty()) {
-            System.out.println("Getting cards from hud...");
-            //hud.selectCards(board.getActivePlayer());
+        if (!(board.getActivePlayer() instanceof TestPlayer)) {
+            batch.setProjectionMatrix(hud.getStage().getCamera().combined);
+            hud.getStage().act(delta); //act the Hud
+            hud.getStage().draw(); //draw the Hud
+            hud.setPlayerHandInHud(board.getActivePlayer().getHand());
+            hud.update();
         }
 
         if (!Board.firstRender) {
-            if (!(board.getActivePlayer() instanceof TestPlayer))
+            if (!(board.getActivePlayer() instanceof TestPlayer)) {
+                if (board.registersAreEmpty() && board.readyCheck()) hud.refreshStage();
+                hud.transferSelectedCards(board.getActivePlayer());
                 board.gameLoop();
+                hud.update();
+            }
             else {
                 board.checkIfTurnIsOver();
                 board.checkIfActivePlayerOnFlag();
@@ -55,7 +57,9 @@ public class GameScreen extends ScreenAdapter {
             }
         }
         Board.firstRender = false;
-        hud.update();
+    }
+    public Board getBoard() {
+        return board;
     }
 
     @Override

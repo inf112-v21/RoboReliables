@@ -63,7 +63,7 @@ public class Board extends InputAdapter implements IBoard {
     protected boolean turnIsOver = true;
     private boolean hasStartedMoving = false;
 
-    private PriorityQueue<AbstractPlayer> phaseQueue = new PriorityQueue<>(Collections.reverseOrder());
+    private PriorityQueue<AbstractPlayer> phaseQueue;
 
     // cards
     protected ProgramCardDeck programCardDeck;
@@ -155,6 +155,7 @@ public class Board extends InputAdapter implements IBoard {
         activePlayer = players.get(0);
         assert activePlayer != null;
         activePlayerInitialRobotLocation = activePlayer.getRobot().getLocation();
+        phaseQueue = new PriorityQueue<>(Collections.reverseOrder());
 
         // cards
         programCardDeck = new ProgramCardDeck();
@@ -216,6 +217,7 @@ public class Board extends InputAdapter implements IBoard {
     public void startNewRoundOffline() {
         round++;
         for (AbstractPlayer player : players) {
+            putHandBackToDeck(player);
             dealCardsToPlayer(player);
         }
         updatePhaseQueue();
@@ -227,6 +229,7 @@ public class Board extends InputAdapter implements IBoard {
             RoboreliableServer.players = new ArrayList<>();
         }
         round++;
+        putHandBackToDeck(networkPlayer);
         dealCardsToPlayer(networkPlayer);
         sendNetworkPlayerToServer();
         updatePlayersFromServer();
@@ -255,6 +258,10 @@ public class Board extends InputAdapter implements IBoard {
         return activePlayer;
     }
 
+    public PriorityQueue<AbstractPlayer> getPhaseQueue() {
+        return phaseQueue;
+    }
+
     public void sendNetworkPlayerToServer() {
         try {
             networkPlayer.sendToServer();
@@ -274,10 +281,20 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void dealCardsToPlayer(AbstractPlayer player) {
-        programCardDeck.dealCard(player, 7);
-        player.getRobot().updateRegister(player.getHand());
+        programCardDeck.shuffle();
+        programCardDeck.dealCard(player, 9);
+        //player.getRobot().updateRegister(player.getHand());
     }
 
+    public void putHandBackToDeck(AbstractPlayer player) {
+        int cardsLeftOverInHand = player.getHandSize();
+        if (cardsLeftOverInHand > 0) {
+            for (int i = 0; i < cardsLeftOverInHand; i++) {
+                programCardDeck.addToTopOfDeck(player.getHand().getCard(0));
+                player.getHand().remove(0);
+            }
+        }
+    }
     /*
     @Override
     public void dealCardsToPlayer(AbstractPlayer player) {
@@ -342,10 +359,13 @@ public class Board extends InputAdapter implements IBoard {
             } else {
                 updatePhaseQueue();
             }
-        } else if (time % 60 == 0) {
-            switchActivePlayer();
-            //executeNextRobotRegister();
-            checkIfActivePlayerOnFlag();
+
+        } else if (readyCheck()) {
+            if (time % 60 == 0) {
+                switchActivePlayer();
+                executeNextRobotRegister();
+                checkIfActivePlayerOnFlag();
+            }
             if (activePlayerOnHole()) {
                 robotHoleEvent();
             }
@@ -357,8 +377,17 @@ public class Board extends InputAdapter implements IBoard {
         time++;
     }
 
-    private void cleanup() {
+    public void cleanup() {
         spawnRobots(destroyedRobots);
+    }
+
+    public boolean readyCheck() {
+        for (AbstractPlayer player : players) {
+            if (player.getRobot().getRegister().getSize() >= 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -386,7 +415,7 @@ public class Board extends InputAdapter implements IBoard {
         for (AbstractPlayer player : players) {
             if (!player.getRobot().getIsDestroyed()) {
                 phaseQueue.add(player);
-                System.out.println("The priority value of " + player.getName() + "'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
+                //System.out.println("The priority value of " + player.getName() + "'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
             }
         }
     }
