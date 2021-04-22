@@ -58,6 +58,21 @@ public enum Direction implements Serializable {
         return direction;
     }
 
+    public static Direction oppositeDirection(Direction direction) {
+        switch (direction) {
+            case UP:
+                return DOWN;
+            case DOWN:
+                return UP;
+            case LEFT:
+                return RIGHT;
+            case RIGHT:
+                return LEFT;
+        }
+        return null;
+    }
+
+
     public static Direction interpretInput(String input) {
         switch(input.toUpperCase()) {
             case "W":

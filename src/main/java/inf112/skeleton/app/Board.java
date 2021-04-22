@@ -34,7 +34,7 @@ public class Board extends InputAdapter implements IBoard {
     private BitmapFont font;
 
     private TiledMap map;
-    public TiledMapTileLayer flagLayer, boardLayer, holeLayer, robotLayer;
+    public TiledMapTileLayer flagLayer, boardLayer, holeLayer, wallLayer, robotLayer;
 
     public OrthogonalTiledMapRenderer renderer;
 
@@ -52,6 +52,7 @@ public class Board extends InputAdapter implements IBoard {
 
     protected ArrayList<Flag> flags = new ArrayList<>();
     protected ArrayList<Hole> holes = new ArrayList<>();
+    protected ArrayList<Wall> walls = new ArrayList<>();
 
     int playerId;
     // The player this instance of the game is responsible for during online play
@@ -97,7 +98,8 @@ public class Board extends InputAdapter implements IBoard {
         initializeBoard();
     }
 
-    public Board() {}
+    public Board() {
+    }
 
     @Override
     public int getMAP_SIZE_X() {
@@ -121,15 +123,16 @@ public class Board extends InputAdapter implements IBoard {
 
     private void initializeBoard() {
         batch = new SpriteBatch();
-        font  = new BitmapFont();
+        font = new BitmapFont();
         font.setColor(Color.RED);
 
         // Sets the map and various layers
         map = new TmxMapLoader().load("gameboard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
-        flagLayer  = (TiledMapTileLayer) map.getLayers().get("flag");
-        holeLayer  = (TiledMapTileLayer) map.getLayers().get("hole");
+        flagLayer = (TiledMapTileLayer) map.getLayers().get("flag");
+        holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
+        wallLayer = (TiledMapTileLayer) map.getLayers().get("wall");
 
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
@@ -144,12 +147,12 @@ public class Board extends InputAdapter implements IBoard {
 
         // Splits the textures of the player into different states and sets them to the given Cell
         TextureRegion[][] robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
-        robotCell      = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
-        robotDiedCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
-        robotWonCell   = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
-        robotUpCell    = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(0);
-        robotLeftCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(1);
-        robotDownCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(2);
+        robotCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
+        robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
+        robotWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
+        robotUpCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(0);
+        robotLeftCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(1);
+        robotDownCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(2);
         robotRightCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(3);
         // Active player
         activePlayer = players.get(0);
@@ -161,9 +164,34 @@ public class Board extends InputAdapter implements IBoard {
 
         setFlags();
         setHoles();
+        setWalls();
 
         renderer.render();
         Gdx.input.setInputProcessor(this);
+    }
+
+    public void setWalls() {
+        for (int x = 0; x < getMAP_SIZE_X(); x++) {
+            for (int y = 0; y < getMAP_SIZE_Y(); y++) {
+                if (wallLayer.getCell(x, y) != null) {
+                    int wallType = wallLayer.getCell(x, y).getTile().getId();
+                    switch (wallType) {
+                        case 31:
+                            walls.add(new Wall(new Location(x, y), Direction.UP));
+                            break;
+                        case 23:
+                            walls.add(new Wall(new Location(x, y), Direction.RIGHT));
+                            break;
+                        case 29:
+                            walls.add(new Wall(new Location(x, y), Direction.DOWN));
+                            break;
+                        case 30:
+                            walls.add(new Wall(new Location(x, y), Direction.LEFT));
+                            break;
+                    }
+                }
+            }
+        }
     }
 
     public void setHoles() {
@@ -332,8 +360,8 @@ public class Board extends InputAdapter implements IBoard {
                 switchActivePlayer();
                 executeNextRobotRegister();
             } else {
-                robotLayer.setCell(activePlayer.getRobot().getLocation().getX(), activePlayer.getRobot().getLocation().getY(),null);
-                activePlayer.getRobot().continueCardMovement();
+                robotLayer.setCell(activePlayer.getRobot().getLocation().getX(), activePlayer.getRobot().getLocation().getY(), null);
+                activePlayer.getRobot().continueCardMovement(walls);
             }
             // entity handling
             checkIfActivePlayerOnFlag();

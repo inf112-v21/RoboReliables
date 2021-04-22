@@ -8,6 +8,7 @@ import inf112.skeleton.app.Board;
 import inf112.skeleton.app.player.AbstractPlayer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Maps the robots position on the board
@@ -133,66 +134,44 @@ public class Robot extends Entity implements Serializable {
      * Moves the robot forward. Uses the direction of the robot to know which way is forward
      */
     public void moveForward() {
+        setLocation(getLocationAhead());
+        remainingStepsOfCard--;
+    }
+
+    public Location getLocationAhead() {
         int x = this.getLocation().getX();
         int y = this.getLocation().getY();
 
         switch (direction) {
             case UP:
                 if (!(y == Board.MAP_SIZE_Y - 1)) {
-                    this.setLocation(new Location(x, y + 1));
+                    return (new Location(x, y + 1));
                 }
                 break;
             case DOWN:
                 if (!(y == 0)) {
-                    this.setLocation(new Location(x, y - 1));
+                    return (new Location(x, y - 1));
                 }
                 break;
             case LEFT:
                 if (!(x == 0)) {
-                    this.setLocation(new Location(x - 1, y));
+                    return (new Location(x - 1, y));
                 }
                 break;
             case RIGHT:
                 if (!(x == Board.MAP_SIZE_X - 1)) {
-                    this.setLocation(new Location(x + 1, y));
+                    return (new Location(x + 1, y));
                 }
                 break;
         }
-        remainingStepsOfCard--;
-//        if (remainingStepsOfCard <!=> null) {
-//            remainingStepsOfCard--;
-//        }
+        return null;
     }
 
     /**
      * Moves the robot backward. Uses the direction of the robot to know which way is forward
      */
     public void moveBackward() {
-        int x = this.getLocation().getX();
-        int y = this.getLocation().getY();
-
-        switch (direction) {
-            case UP:
-                if (!(y == 0)) {
-                    this.setLocation(new Location(x, y - 1));
-                }
-                break;
-            case DOWN:
-                if (!(y == Board.MAP_SIZE_Y - 1)) {
-                    this.setLocation(new Location(x, y + 1));
-                }
-                break;
-            case LEFT:
-                if (!(x == Board.MAP_SIZE_X - 1)) {
-                    this.setLocation(new Location(x + 1, y));
-                }
-                break;
-            case RIGHT:
-                if (!(x == 0)) {
-                    this.setLocation(new Location(x - 1, y));
-                }
-                break;
-        }
+        setLocation(getLocationBehind());
     }
 
     public void rotateLeft(int steps) {
@@ -206,7 +185,6 @@ public class Robot extends Entity implements Serializable {
             setDirection(Direction.rotateRight(this.direction));
         }
     }
-
 
     public void updateRegister(CardDeck newRegister) {
         register = newRegister;
@@ -244,8 +222,8 @@ public class Robot extends Entity implements Serializable {
         return remainingStepsOfCard;
     }
 
-    public void continueCardMovement() {
-        moveForward();
+    public void continueCardMovement(ArrayList<Wall> walls) {
+        moveForward(walls);
         if (remainingStepsOfCard == 0) {
             register.remove(0);
         }
@@ -253,6 +231,48 @@ public class Robot extends Entity implements Serializable {
 
     public boolean noRemainingStepsOfCard() {
         return getRemainingStepsOfCard() == 0;
+    }
+
+    public Location getLocationBehind() {
+        int x = this.getLocation().getX();
+        int y = this.getLocation().getY();
+
+        switch (direction) {
+            case UP:
+                if (!(y == 0)) {
+                    return (new Location(x, y - 1));
+                }
+                break;
+            case DOWN:
+                if (!(y == Board.MAP_SIZE_Y - 1)) {
+                    return (new Location(x, y + 1));
+                }
+                break;
+            case LEFT:
+                if (!(x == Board.MAP_SIZE_X - 1)) {
+                    return (new Location(x + 1, y));
+                }
+                break;
+            case RIGHT:
+                if (!(x == 0)) {
+                    return (new Location(x - 1, y));
+                }
+                break;
+        }
+        return null;
+    }
+
+    boolean canMoveForward(ArrayList<Wall> walls) {
+        for (Wall wall : walls) {
+            if (!getLocation().equals(wall.getLocation())) continue;
+            if (wall.getFaceDirection().equals(getDirection())) return false;
+            if (getLocationAhead().equals(wall.getLocation())) {
+                if (wall.getFaceDirection().equals(Direction.oppositeDirection(getDirection()))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 //    public void moveToArchiveMarker() {
