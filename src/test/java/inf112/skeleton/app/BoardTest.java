@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import static org.junit.jupiter.api.Assertions.*;
 
 import inf112.skeleton.app.cards.ProgramCardDeck;
+import inf112.skeleton.app.entity.Hole;
 import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
@@ -17,19 +18,24 @@ import java.util.ArrayList;
  */
 public class BoardTest {
     private Board board;
-    private AbstractPlayer testPlayer;
+    private AbstractPlayer player;
     private Robot robot;
     private ArrayList<AbstractPlayer> players = new ArrayList<>();
+    private Hole hole;
 
     @BeforeEach
     public void createBoard() {
-        testPlayer = new TestPlayer(new Location(0,0));
-        players.add(testPlayer);
+        player = new Player(new Location(0,0), 1);
+        players.add(player);
         board = new Board(players);
-        robot = testPlayer.getRobot();
-        board.setActivePlayer(testPlayer);
+        robot = player.getRobot();
+        board.setActivePlayer(player);
         board.activePlayerInitialRobotLocation = board.activePlayer.getRobot().getLocation();
         board.programCardDeck = new ProgramCardDeck();
+    }
+
+    public void createHole() {
+        hole = new Hole(new Location(0,3));
     }
 
     @Test
@@ -103,5 +109,25 @@ public class BoardTest {
         board.setActivePlayer(player2);
         assertEquals(board.activePlayer, player2);
     }
+
+       @Test
+    public void holeDamageTest() {
+        AbstractPlayer activePlayer = board.getActivePlayer();
+        Robot activePlayerRobot = activePlayer.getRobot();
+
+        createHole();
+        System.out.println(hole.getLocation().toString());
+        assertEquals(0, robot.getDamageTokens());
+
+        robot.moveForward();
+        if (board.activePlayerOnHole()) board.robotHoleEvent();
+        robot.moveForward();
+        if (board.activePlayerOnHole()) board.robotHoleEvent();
+        robot.moveForward();
+        if (board.activePlayerOnHole()) board.robotHoleEvent();
+
+        System.out.println(robot.getDamageTokens());
+    }
+
 
 }

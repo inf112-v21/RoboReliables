@@ -2,6 +2,7 @@ package inf112.skeleton.app;
 
 import inf112.skeleton.app.cards.Card;
 import inf112.skeleton.app.cards.CardValue;
+import inf112.skeleton.app.entity.Hole;
 import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.player.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +20,7 @@ public class RobotTest {
     public void makeRobot() {
         robot = new Robot(new Location(0,0), 1, new Player());
     }
+
 
     @Test
     public void moveTest() {
@@ -86,6 +88,7 @@ public class RobotTest {
         Direction expectedDirection = Direction.RIGHT;
         assertEquals(expectedDirection, robot.getDirection());
     }
+
 
 
 }

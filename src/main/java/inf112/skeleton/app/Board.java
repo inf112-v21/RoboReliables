@@ -459,7 +459,7 @@ public class Board extends InputAdapter implements IBoard {
         activePlayer.getRobot().setArchiveMarker(new ArchiveMarker(location));
     }
 
-    private boolean activePlayerOnHole() {
+    public boolean activePlayerOnHole() {
         for (Hole hole : holes) {
             if (hole.getLocation().equals(activePlayer.getRobot().getLocation())) {
                 return true;
@@ -468,7 +468,7 @@ public class Board extends InputAdapter implements IBoard {
         return false;
     }
 
-    private void robotHoleEvent() {
+    public void robotHoleEvent() {
         Robot robot = activePlayer.getRobot();
         dealDamage(robot, 10);
     }
