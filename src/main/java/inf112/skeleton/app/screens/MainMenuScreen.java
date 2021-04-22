@@ -27,15 +27,15 @@ import inf112.skeleton.app.player.TestPlayer;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A screen representing the main menu of the game.
+ */
 public class MainMenuScreen extends ScreenAdapter {
-
-
     private RoboRally game;
     private Stage stage;
     private Viewport viewport;
     private AssetManager assetManager;
     private Skin skin;
-    private TextureAtlas atlas;
 
     private Table mainTable;
     private Table selectTable;
@@ -263,6 +263,12 @@ public class MainMenuScreen extends ScreenAdapter {
     public void dispose() {
     }
 
+    /**
+     *
+     * @param table
+     * @param name
+     * @return
+     */
     private TextButton addButton(Table table, String name) {
         TextButton button = new TextButton(name, skin);
         table.add(button).width(700).height(60).padBottom(20);
@@ -270,11 +276,18 @@ public class MainMenuScreen extends ScreenAdapter {
         return button;
     }
 
+    /**
+     *
+     */
     private void setPlayerCount() {
         nrOfPlayers = (int)slider.getVisualValue();
         playersLabel.setText("Number of players: " + String.format("%01d", nrOfPlayers));
     }
 
+    /**
+     *
+     * @return
+     */
     private String showMode() {
         String mode;
         if (playingOnline) { mode = "Online";}
@@ -282,6 +295,10 @@ public class MainMenuScreen extends ScreenAdapter {
         return mode;
     }
 
+    /**
+     *
+     * @return
+     */
     private String showStatus() {
         String status;
         if (!playingOnline) { status = "n/a";}
@@ -292,10 +309,18 @@ public class MainMenuScreen extends ScreenAdapter {
         return status;
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     private void hostOnlineGame() throws IOException {
         RoboreliableServer.start(nrOfPlayers);
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     private void joinOnlineGame() throws IOException {
         RoboreliableClient.connect();
     }

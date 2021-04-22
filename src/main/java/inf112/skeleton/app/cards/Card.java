@@ -16,6 +16,11 @@ public class Card implements ICard, Comparable<Card>, Serializable {
         priorityValue = random.nextInt(255);
     }
 
+    public Card(CardValue cardValue, int priorityValue) {
+        this.cardValue = cardValue;
+        this.priorityValue = priorityValue;
+    }
+
     @Override
     public CardValue getCardValue() {
         return this.cardValue;

@@ -1,5 +1,7 @@
 package inf112.skeleton.app.entity;
 
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import inf112.skeleton.app.cards.Card;
 import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.Direction;
@@ -8,6 +10,7 @@ import inf112.skeleton.app.Board;
 import inf112.skeleton.app.player.AbstractPlayer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Maps the robots position on the board
@@ -64,6 +67,9 @@ public class Robot extends Entity implements Serializable {
         System.out.println(this + " now has " + damageTokens + " damage tokens");
     }
 
+    /**
+     * TODO
+     */
     public void destroy() {
         lifeTokens--;
         damageTokens = 0;
@@ -81,6 +87,10 @@ public class Robot extends Entity implements Serializable {
         register.remove(0);
     }
 
+    /**
+     * TODO
+     * @return
+     */
     public Card getNextRegisterCard() {
         return getRegister().getCard(0);
     }
@@ -219,6 +229,10 @@ public class Robot extends Entity implements Serializable {
 
     public int getDamageTokens() {
         return damageTokens;
+    }
+
+    public int getLifeTokens() {
+        return lifeTokens;
     }
 
     public boolean registerIsEmpty() {

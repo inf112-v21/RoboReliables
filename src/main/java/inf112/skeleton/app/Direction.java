@@ -58,6 +58,11 @@ public enum Direction implements Serializable {
         return direction;
     }
 
+    /**
+     * Gets input from the user and interprets the input to a direction.
+     * @param input string
+     * @return new direction
+     */
     public static Direction interpretInput(String input) {
         switch(input.toUpperCase()) {
             case "W":

@@ -70,9 +70,9 @@ public class Board extends InputAdapter implements IBoard {
 
     private boolean playingOnline;
 
-    private boolean needsCleanup = false;
+    public boolean needsCleanup = false;
 
-    int time = 1; // tracks time in game.
+    public int time = 1; // tracks time in game.
     int round = 1; // round Nr
 
     public static boolean firstRender = true;
@@ -205,6 +205,8 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void startNewRound() {
+
+        System.out.println("Starting new round...");
         if (!playingOnline) {
             startNewRoundOffline();
         } else {
@@ -283,7 +285,6 @@ public class Board extends InputAdapter implements IBoard {
     public void dealCardsToPlayer(AbstractPlayer player) {
         programCardDeck.shuffle();
         programCardDeck.dealCard(player, 9);
-        //player.getRobot().updateRegister(player.getHand());
     }
 
     public void putHandBackToDeck(AbstractPlayer player) {
@@ -334,6 +335,7 @@ public class Board extends InputAdapter implements IBoard {
         AbstractPlayer player = phaseQueue.poll();
         assert player != null;
         Robot robot = player.getRobot();
+        assert robot.getRegister().getSize() > 0;
         int x = robot.getLocation().getX();
         int y = robot.getLocation().getY();
         robotLayer.setCell(x, y, null);
@@ -378,6 +380,7 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     public void cleanup() {
+        getActivePlayer().setReady(false);
         spawnRobots(destroyedRobots);
     }
 
@@ -400,6 +403,11 @@ public class Board extends InputAdapter implements IBoard {
 
     }
 
+    /**
+     * TODO
+     *
+     * @return
+     */
     public boolean registersAreEmpty() {
         for (AbstractPlayer player : players) {
             if (!player.getRobot().registerIsEmpty()) {
@@ -497,7 +505,7 @@ public class Board extends InputAdapter implements IBoard {
         activePlayer.getRobot().setArchiveMarker(new ArchiveMarker(location));
     }
 
-    private boolean activePlayerOnHole() {
+    public boolean activePlayerOnHole() {
         for (Hole hole : holes) {
             if (hole.getLocation().equals(activePlayer.getRobot().getLocation())) {
                 return true;
@@ -506,7 +514,7 @@ public class Board extends InputAdapter implements IBoard {
         return false;
     }
 
-    private void robotHoleEvent() {
+    public void robotHoleEvent() {
         Robot robot = activePlayer.getRobot();
         dealDamage(robot, 10);
     }

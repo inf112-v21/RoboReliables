@@ -10,11 +10,6 @@ import inf112.skeleton.app.screens.MainMenuScreen;
  */
 public class RoboRally extends Game {
 
-    private AssetManager assetManager;
-
-    public RoboRally() {
-
-    }
     @Override
     public void create() {
         Assets assets = new Assets();
@@ -23,6 +18,7 @@ public class RoboRally extends Game {
 
         setScreen(new MainMenuScreen(this, assets.getAssetManager()));
     }
+
     @Override
     public void dispose() {
         super.dispose();

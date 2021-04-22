@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
+/**
+ * Represents all assets in the game.
+ */
 public class Assets {
     private AssetManager assetManager = new AssetManager();
     public static final AssetDescriptor<Texture> menuIMG = new AssetDescriptor<Texture>
@@ -21,6 +24,9 @@ public class Assets {
             Skin.class,
             new SkinLoader.SkinParameter("assets/uiskin.atlas"));
 
+    /**
+     * Loads all the games assets.
+     */
     public void loadAll() {
         assetManager.load(menuIMG);
         assetManager.load(menuATLAS);
@@ -29,6 +35,10 @@ public class Assets {
         System.out.println("skin loaded.");
     }
 
+    /**
+     * Returns the asset manager of the game
+     * @return assetManager
+     */
     public AssetManager getAssetManager() {
         return assetManager;
     }

@@ -1,0 +1,33 @@
+
+readyButtonAtlas.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+ready
+  rotate: false
+  xy: 1, 220
+  size: 369, 217
+  orig: 369, 217
+  offset: 0, 0
+  index: -1
+readyGo
+  rotate: false
+  xy: 1, 1
+  size: 369, 217
+  orig: 369, 217
+  offset: 0, 0
+  index: -1
+readyGoPressed
+  rotate: false
+  xy: 372, 220
+  size: 369, 217
+  orig: 369, 217
+  offset: 0, 0
+  index: -1
+readyPressed
+  rotate: false
+  xy: 372, 1
+  size: 369, 217
+  orig: 369, 217
+  offset: 0, 0
+  index: -1

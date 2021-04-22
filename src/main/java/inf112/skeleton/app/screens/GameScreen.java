@@ -6,8 +6,13 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.RoboRally;
+import inf112.skeleton.app.cards.CardValue;
+import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.TestPlayer;
 
+/**
+ *
+ */
 public class GameScreen extends ScreenAdapter {
     RoboRally game;
     Board board;
@@ -20,12 +25,11 @@ public class GameScreen extends ScreenAdapter {
         this.board = board;
         batch = new SpriteBatch();
 
-        hud = new Hud(batch);
+        hud = new Hud(batch, this);
     }
 
     @Override
     public void show() {
-
     }
 
     @Override
@@ -45,9 +49,7 @@ public class GameScreen extends ScreenAdapter {
 
         if (!Board.firstRender) {
             if (!(board.getActivePlayer() instanceof TestPlayer)) {
-                if (board.registersAreEmpty() && board.readyCheck()) hud.refreshStage();
-                hud.transferSelectedCards(board.getActivePlayer());
-                board.gameLoop();
+                gameLoop();
                 hud.update();
             }
             else {
@@ -58,6 +60,89 @@ public class GameScreen extends ScreenAdapter {
         }
         Board.firstRender = false;
     }
+
+    public AbstractPlayer getPlayer() {
+        if (getBoard().getPlayingOnline())
+            return getBoard().getNetworkPlayer();
+        else
+            return getBoard().getActivePlayer();
+    }
+
+    /**
+     * The game loop for the game.
+     */
+    public void gameLoop() {
+        // if all robots have performed their phase
+        if (!roundHasBeenStarted) {
+            if (board.getPhaseQueue().isEmpty()) {
+                if (board.registersAreEmpty() && !(board.allPlayersReady())) {
+                    if (!board.needsCleanup) {
+                        board.startNewRound();
+                        hud.refreshStage();
+                        System.out.println("active player is " + board.getActivePlayer().getName());
+                        board.switchActivePlayer();
+                        roundHasBeenStarted = true;
+                    } else {
+                        board.cleanup();
+                    }
+                    board.needsCleanup = !board.needsCleanup;
+                } else {
+                    board.updatePhaseQueue();
+                }
+            }
+        }
+
+        if (board.allPlayersReady()) {
+
+            transferSelectedCards(board.getActivePlayer());
+            if (board.getPhaseQueue().isEmpty()) {
+                if (board.registersAreEmpty()) {
+                    board.setAllPlayersNotReady();
+                    roundHasBeenStarted = false;
+                    System.out.println("got to under teh start new round thing");
+                    return;
+                }
+                board.updatePhaseQueue();
+            }
+            if (board.time % 60 == 0) {
+                System.out.println("inside ");
+                board.switchActivePlayer();
+                hud.addToFeed(getPlayer().getName() + ": " + CardValue.extendedCardValue(getPlayer().getRobot().getNextRegisterCard()));
+                board.executeNextRobotRegister();
+                board.checkIfActivePlayerOnFlag();
+            }
+            if (board.activePlayerOnHole()) {
+                board.robotHoleEvent();
+                hud.addToFeed(getPlayer().getName() + " fell down a hole and lost a life!");
+            }
+            if (getPlayer().getRobot().getLifeTokens() == 0) {
+                hud.addToFeed(getPlayer().getName() + "'S ROBOT IS DAMAGED BEYOND REPAIR!");
+            }
+            if (board.checkIfWon()) {
+                hud.addToFeed("Victory!");
+                System.out.println("Player won!");
+                System.out.close();
+            }
+        }
+        board.time++;
+    }
+
+
+    /**
+     *
+     * @param player
+     */
+    public void transferSelectedCards(AbstractPlayer player) {
+        if (board.getActivePlayer() != null) {
+            if (board.getActivePlayer().getReady() && hud.getSelectedCards().getSize() == 5) {
+                player.getRobot().updateRegister(hud.getSelectedCards());
+            }
+        }
+    }
+
+    /**
+     * @return the game board
+     */
     public Board getBoard() {
         return board;
     }
