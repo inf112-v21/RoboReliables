@@ -14,11 +14,12 @@ import inf112.skeleton.app.player.TestPlayer;
  *
  */
 public class GameScreen extends ScreenAdapter {
-    RoboRally game;
-    Board board;
-    SpriteBatch batch;
-    Hud hud;
-    int time = 1; // tracks time in game.
+    private RoboRally game;
+    private Board board;
+    private SpriteBatch batch;
+    private Hud hud;
+    private boolean roundHasBeenStarted = false;
+    private boolean roundComplete = true;
 
     public GameScreen(RoboRally game, Board board) {
         this.game = game;
@@ -43,7 +44,7 @@ public class GameScreen extends ScreenAdapter {
             batch.setProjectionMatrix(hud.getStage().getCamera().combined);
             hud.getStage().act(delta); //act the Hud
             hud.getStage().draw(); //draw the Hud
-            hud.setPlayerHandInHud(board.getActivePlayer().getHand());
+            //hud.setPlayerHandInHud(board.getActivePlayer().getHand());
             hud.update();
         }
 
@@ -145,6 +146,11 @@ public class GameScreen extends ScreenAdapter {
      */
     public Board getBoard() {
         return board;
+    }
+
+    public boolean setRoundComplete() {
+
+        return roundComplete;
     }
 
     @Override

@@ -274,7 +274,9 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void switchActivePlayer() {
-        setActivePlayer(phaseQueue.peek());
+        if (phaseQueue.peek() != null) {
+            setActivePlayer(phaseQueue.peek());
+        }
     }
 
     @Override

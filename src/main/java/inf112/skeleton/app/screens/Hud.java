@@ -72,6 +72,7 @@ public class Hud implements IHud {
     private TextureRegion readySprite;
 
     private Table handTable;
+    private final GameScreen gameScreen;
 
     protected CardDeck playerHand;
     private CardDeck selectedCards;
@@ -85,8 +86,9 @@ public class Hud implements IHud {
      */
     public Hashtable<Actor, Card> buttonCards;
 
-    public Hud(SpriteBatch spriteBatch) {
+    public Hud(SpriteBatch spriteBatch, GameScreen gameScreen) {
         this.spriteBatch = spriteBatch;
+        this.gameScreen = gameScreen;
         create();
     }
 

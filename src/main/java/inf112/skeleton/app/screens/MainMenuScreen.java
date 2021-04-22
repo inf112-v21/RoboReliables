@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Location;
@@ -71,7 +72,7 @@ public class MainMenuScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        viewport = new ExtendViewport(1280, 720);
+        viewport = new FitViewport(1280, 720);
         stage = new Stage(viewport);
 
         // Menu logo
@@ -191,6 +192,8 @@ public class MainMenuScreen extends ScreenAdapter {
                     board = new Board(players);
                     game.setScreen(new GameScreen(game, board));
                 }
+                game.setScreen(new GameScreen(game, board));
+
             }
         });
 
