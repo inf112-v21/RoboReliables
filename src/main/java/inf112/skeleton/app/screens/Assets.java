@@ -3,6 +3,7 @@ package inf112.skeleton.app.screens;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -23,6 +24,9 @@ public class Assets {
             "assets/uiskin.json",
             Skin.class,
             new SkinLoader.SkinParameter("assets/uiskin.atlas"));
+    public static final AssetDescriptor<Music> menuMUSIC = new AssetDescriptor<Music>
+            ("assets/RoboRallyTheme.ogg",
+            Music.class);
 
     /**
      * Loads all the games assets.
@@ -33,6 +37,7 @@ public class Assets {
         System.out.println("atlas loaded.");
         assetManager.load(menuSKIN);
         System.out.println("skin loaded.");
+        assetManager.load(menuMUSIC);
     }
 
     /**

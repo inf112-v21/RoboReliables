@@ -4,6 +4,7 @@ import Network.RoboreliableClient;
 import Network.RoboreliableServer;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -36,6 +37,7 @@ public class MainMenuScreen extends ScreenAdapter {
     private Viewport viewport;
     private AssetManager assetManager;
     private Skin skin;
+    private Music music;
 
     private Table mainTable;
     private Table selectTable;
@@ -71,6 +73,7 @@ public class MainMenuScreen extends ScreenAdapter {
         this.game = game;
         skin = assetManager.get(Assets.menuSKIN);
         logo = assetManager.get(Assets.menuIMG);
+        music = assetManager.get(Assets.menuMUSIC);
         batch = new SpriteBatch();
         nrOfPlayers = 1;
     }
@@ -79,6 +82,8 @@ public class MainMenuScreen extends ScreenAdapter {
     public void show() {
         viewport = new FitViewport(1280, 720);
         stage = new Stage(viewport);
+        music.setLooping(true);
+        music.play();
 
         // Menu logo
         sprite = new Sprite(logo);
