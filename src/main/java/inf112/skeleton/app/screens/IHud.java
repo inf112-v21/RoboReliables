@@ -67,6 +67,17 @@ public interface IHud {
     void transformReadyButton();
 
     /**
+     *
+     */
+    void transformPowerDownButton();
+
+    /**
+     *
+     * @param powerDownSprite
+     */
+    void setUpPowerDownButton(TextureRegion powerDownSprite);
+
+    /**
      * Function for when a card is selected in the HUD. Makes clicks from the screen translate
      * to functions in the game.
      * @param button which button is being clicked
@@ -85,6 +96,11 @@ public interface IHud {
      * Toggles the sprites and player to be ready or not.
      */
     void toggleReady();
+
+    /**
+     *
+     */
+    void togglePowerDown();
 
     /**
      * Creates the ready button

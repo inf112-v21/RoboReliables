@@ -90,6 +90,7 @@ public class GameScreen extends ScreenAdapter {
                         roundHasBeenStarted = true;
                     } else {
                         board.cleanup();
+                        hud.addToFeed("New round starting. Select new cards.");
                     }
                     board.needsCleanup = !board.needsCleanup;
                 } else {
@@ -105,7 +106,6 @@ public class GameScreen extends ScreenAdapter {
                 if (board.registersAreEmpty()) {
                     board.setAllPlayersNotReady();
                     roundHasBeenStarted = false;
-                    System.out.println("got to under teh start new round thing");
                     return;
                 }
                 board.updatePhaseQueue();

@@ -29,10 +29,13 @@ import java.util.Hashtable;
 public class Hud implements IHud {
     public Stage stage;
     private FitViewport stageViewport;
-    private TextureAtlas readyButtonSprites;
-    private TextureAtlas cardSprites;
-    private TextureAtlas lifeTokenSprites;
     private final SpriteBatch spriteBatch;
+
+    // Atlases
+    private TextureAtlas cardSprites;
+    private TextureAtlas readyButtonSprites;
+    private TextureAtlas lifeTokenSprites;
+    private TextureAtlas powerDownSprites;
 
     // Move texture regions
     private TextureRegion leftTurn;
@@ -64,6 +67,13 @@ public class Hud implements IHud {
     protected Drawable currentCardDrawable;
     protected Button currentCardButton;
 
+    // Power down button
+    private Drawable powerDownDrawable;
+    private Button powerDownButton;
+    private TextureRegion powerDownSprite;
+    private boolean powerDownState = false;
+
+    // Ready button
     private Drawable readyDrawable;
     private Button readyButton;
     private TextureRegion readySprite;
@@ -109,6 +119,7 @@ public class Hud implements IHud {
         cardSprites = new TextureAtlas("assets/cardAtlas.atlas");
         readyButtonSprites = new TextureAtlas("assets/readyButtonAtlas.atlas");
         lifeTokenSprites = new TextureAtlas("assets/lifeTokenAtlas.atlas");
+        powerDownSprites = new TextureAtlas("assets/powerDownAtlas.atlas");
 
         // Card sprites
         leftTurn = cardSprites.findRegion("leftTurn");
@@ -138,6 +149,9 @@ public class Hud implements IHud {
 
         // Ready sprite
         readySprite = readyButtonSprites.findRegion("ready");
+
+        // Power Down sprite
+        powerDownSprite = powerDownSprites.findRegion("pdOff");
 
         feed = new ArrayList<>();
     }
@@ -172,13 +186,19 @@ public class Hud implements IHud {
 
         stage.addActor(lifeTokenTable);
 
+        // Ready button
         setUpReadyButton(readySprite);
         transformReadyButton();
+
+        // Power down button
+        setUpPowerDownButton(powerDownSprite);
+        transformPowerDownButton();
 
         populateLabels();
 
         stage.addActor(handTable);
         stage.addActor(readyButton);
+        stage.addActor(powerDownButton);
         stage.addActor(playerNameLabel);
         printFeed();
         Gdx.input.setInputProcessor(stage);
@@ -220,7 +240,6 @@ public class Hud implements IHud {
         stage.addActor(token3);
         robotLife.put(player.getRobot(), token3);
     }
-
 
     @Override
     public void populateLabels() {
@@ -266,8 +285,29 @@ public class Hud implements IHud {
         readyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (selectedCards.getSize() == 5)
-                    toggleReady();
+                if (selectedCards.getSize() <= 5)
+                    if (selectedCards.getSize() == 5)
+                        toggleReady();
+                    else {
+                        // Fills up card slot with empty cards if less than 5 cards are selected.
+                        int cardsToAdd = playerHand.getSize()-4;
+                        for (int i = 0; i < cardsToAdd; i++)
+                            selectedCards.addToDeck(new Card(CardValue.PD));
+                        toggleReady();
+                    }
+                else
+                    addToFeed("Too many cards selected. Unselect some to continue.");
+            }
+        });
+    }
+
+    @Override
+    public void transformPowerDownButton() {
+        powerDownButton.setPosition(670,380);
+        powerDownButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                togglePowerDown();
             }
         });
     }
@@ -290,11 +330,27 @@ public class Hud implements IHud {
     }
 
     @Override
-    public TextureRegion createReadySprite() {
-        if (player.getReady())
-            return readyButtonSprites.findRegion("readyGo");
-        else
-            return readyButtonSprites.findRegion("ready");
+    public void togglePowerDown() {
+        if (powerDownState) {
+            // Power down is deselected
+            powerDownSprite = powerDownSprites.findRegion("pdOff");
+            powerDownState = true;
+            for (int i = 0; i < selectedCards.getSize(); i++) {
+                if (selectedCards.getCard(i).cardValue == CardValue.PD)
+                    selectedCards.remove(i);
+            }
+        } else {
+            // Power down is selected
+            readySprite = readyButtonSprites.findRegion("readyGo");
+            powerDownState = false;
+            CardDeck emptyDeck = new CardDeck();
+            emptyDeck.populate(CardValue.PD, 5);
+            selectedCards = emptyDeck;
+            player.getRobot().addLifeToken();
+            addToFeed("Press ARM to continue.");
+            addToFeed(player.getName() + " will regain a life token next turn.");
+            addToFeed("Powering down...");
+        }
     }
 
     @Override
@@ -304,6 +360,26 @@ public class Hud implements IHud {
         readyButton.setTransform(true);
         readyButton.setScale(0.5f);
         readyButton.setName("Ready");
+    }
+
+    @Override
+    public TextureRegion createReadySprite() {
+        if (player.getReady())
+            return readyButtonSprites.findRegion("readyGo");
+        else
+            return readyButtonSprites.findRegion("ready");
+    }
+
+    @Override
+    public void setUpPowerDownButton(TextureRegion powerDownSprite) {
+        if (powerDownState)
+            powerDownDrawable = new TextureRegionDrawable(powerDownSprites.findRegion("pdOn"));
+        else
+            powerDownDrawable = new TextureRegionDrawable(powerDownSprites.findRegion("pdOff"));
+        powerDownButton = new ImageButton(powerDownDrawable);
+        powerDownButton.setTransform(true);
+        powerDownButton.setScale(0.3f);
+        powerDownButton.setName("Power down");
     }
 
     @Override
@@ -350,27 +426,38 @@ public class Hud implements IHud {
 
     @Override
     public void selectCard(Button button, Card card) {
+
         if (!selectedCards.contains(card)) {
-            //addToFeed("Selected " + CardValue.extendedCardValue(card));
-            button.setScale(0.47f);
-            selectedCards.addToDeck(card);
-            addToFeed(" ");
-            for (int i = selectedCards.getSize()-1; i >= 0; i--) {
-                String cardToString = (i+1) + " - " + CardValue.extendedCardValue(selectedCards.getCard(i));
-                addToFeed(cardToString);
-            } addToFeed("Current selected order:");
-            playerHand.remove(card);
-        } else if (selectedCards.contains(card)) {
-            addToFeed(" ");
-            selectedCards.remove(card);
-            for (int i = selectedCards.getSize()-1; i >= 0; i--) {
-                String cardToString = (i+1) + " - " + CardValue.extendedCardValue(selectedCards.getCard(i));
-                addToFeed(cardToString);
-            } addToFeed("Current selected order:");
-            button.setScale(0.45f);
-            playerHand.addToDeck(card);
-        } else if (selectedCards.getSize() >= 5) {
-            addToFeed("Can't select card. Already 5 cards in deck.");
+            if (selectedCards.getSize() >= 5) {
+                if (selectedCards.getCard(0).cardValue == CardValue.PD) {
+                    addToFeed("Select ARM to continue.");
+                    addToFeed("Power Down already selected. Can't pick cards.");
+                } else
+                    addToFeed("Select ARM to continue.");
+                    addToFeed("Can't select card. Already 5 cards in deck.");
+            } else {
+                button.setScale(0.47f);
+                selectedCards.addToDeck(card);
+                addToFeed(" ");
+                for (int i = selectedCards.getSize() - 1; i >= 0; i--) {
+                    String cardToString = (i + 1) + " - " + CardValue.extendedCardValue(selectedCards.getCard(i));
+                    addToFeed(cardToString);
+                }
+                addToFeed("Current selected order:");
+                playerHand.remove(card);
+            }
+        } else {
+            if (selectedCards.contains(card)) {
+                addToFeed(" ");
+                selectedCards.remove(card);
+                for (int i = selectedCards.getSize() - 1; i >= 0; i--) {
+                    String cardToString = (i + 1) + " - " + CardValue.extendedCardValue(selectedCards.getCard(i));
+                    addToFeed(cardToString);
+                }
+                addToFeed("Current selected order:");
+                button.setScale(0.45f);
+                playerHand.addToDeck(card);
+            }
         }
     }
 

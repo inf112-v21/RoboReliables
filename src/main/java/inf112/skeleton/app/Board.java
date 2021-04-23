@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import inf112.skeleton.app.cards.CardValue;
 import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.entity.*;
 import inf112.skeleton.app.player.AbstractPlayer;
@@ -357,7 +358,9 @@ public class Board extends InputAdapter implements IBoard {
         System.out.println("DeckSize: " + programCardDeck.getSize());
         System.out.println("Register: " + robot.getRegister().getSize());
         System.out.println(player.getName() + " Execute register " + robot.getNextRegisterCard().getCardValue());
-        programCardDeck.addToTopOfDeck(robot.getNextRegisterCard());
+        // Ensures empty cards are not placed back in card deck
+        if (!(robot.getNextRegisterCard().cardValue == CardValue.PD))
+            programCardDeck.addToTopOfDeck(robot.getNextRegisterCard());
         robot.executeNext();
     }
 

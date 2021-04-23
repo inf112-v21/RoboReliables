@@ -1,0 +1,19 @@
+
+powerDownAtlas.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+pdOff
+  rotate: false
+  xy: 1, 1
+  size: 298, 298
+  orig: 298, 298
+  offset: 0, 0
+  index: -1
+pdOn
+  rotate: false
+  xy: 301, 1
+  size: 298, 298
+  orig: 298, 298
+  offset: 0, 0
+  index: -1
