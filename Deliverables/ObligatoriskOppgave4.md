@@ -1,6 +1,6 @@
 # INTRO
 
-Vårt hovedmål for denne innleveringen var å få på plass et brukelig brukergrensesnitt. Dette har gjort at noen andre ting kanskje er satt mer på siden, da vi følte dette var viktig for oss som team å få til. Både fordi vi selv virkelig har ønsket å få det på plass, men også fordi et hver respektabelt spill fortjener.
+Vårt hovedmål for denne innleveringen var å få på plass et brukelig brukergrensesnitt. Dette har gjort at noen andre ting kanskje er satt mer på siden, da vi følte dette var viktig for oss som team å få til. Både fordi vi selv virkelig har ønsket å få det på plass, men også fordi et hvert respektabelt spill fortjener det!
 
 
 # DELOPPGAVE 1 - TEAM & PROSJEKT
