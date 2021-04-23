@@ -20,7 +20,7 @@ public class Robot extends Entity implements Serializable {
     private CardDeck register = new CardDeck();
     private int lifeTokens = 3;
     private int damageTokens = 0;
-    private int id;
+    private final int id;
     private boolean isDestroyed = false;
     private AbstractPlayer owner;
     private ArchiveMarker archiveMarker;

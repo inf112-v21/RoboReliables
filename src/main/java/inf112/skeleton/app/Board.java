@@ -33,6 +33,7 @@ public class Board extends InputAdapter implements IBoard {
     private SpriteBatch batch;
     private BitmapFont font;
 
+    private Map selectedMap;
     private TiledMap map;
     public TiledMapTileLayer flagLayer, boardLayer, holeLayer, robotLayer;
 
@@ -79,22 +80,24 @@ public class Board extends InputAdapter implements IBoard {
 
     public int counter;
 
-
-    public Board(ArrayList<AbstractPlayer> players) {
+    public Board(ArrayList<AbstractPlayer> players, Map map) {
         this.players = players;
+        this.selectedMap = Objects.requireNonNullElseGet(map, () -> new Map("Dizzy Highway", 1));
         initializeBoard();
     }
 
-    public Board(ArrayList<AbstractPlayer> players, boolean playingOnline, int playerId) {
+    public Board(ArrayList<AbstractPlayer> players, Map map, boolean playingOnline, int playerId) {
         this.players = players;
+        this.selectedMap = Objects.requireNonNullElseGet(map, () -> new Map("Dizzy Highway", 1));
         this.playingOnline = playingOnline;
         this.playerId = playerId;
         this.networkPlayer = players.get(playerId - 1);
         initializeBoard();
     }
 
-    public Board(ArrayList<AbstractPlayer> players, ArrayList<Flag> flags) {
+    public Board(ArrayList<AbstractPlayer> players, Map map, ArrayList<Flag> flags) {
         this.players = players;
+        this.selectedMap = Objects.requireNonNullElseGet(map, () -> new Map("Dizzy Highway", 1));
         this.flags = flags;
         initializeBoard();
     }
@@ -127,8 +130,11 @@ public class Board extends InputAdapter implements IBoard {
         font = new BitmapFont();
         font.setColor(Color.RED);
 
+        // Gets the correct map
+
+
         // Sets the map and various layers
-        map = new TmxMapLoader().load("gameboard.tmx");
+        map = new TmxMapLoader().load(selectedMap.getFileName());
         boardLayer = (TiledMapTileLayer) map.getLayers().get("gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
         flagLayer = (TiledMapTileLayer) map.getLayers().get("flag");
@@ -541,6 +547,16 @@ public class Board extends InputAdapter implements IBoard {
             }
             hasStartedMoving = false;
         }
+    }
+
+    @Override
+    public void setSelectedMap(Map map) {
+        this.selectedMap = map;
+    }
+
+    @Override
+    public Map getSelectedMap() {
+        return selectedMap;
     }
 
     @Override

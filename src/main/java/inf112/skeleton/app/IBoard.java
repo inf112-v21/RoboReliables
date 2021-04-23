@@ -94,6 +94,18 @@ public interface IBoard extends ApplicationListener {
     void updatePhaseQueue();
 
     /**
+     *
+     * @param map
+     */
+    void setSelectedMap(Map map);
+
+    /**
+     *
+     * @return
+     */
+    Map getSelectedMap();
+
+    /**
      * Checks if the active player can visit a flag.
      * @param flag flag being checked
      * @return true if the active player can visit

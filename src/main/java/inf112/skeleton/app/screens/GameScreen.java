@@ -5,6 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Board;
+import inf112.skeleton.app.Map;
 import inf112.skeleton.app.RoboRally;
 import inf112.skeleton.app.cards.CardValue;
 import inf112.skeleton.app.player.AbstractPlayer;
@@ -62,6 +63,10 @@ public class GameScreen extends ScreenAdapter {
         Board.firstRender = false;
     }
 
+    /**
+     *
+     * @return
+     */
     public AbstractPlayer getPlayer() {
         if (getBoard().getPlayingOnline())
             return getBoard().getNetworkPlayer();
@@ -128,7 +133,6 @@ public class GameScreen extends ScreenAdapter {
         board.time++;
     }
 
-
     /**
      *
      * @param player
@@ -149,7 +153,6 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public boolean setRoundComplete() {
-
         return roundComplete;
     }
 

@@ -10,16 +10,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Location;
+import inf112.skeleton.app.Map;
 import inf112.skeleton.app.RoboRally;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.Player;
@@ -43,11 +42,15 @@ public class MainMenuScreen extends ScreenAdapter {
     private Table labelTable;
 
     private TextButton testButton;
-    private Slider slider;
+    private Slider playerCountSlider;
+    private Slider mapSelectSlider;
     private CheckBox setOnline;
     private CheckBox setHost;
-    private Label modeLabel;
+
+    // Labels
     private Label playersLabel;
+    private Label mapLabel;
+    private Label modeLabel;
     private Label statusLabel;
 
     private Texture logo;
@@ -55,6 +58,8 @@ public class MainMenuScreen extends ScreenAdapter {
     private Sprite sprite;
 
     private int nrOfPlayers;
+    private int selectedMapInt;
+    private Map selectedMap;
     private final ArrayList<AbstractPlayer> players = new ArrayList<>();
     private Board board;
     private boolean playingOnline;
@@ -88,17 +93,22 @@ public class MainMenuScreen extends ScreenAdapter {
            @Override
            public void clicked(InputEvent event, float x, float y) {
                players.add(new TestPlayer(new Location(2, 0), 1));
-               board = new Board(players);
+               board = new Board(players, null);
                game.setScreen(new GameScreen(game, board));
            }
         });
 
-        modeLabel = new Label("Mode: " + showMode(), new Label.LabelStyle(new BitmapFont(), Color.CYAN));
+        // Initiating labels
         playersLabel = new Label("Number of players: " + String.format("%01d", nrOfPlayers), new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        mapLabel = new Label("Map: " + String.format("%01d", selectedMapInt), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
+        modeLabel = new Label("Mode: " + showMode(), new Label.LabelStyle(new BitmapFont(), Color.CYAN));
         statusLabel = new Label("Network status: " + showStatus(), new Label.LabelStyle(new BitmapFont(), Color.CORAL));
 
-        slider = new Slider(1, 4, 1, false, skin);
-        slider.setColor(Color.GOLD);
+        // Initiating sliders
+        playerCountSlider = new Slider(1, 4, 1, false, skin);
+        playerCountSlider.setColor(Color.GOLD);
+        mapSelectSlider = new Slider(1,4,1,false, skin);
+        mapSelectSlider.setColor(Color.GOLD);
 
         setOnline = new CheckBox("Online", skin);
         setOnline.addListener(new ClickListener() {
@@ -131,36 +141,25 @@ public class MainMenuScreen extends ScreenAdapter {
             }
         });
 
-        /**
-         * Create Label Table
-         */
+        // Create label table
         labelTable = new Table();
         labelTable.setFillParent(true);
         labelTable.setSize(1280, 720);
-        labelTable.setPosition(0,0);
+        labelTable.setPosition(0,10);
 
+        // Add labels to table
         labelTable.add(playersLabel).padRight(20);
+        labelTable.add(mapLabel).padRight(20);
         labelTable.add(modeLabel).padRight(20);
         labelTable.add(statusLabel);
 
-        /**
-         * Create Main Table
-         */
+        // Create main table
         mainTable = new Table();
         mainTable.setFillParent(true);
         mainTable.setSize(1280, 720);
-        mainTable.setPosition(0,-200);
+        mainTable.setPosition(0,-195);
 
-        // add buttons
-        addButton(mainTable, "Settings").addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                stage.clear();
-                stage.addActor(labelTable);
-                stage.addActor(selectTable);
-            }
-        });
-
+        // Add "start game" button
         addButton(mainTable,"Start game").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -185,14 +184,33 @@ public class MainMenuScreen extends ScreenAdapter {
                         playingOnline = true;
                     }
                     addPlayers();
-                    board = new Board(players,playingOnline,playerId);
+                    board = new Board(players, selectedMap, playingOnline, playerId);
                 }
                 else {
                     addPlayers();
-                    board = new Board(players);
+                    board = new Board(players, selectedMap);
                 }
                 game.setScreen(new GameScreen(game, board));
+            }
+        });
 
+        // add "settings" button
+        addButton(mainTable, "Settings").addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                stage.clear();
+                stage.addActor(labelTable);
+                stage.addActor(selectTable);
+            }
+        });
+
+        // add "help" button
+        addButton(mainTable, "Help").addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                stage.clear();
+                stage.addActor(labelTable);
+                stage.addActor(selectTable);
             }
         });
 
@@ -216,7 +234,20 @@ public class MainMenuScreen extends ScreenAdapter {
         selectTable.setSize(1280, 720);
         selectTable.setPosition(0,-200);
 
-        selectTable.add(slider).padBottom(20);
+        BitmapFont font = new BitmapFont();
+        Label.LabelStyle style = new Label.LabelStyle();
+        style.font = font;
+
+        // Adding player count slider
+        selectTable.add(new Label("Player count:", style));
+        selectTable.row();
+        selectTable.add(playerCountSlider).padBottom(20);
+        selectTable.row();
+
+        // Adding map select slider
+        selectTable.add(new Label("Map select:", style));
+        selectTable.row();
+        selectTable.add(mapSelectSlider).padBottom(20);
         selectTable.row();
 
         addButton(selectTable, "Go back").addListener(new ClickListener() {
@@ -249,6 +280,7 @@ public class MainMenuScreen extends ScreenAdapter {
         stage.act();
         stage.draw();
         setPlayerCount();
+        setSelectedMap();
     }
 
     @Override
@@ -282,8 +314,31 @@ public class MainMenuScreen extends ScreenAdapter {
      *
      */
     private void setPlayerCount() {
-        nrOfPlayers = (int)slider.getVisualValue();
+        nrOfPlayers = (int) playerCountSlider.getVisualValue();
         playersLabel.setText("Number of players: " + String.format("%01d", nrOfPlayers));
+    }
+
+    /**
+     *
+     * @return
+     */
+    private void setSelectedMap() {
+        selectedMapInt = (int) mapSelectSlider.getVisualValue();
+        selectedMap = convertIntToMap(selectedMapInt);
+        mapLabel.setText("Map: " + selectedMap.getName());
+    }
+
+    /**
+     *
+     * @param mapNr
+     * @return
+     */
+    public Map convertIntToMap(int mapNr) {
+        for (Map map : game.maps) {
+            if (mapNr == map.getNr())
+                return map;
+        }
+        return null;
     }
 
     /**

@@ -18,12 +18,9 @@ import inf112.skeleton.app.cards.CardDeck;
 import inf112.skeleton.app.cards.CardValue;
 import inf112.skeleton.app.entity.Robot;
 import inf112.skeleton.app.player.AbstractPlayer;
-import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Hashtable;
-import java.util.ListIterator;
 
 /**
  * The Heads Up Display for the game. Shows all the information around the board
@@ -249,9 +246,7 @@ public class Hud implements IHud {
         feed.add(fullMessage);
     }
 
-    /**
-     *
-     */
+    @Override
     public void printFeed() {
         for (Message message : feed)
             stage.addActor(message.getLabel());
