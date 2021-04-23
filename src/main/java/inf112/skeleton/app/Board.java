@@ -36,7 +36,7 @@ public class Board extends InputAdapter implements IBoard {
 
     private Map selectedMap;
     private TiledMap map;
-    public TiledMapTileLayer flagLayer, boardLayer, holeLayer, wallLayer, robotLayer;
+    public TiledMapTileLayer flagLayer, boardLayer, holeLayer, robotLayer;
 
     public OrthogonalTiledMapRenderer renderer;
 
@@ -138,7 +138,6 @@ public class Board extends InputAdapter implements IBoard {
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
         flagLayer = (TiledMapTileLayer) map.getLayers().get("flag");
         holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
-        wallLayer = (TiledMapTileLayer) map.getLayers().get("wall");
 
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();

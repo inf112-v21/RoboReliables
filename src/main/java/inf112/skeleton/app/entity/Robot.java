@@ -32,26 +32,38 @@ public class Robot extends Entity implements Serializable {
         direction = Direction.UP;
     }
 
+    /**
+     * Respawns the robot.
+     * @param location The location to respawn on
+     */
     public void respawn(Location location) {
         this.setLocation(location);
         isDestroyed = false;
         dealDamageToken(2);
     }
 
+    /**
+     * Returns the player who is connected to the robot.
+     * @return player
+     */
     public AbstractPlayer getOwner() {
         return owner;
     }
 
+    /**
+     * Sets who controls the robot
+     * @param owner player
+     */
     public void setOwner(AbstractPlayer owner) {
         this.owner = owner;
     }
 
+    /**
+     * Checks if the robot is destroyed
+     * @return isDestroyed
+     */
     public boolean getIsDestroyed() {
         return isDestroyed;
-    }
-
-    public void setIsDestroyed(boolean bool) {
-        this.isDestroyed = bool;
     }
 
     @Override
@@ -59,13 +71,17 @@ public class Robot extends Entity implements Serializable {
         return "Robot " + id;
     }
 
+    /**
+     * Deals damage to the robot
+     * @param tokens how many damage tokens to deal to robot
+     */
     public void dealDamageToken(int tokens) {
         damageTokens += tokens;
         System.out.println(this + " now has " + damageTokens + " damage tokens");
     }
 
     /**
-     * TODO
+     * Destroys the robot, thus killing it. Is done when the robot loses all damage tokens.
      */
     public void destroy() {
         lifeTokens--;
@@ -85,8 +101,8 @@ public class Robot extends Entity implements Serializable {
     }
 
     /**
-     * TODO
-     * @return
+     * Cycles through to the next card in the register
+     * @return card
      */
     public Card getNextRegisterCard() {
         return getRegister().getCard(0);
@@ -161,14 +177,6 @@ public class Robot extends Entity implements Serializable {
 
     }
 
-    public boolean isEmpty(Location location) {
-        for (Entity entity : entities) {
-            if ((entity.getLocation().getX() == location.getX()) && (entity.getLocation().getY() == location.getY()))
-                return false;
-        }
-        return true;
-    }
-
     /**
      * Moves the robot backward steps times. Uses the direction of the robot to know which way is forward
      * @param steps The number of steps
@@ -198,12 +206,20 @@ public class Robot extends Entity implements Serializable {
         }
     }
 
+    /**
+     * Rotates the direction of the robot left
+     * @param steps how much to rotate
+     */
     public void rotateLeft(int steps) {
         for (int i = 1; i <= steps; i++) {
             setDirection(Direction.rotateLeft(this.direction));
         }
     }
 
+    /**
+     * Rotates the direction of the robot right
+     * @param steps how much to rotate
+     */
     public void rotateRight(int steps) {
         for (int i = 1; i <= steps; i++) {
             setDirection(Direction.rotateRight(this.direction));
@@ -220,46 +236,68 @@ public class Robot extends Entity implements Serializable {
         }
     }
 
+    /**
+     * @return register
+     */
     public CardDeck getRegister() {
         return register;
     }
 
+    /**
+     * @return direction
+     */
     public Direction getDirection() {
         return direction;
     }
 
+    /**
+     * sets a new direction
+     * @param direction new direction
+     */
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
 
+    /**
+     * @return archiveMarker
+     */
     public ArchiveMarker getArchiveMarker() {
         return archiveMarker;
     }
 
+    /**
+     * sets a new archive Marker
+     * @param archiveMarker archiveMarker
+     */
     public void setArchiveMarker(ArchiveMarker archiveMarker) {
         this.archiveMarker = archiveMarker;
     }
 
+    /**
+     * @return damageTokens
+     */
     public int getDamageTokens() {
         return damageTokens;
     }
 
+    /**
+     * @return lifeTokens
+     */
     public int getLifeTokens() {
         return lifeTokens;
     }
 
+    /**
+     * Adds new life tokens to robot.
+     */
     public void addLifeToken() {
         this.lifeTokens++;
     }
 
-    public ArrayList<Entity> getEntities() {
-        return entities;
-    }
-
-    public void setEntities(ArrayList<Entity> entities) {
-        this.entities = entities;
-    }
-
+    /**
+     * checks if the register is empty
+     * @return boolean
+     */
     public boolean registerIsEmpty() {
         return this.getRegister().getSize() == 0;
     }

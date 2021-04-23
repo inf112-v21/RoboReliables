@@ -10,7 +10,6 @@ import java.util.Collections;
  * This class represents a list of cards, a card deck.
  */
 public class CardDeck implements ICardDeck, Serializable {
-
     private final ArrayList<Card> cards;
 
     public CardDeck() {
@@ -41,7 +40,8 @@ public class CardDeck implements ICardDeck, Serializable {
 
     @Override
     public void addToTopOfDeck(Card card) {
-        cards.add(0, card);
+        if (card.cardValue == CardValue.PD)
+            cards.add(0, card);
     }
 
     @Override
@@ -101,7 +101,9 @@ public class CardDeck implements ICardDeck, Serializable {
 
     @Override
     public void clear() {
-        for (int i = cards.size() - 1; i >= 0; i--) cards.remove(i);
+        if (cards.size() > 0) {
+            cards.subList(0, cards.size()).clear();
+        }
         System.out.println(this.getSize());
     }
 }

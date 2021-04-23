@@ -104,7 +104,7 @@ public class Hud implements IHud {
         stageViewport = new FitViewport(1280, 720);
         stage = new Stage(stageViewport, spriteBatch);
 
-        buttonCards = new Hashtable<Actor, Card>();
+        buttonCards = new Hashtable<>();
         selectedCards = new CardDeck();
 
         // Hand Table

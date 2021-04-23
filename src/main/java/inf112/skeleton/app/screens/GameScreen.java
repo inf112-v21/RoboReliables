@@ -15,15 +15,14 @@ import inf112.skeleton.app.player.TestPlayer;
 import java.io.IOException;
 
 /**
- *
+ * Screen for representing the game. Responsible for the main game loop.
  */
 public class GameScreen extends ScreenAdapter {
     private RoboRally game;
-    private Board board;
-    private SpriteBatch batch;
-    private Hud hud;
+    private final Board board;
+    private final SpriteBatch batch;
+    private final Hud hud;
     private boolean roundHasBeenStarted = false;
-    private boolean roundComplete = true;
     private boolean networkPlayerSent = false;
     private boolean networkPlayersReceived = false;
 
@@ -72,8 +71,8 @@ public class GameScreen extends ScreenAdapter {
     }
 
     /**
-     *
-     * @return
+     * Returns player.
+     * @return player
      */
     public AbstractPlayer getPlayer() {
         if (getBoard().getPlayingOnline())
@@ -165,6 +164,10 @@ public class GameScreen extends ScreenAdapter {
         board.time++;
     }
 
+    /**
+     * Updates the robot register.
+     * @param player player
+     */
     public void updateRobotRegisterWithSelectedCards(AbstractPlayer player) {
         player.getRobot().updateRegister(hud.getSelectedCards());
         hud.getSelectedCards().clear();
@@ -174,7 +177,8 @@ public class GameScreen extends ScreenAdapter {
 
 
     /**
-     * @param player
+     * Transfers selected cards to player
+     * @param player player
      */
     public void transferSelectedCards(AbstractPlayer player) {
         if (!board.getPlayingOnline()) {
@@ -195,10 +199,6 @@ public class GameScreen extends ScreenAdapter {
      */
     public Board getBoard() {
         return board;
-    }
-
-    public boolean setRoundComplete() {
-        return roundComplete;
     }
 
     @Override
