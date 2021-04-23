@@ -102,5 +102,6 @@ public class CardDeck implements ICardDeck, Serializable {
     @Override
     public void clear() {
         for (int i = cards.size() - 1; i >= 0; i--) cards.remove(i);
+        System.out.println(this.getSize());
     }
 }

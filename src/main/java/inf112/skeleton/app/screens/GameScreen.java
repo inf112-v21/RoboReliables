@@ -4,12 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Interpolation;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Map;
 import inf112.skeleton.app.RoboRally;
 import inf112.skeleton.app.cards.CardValue;
 import inf112.skeleton.app.player.AbstractPlayer;
 import inf112.skeleton.app.player.TestPlayer;
+
+import java.io.IOException;
 
 /**
  *
@@ -21,6 +24,8 @@ public class GameScreen extends ScreenAdapter {
     private Hud hud;
     private boolean roundHasBeenStarted = false;
     private boolean roundComplete = true;
+    private boolean networkPlayerSent = false;
+    private boolean networkPlayersReceived = false;
 
     public GameScreen(RoboRally game, Board board) {
         this.game = game;
@@ -53,8 +58,7 @@ public class GameScreen extends ScreenAdapter {
             if (!(board.getActivePlayer() instanceof TestPlayer)) {
                 gameLoop();
                 hud.update();
-            }
-            else {
+            } else {
                 board.checkIfTurnIsOver();
                 board.checkIfActivePlayerOnFlag();
                 board.checkIfWon();
@@ -89,12 +93,33 @@ public class GameScreen extends ScreenAdapter {
                         board.switchActivePlayer();
                         roundHasBeenStarted = true;
                     } else {
+                        System.out.println("active player is, before cleanup, " + board.getActivePlayer().getPlayerId());
                         board.cleanup();
                         hud.addToFeed("New round starting. Select new cards.");
                     }
                     board.needsCleanup = !board.needsCleanup;
                 } else {
                     board.updatePhaseQueue();
+                }
+            }
+        }
+
+        // network
+        if (board.getPlayingOnline()) {
+            if (getPlayer().getReady()) {
+                if (!networkPlayerSent) {
+                    System.out.println("player id " + getPlayer().getPlayerId());
+                    transferSelectedCards(getPlayer());
+                    board.sendNetworkPlayerToServer();
+                    System.out.println("inside sending network part");
+                    networkPlayerSent = true;
+                } else if (!networkPlayersReceived) {
+                    System.out.println("inside waiting for players part");
+                    board.updatePlayersFromServer();
+                    for (AbstractPlayer player : board.getPlayers()) {
+                        System.out.println("player " + player.getPlayerId() + " " + player.getRobot().getRegister().getSize());
+                    }
+                    networkPlayersReceived = true;
                 }
             }
         }
@@ -106,6 +131,8 @@ public class GameScreen extends ScreenAdapter {
                 if (board.registersAreEmpty()) {
                     board.setAllPlayersNotReady();
                     roundHasBeenStarted = false;
+                    networkPlayersReceived = false;
+                    networkPlayerSent = false;
                     return;
                 }
                 board.updatePhaseQueue();
@@ -133,14 +160,27 @@ public class GameScreen extends ScreenAdapter {
         board.time++;
     }
 
+    public void updateRobotRegisterWithSelectedCards(AbstractPlayer player) {
+        player.getRobot().updateRegister(hud.getSelectedCards());
+        hud.getSelectedCards().clear();
+        System.out.println("player id of update register" + player.getPlayerId());
+        player.getRobot().getRegister().printDeck();
+    }
+
+
     /**
-     *
      * @param player
      */
     public void transferSelectedCards(AbstractPlayer player) {
-        if (board.getActivePlayer() != null) {
-            if (board.getActivePlayer().getReady() && hud.getSelectedCards().getSize() == 5) {
-                player.getRobot().updateRegister(hud.getSelectedCards());
+        if (!board.getPlayingOnline()) {
+            if (board.getActivePlayer() != null) {
+                if (board.getActivePlayer().getReady() && hud.getSelectedCards().getSize() == 5) {
+                    updateRobotRegisterWithSelectedCards(player);
+                }
+            }
+        } else {
+            if (hud.getSelectedCards().getSize() == 5) {
+                updateRobotRegisterWithSelectedCards(player);
             }
         }
     }

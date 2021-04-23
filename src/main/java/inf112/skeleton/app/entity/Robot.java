@@ -32,8 +32,6 @@ public class Robot extends Entity implements Serializable {
 
     public void respawn(Location location) {
         this.setLocation(location);
-        System.out.println("Enter a direction: W,A,S,D");
-        this.setDirection(Direction.interpretInput(this.getOwner().getInput()));
         isDestroyed = false;
         dealDamageToken(2);
     }
@@ -203,7 +201,9 @@ public class Robot extends Entity implements Serializable {
      * @param newRegister A deck of five or less cards to be played
      */
     public void updateRegister(CardDeck newRegister) {
-        register = newRegister;
+        for (int i = 0; i < newRegister.getSize(); i++) {
+            register.addToDeck(newRegister.getCard(i));
+        }
     }
 
     public CardDeck getRegister() {
@@ -241,12 +241,6 @@ public class Robot extends Entity implements Serializable {
     public boolean registerIsEmpty() {
         return this.getRegister().getSize() == 0;
     }
-
-//    public void moveToArchiveMarker() {
-//        setLocation(archiveMarker.getLocation());
-//        isDestroyed = false;
-//        dealDamageToken(2);
-//    }
 
     @Override
     public boolean equals(Object otherRobot) {

@@ -154,11 +154,13 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
         if (isHost) {
             // read in new players to server as long as the server hasn't received all players
             while (!RoboreliableServer.checkIfAllPlayersReceived()) {
+                System.out.println("inside while");
                 RoboreliableServer.receivePlayersFromClients();
             }
             return RoboreliableServer.getPlayerList();
         } else {
             while (!RoboreliableClient.allPlayersReceived()) {
+                System.out.println("inside guestwhile");
             }
             return RoboreliableClient.getPlayersFromServer();
         }
@@ -166,8 +168,10 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
 
     public void sendToServer() throws IOException {
         if (isHost) {
+            System.out.println("size host" + getRobot().getRegister().getSize());
             RoboreliableServer.receiveHostPlayer(this);
         } else {
+            System.out.println("size " + this.getRobot().getRegister().getSize());
             RoboreliableClient.sendPlayerToServer(this);
         }
     }

@@ -243,14 +243,12 @@ public class Board extends InputAdapter implements IBoard {
         putHandBackToDeck(networkPlayer);
         dealCardsToPlayer(networkPlayer);
        // sendNetworkPlayerToServer();
-        System.out.println("sent!");
        // updatePlayersFromServer();
-        System.out.println("reached!");
         for (AbstractPlayer player : players) {
             player.getRobot().getRegister().printDeck();
         }
         assignNetworkPlayer();
-        updatePhaseQueue();
+//        updatePhaseQueue();
     }
 
     @Override
@@ -673,12 +671,7 @@ public class Board extends InputAdapter implements IBoard {
         for (Robot spawnRobot : spawnRobotList) {
             robotLayer.setCell(spawnRobot.getLocation().getX(), spawnRobot.getLocation().getY(), null);
             Location archiveMarkerLocation = spawnRobot.getArchiveMarker().getLocation();
-            if (validSpawnLocation(archiveMarkerLocation)) {
-                spawnRobot.respawn(archiveMarkerLocation);
-            } else {
-                Location newSpawnLocation = getRelativeSpawnLocation(archiveMarkerLocation, spawnRobot.getOwner());
-                spawnRobot.respawn(newSpawnLocation);
-            }
+            spawnRobot.respawn(archiveMarkerLocation);
         }
         destroyedRobots.clear();
     }
@@ -705,6 +698,8 @@ public class Board extends InputAdapter implements IBoard {
     public ArrayList<AbstractPlayer> getPlayers() {
         return players;
     }
+
+//    public attemptNetworkUpdate
 
     /**
      * Moves the robot in the specified direction

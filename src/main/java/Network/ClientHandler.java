@@ -46,6 +46,7 @@ public class ClientHandler {
 
         AbstractPlayer player = (AbstractPlayer) objIn.readObject();
         System.out.println("after read player");
+        System.out.println(player);
         return player;
     }
 
