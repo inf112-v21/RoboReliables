@@ -41,6 +41,7 @@ public class MainMenuScreen extends ScreenAdapter {
 
     private Table mainTable;
     private Table selectTable;
+    private Table helpTable;
     private Table labelTable;
 
     private TextButton testButton;
@@ -54,6 +55,7 @@ public class MainMenuScreen extends ScreenAdapter {
     private Label mapLabel;
     private Label modeLabel;
     private Label statusLabel;
+    private Label helpLabel;
 
     private Texture logo;
     private SpriteBatch batch;
@@ -108,6 +110,7 @@ public class MainMenuScreen extends ScreenAdapter {
         mapLabel = new Label("Map: " + String.format("%01d", selectedMapInt), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
         modeLabel = new Label("Mode: " + showMode(), new Label.LabelStyle(new BitmapFont(), Color.CYAN));
         statusLabel = new Label("Network status: " + showStatus(), new Label.LabelStyle(new BitmapFont(), Color.CORAL));
+        helpLabel = new Label("Use the settings to select options for the game. You can select how many players, which map and online settings.", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         // Initiating sliders
         playerCountSlider = new Slider(1, 4, 1, false, skin);
@@ -215,7 +218,7 @@ public class MainMenuScreen extends ScreenAdapter {
             public void clicked(InputEvent event, float x, float y) {
                 stage.clear();
                 stage.addActor(labelTable);
-                stage.addActor(selectTable);
+                stage.addActor(helpTable);
             }
         });
 
@@ -239,6 +242,15 @@ public class MainMenuScreen extends ScreenAdapter {
         selectTable.setSize(1280, 720);
         selectTable.setPosition(0,-200);
 
+        /**
+         * Create help Table
+         */
+        helpTable = new Table();
+        helpTable.setFillParent(true);
+        helpTable.setSize(1280, 720);
+        helpTable.setPosition(0,-200);
+        helpTable.add(helpLabel).padBottom(200);;
+
         BitmapFont font = new BitmapFont();
         Label.LabelStyle style = new Label.LabelStyle();
         style.font = font;
@@ -256,6 +268,16 @@ public class MainMenuScreen extends ScreenAdapter {
         selectTable.row();
 
         addButton(selectTable, "Go back").addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                stage.clear();
+                stage.addActor(labelTable);
+                stage.addActor(mainTable);
+            }
+        });
+
+        helpTable.row();
+        addButton(helpTable, "Go back").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 stage.clear();
