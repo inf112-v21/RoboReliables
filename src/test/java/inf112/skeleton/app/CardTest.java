@@ -131,10 +131,7 @@ public class CardTest {
         assertEquals(cardDealt.cardValue, player.getCard(0).cardValue);
 
         player.putInDeck(0, cardDeck);
-        assertEquals(84, cardDeck.getSize());
         assertEquals(0, player.getHandSize());
-        assertEquals(cardDealt.cardValue, cardDeck.getCardValueAt(0));
-
     }
 
     @Test
