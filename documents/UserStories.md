@@ -84,7 +84,7 @@
 
 - - - - 
 
-### Som spiller ønsker jeg å kunne spille med andre spillere over nett.
+### Som spiller ønsker jeg å kunne spille med andre spillere over nett, slik at jeg fremdeles kan spille mot andre selv om vi ikke er i samme rom (samt at spillet blir mer COVID-vennlig).
 
 **Akseptansekriterier**:
 
@@ -97,6 +97,7 @@
 
 - Implementere vert/klient-funksjonalitet.
 - Implementere metode for å sende og motta spillere.
+- Implementere socket-rammeverk.
 
 - - - - 
 
@@ -135,3 +136,75 @@
 - Denne listen oppdateres bare hvis riktig flagg i rekkefølgen blir besøkt.
 - Implementere win-condition som beskrevet i akseptansekriterie 5.
 
+- - - - 
+
+### Som spiller ønsker jeg å kunne velge kort grafisk, for å lett og oversiktlig kunne se og velge kort.
+
+**Akseptansekriterier**:
+
+- Kortene vises på skjermen
+- Kortene reagerer på musetrykk
+- Kortene indikerer om de er valgt eller ikke
+- Når spilleren har valgt kort, skal de kunne bekrefte valget sitt
+- Når kortene har blitt valgt og spilleren er klar, vil disse kortene bli utført (og ingen andre)
+
+**Arbeidsoppgaver**
+
+- Lage HUD som vises på spillskjermen
+- Finne/lage teksturer til kort, samt generere atlas for disse teksturene
+- Implementere lasting av riktige kort når nye kort deles ut
+- Implementere `Listeners` til kortene slik at de reagerer når de trykkes på
+- Implementere funksjonalitet slik at når et kort trykkes på, endres statusen (toggle valgt/ikke valgt)
+- Implementere visuell indikasjon på om et gitt kort er valgt eller ikke
+- Implementere logikk slik at kortene som blir valgt stemmer overens med kortene som blir lagt i robotregisteret og senere utført
+- Implementere "Arm"-knapp (ready-knapp) som lar spilleren bekrefte valget sitt
+
+- - - - 
+
+### Som spiller ønsker jeg å bli møtt med en spillmeny når jeg starter spillet, slik at jeg lett kan velge spillmodus og antall spillere.
+
+**Akseptansekriterier**
+
+- Menyen vises på skjermen når man starter spillet
+- Menyen består av knapper som reagerer ved musetrykk
+- Disse knappene lar spilleren velge spillmodus, velge antall spillere, og starte/avslutte spillet
+- Det er lett å se hvilke innstillinger som har blitt valgt
+- Når man trykker "start"-knappen, starter spillet i tråd med innstillingene som har blitt valgt
+
+**Arbeidsoppgaver**
+
+- Implementere en Meny-skjerm-klasse
+- Legge til ressurser for menyen (logo, knapptekstur osv.)
+- Implementere menyknapper
+- Implementere funksjonalitet for hver knapp
+- Implementere glider for å velge antall spillere, og avkrysningsrute for å bestemme diverse av/på parametre
+- Implementere logikk for overgangen fra meny til spillskjerm
+
+### Som spiller ønsker jeg at det vises en tekstkonsoll på spillskjermen, slik at jeg blir informert om diverse hendelser i spillet.
+
+**Akseptansekriterier**
+
+- Det vises en tekstkonsoll på skjermen
+- Denne konsollen:
+    - forteller om hvilke kort som blir utført (og i hvilken rekkefølge)
+	- gir tilbakemelding på spillerens valg (vellykket/ikke vellykket)
+- Når tekstkonsollen fylles opp, blir gammel tekst fjernet (ordentlig scrolling-oppførsel)
+
+**Arbeidsoppgaver**
+
+- Implementere et eget objekt i HUD som representerer tekstkonsollen
+- Plassere tekstkonsollen på et fornuftig sted i spillskjermen
+- Lage metode som printer til tekstkonsollen
+- Bruke denne metoden til å skrive informasjon i tekstkonsollen som beskrevet i akseptansekriteriene
+- Implementere scrolling-oppførsel i tekstkonsollen
+
+### Som spiller ønsker jeg at det er musikk i spillet, slik at ørene mine ikke føler seg ensomme.
+
+**Akseptansekriterier**
+
+- Når spillet starter vil musikken begynne å spille, og holde frem helt til spillet avsluttes
+
+**Arbeidsoppgaver**
+
+- Komponere musikken, og legge det inn i `assets`
+- Ta bruk av LibGDX sin funksjonalitet for å håndtere avspilling av musikken
