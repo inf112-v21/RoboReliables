@@ -17,7 +17,7 @@ public class Robot extends Entity implements Serializable {
     private CardDeck register = new CardDeck();
     private int lifeTokens = 3;
     private int damageTokens = 0;
-    private int id;
+    private final int id;
     private boolean isDestroyed = false;
     private AbstractPlayer owner;
     private ArchiveMarker archiveMarker;
@@ -64,6 +64,9 @@ public class Robot extends Entity implements Serializable {
         System.out.println(this + " now has " + damageTokens + " damage tokens");
     }
 
+    /**
+     * TODO
+     */
     public void destroy() {
         lifeTokens--;
         damageTokens = 0;
@@ -81,6 +84,10 @@ public class Robot extends Entity implements Serializable {
         register.remove(0);
     }
 
+    /**
+     * TODO
+     * @return
+     */
     public Card getNextRegisterCard() {
         return getRegister().getCard(0);
     }
@@ -111,6 +118,8 @@ public class Robot extends Entity implements Serializable {
                 break;
             case UT:
                 rotateRight(2);
+                break;
+            case PD:
                 break;
             default:
                 System.err.println("Inexhaustible card check.");
@@ -219,6 +228,14 @@ public class Robot extends Entity implements Serializable {
 
     public int getDamageTokens() {
         return damageTokens;
+    }
+
+    public int getLifeTokens() {
+        return lifeTokens;
+    }
+
+    public void addLifeToken() {
+        this.lifeTokens++;
     }
 
     public boolean registerIsEmpty() {

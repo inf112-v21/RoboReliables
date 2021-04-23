@@ -62,6 +62,15 @@ public interface ICardDeck {
     void printDeck();
 
     /**
+     * TODO
+     * @param card
+     * @return
+     */
+    boolean contains(Card card);
+
+    void remove(Card card);
+
+    /**
      *
      * @param i index of card to remove
      */

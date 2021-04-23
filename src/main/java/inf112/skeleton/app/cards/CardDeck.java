@@ -74,6 +74,20 @@ public class CardDeck implements ICardDeck, Serializable {
     }
 
     @Override
+    public boolean contains(Card card) {
+        for (Card c : cards) {
+            if (c.equals(card))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void remove(Card card) {
+        cards.remove(card);
+    }
+
+    @Override
     public void printDeck() {
         for (int i = 0; i < cards.size(); i++) {
             System.out.println((i + 1) + ": " + CardValue.extendedCardValue(cards.get(i)) + ", priorityvalue: " + getCard(i).getPriorityValue());

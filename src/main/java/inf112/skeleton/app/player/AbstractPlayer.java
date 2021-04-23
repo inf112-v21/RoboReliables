@@ -13,7 +13,6 @@ import inf112.skeleton.app.cards.Card;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -22,11 +21,12 @@ import java.util.Scanner;
 public abstract class AbstractPlayer extends InputAdapter implements IAbstractPlayer, Comparable<AbstractPlayer>, Serializable {
     private final Robot robot;
     public final static Location abstractLocation = new Location(0, 0);
-    private ArrayList<Flag> visitedFlags = new ArrayList<>();
-    private String name;
-    private int playerId;
+    private final ArrayList<Flag> visitedFlags = new ArrayList<>();
+    private final String name;
+    private final int playerId;
+    private boolean isReady = false;
     // ArrayList that contains the cards currently in the player's hand
-    private CardDeck hand = new CardDeck();
+    private final CardDeck hand = new CardDeck();
 
     private boolean isHost;
 
@@ -68,6 +68,24 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
     public void putInDeck(int index, CardDeck cardDeck) {
         cardDeck.addToTopOfDeck(getCard(index));
         hand.remove(index);
+    }
+
+    @Override
+    public boolean getReady() {
+        return isReady;
+    }
+
+    @Override
+    public void setReady(boolean state) {
+        isReady = state;
+    }
+
+    @Override
+    public void printReady() {
+        if (isReady)
+            System.out.println("You are ready.");
+        else
+            System.out.println("You are NOT ready.");
     }
 
     @Override
@@ -142,8 +160,7 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
         } else {
             while (!RoboreliableClient.allPlayersReceived()) {
             }
-            ArrayList<AbstractPlayer> players = RoboreliableClient.getPlayersFromServer();
-            return players;
+            return RoboreliableClient.getPlayersFromServer();
         }
     }
 
@@ -175,4 +192,3 @@ public abstract class AbstractPlayer extends InputAdapter implements IAbstractPl
         }
     }
 }
-

@@ -9,7 +9,8 @@ public enum CardValue implements Serializable {
     B1, // backwards 1
     RR, // rotate right
     RL, // rotate left
-    UT; // U-turn (invert rotation)
+    UT, // U-turn (invert rotation)
+    PD; // No move
 
     public static String extendedCardValue(Card card) {
         try {
@@ -28,6 +29,8 @@ public enum CardValue implements Serializable {
                     return "Rotate robot to the left";
                 case UT:
                     return "U-Turn / Rotate robot 180 degrees";
+                case PD:
+                    return "Powered down...";
             }
         } catch (Exception e) {
             System.out.println("Invalid card.");

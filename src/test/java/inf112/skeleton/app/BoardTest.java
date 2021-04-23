@@ -25,7 +25,7 @@ public class BoardTest {
     public void createBoard() {
         testPlayer = new TestPlayer(new Location(0,0));
         players.add(testPlayer);
-        board = new Board(players);
+        board = new Board(players, null);
         robot = testPlayer.getRobot();
         board.setActivePlayer(testPlayer);
         board.activePlayerInitialRobotLocation = board.activePlayer.getRobot().getLocation();

@@ -62,6 +62,22 @@ public interface IAbstractPlayer {
     Card getCard(int index);
 
     /**
+     *
+     * @return
+     */
+    boolean getReady();
+
+    /**
+     *
+     */
+    void setReady(boolean state);
+
+    /**
+     *
+     */
+    void printReady();
+
+    /**
      * Get a player's robot.
      * @return robot the robot itself
      */

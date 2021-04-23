@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import inf112.skeleton.app.cards.CardValue;
 import inf112.skeleton.app.cards.ProgramCardDeck;
 import inf112.skeleton.app.entity.*;
 import inf112.skeleton.app.player.AbstractPlayer;
@@ -33,6 +34,7 @@ public class Board extends InputAdapter implements IBoard {
     private SpriteBatch batch;
     private BitmapFont font;
 
+    private Map selectedMap;
     private TiledMap map;
     public TiledMapTileLayer flagLayer, boardLayer, holeLayer, robotLayer;
 
@@ -70,34 +72,39 @@ public class Board extends InputAdapter implements IBoard {
 
     private boolean playingOnline;
 
-    private boolean needsCleanup = false;
+    public boolean needsCleanup = false;
 
-    int time = 1; // tracks time in game.
+    public int time = 1; // tracks time in game.
     int round = 1; // round Nr
 
     public static boolean firstRender = true;
 
+    public int counter;
 
-    public Board(ArrayList<AbstractPlayer> players) {
+    public Board(ArrayList<AbstractPlayer> players, Map map) {
         this.players = players;
+        this.selectedMap = Objects.requireNonNullElseGet(map, () -> new Map("Dizzy Highway", 1));
         initializeBoard();
     }
 
-    public Board(ArrayList<AbstractPlayer> players, boolean playingOnline, int playerId) {
+    public Board(ArrayList<AbstractPlayer> players, Map map, boolean playingOnline, int playerId) {
         this.players = players;
+        this.selectedMap = Objects.requireNonNullElseGet(map, () -> new Map("Dizzy Highway", 1));
         this.playingOnline = playingOnline;
         this.playerId = playerId;
         this.networkPlayer = players.get(playerId - 1);
         initializeBoard();
     }
 
-    public Board(ArrayList<AbstractPlayer> players, ArrayList<Flag> flags) {
+    public Board(ArrayList<AbstractPlayer> players, Map map, ArrayList<Flag> flags) {
         this.players = players;
+        this.selectedMap = Objects.requireNonNullElseGet(map, () -> new Map("Dizzy Highway", 1));
         this.flags = flags;
         initializeBoard();
     }
 
-    public Board() {}
+    public Board() {
+    }
 
     @Override
     public int getMAP_SIZE_X() {
@@ -121,15 +128,18 @@ public class Board extends InputAdapter implements IBoard {
 
     private void initializeBoard() {
         batch = new SpriteBatch();
-        font  = new BitmapFont();
+        font = new BitmapFont();
         font.setColor(Color.RED);
 
+        // Gets the correct map
+
+
         // Sets the map and various layers
-        map = new TmxMapLoader().load("gameboard.tmx");
+        map = new TmxMapLoader().load(selectedMap.getFileName());
         boardLayer = (TiledMapTileLayer) map.getLayers().get("gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
-        flagLayer  = (TiledMapTileLayer) map.getLayers().get("flag");
-        holeLayer  = (TiledMapTileLayer) map.getLayers().get("hole");
+        flagLayer = (TiledMapTileLayer) map.getLayers().get("flag");
+        holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
 
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
@@ -144,12 +154,12 @@ public class Board extends InputAdapter implements IBoard {
 
         // Splits the textures of the player into different states and sets them to the given Cell
         TextureRegion[][] robotTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
-        robotCell      = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
-        robotDiedCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
-        robotWonCell   = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
-        robotUpCell    = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(0);
-        robotLeftCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(1);
-        robotDownCell  = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(2);
+        robotCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0]));
+        robotDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][1]));
+        robotWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][2]));
+        robotUpCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(0);
+        robotLeftCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(1);
+        robotDownCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(2);
         robotRightCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotTextures[0][0])).setRotation(3);
         // Active player
         activePlayer = players.get(0);
@@ -205,6 +215,8 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void startNewRound() {
+
+        System.out.println("Starting new round...");
         if (!playingOnline) {
             startNewRoundOffline();
         } else {
@@ -220,7 +232,6 @@ public class Board extends InputAdapter implements IBoard {
             putHandBackToDeck(player);
             dealCardsToPlayer(player);
         }
-        updatePhaseQueue();
     }
 
     @Override
@@ -231,8 +242,13 @@ public class Board extends InputAdapter implements IBoard {
         round++;
         putHandBackToDeck(networkPlayer);
         dealCardsToPlayer(networkPlayer);
-        sendNetworkPlayerToServer();
-        updatePlayersFromServer();
+       // sendNetworkPlayerToServer();
+        System.out.println("sent!");
+       // updatePlayersFromServer();
+        System.out.println("reached!");
+        for (AbstractPlayer player : players) {
+            player.getRobot().getRegister().printDeck();
+        }
         assignNetworkPlayer();
         updatePhaseQueue();
     }
@@ -272,7 +288,9 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void switchActivePlayer() {
-        setActivePlayer(phaseQueue.peek());
+        if (phaseQueue.peek() != null) {
+            setActivePlayer(phaseQueue.peek());
+        }
     }
 
     @Override
@@ -283,7 +301,6 @@ public class Board extends InputAdapter implements IBoard {
     public void dealCardsToPlayer(AbstractPlayer player) {
         programCardDeck.shuffle();
         programCardDeck.dealCard(player, 9);
-        //player.getRobot().updateRegister(player.getHand());
     }
 
     public void putHandBackToDeck(AbstractPlayer player) {
@@ -334,18 +351,22 @@ public class Board extends InputAdapter implements IBoard {
         AbstractPlayer player = phaseQueue.poll();
         assert player != null;
         Robot robot = player.getRobot();
+        assert robot.getRegister().getSize() > 0;
         int x = robot.getLocation().getX();
         int y = robot.getLocation().getY();
         robotLayer.setCell(x, y, null);
         System.out.println("DeckSize: " + programCardDeck.getSize());
         System.out.println("Register: " + robot.getRegister().getSize());
         System.out.println(player.getName() + " Execute register " + robot.getNextRegisterCard().getCardValue());
-        programCardDeck.addToTopOfDeck(robot.getNextRegisterCard());
+        // Ensures empty cards are not placed back in card deck
+        if (!(robot.getNextRegisterCard().cardValue == CardValue.PD))
+            programCardDeck.addToTopOfDeck(robot.getNextRegisterCard());
         robot.executeNext();
     }
 
     @Override
     public void gameLoop() {
+        System.out.println("render count " + counter);
         // if all robots have performed their phase
         if (phaseQueue.isEmpty()) {
             if (registersAreEmpty()) {
@@ -359,7 +380,6 @@ public class Board extends InputAdapter implements IBoard {
             } else {
                 updatePhaseQueue();
             }
-
         } else if (readyCheck()) {
             if (time % 60 == 0) {
                 switchActivePlayer();
@@ -378,6 +398,7 @@ public class Board extends InputAdapter implements IBoard {
     }
 
     public void cleanup() {
+        getActivePlayer().setReady(false);
         spawnRobots(destroyedRobots);
     }
 
@@ -390,16 +411,20 @@ public class Board extends InputAdapter implements IBoard {
         return false;
     }
 
-    @Override
     public void updatePlayersFromServer() {
         try {
             players = networkPlayer.getPlayersFromServer();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e);
         }
-
     }
 
+
+    /**
+     * TODO
+     *
+     * @return
+     */
     public boolean registersAreEmpty() {
         for (AbstractPlayer player : players) {
             if (!player.getRobot().registerIsEmpty()) {
@@ -411,11 +436,12 @@ public class Board extends InputAdapter implements IBoard {
 
     @Override
     public void updatePhaseQueue() {
-
-        for (AbstractPlayer player : players) {
-            if (!player.getRobot().getIsDestroyed()) {
-                phaseQueue.add(player);
-                //System.out.println("The priority value of " + player.getName() + "'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
+        if (allPlayersReady()) {
+            for (AbstractPlayer player : players) {
+                if (!player.getRobot().getIsDestroyed()) {
+                    phaseQueue.add(player);
+                    //System.out.println("The priority value of " + player.getName() + "'s first card is: " + player.getRobot().getNextRegisterCard().getPriorityValue());
+                }
             }
         }
     }
@@ -497,7 +523,7 @@ public class Board extends InputAdapter implements IBoard {
         activePlayer.getRobot().setArchiveMarker(new ArchiveMarker(location));
     }
 
-    private boolean activePlayerOnHole() {
+    public boolean activePlayerOnHole() {
         for (Hole hole : holes) {
             if (hole.getLocation().equals(activePlayer.getRobot().getLocation())) {
                 return true;
@@ -506,7 +532,7 @@ public class Board extends InputAdapter implements IBoard {
         return false;
     }
 
-    private void robotHoleEvent() {
+    public void robotHoleEvent() {
         Robot robot = activePlayer.getRobot();
         dealDamage(robot, 10);
     }
@@ -524,6 +550,16 @@ public class Board extends InputAdapter implements IBoard {
             }
             hasStartedMoving = false;
         }
+    }
+
+    @Override
+    public void setSelectedMap(Map map) {
+        this.selectedMap = map;
+    }
+
+    @Override
+    public Map getSelectedMap() {
+        return selectedMap;
     }
 
     @Override
@@ -629,6 +665,10 @@ public class Board extends InputAdapter implements IBoard {
         return spawnLocation;
     }
 
+    public AbstractPlayer getNetworkPlayer() {
+        return networkPlayer;
+    }
+
     public void spawnRobots(ArrayList<Robot> spawnRobotList) {
         for (Robot spawnRobot : spawnRobotList) {
             robotLayer.setCell(spawnRobot.getLocation().getX(), spawnRobot.getLocation().getY(), null);
@@ -641,6 +681,29 @@ public class Board extends InputAdapter implements IBoard {
             }
         }
         destroyedRobots.clear();
+    }
+
+    public boolean allPlayersReady() {
+        for (AbstractPlayer player : players) {
+            if (!player.getReady()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void setAllPlayersNotReady() {
+        for (AbstractPlayer player : players) {
+            player.setReady(false);
+        }
+    }
+
+    public boolean getPlayingOnline() {
+        return playingOnline;
+    }
+
+    public ArrayList<AbstractPlayer> getPlayers() {
+        return players;
     }
 
     /**
