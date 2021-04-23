@@ -1,3 +1,8 @@
+# INTRO
+
+Vårt hovedmål for denne innleveringen var å få på plass et brukelig brukergrensesnitt. Dette har gjort at noen andre ting kanskje er satt mer på siden, da vi følte dette var viktig for oss som team å få til. Både fordi vi selv virkelig har ønsket å få det på plass, men også fordi et hver respektabelt spill fortjener.
+
+
 # DELOPPGAVE 1 - TEAM & PROSJEKT
 
 **REFERAT**
@@ -210,7 +215,7 @@ Møte punkt:
 - Status og idémyldring hver 2 time, for å sikre god sluttføring av prosjekt
 - Kartlegge gjenstående bugs, feil og elemter som ikke blir ferdig i tide
 - Sette opp siste versjon av manuell testing og kjøring
-- Levering av sluttprodukt 16:00
+- Levering av sluttprodukt 15:59 seinest
 - Takk for gruppen og lykke til på eksamen
 
 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
@@ -270,7 +275,11 @@ Hadde vi startet prosjektet helt på nytt, så hadde vi nok fra tidlig av etable
 
 **SKJERMDUMP AV PROJECT BOARD**
 
-![image](jetbrains://idea/navigate/reference?project=mvn-app&path=project_board.jpg)
+**NB!** Grunnet tidspress den siste tiden har vi valgt å sette opp sprinter for å få arbeidet godt i havn i tide. Dette har gått utover Project board og continuerlig oppdatering av den. 
+
+Vi har som kompensasjon for mangel på oppgave-oversikt i project board hatt hyppige møter og oppdateringer i teamet, slik at samtlige er oppdatert, jobber mot felles mål og får samstilt oppgavene. Dette har også gjort det mindre essensielt for oss å faktisk oppdatere prosject board og bruke det som verktøy for samspill, oppdatering og samarbeid.
+
+![image](https://github.com/inf112-v21/RoboReliables/blob/master/assets/Bilde_2021-04-23_144618.png)
 
 - - - -
 
@@ -280,7 +289,7 @@ Generelt sett igjennom hele prosjektet har dynamikken i gruppen og kommunikasjon
 
 Teamets medlemmer har utvist respekt for hverandre sine meninger, alltid stillt opp ved behov og dratt lasset i like stor grad. Det har vært rom for å faile, det har vært rom for å ikke vite ting og det har vært rom for å spørre om hjelp til alt. 
 
-Den største endringer fra start til slutt er nok at vi er blitt bedre kjent og tørr å være hakket mer frampå og vet litt bedre hva hverandres styrker og svakheter er, og vi jobber dermed en del mer effektivt og mer strukturert enn vi gjorde i starten.
+Den største endringer fra start til slutt er nok at vi er blitt bedre kjent og tørr å være hakket mer frampå med egne meninger og vet litt bedre hva hverandres styrker og svakheter er, dette gjør at vi jobber en del mer effektivt og mer strukturert enn vi gjorde i starten.
 
 - - - -
 
@@ -288,16 +297,19 @@ Den største endringer fra start til slutt er nok at vi er blitt bedre kjent og 
 
 **HVA VI HAR PRIORITERT**
 
-Fra starten av prosjektet har vi fokusert på å få et spillbart spill med gøye effekter og et grafisk bra utseende. Men utenfor dette har vi prioritert multiplayeren en del. Vi ønsket å få på plass en fullverdig multiplayer hvor 2-4 spillere kunne spille sammen og kose seg. Dette har vi fått til og spillerne kan velge å spille som 2, 3 eller 4 spillere. Spilleren kan også velge om å hoste eller joine (1 spiller må hoste og det en den initielle spilleren). 
+Fra starten av prosjektet har vi fokusert på å få et spillbart spill med gøye effekter og et grafisk bra utseende. Men utenfor dette har vi prioritert multiplayeren en del. Vi ønsket å få på plass en fullverdig multiplayer hvor 2-4 spillere kunne spille sammen. Dette har vi fått til og spillerne kan velge å spille som 2, 3 eller 4 spillere. Spilleren kan også velge om å hoste eller joine (1 spiller må hoste og det en den initielle spilleren). 
 
-Ellers har vi hatt et stort ønske om å legge til litt gøye effekter også, slik at spillet blir mer spennende og motiverende. 
+Ellers har vi hatt et stort ønske om å legge til litt musikk, slik at spiller spilleren syns det mer underholdende å spille og utviklerne blir motivert til å ville fortsette å utvikle (for det er et gøy spill).
 
 - - - -
 
 **HVOR VI ER KOMMET**
 
-Vi er kommet nå til et sted hvor spillet vårt kjører greit, har noe fuksjoner, har en MENY-skjer, har mutiplayer og en kan velge hvordan en vil spille i "settings". 
-Spillet kjører, vi kan velge visuelle kort og møte på masse spennende på kartet av "feller".
+Vi er kommet nå til et sted hvor spillet vårt kjører greit, vi har interaktive kort som fungerer i riktig rekkefølge og ser grafisk pen ut. Figuren beveger seg riktig på kartet. Vi kan velge antall spillere, om en vil spille online og hvem som hoster spillet. En kan også velge "map", men per nå har vi bare ett brett en kan spille på, så alle er like. 
+
+Det er også en "Start testmode" hvor en beveger figuren med piltaster istedet for kort, for å kunne teste ut funksjoner i spillet. 
+
+Og om en ikke vil spille mer, kan en bruke "Quit" i menyen for å lukke spillet.
 
 - - - -
 
@@ -305,11 +317,14 @@ Spillet kjører, vi kan velge visuelle kort og møte på masse spennende på kar
 
 Progresjonen fra forrige innlevering er i hovedsak:
 - Å få på plass MENY-skjerm med mulighet for å endre innstillinger og gjøre andre valg. 
-- Lagt til effekter som skal påvirke spilleren (hull, laser etc)
-- Fått til en fullverdig og godt fungerendemultiplayer
-- Valg av kort i spillet (ikke bare i console)
-- Visuelle effekter
-- Lyd effekter
+- Lagt til effekter som skal påvirke spilleren (typ hull)
+- Fått til en fullverdig og godt fungerende multiplayer (kan velge 1-4 spillere)
+- Valg av kort i spillet (ikke bare i console) 
+- Legge til "feller" på kartet
+- Få grafisk overlay på kort
+- Legge til musikk
+- Legge til "help"-knapp
+- Sette opp en "testmode"
 
 - - - -
 
@@ -327,22 +342,75 @@ Brukerhistorie:
 "Jeg som bruker ønsker at det skal være en gøy lyd når jeg tar flagget"
 
 Akseptansekriterier:
-- Lyd som spilles av når flagg blir tatt
+- Lydspor som spilles av når flagg blir plassert
 
 Arbeidsoppgaver:
-- Implementere en lydfil som spilles av ved berøring av flagg
+- Implementere en lydfil som spilles av hver gang en spiller tar et flagg
+- Lage forskjellige lyder for de forskjellige flaggene
 
 ```
 
+```
+Brukerhistorie:
+"Jeg som bruker ønsker at det skal være lydeffekter når jeg mister liv"
+
+Akseptansekriterier:
+- Lydspor som spiller av når deltakeren mister liv
+
+Arbeidsoppgaver:
+- Implementere en lydfil som spilles av hver gang en spiller mister liv
+
+```
+
+```
+Brukerhistorie:
+"Jeg som bruker ønsker at det skal være lydeffekter på de forskjellige fellene på brettet"
+
+Akseptansekriterier:
+- Lydspor som spiller av når en går i en av de forskjellige fellene i spillet
+
+Arbeidsoppgaver:
+- Implementere en lydfil for de forskjellige effektene når deltaker treffer dem
+- Lage lydfiler som representerer de forskjellige fellene
+
+```
+
+```
+Brukerhistorie:
+"Jeg som bruker ønsker å kunne spille på variende brett"
+
+Akseptansekriterier:
+- Legge til nytt map
+
+Arbeidsoppgaver:
+- Implimentere et nytt map med annet motiv
+- La spillerne velget map i "settings"
+
+```
+
+```
+Brukerhistorie:
+"Jeg som bruker ønsker at det kommer opp en seierskjem når jeg vinner"
+
+Akseptansekriterier:
+- Skjerm med bilde/navn på vinner ved seier
+
+Arbeidsoppgaver:
+- Lage en "vinner"-skjerm som kommer opp ved at en spiller plasserer alle flaggene
+- Implimentere slik at deltakerens navn / profilbilde blir vist på skjermen
+
+```
 
 - - - -
 
 **BUGS**
 
-I hovedsak er det en del småbugs og noen større. I oversikten her har vi fokusert på bugsene som har i større grad påvirkning for spillerens opplevelse
+I hovedsak er det en del småbugs og noen større. I oversikten her har vi fokusert på bugsene som har i større grad påvirkning for spillerens opplevelse:
 
-- 
-- 
+- Multiplayer fungerer bra første runden, men etter dette kan spillet kresje.
+- Det er ikke mulig å sette flere spillere når en er utenfor online modus.
+- Det er mulig at det mangler kort / ikke dukker opp riktig i hudden.
+- For at en skal kunne spille online må begge spillere velge likt antall spillere og map.
 
 - - - -
 
@@ -351,19 +419,22 @@ I hovedsak er det en del småbugs og noen større. I oversikten her har vi fokus
 **PROSJEKTETS BYGGING, TESTING OG KJØRING**
 
 For å kjøre programmet:
-Last ned spillet som en .zip-fil gjennom den grønne knappen "Code". Kjør prosjektet i IDE'en og "run" prosjektet.
+1. Gå til: https://github.com/inf112-v21/RoboReliables
+2. Last ned spillet som en .zip-fil gjennom den grønne knappen "Code". 
+3. Kjør prosjektet i IDE'en og "run" prosjektet.
 
-Når programmet kjøres:
+Når programmet kjører:
 - Før spillet blir rendret der bruker kan velge 5 kort. 
 - Etter dette blir spillet endret og så utføres programmeringen av disse valgte kortene.
 - Etter dette er det neste spåiller sin tur, da velger også denne spiller sine 5 kort.
 
 For å kjøre testene:  
-- Lag en konfigurasjon av alle testene i pakken "test" og kjør denne. Husk å velg "All in package". Vi bruker JUnit Jupiter.
+1. Lag en konfigurasjon av alle testene i pakken "test" og kjør denne. 
+2. Husk å velg "All in package". Vi bruker JUnit Jupiter.
 
 
 *NB:*
-*Hvis en ønsker å spille Roborally online, så må en velge å hoste før de andre kan bli med. Dette gjøres ved å kjøre flere instanser av main()*
+*Hvis en ønsker å spille Roborally online, så må en velge å hoste før de andre kan bli med. Dette gjøres ved å gå inn i settings og velge "host"*
 
 - - - -
 
@@ -375,6 +446,38 @@ For å kjøre testene:
 
 **TESTER**
 
+Manuel testing:
+
+Vi har hovedsakelig kjørt testing manuelt. Dette fordi det i noen tilfeller ikke har vært mulig å teste med hjelp av Junit pga oppsettet
+av LibGDX og GUI.
+
+Movement tester:
+- Bevege seg opp, ned, rotere til venstre, rotere til høyre.
+- Prøve å gå ut av skjermen.
+- Prøve å gå i et hull.
+
+Effekter:
+- Prøve å miste ett liv med å gå i ett hull.
+- Prøve å gå gjennom flaggene feil rekkefølge.
+- Prøve å gå gjennom flaggene i riktig rekkefølge.
+- Prøve å miste alle livene.
+- Prøve å bruke "power down" for å få tilbake liv.
+
+Meny tester:
+- Trykke på quit lukker spillet
+- De ulike innstillingene fungerer
+- Å trykke "start game" starter spillet
+
+HUD tester:
+- HUD viser riktig mengde liv
+- HUD viser riktig mengde kort
+- HUD viser riktig spiller oppe
+- ARM knappen fungerer slik som tenkt
+- ARM knappen viser riktig status
+
+Feed tester:
+- Feed oppdateres med relevant informasjon.
+- Feed viser riktig kort og kort-rekkefølge
 
 - - - -
 
