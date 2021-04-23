@@ -174,7 +174,7 @@ Møte punkt:
 
 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
-**Referat 22.04.21 – 12:00**
+**Referat arbeidsøkt 22.04.21 – 10:00-22:00**
 
 Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd
@@ -185,11 +185,17 @@ Agenda:
 Ferdigstilling av kode og dokumentering
 
 Møte punkt:
-- 
+- Teamet går igjennom gjenstående elementer og uferdige funksjoner
+- Det kjøres en test-kjøring av programmet
+- Det blir gjennomført en grundig idémyldring
+- Det blir satt opp tidsplan fram mot levering
+- Det blir satt opp grupper for å jobbe med de siste finishene
+- Arbeidstid blir satt til ut dagen og avslutning 22:00 for å slappe av før fredagen
+- Arbeidet pågår videre ut dagen i grupper med jevnlige møter og statuser, samt gjennomkjøringer
 
 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
-**Referat 23.04.21 – 12:00 (ekstra møte)**
+**Referat arbeidsøkt 23.04.21 – 09:00-16:00 (ekstra møte)**
 
 Oppmøte:
 Tilstede: Julian, Sebastian, Heming, Anders, Sigurd
@@ -200,7 +206,12 @@ Agenda:
 Siste gjennomgang av innleverings dokument og total ferdigstilling av prosjekt
 
 Møte punkt:
-- 
+- Fortsetter arbeidet fra gårsdagen
+- Status og idémyldring hver 2 time, for å sikre god sluttføring av prosjekt
+- Kartlegge gjenstående bugs, feil og elemter som ikke blir ferdig i tide
+- Sette opp siste versjon av manuell testing og kjøring
+- Levering av sluttprodukt 16:00
+- Takk for gruppen og lykke til på eksamen
 
 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
@@ -208,10 +219,10 @@ Møte punkt:
 
 **ROLLER**
 
-- Rollene i teamet fungerer veldig bra og har fungert veldig bra igjennom hele prosjektet. Vi har fra start til slutt i all hovedsak hatt de samme rollene, men da ofte fått flere hatter i henhold til hvor det er mest arbeidsoppgaver eller hvor langt vi var kommet i prosjektet.
+Rollene i teamet fungerer veldig bra og har fungert veldig bra igjennom hele prosjektet. Vi har fra start til slutt i all hovedsak hatt de samme rollene, men da ofte fått flere hatter i henhold til hvor det er mest arbeidsoppgaver eller hvor langt vi var kommet i prosjektet. Grunnen til at rollene har fungert så bra har vært at vi tidlig i prosessen vil velge og ta godt eierskap til våre roller, samt at de som har hatt rollene har levert i frohold til sin rolle.
 
 
-Per nå er rollene:
+**ROLLER PER NÅ**
 
 Team leder (Sigurd)
 - Leder sørger for at alle medlemmene i teamet er oppdatert på prosjektets status, sørger for sette prioriteringer for arbeidsoppgaver og deltar ellers aktivt på utvikling av prosjekt.
@@ -251,7 +262,7 @@ Alt i alt sitter vi igjen med mye god erfaring innenfor strukturering, drift og 
 
 **RETROSPEKTIV**
 
-I prosjektet føler vi at vi har gjort mange gode valg. Generelt sett har vi brukt lang tid på å planlegge, utprøve og kartlegge valgene av kode og løsninger. Dette har gjort at vi, selv om det har tatt litt lenger tid å komme igang, har valgt gode og solide løsninger som vi har kunnet bygge videre på igjennom hele prosjektet.
+I prosjektet føler vi at vi har gjort mange gode valg. Generelt sett har vi brukt lang tid på å planlegge, utprøve og kartlegge valgene av kode og løsninger. Dette har gjort at vi, selv om det har tatt litt lenger tid å komme igang, har valgt gode og solide løsninger som vi har kunnet bygge videre på igjennom hele prosjektet. Vi har generelt hatt en unison og lik oppfatning av hva prosjektet skal bli og hvordan vi ønsker at det skal settes opp, dette har gjort at alle har styrt skuten samlet til samme sted.
 
 Hadde vi startet prosjektet helt på nytt, så hadde vi nok fra tidlig av etablert den strukturen som vi har oppbygd oss gjennom erfaringer i dette prosjektet. Dette er ting som faste tider, kontinuerlig og hyppig arbeid med kode og dokumenter, samt kanskje hatt noen ekstra små møter de ukene vi hadde ekstra mye arbeid. Med disse endringene ville vi trolig ha kommet oss raskere igang og jobbet mer strukturert igjennom hele prosjektet og dermed kanskje ha fått spillet opp til enda større høyder.
 
@@ -259,7 +270,6 @@ Hadde vi startet prosjektet helt på nytt, så hadde vi nok fra tidlig av etable
 
 **SKJERMDUMP AV PROJECT BOARD**
 
-Se "project_board.jpg" i assets.
 ![image](jetbrains://idea/navigate/reference?project=mvn-app&path=project_board.jpg)
 
 - - - -
@@ -278,13 +288,16 @@ Den største endringer fra start til slutt er nok at vi er blitt bedre kjent og 
 
 **HVA VI HAR PRIORITERT**
 
-Fra starten av prosjektet har vi fokusert på å få et spillbart spill med gøye effekter og et grafisk bra utseende. Men utenfor dette har vi prioritert multiplayeren en del. Vi ønsket å få på plass en fullverdig multiplayer hvor 2-4 spillere kunne spille sammen og kose seg. Dette har vi fått til og spillerne kan velge å spille som 2, 3 eller 4 spillere. Spilleren kan også velge om å hoste eller joine (1 spiller må hoste og det en den initielle spilleren).
+Fra starten av prosjektet har vi fokusert på å få et spillbart spill med gøye effekter og et grafisk bra utseende. Men utenfor dette har vi prioritert multiplayeren en del. Vi ønsket å få på plass en fullverdig multiplayer hvor 2-4 spillere kunne spille sammen og kose seg. Dette har vi fått til og spillerne kan velge å spille som 2, 3 eller 4 spillere. Spilleren kan også velge om å hoste eller joine (1 spiller må hoste og det en den initielle spilleren). 
+
+Ellers har vi hatt et stort ønske om å legge til litt gøye effekter også, slik at spillet blir mer spennende og motiverende. 
 
 - - - -
 
 **HVOR VI ER KOMMET**
 
-Vi er kommet nå til et sted hvor spillet vårt kjører greit, har noe fuksjoner, har en MENY-skjer, har mutiplayer og en kan velge hvordan en vil spille i "settings". Spillet kjører, vi kan velge kort og møte på masse spennende på kartet.
+Vi er kommet nå til et sted hvor spillet vårt kjører greit, har noe fuksjoner, har en MENY-skjer, har mutiplayer og en kan velge hvordan en vil spille i "settings". 
+Spillet kjører, vi kan velge visuelle kort og møte på masse spennende på kartet av "feller".
 
 - - - -
 
@@ -295,6 +308,8 @@ Progresjonen fra forrige innlevering er i hovedsak:
 - Lagt til effekter som skal påvirke spilleren (hull, laser etc)
 - Fått til en fullverdig og godt fungerendemultiplayer
 - Valg av kort i spillet (ikke bare i console)
+- Visuelle effekter
+- Lyd effekter
 
 - - - -
 
@@ -324,17 +339,12 @@ Arbeidsoppgaver:
 
 **BUGS**
 
+I hovedsak er det en del småbugs og noen større. I oversikten her har vi fokusert på bugsene som har i større grad påvirkning for spillerens opplevelse
+
 - 
 - 
 
 - - - -
-
-**MVP**
-
-
-- - - -
-
-
 
 # DELOPPGAVE 3 - PRODUKTLEVERANSE OG KODEKVALITET
 
@@ -371,8 +381,8 @@ For å kjøre testene:
 
 **BIDRAG TIL KODEBASEN**
 
-- Som ved forrige innlevering benytter vi "Code with me" for kodingen vår, dette medfører at alt som blir committet vises som om hosten commiter. 
-- Det er et team-medlem som er hovedansvarlig for innføring i 'ObligatiskOppgave4.md', slik at dette blir bare committet av en person, selv om flere arbeidet opp imot dokumentet.
+- Som ved tidligere innleveringer benytter vi "Code with me" for kodingen vår, dette medfører at alt som blir committet vises som om hosten commiter. 
+- Det er et team-medlem som er hovedansvarlig for innføring i 'ObligatiskOppgave4.md', slik at dette blir bare committet av en person, selv om flere arbeidet opp imot dokumentets innhold og oppsett.
 
 
 - - - -
