@@ -62,6 +62,10 @@ public class GameScreen extends ScreenAdapter {
                 board.checkIfTurnIsOver();
                 board.checkIfActivePlayerOnFlag();
                 board.checkIfWon();
+                if (board.activePlayerOnHole()) {
+                    board.robotHoleEvent();
+                    hud.addToFeed(getPlayer().getName() + " fell down a hole and lost a life!");
+                }
             }
         }
         Board.firstRender = false;
@@ -138,16 +142,17 @@ public class GameScreen extends ScreenAdapter {
                 board.updatePhaseQueue();
             }
             if (board.time % 60 == 0) {
-                System.out.println("inside ");
                 board.switchActivePlayer();
-                hud.addToFeed(getPlayer().getName() + ": " + CardValue.extendedCardValue(getPlayer().getRobot().getNextRegisterCard()));
+                hud.addToFeed(getPlayer().getName() + ": " + CardValue.extendedCardValue(getPlayer().getRobot().getNextRegisterCard()) + " | Priority Value: " + getPlayer().getRobot().getNextRegisterCard().getPriorityValue());
                 board.executeNextRobotRegister();
                 board.checkIfActivePlayerOnFlag();
+
+                if (board.activePlayerOnHole()) {
+                    board.robotHoleEvent();
+                    hud.addToFeed(getPlayer().getName() + " fell down a hole and lost a life!");
+                }
             }
-            if (board.activePlayerOnHole()) {
-                board.robotHoleEvent();
-                hud.addToFeed(getPlayer().getName() + " fell down a hole and lost a life!");
-            }
+
             if (getPlayer().getRobot().getLifeTokens() == 0) {
                 hud.addToFeed(getPlayer().getName() + "'S ROBOT IS DAMAGED BEYOND REPAIR!");
             }

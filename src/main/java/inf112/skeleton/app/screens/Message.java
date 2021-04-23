@@ -14,7 +14,7 @@ public class Message {
         this.text = text;
         this.yPos = yPos;
         this.label = createLabel(text);
-        label.setPosition(900, yPos);
+        label.setPosition(860, yPos);
     }
 
     public Label createLabel(String text) {
@@ -26,7 +26,7 @@ public class Message {
 
     public void setyPos(int newyPos) {
         yPos = newyPos;
-        label.setPosition(900, yPos);
+        label.setPosition(860, yPos);
     }
 
     public String getText() {

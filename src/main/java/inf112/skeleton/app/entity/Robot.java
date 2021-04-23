@@ -8,6 +8,7 @@ import inf112.skeleton.app.Board;
 import inf112.skeleton.app.player.AbstractPlayer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Maps the robots position on the board
@@ -21,6 +22,7 @@ public class Robot extends Entity implements Serializable {
     private boolean isDestroyed = false;
     private AbstractPlayer owner;
     private ArchiveMarker archiveMarker;
+    private ArrayList<Entity> entities;
 
     public Robot(Location location, int playerId, AbstractPlayer owner) {
         super(location);
@@ -135,23 +137,36 @@ public class Robot extends Entity implements Serializable {
 
             switch (direction) {
                 case UP:
-                    if (!(y == Board.MAP_SIZE_Y-1)) {
-                        this.setLocation(new Location(x, y + 1)); }
+                    if (!(y == Board.MAP_SIZE_Y - 1)) {
+                        this.setLocation(new Location(x, y + 1));
+                    }
                     break;
                 case DOWN:
                     if (!(y == 0)) {
-                        this.setLocation(new Location(x, y - 1)); }
+                        this.setLocation(new Location(x, y - 1));
+                    }
                     break;
                 case LEFT:
                     if (!(x == 0)) {
-                        this.setLocation(new Location(x - 1, y)); }
+                        this.setLocation(new Location(x - 1, y));
+                    }
                     break;
                 case RIGHT:
-                    if (!(x == Board.MAP_SIZE_X-1)) {
-                        this.setLocation(new Location(x + 1, y)); }
+                    if (!(x == Board.MAP_SIZE_X - 1)) {
+                        this.setLocation(new Location(x + 1, y));
+                    }
                     break;
             }
         }
+
+    }
+
+    public boolean isEmpty(Location location) {
+        for (Entity entity : entities) {
+            if ((entity.getLocation().getX() == location.getX()) && (entity.getLocation().getY() == location.getY()))
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -162,7 +177,6 @@ public class Robot extends Entity implements Serializable {
         for (int i = 0; i < steps; i++) {
             int x = this.getLocation().getX();
             int y = this.getLocation().getY();
-
             switch (direction) {
                 case UP:
                     if (!(y == 0)) {
@@ -236,6 +250,14 @@ public class Robot extends Entity implements Serializable {
 
     public void addLifeToken() {
         this.lifeTokens++;
+    }
+
+    public ArrayList<Entity> getEntities() {
+        return entities;
+    }
+
+    public void setEntities(ArrayList<Entity> entities) {
+        this.entities = entities;
     }
 
     public boolean registerIsEmpty() {

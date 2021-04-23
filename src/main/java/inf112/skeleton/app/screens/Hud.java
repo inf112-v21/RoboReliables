@@ -440,7 +440,11 @@ public class Hud implements IHud {
                 selectedCards.addToDeck(card);
                 addToFeed(" ");
                 for (int i = selectedCards.getSize() - 1; i >= 0; i--) {
-                    String cardToString = (i + 1) + " - " + CardValue.extendedCardValue(selectedCards.getCard(i));
+                    String cardToString;
+                    if (!(selectedCards.getCard(i).cardValue == CardValue.PD))
+                        cardToString = (i + 1) + " - " + CardValue.extendedCardValue(selectedCards.getCard(i)) + " | Priority Value: " + selectedCards.getCard(i).getPriorityValue();
+                    else
+                        cardToString = (i + 1) + " - " + CardValue.extendedCardValue(selectedCards.getCard(i));
                     addToFeed(cardToString);
                 }
                 addToFeed("Current selected order:");
@@ -451,8 +455,11 @@ public class Hud implements IHud {
                 addToFeed(" ");
                 selectedCards.remove(card);
                 for (int i = selectedCards.getSize() - 1; i >= 0; i--) {
-                    String cardToString = (i + 1) + " - " + CardValue.extendedCardValue(selectedCards.getCard(i));
-                    addToFeed(cardToString);
+                    String cardToString;
+                    if (!(selectedCards.getCard(i).cardValue == CardValue.PD))
+                        cardToString = (i + 1) + " - " + CardValue.extendedCardValue(selectedCards.getCard(i)) + " | Priority Value: " + selectedCards.getCard(i).getPriorityValue();
+                    else
+                        cardToString = (i + 1) + " - " + CardValue.extendedCardValue(selectedCards.getCard(i));                    addToFeed(cardToString);
                 }
                 addToFeed("Current selected order:");
                 button.setScale(0.45f);

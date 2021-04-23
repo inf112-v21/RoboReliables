@@ -13,7 +13,10 @@ public class Card implements ICard, Comparable<Card>, Serializable {
 
     public Card(CardValue cardValue) {
         this.cardValue = cardValue;
-        priorityValue = random.nextInt(255);
+        if (cardValue == CardValue.PD)
+            priorityValue = 0;
+        else
+            priorityValue = random.nextInt(255);
     }
 
     public Card(CardValue cardValue, int priorityValue) {

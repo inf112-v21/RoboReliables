@@ -36,7 +36,7 @@ public class Board extends InputAdapter implements IBoard {
 
     private Map selectedMap;
     private TiledMap map;
-    public TiledMapTileLayer flagLayer, boardLayer, holeLayer, robotLayer;
+    public TiledMapTileLayer flagLayer, boardLayer, holeLayer, wallLayer, robotLayer;
 
     public OrthogonalTiledMapRenderer renderer;
 
@@ -52,6 +52,7 @@ public class Board extends InputAdapter implements IBoard {
     // List of robots that have been destroyed and are yet to respawn
     protected ArrayList<Robot> destroyedRobots = new ArrayList<>();
 
+    // Entities
     protected ArrayList<Flag> flags = new ArrayList<>();
     protected ArrayList<Hole> holes = new ArrayList<>();
 
@@ -131,15 +132,13 @@ public class Board extends InputAdapter implements IBoard {
         font = new BitmapFont();
         font.setColor(Color.RED);
 
-        // Gets the correct map
-
-
         // Sets the map and various layers
         map = new TmxMapLoader().load(selectedMap.getFileName());
         boardLayer = (TiledMapTileLayer) map.getLayers().get("gameboard.tmx");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("player");
         flagLayer = (TiledMapTileLayer) map.getLayers().get("flag");
         holeLayer = (TiledMapTileLayer) map.getLayers().get("hole");
+        wallLayer = (TiledMapTileLayer) map.getLayers().get("wall");
 
         // Initializes camera
         OrthographicCamera camera = new OrthographicCamera();
@@ -186,7 +185,6 @@ public class Board extends InputAdapter implements IBoard {
             }
         }
     }
-
 
     public void setFlags() {
         for (int x = 0; x < getMAP_SIZE_X(); x++) {
@@ -524,6 +522,7 @@ public class Board extends InputAdapter implements IBoard {
     public boolean activePlayerOnHole() {
         for (Hole hole : holes) {
             if (hole.getLocation().equals(activePlayer.getRobot().getLocation())) {
+                System.out.println("player on hole");
                 return true;
             }
         }
@@ -587,7 +586,6 @@ public class Board extends InputAdapter implements IBoard {
         batch.dispose();
         font.dispose();
     }
-
 
     public boolean holeAtLocation(Location location) {
         for (Hole hole : holes) {
