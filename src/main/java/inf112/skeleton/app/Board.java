@@ -69,7 +69,7 @@ public class Board extends InputAdapter implements IBoard {
     private PriorityQueue<AbstractPlayer> phaseQueue;
 
     // cards
-    protected ProgramCardDeck programCardDeck;
+    public ProgramCardDeck programCardDeck;
 
     private boolean playingOnline;
 

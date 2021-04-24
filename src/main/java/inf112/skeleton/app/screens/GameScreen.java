@@ -90,6 +90,9 @@ public class GameScreen extends ScreenAdapter {
             if (board.getPhaseQueue().isEmpty()) {
                 if (board.registersAreEmpty() && !(board.allPlayersReady())) {
                     if (!board.needsCleanup) {
+                        // Checking cards/carddeck
+                        //hud.addToFeed("Cards in hand: " + board.getActivePlayer().getHandSize());
+                        //hud.addToFeed("Cards in deck: " + board.programCardDeck.getSize());
                         board.startNewRound();
                         hud.refreshStage();
                         System.out.println("active player is " + board.getActivePlayer().getName());

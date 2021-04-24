@@ -170,7 +170,7 @@ public class Hud implements IHud {
         player = gameScreen.getPlayer();
         playerHand = player.getHand();
 
-        if (handTable.getChildren().size < 5 && (!(playerHand == null))) {
+        if (handTable.getChildren().size < 1 && (!(playerHand == null))) {
 
             for (int i = 0; i < playerHand.getSize(); i++) {
                 Card card = playerHand.getCard(i);
@@ -285,20 +285,39 @@ public class Hud implements IHud {
         readyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (selectedCards.getSize() <= 5)
-                    if (selectedCards.getSize() == 5)
-                        toggleReady();
-                    else {
-                        // Fills up card slot with empty cards if less than 5 cards are selected.
-                        int cardsToAdd = playerHand.getSize()-4;
-                        for (int i = 0; i < cardsToAdd; i++)
-                            selectedCards.addToDeck(new Card(CardValue.PD));
-                        toggleReady();
-                    }
+                addToFeed("Selected cards: " + selectedCards.getSize());
+                if (selectedCards.getSize() == 5) {
+                    toggleReady();
+                    offlineSwitchPlayer();
+                }
                 else
-                    addToFeed("Too many cards selected. Unselect some to continue.");
+                    addToFeed("You must select exactly <<< 5 cards >>>");
             }
         });
+    }
+
+    private void offlineSwitchPlayer() {
+        int size = gameScreen.getBoard().getPlayers().size();
+        if (!gameScreen.getBoard().getPlayingOnline() && size > 1) {
+            gameScreen.updateRobotRegisterWithSelectedCards(player);
+            addToFeed(player.getName() + "'s robotregisters locked in!");
+            for (int i = 0; i < size; i++) {
+                if (player != gameScreen.getBoard().getPlayers().get(size - 1) && gameScreen.getBoard().getPlayers().get(i) == player) {
+                    gameScreen.getBoard().setActivePlayer(gameScreen.getBoard().getPlayers().get(i + 1));
+                    break;
+                } else {
+                    gameScreen.getBoard().setActivePlayer(gameScreen.getBoard().getPlayers().get(0));
+                }
+            }
+            refreshStage();
+            update();
+            if (gameScreen.getBoard().allPlayersReady()) {
+                addToFeed("All robots ready! GO!");
+            }
+            else {
+                addToFeed(player.getName() + "'s turn! Select your cards");
+            }
+        }
     }
 
     @Override
@@ -343,14 +362,21 @@ public class Hud implements IHud {
             // Power down is selected
             readySprite = readyButtonSprites.findRegion("readyGo");
             powerDownState = false;
-            CardDeck emptyDeck = new CardDeck();
-            emptyDeck.populate(CardValue.PD, 5);
-            selectedCards = emptyDeck;
+            //CardDeck emptyDeck = new CardDeck();
+            resetSelectedCards();
+            if (selectedCards.getSize() == 0) selectedCards.populate(CardValue.PD, 5);
+            //selectedCards = emptyDeck;
             player.getRobot().addLifeToken();
             addToFeed("Press ARM to continue.");
             addToFeed(player.getName() + " will regain a life token next turn.");
             addToFeed("Powering down...");
         }
+    }
+
+    public void resetSelectedCards() {
+
+        playerHand.addToDeck(selectedCards);
+        selectedCards.clear();
     }
 
     @Override

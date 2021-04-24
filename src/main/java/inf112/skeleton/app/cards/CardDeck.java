@@ -34,13 +34,13 @@ public class CardDeck implements ICardDeck, Serializable {
 
     public void addToDeck(CardDeck cardDeck) {
         for (int i = 0; i < cardDeck.getSize(); i++) {
-            addToDeck(cardDeck.getCard(i));
+            if (cardDeck.getCard(i).cardValue != CardValue.PD) addToDeck(cardDeck.getCard(i));
         }
     }
 
     @Override
     public void addToTopOfDeck(Card card) {
-        if (card.cardValue == CardValue.PD)
+        if (card.cardValue != CardValue.PD)
             cards.add(0, card);
     }
 
