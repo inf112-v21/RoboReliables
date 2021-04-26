@@ -309,6 +309,8 @@ public class Hud implements IHud {
                     gameScreen.getBoard().setActivePlayer(gameScreen.getBoard().getPlayers().get(0));
                 }
             }
+            gameScreen.getBoard().programCardDeck.addToDeck(playerHand);
+            playerHand.clear();
             refreshStage();
             update();
             if (gameScreen.getBoard().allPlayersReady()) {
